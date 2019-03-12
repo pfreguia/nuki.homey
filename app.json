@@ -1,0 +1,275 @@
+{
+	"id": "nuki.homey",
+	"sdk": 2,
+  "brandColor": "#000000",
+	"name": {
+		"en": "Nuki Smart Lock",
+		"nl": "Nuki Smart Lock"
+	},
+	"tags": {
+		"en": [ "nuki", "lock"],
+		"nl": [ "nuki", "slot"]
+	},
+	"version": "1.0.0",
+	"compatibility": ">=2.0.0",
+	"author": {
+		"name": "Jelger Haanstra",
+		"email": "homey@solidewebservices.com",
+		"website": "https://github.com/jghaanstra/nuki.homey"
+	},
+	"contributing": {
+		"donate": {
+			"paypal": {
+				"username": "jghaanstra"
+			}
+		}
+	},
+	"bugs": {
+		"url": "https://github.com/jghaanstra/nuki.homey/issues"
+	},
+  "homeyCommunityTopicId": 3724,
+	"images": {
+		"large": "./assets/images/large.png",
+		"small": "./assets/images/small.png"
+	},
+	"category": "security",
+	"description": {
+		"en": "Control your Nuki Smart Lock",
+		"nl": "Beheer je Nuki Smart Lock"
+	},
+	"dependencies": {
+		"net": "*"
+	},
+  "capabilities": {
+    "lockstate": {
+      "type": "string",
+      "title": {
+        "en": "Lock State",
+        "nl": "Slot status"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/lockstatus.svg"
+    },
+    "lockaction": {
+      "type": "enum",
+      "title": {
+        "en": "Lock Action",
+        "nl": "Slot Actie"
+      },
+      "values": [
+        {
+          "id": "0",
+          "title": {
+            "en": "Choose action ...",
+            "nl": "Kies actie ..."
+          }
+        },
+        {
+          "id": "1",
+          "title": {
+            "en": "Unlock",
+            "nl": "Ontgrendelen"
+          }
+        },
+        {
+          "id": "2",
+          "title": {
+            "en": "Lock",
+            "nl": "Vergrendelen"
+          }
+        },
+        {
+          "id": "3",
+          "title": {
+            "en": "Unlatch",
+            "nl": "Openen"
+          }
+        },
+        {
+          "id": "4",
+          "title": {
+            "en": "Lock 'n' Go",
+            "nl": "Lock 'n' Go"
+          }
+        },
+        {
+          "id": "5",
+          "title": {
+            "en": "Lock 'n' Go With Unlatch",
+            "nl": "Lock 'n' Go met openen"
+          }
+        }
+      ],
+      "getable": true,
+      "setable": true,
+      "uiComponent": "picker",
+      "icon": "/assets/lockaction.svg"
+    }
+  },
+	"drivers": [
+		{
+			"id": "nuki",
+			"name": {
+				"en": "Nuki Smart Lock",
+				"nl": "Nuki Smart Lock"
+			},
+			"images": {
+				"large": "drivers/nuki/assets/images/large.jpg",
+				"small": "drivers/nuki/assets/images/small.jpg"
+			},
+			"class": "lock",
+			"capabilities": [
+        "lockstate",
+        "locked",
+        "lockaction"
+			],
+      "pair": [
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ]
+		}
+	],
+  "flow": {
+    "triggers": [
+      {
+		    "id": "batteryCritical",
+				"title": {
+					"en": "Battery is critical",
+					"nl": "Batterij op kritiek niveau"
+				},
+	      "args": [
+	        {
+            "name": "device",
+            "type": "device",
+            "placeholder": {
+              "en": "Select Nuki Smart Lock",
+              "nl": "Selecteer Nuki Smart Lock"
+            },
+            "filter": "driver_id=nuki"
+	        }
+	      ]
+	    },
+      {
+		    "id": "lockstateChanged",
+				"title": {
+					"en": "Lockstate changed",
+					"nl": "Slotstatus is veranderd"
+				},
+        "tokens": [
+          {
+            "name": "lockstate",
+            "type": "string",
+            "title": {
+              "en": "Lockstate",
+              "nl": "Slotstatus"
+            },
+            "example": "Locked"
+          }
+        ],
+	      "args": [
+	        {
+            "name": "device",
+            "type": "device",
+            "placeholder": {
+              "en": "Select Nuki Smart Lock",
+              "nl": "Selecteer Nuki Smart Lock"
+            },
+            "filter": "driver_id=nuki"
+	        }
+	      ]
+	    }
+    ],
+    "conditions": [
+      {
+        "id": "isLocked",
+        "title": {
+          "en": "!{{is|is not}} locked",
+          "nl": "!{{is|is niet}} vergrendeld"
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "placeholder": {
+              "en": "Select Nuki Smart Lock",
+              "nl": "Selecteer Nuki Smart Lock"
+            },
+            "filter": "driver_id=nuki"
+          }
+        ]
+      }
+	  ],
+    "actions": [
+      {
+        "id": "lockAction",
+        "title": {
+          "en": "Perform a lock operation",
+          "nl": "Slot actie uitvoeren"
+        },
+        "args": [
+          {
+            "type": "dropdown",
+            "name": "lockaction",
+            "values": [
+              {
+                "id": "1",
+                "title": {
+                  "en": "Unlock",
+                  "nl": "Ontgrendelen"
+                }
+              },
+              {
+                "id": "2",
+                "title": {
+                  "en": "Lock",
+                  "nl": "Vergrendelen"
+                }
+              },
+              {
+                "id": "3",
+                "title": {
+                  "en": "Unlatch",
+                  "nl": "Openen"
+                }
+              },
+              {
+                "id": "4",
+                "title": {
+                  "en": "Lock 'n' Go",
+                  "nl": "Lock 'n' Go"
+                }
+              },
+              {
+                "id": "5",
+                "title": {
+                  "en": "Lock 'n' Go With Unlatch",
+                  "nl": "Lock 'n' Go met openen"
+                }
+              }
+            ]
+          },
+          {
+            "name": "device",
+            "type": "device",
+            "placeholder": {
+              "en": "Select Nuki Smart Lock",
+              "nl": "Selecteer Nuki Smart Lock"
+            },
+            "filter": "driver_id=nuki"
+          }
+        ]
+      }
+    ]
+  }
+}

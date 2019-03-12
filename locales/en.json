@@ -1,0 +1,18 @@
+{
+  "Unreachable": "Unreachable",
+  "Did not receive a token from the bridge, make sure you push the bridge button during pairing.": "Did not receive a token from the bridge, make sure you push the bridge button during pairing.",
+  "400": "Action invalid",
+  "401": "Token is invalid, please re-pair your Nuki",
+  "404": "Smart Lock is unknown, please re-pair your Nuki",
+  "503": "Smart Lock is offline",
+  "uncalibrated": "Uncalibrated",
+  "locked": "Locked",
+  "unlocking": "Unlocking",
+  "unlocked": "Unlocked",
+  "locking": "Locking",
+  "unlatched": "Unlatched",
+  "unlocked (lock ‘n’ go)": "Unlocked (lock ‘n’ go)",
+  "unlatching": "Unlatching",
+  "motor blocked": "Motor Blocked",
+  "undefined": "Undefined"
+}

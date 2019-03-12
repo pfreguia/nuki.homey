@@ -1,0 +1,18 @@
+{
+  "Unreachable": "Onbereikbaar",
+  "Did not receive a token from the bridge, make sure you push the bridge button during pairing.": "Geen token van de bridge ontvangen, zorg ervoor dat je de knop van de bridge indrukt gedurende het pairen.",
+  "400": "Actie is ongeldig",
+  "401": "Token is ongeldig, voeg je Nuki opnieuw toe a.u.b.",
+  "404": "Slot is onbekend, voeg je Nuki opnieuw toe a.u.b.",
+  "503": "Slot is offline",
+  "uncalibrated": "Niet gecalibreerd",
+  "locked": "Vergrendeld",
+  "unlocking": "Ontgrendelende",
+  "unlocked": "Ontgrendeld",
+  "locking": "Vergrendelende",
+  "unlatched": "Geopend",
+  "unlocked (lock ‘n’ go)": "Ontgrendeld (lock ‘n’ go)",
+  "unlatching": "Openende",
+  "motor blocked": "Motor geblokkeerd",
+  "undefined": "Niet gedefinieerd"
+}

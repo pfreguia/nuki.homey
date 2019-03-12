@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<!DOCTYPE svg PUBLIC '-//W3C//DTD SVG 1.1//EN' 'http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd'>
+<!-- Animated using aniGen version 0.8.1 Quality of Life - http://anigen.org -->
+<svg xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" viewBox="0 0 676.27172 676.27175" version="1.1" id="svg926" sodipodi:docname="bridge.svg" width="676.27173px" height="676.27173px" inkscape:version="0.92.3 (2405546, 2018-03-11)" preserveAspectRatio="xMidYMid" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:anigen="http://www.anigen.org/namespace" anigen:version="0.8.1">
+  <metadata id="metadata930">
+    <rdf:rdf id="rdf:rdf3640">
+      <cc:work rdf:about="" id="cc:work122">
+        <dc:format id="dc:format1915">image/svg+xml</dc:format>
+        <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage" id="dc:type883"></dc:type>
+        <dc:title id="dc:title7223"></dc:title>
+      </cc:work>
+    </rdf:rdf>
+  </metadata>
+  <sodipodi:namedview pagecolor="#ffffff" bordercolor="#666666" borderopacity="1" objecttolerance="10" gridtolerance="10" guidetolerance="10" inkscape:pageopacity="0" inkscape:pageshadow="2" inkscape:window-width="1920" inkscape:window-height="1027" id="namedview928" showgrid="false" inkscape:zoom="0.7071067811865475" inkscape:cx="876.3229764259939" inkscape:cy="-356.51595807681446" inkscape:window-x="-8" inkscape:window-y="-8" inkscape:window-maximized="1" inkscape:current-layer="Gruppe_15"></sodipodi:namedview>
+  <defs id="defs900">
+    <style id="style898">.cls-1,.cls-4{fill:none}.cls-1,.cls-2,.cls-4{stroke:gray;stroke-width:2px}.cls-1,.cls-2{stroke-miterlimit:10}.cls-2{fill:#fff}.cls-3{fill:#c3c3c3}.cls-4{stroke-linecap:round}</style>
+  </defs>
+  <g id="Gruppe_16" data-name="Gruppe 16" transform="translate(-337.04529,-1271.7273)">
+    <g id="Gruppe_13" data-name="Gruppe 13" transform="translate(-7,7)"></g>
+    <g id="Gruppe_15" data-name="Gruppe 15" transform="translate(984,1918.682)">
+      <path id="Pfad_34" data-name="Pfad 34" d="m -539.87508,-623.88714 h 462.112462 a 83.98899,83.98899 0 0 1 84.0120526,84.01206 V -77.762618 A 83.98899,83.98899 0 0 1 -77.762618,6.2494346 H -539.87508 A 83.98899,83.98899 0 0 1 -623.88714,-77.762618 V -539.87508 a 83.98899,83.98899 0 0 1 84.01206,-84.01206 z" stroke-miterlimit="10" inkscape:connector-curvature="0" style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:46.13512421;stroke-miterlimit:10;stroke-opacity:1"></path>
+      <path id="Pfad_35" data-name="Pfad 35" class="cls-1" d="M 40.664,35.2 A 5.464,5.464 0 1 1 35.2,40.664 5.461,5.461 0 0 1 40.664,35.2" transform="matrix(23.06756019592285 0 0 23.06756019592285 -1246.8266167202455 -1246.8266167202455)" inkscape:connector-curvature="0" style="fill:none;stroke:#000000;stroke-width:2px;stroke-miterlimit:10;stroke-opacity:1"><animate attributeType="auto" attributeName="stroke" values="rgb(0, 0, 0);#0000a0" calcMode="spline" keyTimes="0;1" keySplines=".5 .5 .5 1" dur="1s" begin="0s" repeatCount="indefinite" additive="replace" accumulate="none" fill="remove" id="animate6482"></animate></path>
+      <path id="Pfad_36" data-name="Pfad 36" class="cls-3" d="m -425.53015,-98.598162 c 0.0578,-0.777789 0.67618,-1.39613 1.45397,-1.453978 h 2.18096 l 31.92681,29.049147 v -27.595169 h 10.87451 c 0.77778,0.05785 1.39612,0.676182 1.45397,1.453967 v 55.160056 c -0.0578,0.777788 -0.67618,1.396129 -1.45397,1.453977 h -1.54485 l -31.92681,-31.926798 v 29.745843 c -0.0578,0.777778 -0.67616,1.396115 -1.45394,1.453977 h -10.14754 c -1.83355,-0.03215 -1.61297,-1.950354 -1.61297,-1.950354 0.0176,-1.745964 0.0292,-1.174997 0.0378,-2.532734 z" inkscape:connector-curvature="0" style="fill:#000000;fill-opacity:1;stroke-width:30.2910862" sodipodi:nodetypes="ccccccccccccccccc"></path>
+      <path id="Pfad_37" data-name="Pfad 37" class="cls-3" d="m -353.64939,-98.598162 h 10.8745 a 1.5751364,1.5751364 0 0 1 1.45397,1.453967 v 32.653796 a 10.16266,10.16266 0 0 0 20.32532,0 v -34.107763 a 1.3630989,1.3630989 0 0 1 2.18096,0 h 10.14751 a 1.5751364,1.5751364 0 0 1 1.45398,1.453967 v 33.320202 a 23.233265,23.233265 0 0 1 -46.46653,0 v -34.834762 z" inkscape:connector-curvature="0" style="fill:#000000;fill-opacity:1;stroke-width:30.2910862"></path>
+      <path id="Pfad_38" data-name="Pfad 38" class="cls-3" d="m -283.97989,-98.598162 h 11.60148 a 2.3324135,2.3324135 0 0 1 2.18096,2.180956 v 21.052302 l 18.17465,-23.233258 h 11.60149 c 0.72698,0 2.18096,0.72702 1.45397,2.180956 v 0.848204 l -20.32532,21.779302 20.32532,27.595169 a 1.7871741,1.7871741 0 0 1 -0.72698,3.0291 h -13.78245 l -18.17465,-25.414264 v 23.960237 a 2.3324135,2.3324135 0 0 1 -2.18096,2.180955 h -7.99685 a 2.3324135,2.3324135 0 0 1 -2.18095,-2.180955 z" inkscape:connector-curvature="0" style="fill:#000000;fill-opacity:1;stroke-width:30.2910862"></path>
+      <path id="Pfad_39" data-name="Pfad 39" class="cls-3" d="m -219.36901,-98.598162 h 10.8745 a 1.5751364,1.5751364 0 0 1 1.45397,1.453967 v 53.069976 a 1.5751364,1.5751364 0 0 1 -1.45397,1.453977 h -9.45082 a 1.5751364,1.5751364 0 0 1 -1.42368,-1.453977 z" inkscape:connector-curvature="0" style="fill:#000000;fill-opacity:1;stroke-width:30.2910862"></path>
+      <path id="Pfad_40" data-name="Pfad 40" class="cls-3" d="m -221.54996,-132.70593 a 7.9968466,7.9968466 0 1 1 7.99684,7.99685 8.0574287,8.0574287 0 0 1 -7.99684,-7.99685 z" inkscape:connector-curvature="0" style="fill:#000000;fill-opacity:1;stroke-width:30.2910862"></path>
+      <circle id="Ellipse_3" data-name="Ellipse 3" cx="-308.80731" cy="-524.39673" r="10.495741" style="fill:#000000;fill-opacity:1;stroke-width:23.0675621"></circle>
+    </g>
+  </g>
+</svg>
