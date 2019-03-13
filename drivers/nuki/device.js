@@ -43,9 +43,9 @@ class NukiDevice extends Homey.Device {
     this.registerCapabilityListener('locked', async (value) => {
       try {
         if (value) {
-          let path = 'http://'+ this.getSetting('address') +':'+ this.getSetting('port') +'/lockAction?nukiId='+ this.getSetting('nukiId') +'&action=2&token='+ this.getSetting('token');
+          var path = 'http://'+ this.getSetting('address') +':'+ this.getSetting('port') +'/lockAction?nukiId='+ this.getSetting('nukiId') +'&action=2&token='+ this.getSetting('token');
         } else {
-          let path = 'http://'+ this.getSetting('address') +':'+ this.getSetting('port') +'/lockAction?nukiId='+ this.getSetting('nukiId') +'&action=1&token='+ this.getSetting('token');
+          var path = 'http://'+ this.getSetting('address') +':'+ this.getSetting('port') +'/lockAction?nukiId='+ this.getSetting('nukiId') +'&action=1&token='+ this.getSetting('token');
         }
         let result = await util.sendCommand(path, 8000);
         if (result.success == true) {

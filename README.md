@@ -20,3 +20,8 @@ Follow these steps to add your Nuki to Homey.
 * Press the button of your Nuki Bridge(s) during the discovery process
 * Select the Nuki(s) you wish to add to Homey and confirm
 You Nuki(s) have now been added to Homey.
+
+
+## Release Notes
+### v1.0.1 - 2019-03-13
+* FIX: small fix for quick action
