@@ -6,7 +6,7 @@ This is an alternative Homey app for the Nuki Smart Lock. The official app in th
 * being able to set all possible lock actions
 
 The app works similar to the previous community app (which was removed from the app store when Athom published their app) but has been completely rewritten with the following additions:
-- SDK2 and there future proof
+- SDK2 and therefor future proof
 - auto discovery of Nuki Smart Locks during pairing (no manual entries)
 - better mechanism for adding the callback URL to Nuki (needed for sending lockstate changes from Nuki to Homey)
 - better icons
