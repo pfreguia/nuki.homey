@@ -23,5 +23,5 @@ You Nuki(s) have now been added to Homey.
 
 
 ## Release Notes
-### v1.0.1 - 2019-03-13
-* FIX: small fix for quick action
+### v1.0.2 - 2019-03-13
+* FIX: small workaround for random 503 errors from Nuki Bridge

@@ -16,15 +16,15 @@ module.exports = [
         Object.keys(smartlocks).forEach((key) => {
           if (smartlocks[key].getSetting('nukiId') == args.body.nukiId.toString()) {
 
+            // update capability locked
+            if (locked != smartlocks[key].getCapabilityValue('locked')) {
+              smartlocks[key].setCapabilityValue('locked', locked);
+            }
+
             // update capability lockstate & trigger lockstateChanged
             if (state != smartlocks[key].getCapabilityValue('lockstate')) {
               smartlocks[key].setCapabilityValue('lockstate', state);
               Homey.ManagerFlow.getCard('trigger', 'lockstateChanged').trigger(smartlocks[key], { lockstate: state }, {});
-            }
-
-            // update capability locked
-            if (locked != smartlocks[key].getCapabilityValue('locked')) {
-              smartlocks[key].setCapabilityValue('locked', locked);
             }
 
             // trigger batteryCritical

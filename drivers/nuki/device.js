@@ -7,6 +7,9 @@ class NukiDevice extends Homey.Device {
 
   onInit() {
 
+    // INITIALLY SET DEVICE AS AVAILABLE
+    this.setAvailable();
+
     // POLLING DEVICE FOR LOCKSTATE AND BATTERYCRITICAL
     this.pollDevice();
 
@@ -87,15 +90,15 @@ class NukiDevice extends Homey.Device {
           let state = util.returnLockState(result.state);
           let locked = util.returnLocked(result.state);
 
+          // update capability locked
+          if (locked != this.getCapabilityValue('locked')) {
+            this.setCapabilityValue('locked', locked);
+          }
+
           // update capability lockstate & trigger lockstateChanged
           if (state != this.getCapabilityValue('lockstate')) {
             this.setCapabilityValue('lockstate', state);
             Homey.ManagerFlow.getCard('trigger', 'lockstateChanged').trigger(this, { lockstate: state }, {});
-          }
-
-          // update capability locked
-          if (locked != this.getCapabilityValue('locked')) {
-            this.setCapabilityValue('locked', locked);
           }
 
           // trigger batteryCritical
@@ -105,7 +108,9 @@ class NukiDevice extends Homey.Device {
         }
       } catch (error) {
         this.log(error);
-        this.setUnavailable(Homey.__('Unreachable'));
+        if (error !== 503) {
+          this.setUnavailable(Homey.__('Unreachable'));
+        }
       }
     }, 300000);
   }
