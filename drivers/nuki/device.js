@@ -80,7 +80,7 @@ class NukiDevice extends Homey.Device {
   // HELPER FUNCTIONS
   pollDevice() {
     clearInterval(this.pollingInterval);
-    if (!this.getAvailable()) { this.setAvailable(); }
+    //if (!this.getAvailable()) { this.setAvailable(); }
 
     this.pollingInterval = setInterval(async () => {
       try {
@@ -102,13 +102,16 @@ class NukiDevice extends Homey.Device {
           }
 
           // trigger batteryCritical
-          if (result.batteryCritical == true) {
+          if (result.batteryCritical == true && this.getStoreValue('batteryCritical') == false) {
             Homey.ManagerFlow.getCard('trigger', 'batteryCritical').trigger(this, {}, {});
+            this.setStoreValue('batteryCritical', true);
+          } else if (result.batteryCritical == false && this.getStoreValue('batteryCritical') == true) {
+            this.setStoreValue('batteryCritical', false);
           }
         }
       } catch (error) {
         this.log(error);
-        if (error !== 503) {
+        if (error != 503) {
           this.setUnavailable(Homey.__('Unreachable'));
         }
       }

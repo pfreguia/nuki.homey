@@ -32,6 +32,9 @@ class NukiDriver extends Homey.Driver {
                   port: bridgeList.bridges[i].port,
                   nukiId: deviceList[x].nukiId,
                   token: auth.token
+                },
+                store: {
+                  batteryCritical: false
                 }
               });
             }

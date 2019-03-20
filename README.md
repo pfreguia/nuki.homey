@@ -23,5 +23,6 @@ You Nuki(s) have now been added to Homey.
 
 
 ## Release Notes
-### v1.0.2 - 2019-03-13
-* FIX: small workaround for random 503 errors from Nuki Bridge
+### v1.0.3 - 2019-03-20
+* FIX: removed code to set the device unavailable when it is not reachable (due to know issue with 503 errors)
+* FIX: only trigger battery critical once until the batteries have been replaced

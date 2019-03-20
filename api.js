@@ -28,8 +28,11 @@ module.exports = [
             }
 
             // trigger batteryCritical
-            if (args.body.batteryCritical == true) {
-              Homey.ManagerFlow.getCard('trigger', 'batteryCritical').trigger(smartlocks[key], {}, {});
+            if (args.body.batteryCritical == true && smartlocks[key].getStoreValue('batteryCritical') == false) {
+              Homey.ManagerFlow.getCard('trigger', 'batteryCritical').trigger(this, {}, {});
+              smartlocks[key].setStoreValue('batteryCritical', true);
+            } else if (args.body.batteryCritical == false && smartlocks[key].getStoreValue('batteryCritical') == true) {
+              smartlocks[key].setStoreValue('batteryCritical', false);
             }
 
             callback(null, true);
