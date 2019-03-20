@@ -111,9 +111,9 @@ class NukiDevice extends Homey.Device {
         }
       } catch (error) {
         this.log(error);
-        if (error != 503) {
+        /*if (error != 503) {
           this.setUnavailable(Homey.__('Unreachable'));
-        }
+        }*/
       }
     }, 300000);
   }
