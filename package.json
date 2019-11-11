@@ -1,10 +1,10 @@
 {
   "name": "nuki.homey",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "description": "Nuki Smart Lock",
   "main": "app.js",
   "dependencies": {
-    "node-fetch": "^2.3.0"
+    "node-fetch": "^2.6.0"
   },
   "devDependencies": {},
   "scripts": {

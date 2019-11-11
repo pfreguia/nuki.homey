@@ -19,10 +19,10 @@ Follow these steps to add your Nuki to Homey.
 * Confirm adding a Nuki Smart Lock and wait for the discovery process to start
 * Press the button of your Nuki Bridge(s) during the discovery process
 * Select the Nuki(s) you wish to add to Homey and confirm
-You Nuki(s) have now been added to Homey.
+Your Nuki(s) have now been added to Homey.
 
 
 ## Release Notes
-### v1.0.3 - 2019-03-20
-* FIX: removed code to set the device unavailable when it is not reachable (due to know issue with 503 errors)
-* FIX: only trigger battery critical once until the batteries have been replaced
+### v1.1.0 - 2019-11-11
+* Changed endpoint from /lockState to /list for polling the lock. The /list endpoints gets the cached state from the lock and using this will spare the batteries of the lock
+* Added the alarm_battery capability and deprecated the previous "Battery Critical" trigger card. Please switch to the default "Battery Alarm" trigger card as the old one does not work anymore

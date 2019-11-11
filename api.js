@@ -28,11 +28,10 @@ module.exports = [
             }
 
             // trigger batteryCritical
-            if (args.body.batteryCritical == true && smartlocks[key].getStoreValue('batteryCritical') == false) {
-              Homey.ManagerFlow.getCard('trigger', 'batteryCritical').trigger(this, {}, {});
-              smartlocks[key].setStoreValue('batteryCritical', true);
-            } else if (args.body.batteryCritical == false && smartlocks[key].getStoreValue('batteryCritical') == true) {
-              smartlocks[key].setStoreValue('batteryCritical', false);
+            if (args.body.batteryCritical == true && smartlocks[key].getCapabilityValue('alarm_battery') == false) {
+              smartlocks[key].setCapabilityValue('alarm_battery', true);
+            } else if (args.body.batteryCritical == false && smartlocks[key].getCapabilityValue('alarm_battery') == true) {
+              smartlocks[key].setCapabilityValue('alarm_battery', false);
             }
 
             callback(null, true);

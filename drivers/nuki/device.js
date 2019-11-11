@@ -10,6 +10,11 @@ class NukiDevice extends Homey.Device {
     // INITIALLY SET DEVICE AS AVAILABLE
     this.setAvailable();
 
+    // ADD BATTERY ALARM CAPABILITY
+    if (!this.hasCapability('alarm_battery')) {
+      this.addCapability('alarm_battery');
+    }
+
     // POLLING DEVICE FOR LOCKSTATE AND BATTERYCRITICAL
     this.pollDevice();
 
@@ -80,20 +85,17 @@ class NukiDevice extends Homey.Device {
   // HELPER FUNCTIONS
   pollDevice() {
     clearInterval(this.pollingInterval);
-    //if (!this.getAvailable()) { this.setAvailable(); }
 
     this.pollingInterval = setInterval(async () => {
       try {
-        let path = 'http://'+ this.getSetting('address') +':'+ this.getSetting('port') +'/lockState?nukiId='+ this.getSetting('nukiId') +'&token='+ this.getSetting('token');
+        let path = 'http://'+ this.getSetting('address') +':'+ this.getSetting('port') +'/list?token='+ this.getSetting('token');
         let result = await util.sendCommand(path, 4000);
-        if (result.success == true) {
-          let state = util.returnLockState(result.state);
-          let locked = util.returnLocked(result.state);
+        if (result) {
 
-          // update capability locked
-          if (locked != this.getCapabilityValue('locked')) {
-            this.setCapabilityValue('locked', locked);
-          }
+          const device = result.find(el => el.nukiId === this.getSetting('nukiId'));
+
+          let state = util.returnLockState(device.lastKnownState.state);
+          let locked = util.returnLocked(device.lastKnownState.state);
 
           // update capability lockstate & trigger lockstateChanged
           if (state != this.getCapabilityValue('lockstate')) {
@@ -101,19 +103,23 @@ class NukiDevice extends Homey.Device {
             Homey.ManagerFlow.getCard('trigger', 'lockstateChanged').trigger(this, { lockstate: state }, {});
           }
 
-          // trigger batteryCritical
-          if (result.batteryCritical == true && this.getStoreValue('batteryCritical') == false) {
-            Homey.ManagerFlow.getCard('trigger', 'batteryCritical').trigger(this, {}, {});
-            this.setStoreValue('batteryCritical', true);
-          } else if (result.batteryCritical == false && this.getStoreValue('batteryCritical') == true) {
-            this.setStoreValue('batteryCritical', false);
+          // update capability locked
+          if (locked != this.getCapabilityValue('locked')) {
+            this.setCapabilityValue('locked', locked);
           }
+
+          // update battery alarm capability
+          if (this.hasCapability('alarm_battery')) {
+            if (device.lastKnownState.batteryCritical == true && this.getCapabilityValue('alarm_battery') == false) {
+              this.setCapabilityValue('alarm_battery', true);
+            } else if (device.lastKnownState.batteryCritical == false && this.getCapabilityValue('alarm_battery') == true) {
+              this.setCapabilityValue('alarm_battery', false);
+            }
+          }
+
         }
       } catch (error) {
         this.log(error);
-        /*if (error != 503) {
-          this.setUnavailable(Homey.__('Unreachable'));
-        }*/
       }
     }, 300000);
   }
