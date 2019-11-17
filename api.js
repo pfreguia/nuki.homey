@@ -28,7 +28,7 @@ module.exports = [
             }
 
             // trigger batteryCritical
-            if (args.body.batteryCritical == true && smartlocks[key].getCapabilityValue('alarm_battery') == false) {
+            if (args.body.batteryCritical == true && (smartlocks[key].getCapabilityValue('alarm_battery') == false || smartlocks[key].getCapabilityValue('alarm_battery') == null)) {
               smartlocks[key].setCapabilityValue('alarm_battery', true);
             } else if (args.body.batteryCritical == false && smartlocks[key].getCapabilityValue('alarm_battery') == true) {
               smartlocks[key].setCapabilityValue('alarm_battery', false);

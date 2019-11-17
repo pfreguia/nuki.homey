@@ -21,8 +21,6 @@ Follow these steps to add your Nuki to Homey.
 * Select the Nuki(s) you wish to add to Homey and confirm
 Your Nuki(s) have now been added to Homey.
 
-
 ## Release Notes
-### v1.1.0 - 2019-11-11
-* Changed endpoint from /lockState to /list for polling the lock. The /list endpoints gets the cached state from the lock and using this will spare the batteries of the lock
-* Added the alarm_battery capability and deprecated the previous "Battery Critical" trigger card. Please switch to the default "Battery Alarm" trigger card as the old one does not work anymore
+### v1.1.1 - 2019-11-17
+* Fix for alarm_battery capability due to a bug in Homey core

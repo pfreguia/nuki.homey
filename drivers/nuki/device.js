@@ -110,7 +110,7 @@ class NukiDevice extends Homey.Device {
 
           // update battery alarm capability
           if (this.hasCapability('alarm_battery')) {
-            if (device.lastKnownState.batteryCritical == true && this.getCapabilityValue('alarm_battery') == false) {
+            if (device.lastKnownState.batteryCritical == true && (this.getCapabilityValue('alarm_battery') == false || this.getCapabilityValue('alarm_battery') == null)) {
               this.setCapabilityValue('alarm_battery', true);
             } else if (device.lastKnownState.batteryCritical == false && this.getCapabilityValue('alarm_battery') == true) {
               this.setCapabilityValue('alarm_battery', false);
