@@ -22,5 +22,5 @@ Follow these steps to add your Nuki to Homey.
 Your Nuki(s) have now been added to Homey.
 
 ## Release Notes
-### v1.1.1 - 2019-11-17
-* Fix for alarm_battery capability due to a bug in Homey core
+### v1.1.2 - 2019-12-04
+* Fixed custom condition card for (un)locked but also deprecated it as it's a duplicate of the default condition cards for the locked capability

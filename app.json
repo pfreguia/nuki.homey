@@ -10,7 +10,7 @@
 		"en": [ "nuki", "lock"],
 		"nl": [ "nuki", "slot"]
 	},
-	"version": "1.1.1",
+	"version": "1.1.2",
 	"compatibility": ">=2.0.0",
 	"author": {
 		"name": "Jelger Haanstra",
@@ -195,6 +195,7 @@
     "conditions": [
       {
         "id": "isLocked",
+        "deprecated": true,
         "title": {
           "en": "!{{is|is not}} locked",
           "nl": "!{{is|is niet}} vergrendeld"

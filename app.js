@@ -11,7 +11,7 @@ class NukiApp extends Homey.App {
     new Homey.FlowCardCondition('isLocked')
       .register()
       .registerRunListener((args, state) => {
-        if (args.device.getCapabilityValue('lockstate') == 'locked') {
+        if (args.device.getCapabilityValue('locked')) {
           return Promise.resolve(true);
         } else {
           return Promise.resolve(false);
