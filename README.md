@@ -15,7 +15,8 @@ The app works similar to the previous community app (which was removed from the 
 
 ## Adding your Nuki
 Follow these steps to add your Nuki to Homey.
-* Select the 'Nuki Smart Lock' app when adding a device and select a Nuki Smart Lock
+* First enable the HTTP API in your Nuki Bridge. You can do this within the Nuki smartphone app. Go to manage your devices and select your Nuki Bridge. There you can enable the HTTP API.
+* Once enabled go to the Homey app and add a Nuki Smart Lock as device by selecting the 'Nuki Smart Lock' app from the pairing wizard.
 * Confirm adding a Nuki Smart Lock and wait for the discovery process to start
 * Press the button of your Nuki Bridge(s) during the discovery process
 * Select the Nuki(s) you wish to add to Homey and confirm
