@@ -8,6 +8,7 @@ class NukiApp extends Homey.App {
   onInit() {
     this.log('Initializing Nuki app ...');
 
+    /* DEPRECATED - USING DEFAULT CONDITION CARD FOR LOCKED CAPABILITY INSTEAD */
     new Homey.FlowCardCondition('isLocked')
       .register()
       .registerRunListener((args, state) => {
