@@ -23,5 +23,5 @@ Follow these steps to add your Nuki to Homey.
 Your Nuki(s) have now been added to Homey.
 
 ## Release Notes
-### v1.1.2 - 2019-12-04
-* Fixed custom condition card for (un)locked but also deprecated it as it's a duplicate of the default condition cards for the locked capability
+### v1.1.3 - 2020-03-01
+* Small code refactoring to reduce complexity and lines of code.
