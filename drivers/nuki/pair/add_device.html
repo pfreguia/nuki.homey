@@ -1,0 +1,22 @@
+<script type="text/javascript">
+  Homey.emit('add_device', null, function(error, result) {
+    if (error) {
+      Homey.alert(error, null, function() {
+        Homey.done()
+    	});
+    } else {
+      for (let i in result) {
+        Homey.addDevice(result[i], function(error, result) {
+          if (error) {
+            Homey.alert(error, null, function() {
+              Homey.done()
+          	});
+          }
+        })
+      }
+      setTimeout(function() {
+        Homey.done();
+      }, 5000);
+    }
+  })
+</script>

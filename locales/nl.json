@@ -1,4 +1,22 @@
 {
+  "pair": {
+    "title": "Koppelen van Nuki bridge",
+    "intro": "Vul de details van je Nuki bridge hieronder in.",
+    "address": "IP adres",
+    "port": "Port",
+    "token": "Token",
+    "nukiid": "Nuki ID",
+    "titleselection": "Wat wil je doen?",
+    "nodevices": "Geen apparaten gevonden. Heb je op de knop van je Nuki bridge gedrukt gedurende discovery? Je kan het nog een keer proberen of je Nuki bridge handmatig toevoegen als je het IP adres en token weet.",
+    "again": "Probeer opnieuw",
+    "manual": "Handmatig koppelen",
+    "test" : "Test connectie",
+    "testing" : "Connectietest succesvol, je kan de Nuki bridge nu verbinden.",
+    "connect": "Verbind",
+    "success": "Nuki bridge succesvol toegevoegd.",
+    "bridgetype": "Bridge type:",
+    "unknownerror": "Onbekende fout, weet je zeker dat je de juiste details hebt opgegeven en dat de Nuki bridge op hetzelfde netwerk zit als Homey? Controleer a.u.b. je instellingen en probeer het nog eens."
+  },
   "Unreachable": "Onbereikbaar",
   "Did not receive a token from the bridge, make sure you push the bridge button during pairing.": "Geen token van de bridge ontvangen, zorg ervoor dat je de knop van de bridge indrukt gedurende het pairen.",
   "400": "Actie is ongeldig",

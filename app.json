@@ -10,7 +10,7 @@
 		"en": [ "nuki", "lock"],
 		"nl": [ "nuki", "slot"]
 	},
-	"version": "1.1.3",
+	"version": "1.2.0",
 	"compatibility": ">=2.0.0",
 	"author": {
 		"name": "Jelger Haanstra",
@@ -133,6 +133,15 @@
           "navigation": {
             "next": "add_devices"
           }
+        },
+        {
+          "id": "select_pairing"
+        },
+        {
+          "id": "manual_pairing"
+        },
+        {
+          "id": "add_device"
         },
         {
           "id": "add_devices",

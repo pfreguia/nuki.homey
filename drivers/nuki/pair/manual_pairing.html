@@ -1,0 +1,118 @@
+<script type="text/javascript">
+
+Homey.setTitle( Homey.__('pair.title') );
+
+$(function() {
+
+	$('#test-connection').click(function() {
+		$('.nuki-test').hide();
+		$('.nuki-ok').hide();
+		$('.nuki-error').hide();
+		$('.nuki-info').hide();
+
+		var inputaddress = $('#address').val();
+    var inputport = $('#port').val();
+		var inputtoken = $('#token').val();
+
+		if (inputaddress != '' && inputport != '' && inputtoken != '') {
+			var data = {
+				address: inputaddress,
+				port: inputport,
+				token: inputtoken
+			};
+
+			Homey.emit('manual_pairing', data, function (error, result) {
+				if (error) {
+					$('.nuki-error').show();
+					$('.nuki-error-msg').html(error);
+				} else if (result) {
+          var bridgetype = result.bridgeType == 1 ? 'Hardware Bridge' : 'Software Bridge';
+          var nukiinfo = "<div class='info-row'><span class='info-label' data-i18n='pair.bridgetype'>Bridgetype:</span><span class='info-value'> "+ bridgetype +"</span></div>";
+          $('.nuki-info').show();
+          $('.nuki-info').html(nukiinfo);
+          $('.nuki-test').show();
+          $('#connect').prop('disabled', false);
+        } else {
+					$('.nuki-error').show();
+					$('.nuki-error-msg').html( Homey.__('pair.unknownerror') );
+				}
+			});
+
+		} else {
+			$('.nuki-error').show();
+			$('.nuki-error-msg').html( Homey.__('pair.nosettings') );
+		}
+
+	});
+
+	$('#connect').click(function() {
+    Homey.showView('add_device');
+	});
+})
+</script>
+
+<style type="text/css">
+  .form-group {
+    width: 100%;
+    display: block;
+    margin-bottom: 12px;
+  }
+  .form-group label {
+    display: block;
+  }
+  .nuki-status, .nuki-info {
+		display: none;
+	}
+  .nuki-info {
+    margin-top: 10px;
+    font-size: 12px;
+  }
+  .nuki-info .info-row {
+    min-width: 150px;
+    padding-bottom: 4px;
+  }
+  .nuki-info .info-label {
+    display: inline-block;
+    min-width: 100px;
+    font-weight: 700;
+  }
+  .buttons, .messages {
+    padding-top: 14px;
+  }
+  .button:disabled {
+    color: #ccc;
+  }
+  .button:enabled {
+    background-color: #00c139 !important;
+    color: #fff;
+  }
+</style>
+
+<p data-i18n="pair.intro">Enter the details of your Nuki bridge below.</p>
+<div class="nuki-pairing">
+	<div class="form-group">
+		<label for="address" data-i18n="pair.address">IP address</label>
+		<input type="text" class="form-control" id="address" placeholder="0.0.0.0">
+	</div>
+  <div class="form-group">
+    <label for="port" data-i18n="pair.port">Port</label>
+    <input type="number" class="form-control" id="port" placeholder="8080">
+  </div>
+	<div class="form-group">
+		<label for="token" data-i18n="pair.token">Token</label>
+		<input type="text" class="form-control" id="token">
+	</div>
+
+	<div class="form-group buttons">
+		<button id="test-connection" class="button" data-i18n="pair.test">Test Connection</button>
+		<button id="connect" class="button" data-i18n="pair.connect" disabled>Connect</button>
+	</div>
+</div>
+
+<div class="nuki-info"></div>
+
+<div class="messages">
+	<p class="nuki-status nuki-test" style="color: #008C23;"><i class="fa fa-check"></i> <span class="nuki-test-msg" data-i18n="pair.testing">Connection test succesful, you can now connect the Nuki bridge.</span></p>
+	<p class="nuki-status nuki-ok" style="color: #008C23;"><i class="fa fa-check"></i> <span class="nuki-ok-msg" data-i18n="pair.success">Nuki bridge added succesfully.</span></p>
+	<p class="nuki-status nuki-error" style="color: #ff6300;"><i class="fa fa-times"></i> <span class="nuki-error-msg"></span></p>
+</div>

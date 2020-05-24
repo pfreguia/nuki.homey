@@ -1,4 +1,22 @@
 {
+  "pair": {
+    "title": "Pair the Nuki bridge",
+    "intro": "Enter the details of your Nuki bridge below.",
+    "address": "IP Address",
+    "port": "Port",
+    "token": "Token",
+    "nukiid": "Nuki ID",
+    "titleselection": "What do you want to do?",
+    "nodevices": "No devices have been discovered. Did you push the button on your Nuki bridge during discovery? You can try again or use manual pairing if you know the IP address and token of your Nuki bridge.",
+    "again": "Try Again",
+    "manual": "Manual Pairing",
+    "test" : "Test Connection",
+    "testing" : "Connection test succesful, you can now connect the Nuki bridge.",
+    "connect": "Connect",
+    "success": "Nuki bridge added succesfully.",
+    "bridgetype": "Bridge Type:",
+    "unknownerror": "Unknown error, are you sure you have entered the correct details and Homey is on the same network as the Nuki bridge? Please check your settings and try again."
+  },
   "Unreachable": "Unreachable",
   "Did not receive a token from the bridge, make sure you push the bridge button during pairing.": "Did not receive a token from the bridge, make sure you push the bridge button during pairing.",
   "400": "Action invalid",

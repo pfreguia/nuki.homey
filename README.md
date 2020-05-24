@@ -24,5 +24,5 @@ Follow these steps to add your Nuki to Homey.
 Your Nuki(s) have now been added to Homey.
 
 ## Release Notes
-### v1.1.3 - 2020-03-01
-* Small code refactoring to reduce complexity and lines of code.
+### v1.2.0 - 2020-05-24
+* Added a manual pairing fallback mechanism.
