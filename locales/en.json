@@ -7,7 +7,7 @@
     "token": "Token",
     "nukiid": "Nuki ID",
     "titleselection": "What do you want to do?",
-    "nodevices": "No devices have been discovered. Did you push the button on your Nuki bridge during discovery? You can try again or use manual pairing if you know the IP address and token of your Nuki bridge.",
+    "nodevices": "No hardware Nuki bridge discovered. You can try again or use try manual pairing if you know the IP address and token of your Nuki (software) bridge.",
     "again": "Try Again",
     "manual": "Manual Pairing",
     "test" : "Test Connection",

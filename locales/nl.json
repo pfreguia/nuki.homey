@@ -7,7 +7,7 @@
     "token": "Token",
     "nukiid": "Nuki ID",
     "titleselection": "Wat wil je doen?",
-    "nodevices": "Geen apparaten gevonden. Heb je op de knop van je Nuki bridge gedrukt gedurende discovery? Je kan het nog een keer proberen of je Nuki bridge handmatig toevoegen als je het IP adres en token weet.",
+    "nodevices": "Geen hardware Nuki bridge gevonden. Je kan het nog een keer proberen of je Nuki (software) bridge handmatig proberen toe te voegen als je het IP adres en token weet.",
     "again": "Probeer opnieuw",
     "manual": "Handmatig koppelen",
     "test" : "Test connectie",
