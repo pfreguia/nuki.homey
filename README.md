@@ -1,5 +1,5 @@
 # Nuki for Homey (Bridge API version)
-This is an alternative Homey app for the Nuki Smart Lock. The official app in the Homey app store created by Athom uses the web API for communication with your Nuki. This app polls your device for changes in the lockstate which reduces the battery life of your Nuki and depends on an internet connection between your Nuki Bridge and the Nuki cloud. This alternative app only requires internet access during pairing of your Nuki but relies completely on local communication between Homey and your Nuki for updates in lockstate changes. When your Nuki changes the lockstate it will notify Homey directly of the changed lockstate without the need to poll your Nuki. Another difference it that it brings back the other possible lockactions like "Lock n Go" which are missing in the official Homey app. So benefits from this app of the official app are:
+This is an alternative Homey app for the Nuki Smart Lock. The official app in the Homey app store created by Athom uses the web API for communication with your Nuki and polls your Nuki bridge for status changes which reduces the battery life of your Nuki Lock or Opener and depends on an internet connection between your Nuki Bridge and the Nuki cloud. This alternative app only requires internet access during pairing of your Nuki Lock or Opener but relies completely on local communication between Homey and your Nuki Bridge for updates in from your devices. When your Nuki Lock or Opener changes state it will notify Homey directly of the changed state without the need to poll your Nuki. Another difference it that it brings back the other possible lockactions like "Lock n Go" which are missing in the official Homey app. So benefits from this app of the official app are:
 * no internet connection needed for communication between Homey and Nuki
 * no polling needed for lockstate updates
 * faster response times because direct communication
@@ -13,16 +13,16 @@ The app works similar to the previous community app (which was removed from the 
 - custom capabilities for lockstate and lockaction
 - less code, smaller footprint
 
-## Adding your Nuki
+## Adding your Nuki Lock or Nuki Opener
 Follow these steps to add your Nuki to Homey.
 * First enable the HTTP API in your Nuki Bridge. You can do this within the Nuki smartphone app. Go to manage your devices and select your Nuki Bridge. There you can enable the HTTP API.
 * Once enabled go to the Homey app and add a Nuki Smart Lock as device by selecting the 'Nuki Smart Lock' app from the pairing wizard.
-* Confirm adding a Nuki Smart Lock and wait for the discovery process to start
+* Confirm adding a Nuki Smart Lock or Nuki Opener and wait for the discovery process to start
 * Press the button of your Nuki Bridge(s) during the discovery process
-* Select the Nuki(s) you wish to add to Homey and confirm
+* Select the Nuki Lock(s) or Nuki Opener(s) you wish to add to Homey and confirm
 
-Your Nuki(s) have now been added to Homey.
+Your Nuki device(s) have now been added to Homey.
 
 ## Release Notes
-### v1.2.0 - 2020-05-24
-* Added a manual pairing fallback mechanism.
+### v1.3.0 - 2020-06-01
+* Added support for Nuki Opener (kudo's to Piero Freguia).

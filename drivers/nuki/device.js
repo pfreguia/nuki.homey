@@ -15,9 +15,6 @@ class NukiDevice extends Homey.Device {
       this.addCapability('alarm_battery');
     }
 
-    // POLLING DEVICE FOR LOCKSTATE AND BATTERYCRITICAL
-    this.pollDevice();
-
     // ADD CALLBACK URL IN NUKI IF NOT SET ALREADY
     setTimeout(this.setCallbackUrl.bind(this), 10000);
 
@@ -76,10 +73,6 @@ class NukiDevice extends Homey.Device {
       }
     });
 
-  }
-
-  onDeleted() {
-    clearInterval(this.pollingInterval);
   }
 
   // HELPER FUNCTIONS

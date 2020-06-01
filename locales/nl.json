@@ -32,5 +32,11 @@
   "unlocked (lock ‘n’ go)": "Ontgrendeld (lock ‘n’ go)",
   "unlatching": "Openende",
   "motor blocked": "Motor geblokkeerd",
-  "undefined": "Niet gedefinieerd"
+  "undefined": "Niet gedefinieerd",
+  "untrained": "Ongetrained",
+  "online": "Online",
+  "rto active": "Ring om te openen",
+  "open": "Open",
+  "opening": "Openend",
+  "boot run": "Boot run"
 }

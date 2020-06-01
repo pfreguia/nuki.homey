@@ -32,5 +32,11 @@
   "unlocked (lock ‘n’ go)": "Unlocked (lock ‘n’ go)",
   "unlatching": "Unlatching",
   "motor blocked": "Motor Blocked",
-  "undefined": "Undefined"
+  "undefined": "Undefined",
+  "untrained": "Untrained",
+  "online": "Online",
+  "rto active": "Ring to Open",
+  "open": "Open",
+  "opening": "Opening",
+  "boot run": "Boot run"
 }

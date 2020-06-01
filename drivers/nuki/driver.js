@@ -25,18 +25,20 @@ class NukiDriver extends Homey.Driver {
               var deviceList = await util.sendCommand(locklistpath, 2000);
               if (deviceList) {
                 for (let x in deviceList) {
-                  devices.push({
-                    name: deviceList[x].name +' ('+ bridgeList.bridges[i].ip +')',
-                    data: {
-                      id: deviceList[x].nukiId
-                    },
-                    settings: {
-                      address: bridgeList.bridges[i].ip,
-                      port: bridgeList.bridges[i].port,
-                      nukiId: deviceList[x].nukiId,
-                      token: auth.token
-                    }
-                  });
+                  if (deviceList[x].deviceType == 0) {
+                    devices.push({
+                      name: deviceList[x].name +' ('+ bridgeList.bridges[i].ip +')',
+                      data: {
+                        id: deviceList[x].nukiId
+                      },
+                      settings: {
+                        address: bridgeList.bridges[i].ip,
+                        port: bridgeList.bridges[i].port,
+                        nukiId: deviceList[x].nukiId,
+                        token: auth.token
+                      }
+                    });
+                  }
                 }
               }
             } else {
