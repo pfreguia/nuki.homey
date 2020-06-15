@@ -24,5 +24,5 @@ Follow these steps to add your Nuki to Homey.
 Your Nuki device(s) have now been added to Homey.
 
 ## Release Notes
-### v1.3.0 - 2020-06-01
-* Added support for Nuki Opener (kudo's to Piero Freguia).
+### v1.4.0 - 2020-06-15
+* Added support for the door sensor of the Nuki lock. This requires bridge firmware 2.6.0 / 1.16.0 which is currently in beta. Please be aware that the Nuki callbacks of the door sensor are not real time. So there will be a delay in response which can also result in missed events.

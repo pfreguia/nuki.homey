@@ -90,28 +90,7 @@ class NukiApp extends Homey.App {
               const device = bridgeItems.find(el => el.nukiId === nukiDev.getSetting('nukiId'));
               switch (device.deviceType) {
                 case 0:  // SmartLock
-                  let state = util.returnLockState(device.lastKnownState.state);
-                  let locked = util.returnLocked(device.lastKnownState.state);
-
-                  // update capability lockstate & trigger lockstateChanged
-                  if (state != nukiDev.getCapabilityValue('lockstate')) {
-                    nukiDev.setCapabilityValue('lockstate', state);
-                    Homey.ManagerFlow.getCard('trigger', 'lockstateChanged').trigger(nukiDev, { lockstate: state }, {});
-                  }
-
-                  // update capability locked
-                  if (locked != nukiDev.getCapabilityValue('locked')) {
-                    nukiDev.setCapabilityValue('locked', locked);
-                  }
-
-                  // update battery alarm capability
-                  if (nukiDev.hasCapability('alarm_battery')) {
-                    if (device.lastKnownState.batteryCritical == true && (nukiDev.getCapabilityValue('alarm_battery') == false || nukiDev.getCapabilityValue('alarm_battery') == null)) {
-                      nukiDev.setCapabilityValue('alarm_battery', true);
-                    } else if (device.lastKnownState.batteryCritical == false && nukiDev.getCapabilityValue('alarm_battery') == true) {
-                      nukiDev.setCapabilityValue('alarm_battery', false);
-                    }
-                  }
+                  nukiDev.updateCapabilitiesValue(device.lastKnownState);
                   break;
                 case 2:  // Opener
                   nukiDev.updateCapabilitiesValue(device.lastKnownState);

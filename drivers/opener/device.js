@@ -72,6 +72,7 @@ class OpenerDevice extends Homey.Device {
     });
   }
 
+  // HELPER FUNCTIONS
   updateCapabilitiesValue(newState) {
     let state;
     let locked;
@@ -108,7 +109,6 @@ class OpenerDevice extends Homey.Device {
         locked = false;
         break;
     }
-    //this.log(newState.mode);
     continuous_mode = newState.mode == 3;
 
     // update capability openerstate & trigger openerstateChanged
@@ -137,7 +137,6 @@ class OpenerDevice extends Homey.Device {
     }
   }
 
-  // HELPER FUNCTIONS
   async setCallbackUrl() {
     try {
       let homeyaddress = await util.getHomeyIp();

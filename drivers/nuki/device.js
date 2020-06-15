@@ -10,11 +10,6 @@ class NukiDevice extends Homey.Device {
     // INITIALLY SET DEVICE AS AVAILABLE
     this.setAvailable();
 
-    // ADD BATTERY ALARM CAPABILITY
-    if (!this.hasCapability('alarm_battery')) {
-      this.addCapability('alarm_battery');
-    }
-
     // ADD CALLBACK URL IN NUKI IF NOT SET ALREADY
     setTimeout(this.setCallbackUrl.bind(this), 10000);
 
@@ -76,45 +71,39 @@ class NukiDevice extends Homey.Device {
   }
 
   // HELPER FUNCTIONS
-  pollDevice() {
-    clearInterval(this.pollingInterval);
+  updateCapabilitiesValue(newState) {
+    let state = util.returnLockState(newState.state);
+    let locked = util.returnLocked(newState.state);
 
-    this.pollingInterval = setInterval(async () => {
-      try {
-        let path = 'http://'+ this.getSetting('address') +':'+ this.getSetting('port') +'/list?token='+ this.getSetting('token');
-        let result = await util.sendCommand(path, 4000);
-        if (result) {
+    // update capability locked
+    if (locked != this.getCapabilityValue('locked')) {
+      this.setCapabilityValue('locked', locked);
+    }
 
-          const device = result.find(el => el.nukiId === this.getSetting('nukiId'));
+    // update capability lockstate & trigger lockstateChanged
+    if (state != this.getCapabilityValue('lockstate')) {
+      this.setCapabilityValue('lockstate', state);
+      Homey.ManagerFlow.getCard('trigger', 'lockstateChanged').trigger(this, { lockstate: state }, {});
+    }
 
-          let state = util.returnLockState(device.lastKnownState.state);
-          let locked = util.returnLocked(device.lastKnownState.state);
-
-          // update capability lockstate & trigger lockstateChanged
-          if (state != this.getCapabilityValue('lockstate')) {
-            this.setCapabilityValue('lockstate', state);
-            Homey.ManagerFlow.getCard('trigger', 'lockstateChanged').trigger(this, { lockstate: state }, {});
-          }
-
-          // update capability locked
-          if (locked != this.getCapabilityValue('locked')) {
-            this.setCapabilityValue('locked', locked);
-          }
-
-          // update battery alarm capability
-          if (this.hasCapability('alarm_battery')) {
-            if (device.lastKnownState.batteryCritical == true && (this.getCapabilityValue('alarm_battery') == false || this.getCapabilityValue('alarm_battery') == null)) {
-              this.setCapabilityValue('alarm_battery', true);
-            } else if (device.lastKnownState.batteryCritical == false && this.getCapabilityValue('alarm_battery') == true) {
-              this.setCapabilityValue('alarm_battery', false);
-            }
-          }
-
-        }
-      } catch (error) {
-        this.log(error);
+    // update capability alarm_contact
+    if (newState.doorsensorState == 2 || newState.doorsensorState == 3) {
+      if (!this.hasCapability('alarm_contact')) {
+        this.addCapability('alarm_contact')
       }
-    }, 300000);
+      if (newState.doorsensorState == 3 && this.getCapabilityValue('alarm_contact') == false) {
+        this.setCapabilityValue('alarm_contact', true);
+      } else if (newState.doorsensorState == 2 && (this.getCapabilityValue('alarm_contact') == true || this.getCapabilityValue('alarm_contact') == null)) {
+        this.setCapabilityValue('alarm_contact', false);
+      }
+    }
+
+    // trigger batteryCritical
+    if (newState.batteryCritical == true && (this.getCapabilityValue('alarm_battery') == false || this.getCapabilityValue('alarm_battery') == null)) {
+      this.setCapabilityValue('alarm_battery', true);
+    } else if (newState.batteryCritical == false && this.getCapabilityValue('alarm_battery') == true) {
+      this.setCapabilityValue('alarm_battery', false);
+    }
   }
 
   async setCallbackUrl() {

@@ -10,7 +10,7 @@
 		"en": [ "nuki", "lock"],
 		"nl": [ "nuki", "slot"]
 	},
-	"version": "1.3.0",
+	"version": "1.4.0",
 	"compatibility": ">=2.0.0",
 	"author": {
 		"name": "Jelger Haanstra",
@@ -150,7 +150,8 @@
         "lockstate",
         "locked",
         "lockaction",
-        "alarm_battery"
+        "alarm_battery",
+        "alarm_contact"
 			],
       "pair": [
         {
