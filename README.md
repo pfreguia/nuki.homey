@@ -25,6 +25,6 @@ Your Nuki device(s) have now been added to Homey.
 
 ## Release Notes
 ### v3.0.0 - 2020-08-06
-* Updated to SDK3.
+* Updated to SDK3 (this require Homey firmware 5.x).
 * Fixed issue with triggercards for continuous mode for Nuki opener.
 * Added instructions in pairing wizard.
