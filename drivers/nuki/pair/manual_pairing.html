@@ -1,6 +1,6 @@
 <script type="text/javascript">
 
-Homey.setTitle( Homey.__('pair.title') );
+Homey.setTitle(Homey.__('pair.title'));
 
 $(function() {
 
@@ -21,22 +21,19 @@ $(function() {
 				token: inputtoken
 			};
 
-			Homey.emit('manual_pairing', data, function (error, result) {
-				if (error) {
-					$('.nuki-error').show();
-					$('.nuki-error-msg').html(error);
-				} else if (result) {
+      Homey.emit('manual_pairing', data)
+        .then(result => {
           var bridgetype = result.bridgeType == 1 ? 'Hardware Bridge' : 'Software Bridge';
           var nukiinfo = "<div class='info-row'><span class='info-label' data-i18n='pair.bridgetype'>Bridgetype:</span><span class='info-value'> "+ bridgetype +"</span></div>";
           $('.nuki-info').show();
           $('.nuki-info').html(nukiinfo);
           $('.nuki-test').show();
           $('#connect').prop('disabled', false);
-        } else {
-					$('.nuki-error').show();
-					$('.nuki-error-msg').html( Homey.__('pair.unknownerror') );
-				}
-			});
+        })
+        .catch(error => {
+          $('.nuki-error').show();
+					$('.nuki-error-msg').html(error);
+        })
 
 		} else {
 			$('.nuki-error').show();

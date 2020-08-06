@@ -1,33 +1,53 @@
-"use strict";
+'use strict';
 
 const Homey = require('homey');
-const util = require('/lib/util.js');
+const Util = require('/lib/util.js');
 
 class NukiApp extends Homey.App {
 
   onInit() {
     this.log('Initializing Nuki app ...');
 
+    if (!this.util) this.util = new Util({homey: this.homey });
+
     // POLLING DEVICES FOR STATE
     this.pollDevices();
 
-    /* DEPRECATED - USING DEFAULT CONDITION CARD FOR LOCKED CAPABILITY INSTEAD */
-    new Homey.FlowCardCondition('isLocked')
-      .register()
-      .registerRunListener((args, state) => {
-        if (args.device.getCapabilityValue('locked')) {
-          return Promise.resolve(true);
-        } else {
-          return Promise.resolve(false);
+
+    // FLOW CARDS
+
+    // Nuki Lock
+    this.homey.flow.getActionCard('lockAction')
+      .registerRunListener(async (args) => {
+        try {
+          let path = 'http://'+ args.device.getSetting('address') +':'+ args.device.getSetting('port') +'/lockAction?nukiId='+ args.device.getSetting('nukiId') +'&action='+ args.lockaction +'&token='+ args.device.getSetting('token');
+          let result = await this.util.sendCommand(path, 8000);
+          if (result.success == true) {
+            return Promise.resolve(true);
+          } else {
+            return Promise.resolve(false);
+          }
+        } catch (error) {
+          if (error == '400') {
+            return Promise.reject(this.homey.__('app.400'));
+          } else if (error == '401') {
+            return Promise.reject(this.homey.__('app.401'));
+          } else if (error == '404') {
+            return Promise.reject(this.homey.__('app.404'));
+          } else if (error == '503') {
+            return Promise.reject(this.homey.__('app.503'));
+          } else {
+            return Promise.reject(error);
+          }
         }
       })
 
-    new Homey.FlowCardAction('lockAction')
-      .register()
+    // Nuki Opener
+    this.homey.flow.getActionCard('openerAction')
       .registerRunListener(async (args, state) => {
         try {
-          let path = 'http://'+ args.device.getSetting('address') +':'+ args.device.getSetting('port') +'/lockAction?nukiId='+ args.device.getSetting('nukiId') +'&action='+ args.lockaction +'&token='+ args.device.getSetting('token');
-          let result = await util.sendCommand(path, 8000);
+          let path = 'http://' + args.device.getSetting('address') + ':' + args.device.getSetting('port') + '/lockAction?nukiId=' + args.device.getSetting('nukiId') + '&deviceType=2&action=' + args.openeraction + '&token=' + args.device.getSetting('token');
+          let result = await this.util.sendCommand(path, 8000);
           if (result.success == true) {
             return Promise.resolve(true);
           } else {
@@ -55,7 +75,7 @@ class NukiApp extends Homey.App {
     this.pollingInterval = setInterval(async () => {
       try {
         let bridges = [];
-        let drivers = Homey.ManagerDrivers.getDrivers();
+        let drivers = this.homey.drivers.getDrivers();
         let isSameBridge = function (b) {
           return b.address == this.address && b.port == this.port
         };
@@ -83,7 +103,7 @@ class NukiApp extends Homey.App {
         for (let i in bridges) {
           let bridge = bridges[i];
           let url = 'http://' + bridge.address + ':' + bridge.port + '/list?token=' + bridge.token;
-          let bridgeItems = await util.sendCommand(url, 4000);
+          let bridgeItems = await this.util.sendCommand(url, 4000);
           if (bridgeItems) {
             for (let j in bridge.nukiDevs) {
               let nukiDev = bridge.nukiDevs[j];

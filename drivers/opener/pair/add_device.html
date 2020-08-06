@@ -1,22 +1,14 @@
 <script type="text/javascript">
-  Homey.emit('add_device', null, function(error, result) {
-    if (error) {
-      Homey.alert(error, null, function() {
-        Homey.done()
-    	});
-    } else {
-      for (let i in result) {
-        Homey.addDevice(result[i], function(error, result) {
-          if (error) {
-            Homey.alert(error, null, function() {
-              Homey.done()
-          	});
-          }
-        })
+  (async () => {
+    try {
+      let devices = await Homey.emit('add_device', {});
+      for (let i in devices) {
+        Homey.createDevice(devices[i]);
       }
-      setTimeout(function() {
-        Homey.done();
-      }, 5000);
+      setTimeout(() => { Homey.done(); }, 5000);
+    } catch (error) {
+      await Homey.alert(error);
+      Homey.done()
     }
-  })
+  });
 </script>

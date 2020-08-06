@@ -1,11 +1,12 @@
 'use strict';
 
 const Homey = require('homey');
-const util = require('/lib/util.js');
+const Util = require('/lib/util.js');
 
 class OpenerDevice extends Homey.Device {
 
   onInit() {
+    if (!this.util) this.util = new Util({homey: this.homey });
 
     // INITIALLY SET DEVICE AS AVAILABLE
     this.setAvailable();
@@ -22,7 +23,7 @@ class OpenerDevice extends Homey.Device {
           var path = 'http://' + this.getSetting('address') + ':' + this.getSetting('port') + '/lockAction?nukiId=' + this.getSetting('nukiId') + '&deviceType=2&action=1&token=' + this.getSetting('token');
         }
         this.log(path);
-        let result = await util.sendCommand(path, 8000);
+        let result = await this.util.sendCommand(path, 8000);
         if (result.success == true) {
           return Promise.resolve(true);
         } else {
@@ -30,13 +31,13 @@ class OpenerDevice extends Homey.Device {
         }
       } catch (error) {
         if (error == 400) {
-          return Promise.reject(Homey.__('400'));
+          return Promise.reject(this.homey.__('app.400'));
         } else if (error == 401) {
-          return Promise.reject(Homey.__('401'));
+          return Promise.reject(this.homey.__('app.401'));
         } else if (error == 404) {
-          return Promise.reject(Homey.__('404'));
+          return Promise.reject(this.homey.__('app.404'));
         } else if (error == 503) {
-          return Promise.reject(Homey.__('503'));
+          return Promise.reject(this.homey.__('app.503'));
         } else {
           return Promise.reject(error);
         }
@@ -50,7 +51,7 @@ class OpenerDevice extends Homey.Device {
         } else {
           var path = 'http://' + this.getSetting('address') + ':' + this.getSetting('port') + '/lockAction?nukiId=' + this.getSetting('nukiId') + '&deviceType=2&action=5&token=' + this.getSetting('token');
         }
-        let result = await util.sendCommand(path, 8000);
+        let result = await this.util.sendCommand(path, 8000);
         if (result.success == true) {
           return Promise.resolve(true);
         } else {
@@ -58,13 +59,13 @@ class OpenerDevice extends Homey.Device {
         }
       } catch (error) {
         if (error == 400) {
-          return Promise.reject(Homey.__('400'));
+          return Promise.reject(this.homey.__('app.400'));
         } else if (error == 401) {
-          return Promise.reject(Homey.__('401'));
+          return Promise.reject(this.homey.__('app.401'));
         } else if (error == 404) {
-          return Promise.reject(Homey.__('404'));
+          return Promise.reject(this.homey.__('app.404'));
         } else if (error == 503) {
-          return Promise.reject(Homey.__('503'));
+          return Promise.reject(this.homey.__('app.503'));
         } else {
           return Promise.reject(error);
         }
@@ -80,25 +81,25 @@ class OpenerDevice extends Homey.Device {
     let batteryCritical = newState.batteryCritical;
     switch (newState.state) {
       case 0:
-        state = Homey.__('untrained');
+        state = this.homey.__('device.untrained');
         break;
       case 1:
-        state = Homey.__('online');
+        state = this.homey.__('device.online');
         break;
       case 3:
-        state = Homey.__('rto active');
+        state = this.homey.__('device.rto active');
         break;
       case 5:
-        state = Homey.__('open');
+        state = this.homey.__('device.open');
         break;
       case 7:
-        state = Homey.__('opening');
+        state = this.homey.__('device.opening');
         break;
       case 253:
-        state = Homey.__('boot run');
+        state = this.homey.__('device.boot_run');
         break;
       default:
-        state = Homey.__('undefined');
+        state = this.homey.__('util.undefined');
         break;
     }
     switch (newState.state) {
@@ -114,7 +115,7 @@ class OpenerDevice extends Homey.Device {
     // update capability openerstate & trigger openerstateChanged
     if (state != this.getCapabilityValue('openerstate')) {
       this.setCapabilityValue('openerstate', state);
-      Homey.ManagerFlow.getCard('trigger', 'openerstateChanged').trigger(this, { openerstate: state }, {});
+      this.homey.flow.getDeviceTriggerCard('openerstateChanged').trigger(this, {openerstate: state}, {});
     }
 
     // update capability locked
@@ -125,6 +126,11 @@ class OpenerDevice extends Homey.Device {
     // update capability contiuous_mode
     if (continuous_mode != this.getCapabilityValue('continuous_mode')) {
       this.setCapabilityValue('continuous_mode', continuous_mode);
+      if (continuous_mode) {
+        this.homey.flow.getDeviceTriggerCard('continuous_mode_true').trigger(this, {}, {});
+      } else {
+        this.homey.flow.getDeviceTriggerCard('continuous_mode_false').trigger(this, {}, {});
+      }
     }
 
     // update battery alarm capability
@@ -139,16 +145,14 @@ class OpenerDevice extends Homey.Device {
 
   async setCallbackUrl() {
     try {
-      let homeyaddress = await util.getHomeyIp();
+      let homeyaddress = await this.util.getHomeyIp();
       let callbackUrl = 'http://'+ homeyaddress +'/api/app/nuki.homey/callback/';
-      let callbackListPath = 'http://' + this.getSetting('address') + ':' + this.getSetting('port') + '/callback/list?token=' + this.getSetting('token');
-       this.log(callbackListPath);
-      let callbackList = await util.sendCommand(callbackListPath, 4000);
+      let callbackListPath = 'http://'+ this.getSetting('address') +':'+ this.getSetting('port') +'/callback/list?token='+ this.getSetting('token');
+      let callbackList = await this.util.sendCommand(callbackListPath, 4000);
       let callbacks = JSON.stringify(callbackList.callbacks);
-      this.log(callbacks);
       if (!callbacks.includes(encodeURI(callbackUrl))) {
         let callbackAddPath = 'http://'+ this.getSetting('address') +':'+ this.getSetting('port') +'/callback/add?url='+ encodeURI(callbackUrl) +'&token='+ this.getSetting('token');
-        let result = await util.sendCommand(callbackAddPath, 4000);
+        let result = await this.util.sendCommand(callbackAddPath, 4000);
         if (result.success != true) {
           setTimeout(this.setCallbackUrl.bind(this), 10000);
         }

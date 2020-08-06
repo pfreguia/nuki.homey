@@ -1,6 +1,6 @@
 {
 	"id": "nuki.homey",
-	"sdk": 2,
+	"sdk": 3,
   "brandColor": "#000000",
 	"name": {
 		"en": "Nuki Smart Lock",
@@ -10,8 +10,8 @@
 		"en": [ "nuki", "lock"],
 		"nl": [ "nuki", "slot"]
 	},
-	"version": "1.4.0",
-	"compatibility": ">=2.0.0",
+	"version": "3.0.0",
+	"compatibility": ">=5.0.0",
 	"author": {
 		"name": "Jelger Haanstra",
 		"email": "homey@solidewebservices.com",
@@ -134,6 +134,13 @@
       "uiComponent": "toggle"
     }
   },
+  "api": {
+    "nukiCallbacks": {
+      "method": "post",
+      "path": "/callback",
+      "public": true
+    }
+  },
 	"drivers": [
 		{
 			"id": "nuki",
@@ -154,6 +161,12 @@
         "alarm_contact"
 			],
       "pair": [
+        {
+          "id": "start",
+          "navigation": {
+            "next": "list_devices"
+          }
+        },
         {
           "id": "list_devices",
           "template": "list_devices",
@@ -195,6 +208,12 @@
       ],
       "pair": [
         {
+          "id": "start",
+          "navigation": {
+            "next": "list_devices"
+          }
+        },
+        {
           "id": "list_devices",
           "template": "list_devices",
           "navigation": {
@@ -219,25 +238,6 @@
 	],
   "flow": {
     "triggers": [
-      {
-		    "id": "batteryCritical",
-        "deprecated": true,
-				"title": {
-					"en": "Battery is critical",
-					"nl": "Batterij op kritiek niveau"
-				},
-	      "args": [
-	        {
-            "name": "device",
-            "type": "device",
-            "placeholder": {
-              "en": "Select Nuki Smart Lock",
-              "nl": "Selecteer Nuki Smart Lock"
-            },
-            "filter": "driver_id=nuki"
-	        }
-	      ]
-	    },
       {
 		    "id": "lockstateChanged",
 				"title": {
@@ -347,25 +347,6 @@
       }
     ],
     "conditions": [
-      {
-        "id": "isLocked",
-        "deprecated": true,
-        "title": {
-          "en": "!{{is|is not}} locked",
-          "nl": "!{{is|is niet}} vergrendeld"
-        },
-        "args": [
-          {
-            "name": "device",
-            "type": "device",
-            "placeholder": {
-              "en": "Select Nuki Smart Lock",
-              "nl": "Selecteer Nuki Smart Lock"
-            },
-            "filter": "driver_id=nuki"
-          }
-        ]
-      },
       {
         "id": "continuous_mode",
         "title": {

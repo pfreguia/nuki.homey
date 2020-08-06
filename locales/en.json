@@ -15,28 +15,40 @@
     "connect": "Connect",
     "success": "Nuki bridge added succesfully.",
     "bridgetype": "Bridge Type:",
-    "unknownerror": "Unknown error, are you sure you have entered the correct details and Homey is on the same network as the Nuki bridge? Please check your settings and try again."
+    "unknownerror": "Unknown error, are you sure you have entered the correct details and Homey is on the same network as the Nuki bridge? Please check your settings and try again.",
+    "step1": "First enable the HTTP API in your Nuki Bridge. You can do this within the Nuki smartphone app. Go to manage your devices and select your Nuki Bridge. There you can enable the HTTP API.",
+    "step2": "Once enabled go to the Homey app and add a Nuki Smart Lock as device by selecting the 'Nuki Smart Lock' app from the pairing wizard.",
+    "step3": "Confirm adding a Nuki Smart Lock or Nuki Opener and wait for the discovery process to start.",
+    "step4": "When the discovery process is running press the button of your Nuki Bridge(s).",
+    "step5": "Your Nuki devices will be discovered and you can finish the pairing of your device(s)."
   },
-  "Unreachable": "Unreachable",
-  "Did not receive a token from the bridge, make sure you push the bridge button during pairing.": "Did not receive a token from the bridge, make sure you push the bridge button during pairing.",
-  "400": "Action invalid",
-  "401": "Token is invalid, please re-pair your Nuki",
-  "404": "Smart Lock is unknown, please re-pair your Nuki",
-  "503": "Smart Lock is offline",
-  "uncalibrated": "Uncalibrated",
-  "locked": "Locked",
-  "unlocking": "Unlocking",
-  "unlocked": "Unlocked",
-  "locking": "Locking",
-  "unlatched": "Unlatched",
-  "unlocked (lock ‘n’ go)": "Unlocked (lock ‘n’ go)",
-  "unlatching": "Unlatching",
-  "motor blocked": "Motor Blocked",
-  "undefined": "Undefined",
-  "untrained": "Untrained",
-  "online": "Online",
-  "rto active": "Ring to Open",
-  "open": "Open",
-  "opening": "Opening",
-  "boot run": "Boot run"
+  "util": {
+    "uncalibrated": "Uncalibrated",
+    "locked": "Locked",
+    "unlocking": "Unlocking",
+    "unlocked": "Unlocked",
+    "locking": "Locking",
+    "unlatched": "Unlatched",
+    "unlocked_go": "Unlocked (lock ‘n’ go)",
+    "unlatching": "Unlatching",
+    "motor_blocked": "Motor Blocked",
+    "undefined": "Undefined"
+  },
+  "app": {
+    "400": "Action invalid",
+    "401": "Token is invalid, please re-pair your Nuki",
+    "404": "Smart Lock is unknown, please re-pair your Nuki",
+    "503": "Smart Lock is offline"
+  },
+  "driver": {
+    "no_token": "Did not receive a token from the bridge, make sure you push the bridge button during pairing."
+  },
+  "device": {
+    "untrained": "Untrained",
+    "online": "Online",
+    "rto_active": "Ring to Open",
+    "open": "Open",
+    "opening": "Opening",
+    "boot_run": "Boot run"
+  }
 }

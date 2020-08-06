@@ -1,35 +1,37 @@
-"use strict";
+'use strict';
 
 const Homey = require('homey');
-const util = require('/lib/util.js');
+const Util = require('/lib/util.js');
 
 class NukiDriver extends Homey.Driver {
 
   onInit() {
-    new Homey.FlowCardTriggerDevice('lockstateChanged').register();
+    if (!this.util) this.util = new Util({homey: this.homey });
+
+    this.homey.flow.getDeviceTriggerCard('lockstateChanged');
   }
 
-  onPair(socket) {
+  onPair(session) {
     let devicesArray = [];
 
-    socket.on('list_devices', async (data, callback) => {
+    session.setHandler('list_devices', async (data) => {
       let devices = [];
       try {
-        let bridgeList = await util.sendCommand('https://api.nuki.io/discover/bridges', 4000);
+        let bridgeList = await this.util.sendCommand('https://api.nuki.io/discover/bridges', 4000);
         if (JSON.stringify(bridgeList).includes('"ip":')) {
           for (let i in bridgeList.bridges) {
             var authpath = 'http://'+ bridgeList.bridges[i].ip +':'+ bridgeList.bridges[i].port +'/auth';
-            var auth = await util.sendCommand(authpath, 32000);
+            var auth = await this.util.sendCommand(authpath, 32000);
             if (auth.success == true) {
               var locklistpath = 'http://'+ bridgeList.bridges[i].ip +':'+ bridgeList.bridges[i].port +'/list?token='+ auth.token;
-              var deviceList = await util.sendCommand(locklistpath, 2000);
+              var deviceList = await this.util.sendCommand(locklistpath, 2000);
               if (deviceList) {
                 for (let x in deviceList) {
                   if (deviceList[x].deviceType == 0) {
                     devices.push({
                       name: deviceList[x].name +' ('+ bridgeList.bridges[i].ip +')',
                       data: {
-                        id: deviceList[x].nukiId
+                        id: deviceList[x].nukiId+'-2'
                       },
                       settings: {
                         address: bridgeList.bridges[i].ip,
@@ -42,24 +44,22 @@ class NukiDriver extends Homey.Driver {
                 }
               }
             } else {
-              callback(Homey.__("Did not receive a token from the bridge, make sure you push the bridge button during pairing."), false);
+              return Promise.reject(this.homey.__("driver.no_token"));
             }
           }
-          callback(null, devices);
+          return Promise.resolve(devices);
         } else {
-          socket.showView('select_pairing');
+          await session.showView('select_pairing');
         }
-
-
       } catch(error) {
-        callback(error, false);
+        return Promise.reject(error);
       }
     });
 
-    socket.on('manual_pairing', async (data, callback) => {
+    session.setHandler('manual_pairing', async (data) => {
       try {
         let path = 'http://'+ data.address +':'+ data.port +'/info?token='+ data.token;
-        let result = await util.sendCommand(path, 8000);
+        let result = await this.util.sendCommand(path, 8000);
         for (let i in result.scanResults) {
           devicesArray.push({
             name: result.scanResults[i].name +' ('+ data.address +')',
@@ -74,14 +74,20 @@ class NukiDriver extends Homey.Driver {
             }
           });
         }
-        callback(null, result);
+        return Promise.resolve(result);
       } catch(error) {
-        callback(error, false);
+        return Promise.reject(error);
       }
     });
 
-    socket.on('add_device', (data, callback) => {
-      callback(false, devicesArray);
+    session.setHandler('add_device', (data) => {
+      return new Promise((resolve, reject) => {
+        try {
+          return resolve(devicesArray);
+        } catch (error) {
+          return reject(error);
+        }
+      });
     });
 
   }
