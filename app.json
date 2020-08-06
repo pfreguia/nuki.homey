@@ -157,9 +157,13 @@
         "lockstate",
         "locked",
         "lockaction",
+        "measure_battery",
         "alarm_battery",
         "alarm_contact"
 			],
+      "energy": {
+        "batteries": ["AA", "AA", "AA", "AA"]
+      },
       "pair": [
         {
           "id": "start",
@@ -187,6 +191,39 @@
           "id": "add_devices",
           "template": "add_devices"
         }
+      ],
+      "settings": [
+        {
+          "type": "group",
+          "label": {
+            "en": "Device Settings",
+            "nl": "Apparaat instellingen"
+          },
+          "children": [
+            {
+              "id": "address",
+              "type": "text",
+              "value": "0.0.0.0",
+              "label": {
+                "en": "IP Address",
+                "nl": "IP adres"
+              }
+            },
+            {
+              "id": "port",
+              "type": "number",
+              "value": 8080,
+              "attr": {
+                "min": 1,
+                "max": 99999
+              },
+              "label": {
+                "en": "Port",
+                "nl": "Poort"
+              }
+            }
+          ]
+        }
       ]
 		},
     {
@@ -204,8 +241,12 @@
         "openerstate",
         "locked",
         "continuous_mode",
+        "measure_battery",
         "alarm_battery"
       ],
+      "energy": {
+        "batteries": ["AA", "AA", "AA", "AA"]
+      },
       "pair": [
         {
           "id": "start",
@@ -232,6 +273,57 @@
         {
           "id": "add_devices",
           "template": "add_devices"
+        }
+      ],
+      "settings": [
+        {
+          "type": "group",
+          "label": {
+            "en": "Device Settings",
+            "nl": "Apparaat instellingen"
+          },
+          "children": [
+            {
+              "id": "address",
+              "type": "text",
+              "value": "0.0.0.0",
+              "label": {
+                "en": "IP Address",
+                "nl": "IP adres"
+              }
+            },
+            {
+              "id": "port",
+              "type": "number",
+              "value": 8080,
+              "attr": {
+                "min": 1,
+                "max": 99999
+              },
+              "label": {
+                "en": "Port",
+                "nl": "Poort"
+              }
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "label": {
+            "en": "General Settings",
+            "nl": "Algemene instellingen"
+          },
+          "children": [
+            {
+              "id": "battery",
+              "type": "checkbox",
+              "value": false,
+              "label": {
+                "en": "Enable if your Nuki Opener is powered by batteries.",
+                "nl": "Inschakelen als je Nuki Opener op batterijen werkt."
+              }
+            }
+          ]
         }
       ]
     }
@@ -332,6 +424,36 @@
           "it": "Modalit\u00E0 continua \u00E8 stata disattivata",
           "es": "Modo continuo se ha desactivado"
         },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "placeholder": {
+              "en": "Select Nuki Opener",
+              "nl": "Selecteer Nuki Opener",
+              "it": "Seleziona Nuki Opener"
+            },
+            "filter": "driver_id=opener"
+          }
+        ]
+      },
+      {
+        "id": "openerRinging",
+        "title": {
+          "en": "Opener Ring Action",
+          "nl": "Opener Ring Actie"
+        },
+        "tokens": [
+          {
+            "name": "timestamp",
+            "type": "string",
+            "title": {
+              "en": "time",
+              "nl": "tijd"
+            },
+            "example": "online"
+          }
+        ],
         "args": [
           {
             "name": "device",

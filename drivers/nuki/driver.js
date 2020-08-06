@@ -31,7 +31,7 @@ class NukiDriver extends Homey.Driver {
                     devices.push({
                       name: deviceList[x].name +' ('+ bridgeList.bridges[i].ip +')',
                       data: {
-                        id: deviceList[x].nukiId+'-2'
+                        id: deviceList[x].nukiId
                       },
                       settings: {
                         address: bridgeList.bridges[i].ip,

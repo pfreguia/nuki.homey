@@ -11,6 +11,7 @@ class OpenerDriver extends Homey.Driver {
     this.homey.flow.getDeviceTriggerCard('openerstateChanged');
     this.homey.flow.getDeviceTriggerCard('continuous_mode_true');
     this.homey.flow.getDeviceTriggerCard('continuous_mode_false');
+    this.homey.flow.getDeviceTriggerCard('openerRinging');
   }
 
   onPair(session) {

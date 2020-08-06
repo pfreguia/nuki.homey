@@ -38,7 +38,8 @@
     "400": "Action invalid",
     "401": "Token is invalid, please re-pair your Nuki",
     "404": "Smart Lock is unknown, please re-pair your Nuki",
-    "503": "Smart Lock is offline"
+    "503": "Smart Lock is offline",
+    "unreachable": "Unreachable"
   },
   "driver": {
     "no_token": "Did not receive a token from the bridge, make sure you push the bridge button during pairing."

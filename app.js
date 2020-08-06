@@ -103,21 +103,28 @@ class NukiApp extends Homey.App {
         for (let i in bridges) {
           let bridge = bridges[i];
           let url = 'http://' + bridge.address + ':' + bridge.port + '/list?token=' + bridge.token;
-          let bridgeItems = await this.util.sendCommand(url, 4000);
-          if (bridgeItems) {
-            for (let j in bridge.nukiDevs) {
-              let nukiDev = bridge.nukiDevs[j];
-              const device = bridgeItems.find(el => el.nukiId === nukiDev.getSetting('nukiId'));
-              switch (device.deviceType) {
-                case 0:  // SmartLock
-                  nukiDev.updateCapabilitiesValue(device.lastKnownState);
-                  break;
-                case 2:  // Opener
-                  nukiDev.updateCapabilitiesValue(device.lastKnownState);
-                  break
+          await this.util.sendCommand(url, 4000)
+            .then(bridgeItems => {
+              for (let j in bridge.nukiDevs) {
+                let nukiDev = bridge.nukiDevs[j];
+                const device = bridgeItems.find(el => el.nukiId === nukiDev.getSetting('nukiId'));
+                if (!device.getAvailable()) { device.setAvailable(); }
+                switch (device.deviceType) {
+                  case 0:  // SmartLock
+                    nukiDev.updateCapabilitiesValue(device.lastKnownState);
+                    break;
+                  case 2:  // Opener
+                    nukiDev.updateCapabilitiesValue(device.lastKnownState);
+                    break
+                }
               }
-            }
-          }
+            })
+            .catch(error => {
+              for (let j in bridge.nukiDevs) {
+                let nukiDev = bridge.nukiDevs[j];
+                nukiDev.setUnavailable(this.homey.__('app.unreachable'));
+              }
+            })
         }
       } catch (error) {
         this.log(error);

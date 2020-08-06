@@ -11,8 +11,10 @@ class NukiDevice extends Homey.Device {
     // INITIALLY SET DEVICE AS AVAILABLE
     this.setAvailable();
 
-    // ADD CALLBACK URL IN NUKI IF NOT SET ALREADY
-    setTimeout(this.setCallbackUrl.bind(this), 10000);
+    // UPDATE CAPABILITIES
+    if (!this.hasCapability('measure_battery') ) {
+      this.addCapability('measure_battery');
+    }
 
     // LISTENERS FOR UPDATING CAPABILITIES
     this.registerCapabilityListener('lockaction', async (value) => {
@@ -71,6 +73,10 @@ class NukiDevice extends Homey.Device {
 
   }
 
+  onAdded() {
+    this.setCallbackUrl.bind(this);
+  }
+
   // HELPER FUNCTIONS
   updateCapabilitiesValue(newState) {
     let state = this.util.returnLockState(newState.state);
@@ -99,7 +105,12 @@ class NukiDevice extends Homey.Device {
       }
     }
 
-    // trigger batteryCritical
+    // update capability measure_battery
+    if (Number(newState.batteryChargeState) != this.getCapabilityValue('measure_battery')) {
+      this.setCapabilityValue('measure_battery', Number(newState.batteryChargeState));
+    }
+
+    // update capability alarm_battery
     if (newState.batteryCritical == true && (this.getCapabilityValue('alarm_battery') == false || this.getCapabilityValue('alarm_battery') == null)) {
       this.setCapabilityValue('alarm_battery', true);
     } else if (newState.batteryCritical == false && this.getCapabilityValue('alarm_battery') == true) {
@@ -117,13 +128,9 @@ class NukiDevice extends Homey.Device {
       if (!callbacks.includes(encodeURI(callbackUrl))) {
         let callbackAddPath = 'http://'+ this.getSetting('address') +':'+ this.getSetting('port') +'/callback/add?url='+ encodeURI(callbackUrl) +'&token='+ this.getSetting('token');
         let result = await this.util.sendCommand(callbackAddPath, 4000);
-        if (result.success != true) {
-          setTimeout(this.setCallbackUrl.bind(this), 10000);
-        }
       }
     } catch (error) {
       this.log(error);
-      setTimeout(this.setCallbackUrl.bind(this), 10000);
     }
   }
 

@@ -28,3 +28,7 @@ Your Nuki device(s) have now been added to Homey.
 * Updated to SDK3 (this require Homey firmware 5.x).
 * Fixed issue with triggercards for continuous mode for Nuki opener.
 * Added instructions in pairing wizard.
+* Added battery percentage for Nuki Lock (requires Nuki Bridge firmware 2.7.0 and Nuki Lock firmware 2.8.1)
+* Added triggercard for Nuki Opener Ring actions including timestamp token (requires Nuki Bridge firmware 2.7.0 and Nuki Opener firmware 1.5.1)
+* Added Nuki Opener setting for configuring battery powered device. When enabled the battery alarm capability will be available
+* Added functionality where the Nuki will show as unreachable when it cant be reached

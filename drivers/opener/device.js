@@ -11,8 +11,12 @@ class OpenerDevice extends Homey.Device {
     // INITIALLY SET DEVICE AS AVAILABLE
     this.setAvailable();
 
-    // ADD CALLBACK URL IN NUKI IF NOT SET ALREADY
-    setTimeout(this.setCallbackUrl.bind(this), 10000);
+    // UPDATE CAPABILITIES
+    if (this.hasCapability('alarm_battery') && !this.getSetting('battery')) {
+      this.removeCapability('alarm_battery');
+    } else if (!this.hasCapability('alarm_battery') && this.getSetting('battery')) {
+      this.addCapability('alarm_battery');
+    }
 
     // LISTENERS FOR UPDATING CAPABILITIES VALUE
     this.registerCapabilityListener('locked', async (value) => {
@@ -71,6 +75,10 @@ class OpenerDevice extends Homey.Device {
         }
       }
     });
+  }
+
+  onAdded() {
+    this.setCallbackUrl.bind(this);
   }
 
   // HELPER FUNCTIONS
@@ -141,6 +149,11 @@ class OpenerDevice extends Homey.Device {
         this.setCapabilityValue('alarm_battery', false);
       }
     }
+
+    // trigger opener ring actions
+    if (newState.ringactionState) {
+      this.homey.flow.getDeviceTriggerCard('openerRinging').trigger(this, {timestamp: newState.ringactionTimestamp}, {});
+    }
   }
 
   async setCallbackUrl() {
@@ -153,13 +166,9 @@ class OpenerDevice extends Homey.Device {
       if (!callbacks.includes(encodeURI(callbackUrl))) {
         let callbackAddPath = 'http://'+ this.getSetting('address') +':'+ this.getSetting('port') +'/callback/add?url='+ encodeURI(callbackUrl) +'&token='+ this.getSetting('token');
         let result = await this.util.sendCommand(callbackAddPath, 4000);
-        if (result.success != true) {
-          setTimeout(this.setCallbackUrl.bind(this), 10000);
-        }
       }
     } catch (error) {
       this.log(error);
-      setTimeout(this.setCallbackUrl.bind(this), 10000);
     }
   }
 

@@ -32,7 +32,8 @@
     "unlocked_go": "Ontgrendeld (lock ‘n’ go)",
     "unlatching": "Openende",
     "motor_blocked": "Motor geblokkeerd",
-    "undefined": "Niet gedefinieerd"
+    "undefined": "Niet gedefinieerd",
+    "unreachable": "Onbereikbaar"
   },
   "app": {
     "400": "Actie is ongeldig",
