@@ -13,9 +13,7 @@ class NukiApp extends Homey.App {
     // POLLING DEVICES FOR STATE
     this.pollDevices();
 
-
     // FLOW CARDS
-
     // Nuki Lock
     this.homey.flow.getActionCard('lockAction')
       .registerRunListener(async (args) => {
@@ -108,7 +106,7 @@ class NukiApp extends Homey.App {
               for (let j in bridge.nukiDevs) {
                 let nukiDev = bridge.nukiDevs[j];
                 const device = bridgeItems.find(el => el.nukiId === nukiDev.getSetting('nukiId'));
-                if (!device.getAvailable()) { device.setAvailable(); }
+                if (!nukiDev.getAvailable()) { nukiDev.setAvailable(); }
                 switch (device.deviceType) {
                   case 0:  // SmartLock
                     nukiDev.updateCapabilitiesValue(device.lastKnownState);
@@ -120,9 +118,11 @@ class NukiApp extends Homey.App {
               }
             })
             .catch(error => {
-              for (let j in bridge.nukiDevs) {
-                let nukiDev = bridge.nukiDevs[j];
-                nukiDev.setUnavailable(this.homey.__('app.unreachable'));
+              if (error != 503) {
+                for (let j in bridge.nukiDevs) {
+                  let nukiDev = bridge.nukiDevs[j];
+                  nukiDev.setUnavailable(this.homey.__('app.unreachable'));
+                }
               }
             })
         }
