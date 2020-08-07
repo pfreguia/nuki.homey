@@ -6,7 +6,7 @@ const Util = require('/lib/util.js');
 class NukiDriver extends Homey.Driver {
 
   onInit() {
-    if (!this.util) this.util = new Util({homey: this.homey });
+    if (!this.util) this.util = new Util({homey: this.homey});
 
     this.homey.flow.getDeviceTriggerCard('lockstateChanged');
   }

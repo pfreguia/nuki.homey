@@ -32,13 +32,13 @@
     "unlocked_go": "Unlocked (lock ‘n’ go)",
     "unlatching": "Unlatching",
     "motor_blocked": "Motor Blocked",
-    "undefined": "Undefined"
-  },
-  "app": {
+    "undefined": "Undefined",
     "400": "Action invalid",
     "401": "Token is invalid, please re-pair your Nuki",
     "404": "Smart Lock is unknown, please re-pair your Nuki",
-    "503": "Smart Lock is offline",
+    "503": "Smart Lock is offline"
+  },
+  "app": {
     "unreachable": "Unreachable"
   },
   "driver": {

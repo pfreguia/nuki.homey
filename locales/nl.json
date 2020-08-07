@@ -33,13 +33,13 @@
     "unlatching": "Openende",
     "motor_blocked": "Motor geblokkeerd",
     "undefined": "Niet gedefinieerd",
-    "unreachable": "Onbereikbaar"
-  },
-  "app": {
     "400": "Actie is ongeldig",
     "401": "Token is ongeldig, voeg je Nuki opnieuw toe a.u.b.",
     "404": "Slot is onbekend, voeg je Nuki opnieuw toe a.u.b.",
     "503": "Slot is offline"
+  },
+  "app": {
+    "unreachable": "Onbereikbaar"
   },
   "driver": {
     "no_token": "Geen token van de bridge ontvangen, zorg ervoor dat je de knop van de bridge indrukt gedurende het pairen."

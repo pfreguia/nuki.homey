@@ -8,7 +8,7 @@ class NukiApp extends Homey.App {
   onInit() {
     this.log('Initializing Nuki app ...');
 
-    if (!this.util) this.util = new Util({homey: this.homey });
+    if (!this.util) this.util = new Util({homey: this.homey});
 
     // POLLING DEVICES FOR STATE
     this.pollDevices();
@@ -26,17 +26,7 @@ class NukiApp extends Homey.App {
             return Promise.resolve(false);
           }
         } catch (error) {
-          if (error == '400') {
-            return Promise.reject(this.homey.__('app.400'));
-          } else if (error == '401') {
-            return Promise.reject(this.homey.__('app.401'));
-          } else if (error == '404') {
-            return Promise.reject(this.homey.__('app.404'));
-          } else if (error == '503') {
-            return Promise.reject(this.homey.__('app.503'));
-          } else {
-            return Promise.reject(error);
-          }
+          return Promise.reject(error);
         }
       })
 
@@ -52,17 +42,7 @@ class NukiApp extends Homey.App {
             return Promise.resolve(false);
           }
         } catch (error) {
-          if (error == '400') {
-            return Promise.reject(Homey.__('400'));
-          } else if (error == '401') {
-            return Promise.reject(Homey.__('401'));
-          } else if (error == '404') {
-            return Promise.reject(Homey.__('404'));
-          } else if (error == '503') {
-            return Promise.reject(Homey.__('503'));
-          } else {
-            return Promise.reject(error);
-          }
+          return Promise.reject(error);
         }
       })
   }

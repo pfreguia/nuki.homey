@@ -28,17 +28,7 @@ class NukiDevice extends Homey.Device {
             return Promise.resolve(false);
           }
         } catch (error) {
-          if (error == 400) {
-            return Promise.reject(this.homey.__('app.400'));
-          } else if (error == 401) {
-            return Promise.reject(this.homey.__('app.401'));
-          } else if (error == 404) {
-            return Promise.reject(this.homey.__('app.404'));
-          } else if (error == 503) {
-            return Promise.reject(this.homey.__('app.503'));
-          } else {
-            return Promise.reject(error);
-          }
+          return Promise.reject(error);
         }
       }
     });
@@ -57,17 +47,7 @@ class NukiDevice extends Homey.Device {
           return Promise.resolve(false);
         }
       } catch (error) {
-        if (error == 400) {
-          return Promise.reject(this.homey.__('app.400'));
-        } else if (error == 401) {
-          return Promise.reject(this.homey.__('app.401'));
-        } else if (error == 404) {
-          return Promise.reject(this.homey.__('app.404'));
-        } else if (error == 503) {
-          return Promise.reject(this.homey.__('app.503'));
-        } else {
-          return Promise.reject(error);
-        }
+        return Promise.reject(error);
       }
     });
 
