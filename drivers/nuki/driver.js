@@ -44,15 +44,19 @@ class NukiDriver extends Homey.Driver {
                 }
               }
             } else {
-              return Promise.reject(this.homey.__("driver.no_token"));
+              session.showView('select_pairing');
             }
           }
-          return Promise.resolve(devices);
+          if (devices.length) {
+            return Promise.resolve(devices);
+          } else {
+            session.showView('select_pairing');
+          }
         } else {
-          await session.showView('select_pairing');
+          session.showView('select_pairing');
         }
-      } catch(error) {
-        return Promise.reject(error);
+      } catch (error) {
+        session.showView('select_pairing');
       }
     });
 
@@ -61,21 +65,23 @@ class NukiDriver extends Homey.Driver {
         let path = 'http://'+ data.address +':'+ data.port +'/info?token='+ data.token;
         let result = await this.util.sendCommand(path, 8000);
         for (let i in result.scanResults) {
-          devicesArray.push({
-            name: result.scanResults[i].name +' ('+ data.address +')',
-            data: {
-              id: result.scanResults[i].nukiId
-            },
-            settings: {
-              address: data.address,
-              port: data.port,
-              nukiId: result.scanResults[i].nukiId,
-              token: data.token
-            }
-          });
+          if (result.scanResults[i].deviceType == 1) {
+            devicesArray.push({
+              name: result.scanResults[i].name +' ('+ data.address +')',
+              data: {
+                id: result.scanResults[i].nukiId
+              },
+              settings: {
+                address: data.address,
+                port: Number(data.port),
+                nukiId: result.scanResults[i].nukiId,
+                token: data.token
+              }
+            });
+          }
         }
-        return Promise.resolve(result);
-      } catch(error) {
+        return Promise.resolve(true);
+      } catch (error) {
         return Promise.reject(error);
       }
     });

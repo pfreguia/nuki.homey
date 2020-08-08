@@ -32,3 +32,7 @@ Your Nuki device(s) have now been added to Homey.
 * Added triggercard for Nuki Opener Ring actions including timestamp token (requires Nuki Bridge firmware 2.7.0 and Nuki Opener firmware 1.5.1)
 * Added Nuki Opener setting for configuring battery powered device. When enabled the battery alarm capability will be available
 * Added functionality where the Nuki will show as unreachable when it cant be reached
+
+### v3.0.1 - 2020-08-08
+* Updated the app structure using Homey compose.
+* Fixed manual pairing.

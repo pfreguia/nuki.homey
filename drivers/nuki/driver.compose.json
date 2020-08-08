@@ -1,0 +1,17 @@
+{
+  "name": {
+    "en": "Nuki Smart Lock",
+    "nl": "Nuki Smart Lock"
+  },
+  "$extends": [
+    "defaults"
+  ],
+  "capabilities": [
+    "lockstate",
+    "locked",
+    "lockaction",
+    "measure_battery",
+    "alarm_battery",
+    "alarm_contact"
+  ]
+}

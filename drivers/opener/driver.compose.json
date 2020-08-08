@@ -1,0 +1,67 @@
+{
+  "name": {
+    "en": "Nuki Opener",
+    "nl": "Nuki Opener"
+  },
+  "$extends": [
+    "defaults"
+  ],
+  "capabilities": [
+    "openerstate",
+    "locked",
+    "continuous_mode",
+    "measure_battery",
+    "alarm_battery"
+  ],
+  "settings": [
+    {
+      "type": "group",
+      "label": {
+        "en": "Device Settings",
+        "nl": "Apparaat instellingen"
+      },
+      "children": [
+        {
+          "id": "address",
+          "type": "text",
+          "value": "0.0.0.0",
+          "label": {
+            "en": "IP Address",
+            "nl": "IP adres"
+          }
+        },
+        {
+          "id": "port",
+          "type": "number",
+          "value": 8080,
+          "attr": {
+            "min": 1,
+            "max": 99999
+          },
+          "label": {
+            "en": "Port",
+            "nl": "Poort"
+          }
+        }
+      ]
+    },
+    {
+      "type": "group",
+      "label": {
+        "en": "General Settings",
+        "nl": "Algemene instellingen"
+      },
+      "children": [
+        {
+          "id": "battery",
+          "type": "checkbox",
+          "value": false,
+          "label": {
+            "en": "Enable if your Nuki Opener is powered by batteries.",
+            "nl": "Inschakelen als je Nuki Opener op batterijen werkt."
+          }
+        }
+      ]
+    }
+  ]
+}

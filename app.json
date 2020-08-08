@@ -1,138 +1,50 @@
 {
-	"id": "nuki.homey",
-	"sdk": 3,
+  "id": "nuki.homey",
+  "sdk": 3,
   "brandColor": "#000000",
-	"name": {
-		"en": "Nuki Smart Lock",
-		"nl": "Nuki Smart Lock"
-	},
-	"tags": {
-		"en": [ "nuki", "lock"],
-		"nl": [ "nuki", "slot"]
-	},
-	"version": "3.0.0",
-	"compatibility": ">=5.0.0",
-	"author": {
-		"name": "Jelger Haanstra",
-		"email": "homey@solidewebservices.com",
-		"website": "https://github.com/jghaanstra/nuki.homey"
-	},
-	"contributing": {
-		"donate": {
-			"paypal": {
-				"username": "jghaanstra"
-			}
-		}
-	},
-	"bugs": {
-		"url": "https://github.com/jghaanstra/nuki.homey/issues"
-	},
-  "homeyCommunityTopicId": 10853,
-	"images": {
-		"large": "./assets/images/large.png",
-		"small": "./assets/images/small.png"
-	},
-	"category": "security",
-	"description": {
-		"en": "Control your Nuki Smart Lock",
-		"nl": "Beheer je Nuki Smart Lock"
-	},
-	"dependencies": {
-		"net": "*"
-	},
-  "capabilities": {
-    "lockstate": {
-      "type": "string",
-      "title": {
-        "en": "Lock State",
-        "nl": "Slot status"
-      },
-      "getable": true,
-      "setable": false,
-      "uiComponent": "sensor",
-      "icon": "/assets/lockstatus.svg"
-    },
-    "lockaction": {
-      "type": "enum",
-      "title": {
-        "en": "Lock Action",
-        "nl": "Slot Actie"
-      },
-      "values": [
-        {
-          "id": "0",
-          "title": {
-            "en": "Choose action ...",
-            "nl": "Kies actie ..."
-          }
-        },
-        {
-          "id": "1",
-          "title": {
-            "en": "Unlock",
-            "nl": "Ontgrendelen"
-          }
-        },
-        {
-          "id": "2",
-          "title": {
-            "en": "Lock",
-            "nl": "Vergrendelen"
-          }
-        },
-        {
-          "id": "3",
-          "title": {
-            "en": "Unlatch",
-            "nl": "Openen"
-          }
-        },
-        {
-          "id": "4",
-          "title": {
-            "en": "Lock 'n' Go",
-            "nl": "Lock 'n' Go"
-          }
-        },
-        {
-          "id": "5",
-          "title": {
-            "en": "Lock 'n' Go With Unlatch",
-            "nl": "Lock 'n' Go met openen"
-          }
-        }
-      ],
-      "getable": true,
-      "setable": true,
-      "uiComponent": "picker",
-      "icon": "/assets/lockaction.svg"
-    },
-    "openerstate": {
-      "type": "string",
-      "title": {
-        "en": "Opener State",
-        "nl": "Opener status",
-        "it": "Stato Opener"
-      },
-      "getable": true,
-      "setable": false,
-      "uiComponent": "sensor",
-      "icon": "/assets/lockstatus.svg"
-    },
-    "continuous_mode": {
-      "type": "boolean",
-      "title": {
-        "en": "Continuous mode",
-        "nl": "Continumodus",
-        "de": "Dauermodus",
-        "fr": "Mode continu",
-        "it": "Modalit\u00E0 continua",
-        "es": "Modo continuo"
-      },
-      "getable": true,
-      "setable": true,
-      "uiComponent": "toggle"
+  "name": {
+    "en": "Nuki Smart Lock",
+    "nl": "Nuki Smart Lock"
+  },
+  "tags": {
+    "en": [
+      "nuki",
+      "lock"
+    ],
+    "nl": [
+      "nuki",
+      "slot"
+    ]
+  },
+  "version": "3.0.1",
+  "compatibility": ">=5.0.0",
+  "author": {
+    "name": "Jelger Haanstra",
+    "email": "homey@solidewebservices.com",
+    "website": "https://github.com/jghaanstra/nuki.homey"
+  },
+  "contributing": {
+    "donate": {
+      "paypal": {
+        "username": "jghaanstra"
+      }
     }
+  },
+  "bugs": {
+    "url": "https://github.com/jghaanstra/nuki.homey/issues"
+  },
+  "homeyCommunityTopicId": 10853,
+  "images": {
+    "large": "./assets/images/large.png",
+    "small": "./assets/images/small.png"
+  },
+  "category": "security",
+  "description": {
+    "en": "Control your Nuki Smart Lock",
+    "nl": "Beheer je Nuki Smart Lock"
+  },
+  "dependencies": {
+    "net": "*"
   },
   "api": {
     "nukiCallbacks": {
@@ -141,28 +53,291 @@
       "public": true
     }
   },
-	"drivers": [
-		{
-			"id": "nuki",
-			"name": {
-				"en": "Nuki Smart Lock",
-				"nl": "Nuki Smart Lock"
-			},
-			"images": {
-				"large": "drivers/nuki/assets/images/large.jpg",
-				"small": "drivers/nuki/assets/images/small.jpg"
-			},
-			"class": "lock",
-			"capabilities": [
-        "lockstate",
-        "locked",
-        "lockaction",
-        "measure_battery",
-        "alarm_battery",
-        "alarm_contact"
-			],
+  "flow": {
+    "triggers": [
+      {
+        "id": "lockstateChanged",
+        "title": {
+          "en": "Lockstate changed",
+          "nl": "Slotstatus is veranderd"
+        },
+        "tokens": [
+          {
+            "name": "lockstate",
+            "type": "string",
+            "title": {
+              "en": "Lockstate",
+              "nl": "Slotstatus"
+            },
+            "example": "Locked"
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=nuki"
+          }
+        ]
+      },
+      {
+        "id": "openerstateChanged",
+        "title": {
+          "en": "Opener state changed",
+          "nl": "Opener status gewijzigd",
+          "it": "Lo stato è cambiato"
+        },
+        "tokens": [
+          {
+            "name": "openerstate",
+            "type": "string",
+            "title": {
+              "en": "New Opener State",
+              "nl": "Nieuwe opener status",
+              "it": "Nuovo stato Opener"
+            },
+            "example": "online"
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=opener"
+          }
+        ]
+      },
+      {
+        "id": "continuous_mode_true",
+        "title": {
+          "en": "Continuous mode turned on",
+          "nl": "Continumodus gaat aan",
+          "de": "Dauermodus ist angegangen",
+          "fr": "Mode continu s'est activée",
+          "it": "Modalità continua è stata attivata",
+          "es": "Modo continuo se ha activado"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=opener"
+          }
+        ]
+      },
+      {
+        "id": "continuous_mode_false",
+        "title": {
+          "en": "Continuous mode turned off",
+          "nl": "Continumodus gaat uit",
+          "de": "Dauermodus ist ausgegangen",
+          "fr": "Mode continu s'est désactivée",
+          "it": "Modalità continua è stata disattivata",
+          "es": "Modo continuo se ha desactivado"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=opener"
+          }
+        ]
+      },
+      {
+        "id": "openerRinging",
+        "title": {
+          "en": "Opener Ring Action",
+          "nl": "Opener Ring Actie"
+        },
+        "tokens": [
+          {
+            "name": "timestamp",
+            "type": "string",
+            "title": {
+              "en": "time",
+              "nl": "tijd"
+            },
+            "example": "online"
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=opener"
+          }
+        ]
+      }
+    ],
+    "actions": [
+      {
+        "id": "lockAction",
+        "title": {
+          "en": "Perform a lock operation",
+          "nl": "Slot actie uitvoeren"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=nuki"
+          },
+          {
+            "type": "dropdown",
+            "name": "lockaction",
+            "values": [
+              {
+                "id": "1",
+                "title": {
+                  "en": "Unlock",
+                  "nl": "Ontgrendelen"
+                }
+              },
+              {
+                "id": "2",
+                "title": {
+                  "en": "Lock",
+                  "nl": "Vergrendelen"
+                }
+              },
+              {
+                "id": "3",
+                "title": {
+                  "en": "Unlatch",
+                  "nl": "Openen"
+                }
+              },
+              {
+                "id": "4",
+                "title": {
+                  "en": "Lock 'n' Go",
+                  "nl": "Lock 'n' Go"
+                }
+              },
+              {
+                "id": "5",
+                "title": {
+                  "en": "Lock 'n' Go With Unlatch",
+                  "nl": "Lock 'n' Go met openen"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "openerAction",
+        "title": {
+          "en": "Nuki action",
+          "nl": "Nuki action",
+          "it": "Azione Nuki"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=opener"
+          },
+          {
+            "type": "dropdown",
+            "name": "openeraction",
+            "values": [
+              {
+                "id": "1",
+                "title": {
+                  "en": "Activate Ring to Open",
+                  "nl": "Ring to Open activeren",
+                  "de": "Ring to Open aktivieren",
+                  "fr": "Activer Ring to Open",
+                  "it": "Attiva Ring to Open",
+                  "es": "Activar Ring to Open"
+                }
+              },
+              {
+                "id": "2",
+                "title": {
+                  "en": "Deactivate Ring to Open",
+                  "nl": "Ring to Open deactiveren",
+                  "de": "Ring to Open deaktivieren",
+                  "fr": "Désactiver Ring to Open",
+                  "it": "Disattiva Ring to Open",
+                  "es": "Desactivar Ring to Open"
+                }
+              },
+              {
+                "id": "3",
+                "title": {
+                  "en": "Open",
+                  "nl": "Openen",
+                  "de": "Öffnen",
+                  "fr": "Ouvrir",
+                  "it": "Apri",
+                  "es": "Abrir"
+                }
+              },
+              {
+                "id": "4",
+                "title": {
+                  "en": "Activate continuous mode",
+                  "nl": "Continumodus activeren",
+                  "de": "Dauermodus aktivieren",
+                  "fr": "Activer le mode continu",
+                  "it": "Attiva Modalità continua",
+                  "es": "Activar modo continuo"
+                }
+              },
+              {
+                "id": "5",
+                "title": {
+                  "en": "Deactivate continuous mode",
+                  "nl": "Continumodus deactiveren",
+                  "de": "Dauermodus deaktivieren",
+                  "fr": "Désactiver le mode continu",
+                  "it": "Disattiva Modalità continua",
+                  "es": "Desactivar modo continuo"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "conditions": [
+      {
+        "id": "continuous_mode",
+        "title": {
+          "en": "Continuous mode is !{{on|off}}",
+          "nl": "Continumodus is !{{aan|uit}}",
+          "de": "Dauermodus ist !{{an|aus}}",
+          "fr": "Mode continu est !{{en marche|arrêtée}}",
+          "it": "Modalità continua è !{{attiva|disattiva}}",
+          "es": "Modo continuo está !{{activada|desactivada}}"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=opener"
+          }
+        ]
+      }
+    ]
+  },
+  "drivers": [
+    {
+      "class": "lock",
+      "images": {
+        "large": "/drivers/nuki/assets/images/large.png",
+        "small": "/drivers/nuki/assets/images/small.png"
+      },
+      "icon": "/drivers/nuki/assets/icon.svg",
       "energy": {
-        "batteries": ["AA", "AA", "AA", "AA"]
+        "batteries": [
+          "AA",
+          "AA",
+          "AA",
+          "AA"
+        ]
       },
       "pair": [
         {
@@ -224,28 +399,35 @@
             }
           ]
         }
-      ]
-		},
-    {
-      "id": "opener",
-      "name": {
-        "en": "Nuki Opener",
-        "nl": "Nuki Opener"
-      },
-      "images": {
-        "large": "drivers/opener/assets/images/large.jpg",
-        "small": "drivers/opener/assets/images/small.jpg"
-      },
-      "class": "lock",
-      "capabilities": [
-        "openerstate",
-        "locked",
-        "continuous_mode",
-        "measure_battery",
-        "alarm_battery"
       ],
+      "name": {
+        "en": "Nuki Smart Lock",
+        "nl": "Nuki Smart Lock"
+      },
+      "capabilities": [
+        "lockstate",
+        "locked",
+        "lockaction",
+        "measure_battery",
+        "alarm_battery",
+        "alarm_contact"
+      ],
+      "id": "nuki"
+    },
+    {
+      "class": "lock",
+      "images": {
+        "large": "/drivers/opener/assets/images/large.png",
+        "small": "/drivers/opener/assets/images/small.png"
+      },
+      "icon": "/drivers/opener/assets/icon.svg",
       "energy": {
-        "batteries": ["AA", "AA", "AA", "AA"]
+        "batteries": [
+          "AA",
+          "AA",
+          "AA",
+          "AA"
+        ]
       },
       "pair": [
         {
@@ -325,315 +507,113 @@
             }
           ]
         }
-      ]
+      ],
+      "name": {
+        "en": "Nuki Opener",
+        "nl": "Nuki Opener"
+      },
+      "capabilities": [
+        "openerstate",
+        "locked",
+        "continuous_mode",
+        "measure_battery",
+        "alarm_battery"
+      ],
+      "id": "opener"
     }
-	],
-  "flow": {
-    "triggers": [
-      {
-		    "id": "lockstateChanged",
-				"title": {
-					"en": "Lockstate changed",
-					"nl": "Slotstatus is veranderd"
-				},
-        "tokens": [
-          {
-            "name": "lockstate",
-            "type": "string",
-            "title": {
-              "en": "Lockstate",
-              "nl": "Slotstatus"
-            },
-            "example": "Locked"
-          }
-        ],
-	      "args": [
-	        {
-            "name": "device",
-            "type": "device",
-            "placeholder": {
-              "en": "Select Nuki Smart Lock",
-              "nl": "Selecteer Nuki Smart Lock"
-            },
-            "filter": "driver_id=nuki"
-	        }
-	      ]
-	    },
-      {
-        "id": "openerstateChanged",
-        "title": {
-          "en": "Opener state changed",
-          "nl": "Opener status gewijzigd",
-          "it": "Lo stato \u00E8 cambiato"
-        },
-        "tokens": [
-          {
-            "name": "openerstate",
-            "type": "string",
-            "title": {
-              "en": "New Opener State",
-              "nl": "Nieuwe opener status",
-              "it": "Nuovo stato Opener"
-            },
-            "example": "online"
-          }
-        ],
-        "args": [
-          {
-            "name": "device",
-            "type": "device",
-            "placeholder": {
-              "en": "Select Nuki Opener",
-              "nl": "Selecteer Nuki Opener",
-              "it": "Seleziona Nuki Opener"
-            },
-            "filter": "driver_id=opener"
-          }
-        ]
+  ],
+  "capabilities": {
+    "continuous_mode": {
+      "type": "boolean",
+      "title": {
+        "en": "Continuous mode",
+        "nl": "Continumodus",
+        "de": "Dauermodus",
+        "fr": "Mode continu",
+        "it": "Modalità continua",
+        "es": "Modo continuo"
       },
-      {
-        "id": "continuous_mode_true",
-        "title": {
-          "en": "Continuous mode turned on",
-          "nl": "Continumodus gaat aan",
-          "de": "Dauermodus ist angegangen",
-          "fr": "Mode continu s'est activ\u00E9e",
-          "it": "Modalit\u00E0 continua \u00E8 stata attivata",
-          "es": "Modo continuo se ha activado"
-        },
-        "args": [
-          {
-            "name": "device",
-            "type": "device",
-            "placeholder": {
-              "en": "Select Nuki Opener",
-              "nl": "Selecteer Nuki Opener",
-              "it": "Seleziona Nuki Opener"
-            },
-            "filter": "driver_id=opener"
-          }
-        ]
+      "getable": true,
+      "setable": true,
+      "uiComponent": "toggle"
+    },
+    "lockaction": {
+      "type": "enum",
+      "title": {
+        "en": "Lock Action",
+        "nl": "Slot Actie"
       },
-      {
-        "id": "continuous_mode_false",
-        "title": {
-          "en": "Continuous mode turned off",
-          "nl": "Continumodus gaat uit",
-          "de": "Dauermodus ist ausgegangen",
-          "fr": "Mode continu s'est d\u00E9sactiv\u00E9e",
-          "it": "Modalit\u00E0 continua \u00E8 stata disattivata",
-          "es": "Modo continuo se ha desactivado"
-        },
-        "args": [
-          {
-            "name": "device",
-            "type": "device",
-            "placeholder": {
-              "en": "Select Nuki Opener",
-              "nl": "Selecteer Nuki Opener",
-              "it": "Seleziona Nuki Opener"
-            },
-            "filter": "driver_id=opener"
+      "values": [
+        {
+          "id": "0",
+          "title": {
+            "en": "Choose action ...",
+            "nl": "Kies actie ..."
           }
-        ]
+        },
+        {
+          "id": "1",
+          "title": {
+            "en": "Unlock",
+            "nl": "Ontgrendelen"
+          }
+        },
+        {
+          "id": "2",
+          "title": {
+            "en": "Lock",
+            "nl": "Vergrendelen"
+          }
+        },
+        {
+          "id": "3",
+          "title": {
+            "en": "Unlatch",
+            "nl": "Openen"
+          }
+        },
+        {
+          "id": "4",
+          "title": {
+            "en": "Lock 'n' Go",
+            "nl": "Lock 'n' Go"
+          }
+        },
+        {
+          "id": "5",
+          "title": {
+            "en": "Lock 'n' Go With Unlatch",
+            "nl": "Lock 'n' Go met openen"
+          }
+        }
+      ],
+      "getable": true,
+      "setable": true,
+      "uiComponent": "picker",
+      "icon": "/assets/lockaction.svg"
+    },
+    "lockstate": {
+      "type": "string",
+      "title": {
+        "en": "Lock State",
+        "nl": "Slot status"
       },
-      {
-        "id": "openerRinging",
-        "title": {
-          "en": "Opener Ring Action",
-          "nl": "Opener Ring Actie"
-        },
-        "tokens": [
-          {
-            "name": "timestamp",
-            "type": "string",
-            "title": {
-              "en": "time",
-              "nl": "tijd"
-            },
-            "example": "online"
-          }
-        ],
-        "args": [
-          {
-            "name": "device",
-            "type": "device",
-            "placeholder": {
-              "en": "Select Nuki Opener",
-              "nl": "Selecteer Nuki Opener",
-              "it": "Seleziona Nuki Opener"
-            },
-            "filter": "driver_id=opener"
-          }
-        ]
-      }
-    ],
-    "conditions": [
-      {
-        "id": "continuous_mode",
-        "title": {
-          "en": "Continuous mode is !{{on|off}}",
-          "nl": "Continumodus is !{{aan|uit}}",
-          "de": "Dauermodus ist !{{an|aus}}",
-          "fr": "Mode continu est !{{en marche|arr\u00EAt\u00E9e}}",
-          "it": "Modalit\u00E0 continua \u00E8 !{{attiva|disattiva}}",
-          "es": "Modo continuo est\u00E1 !{{activada|desactivada}}"
-        },
-        "args": [
-          {
-            "name": "device",
-            "type": "device",
-            "placeholder": {
-              "en": "Select Nuki Opener",
-              "nl": "Selecteer Nuki Opener",
-              "it": "Seleziona Nuki Opener"
-            },
-            "filter": "driver_id=opener"
-          }
-        ]
-      }
-	  ],
-    "actions": [
-      {
-        "id": "lockAction",
-        "title": {
-          "en": "Perform a lock operation",
-          "nl": "Slot actie uitvoeren"
-        },
-        "args": [
-          {
-            "type": "dropdown",
-            "name": "lockaction",
-            "values": [
-              {
-                "id": "1",
-                "title": {
-                  "en": "Unlock",
-                  "nl": "Ontgrendelen"
-                }
-              },
-              {
-                "id": "2",
-                "title": {
-                  "en": "Lock",
-                  "nl": "Vergrendelen"
-                }
-              },
-              {
-                "id": "3",
-                "title": {
-                  "en": "Unlatch",
-                  "nl": "Openen"
-                }
-              },
-              {
-                "id": "4",
-                "title": {
-                  "en": "Lock 'n' Go",
-                  "nl": "Lock 'n' Go"
-                }
-              },
-              {
-                "id": "5",
-                "title": {
-                  "en": "Lock 'n' Go With Unlatch",
-                  "nl": "Lock 'n' Go met openen"
-                }
-              }
-            ]
-          },
-          {
-            "name": "device",
-            "type": "device",
-            "placeholder": {
-              "en": "Select Nuki Smart Lock",
-              "nl": "Selecteer Nuki Smart Lock"
-            },
-            "filter": "driver_id=nuki"
-          }
-        ]
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/lockstatus.svg"
+    },
+    "openerstate": {
+      "type": "string",
+      "title": {
+        "en": "Opener State",
+        "nl": "Opener status",
+        "it": "Stato Opener"
       },
-      {
-        "id": "openerAction",
-        "title": {
-          "en": "Nuki action",
-          "nl": "Nuki action",
-          "it": "Azione Nuki"
-        },
-        "args": [
-          {
-            "type": "dropdown",
-            "name": "openeraction",
-            "values": [
-              {
-                "id": "1",
-                "title": {
-                  "en": "Activate Ring to Open",
-                  "nl": "Ring to Open activeren",
-                  "de": "Ring to Open aktivieren",
-                  "fr": "Activer Ring to Open",
-                  "it": "Attiva Ring to Open",
-                  "es": "Activar Ring to Open"
-                }
-              },
-              {
-                "id": "2",
-                "title": {
-                  "en": "Deactivate Ring to Open",
-                  "nl": "Ring to Open deactiveren",
-                  "de": "Ring to Open deaktivieren",
-                  "fr": "D\u00E9sactiver Ring to Open",
-                  "it": "Disattiva Ring to Open",
-                  "es": "Desactivar Ring to Open"
-                }
-              },
-              {
-                "id": "3",
-                "title": {
-                  "en": "Open",
-                  "nl": "Openen",
-                  "de": "\u00D6ffnen",
-                  "fr": "Ouvrir",
-                  "it": "Apri",
-                  "es": "Abrir"
-                }
-              },
-              {
-                "id": "4",
-                "title": {
-                  "en": "Activate continuous mode",
-                  "nl": "Continumodus activeren",
-                  "de": "Dauermodus aktivieren",
-                  "fr": "Activer le mode continu",
-                  "it": "Attiva Modalit\u00E0 continua",
-                  "es": "Activar modo continuo"
-                }
-              },
-              {
-                "id": "5",
-                "title": {
-                  "en": "Deactivate continuous mode",
-                  "nl": "Continumodus deactiveren",
-                  "de": "Dauermodus deaktivieren",
-                  "fr": "D\u00E9sactiver le mode continu",
-                  "it": "Disattiva Modalit\u00E0 continua",
-                  "es": "Desactivar modo continuo"
-                }
-              }
-            ]
-          },
-          {
-            "name": "device",
-            "type": "device",
-            "placeholder": {
-              "en": "Select Nuki Opener",
-              "nl": "Selecteer Nuki Opener",
-              "it": "Seleziona Nuki Opener"
-            },
-            "filter": "driver_id=opener"
-          }
-        ]
-      }
-    ]
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/lockstatus.svg"
+    }
   }
 }

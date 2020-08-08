@@ -1,0 +1,75 @@
+{
+  "triggers": [
+    {
+      "id": "lockstateChanged",
+      "title": {
+        "en": "Lockstate changed",
+        "nl": "Slotstatus is veranderd"
+      },
+      "tokens": [
+        {
+          "name": "lockstate",
+          "type": "string",
+          "title": {
+            "en": "Lockstate",
+            "nl": "Slotstatus"
+          },
+          "example": "Locked"
+        }
+      ],
+      "args": []
+    }
+  ],
+  "actions": [
+    {
+      "id": "lockAction",
+      "title": {
+        "en": "Perform a lock operation",
+        "nl": "Slot actie uitvoeren"
+      },
+      "args": [
+        {
+          "type": "dropdown",
+          "name": "lockaction",
+          "values": [
+            {
+              "id": "1",
+              "title": {
+                "en": "Unlock",
+                "nl": "Ontgrendelen"
+              }
+            },
+            {
+              "id": "2",
+              "title": {
+                "en": "Lock",
+                "nl": "Vergrendelen"
+              }
+            },
+            {
+              "id": "3",
+              "title": {
+                "en": "Unlatch",
+                "nl": "Openen"
+              }
+            },
+            {
+              "id": "4",
+              "title": {
+                "en": "Lock 'n' Go",
+                "nl": "Lock 'n' Go"
+              }
+            },
+            {
+              "id": "5",
+              "title": {
+                "en": "Lock 'n' Go With Unlatch",
+                "nl": "Lock 'n' Go met openen"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

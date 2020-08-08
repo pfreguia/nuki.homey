@@ -1,0 +1,77 @@
+{
+  "class": "lock",
+  "images": {
+    "large": "{{driverAssetsPath}}/images/large.png",
+    "small": "{{driverAssetsPath}}/images/small.png"
+  },
+  "icon": "{{driverAssetsPath}}/icon.svg",
+  "energy": {
+    "batteries": [
+      "AA",
+      "AA",
+      "AA",
+      "AA"
+    ]
+  },
+  "pair": [
+    {
+      "id": "start",
+      "navigation": {
+        "next": "list_devices"
+      }
+    },
+    {
+      "id": "list_devices",
+      "template": "list_devices",
+      "navigation": {
+        "next": "add_devices"
+      }
+    },
+    {
+      "id": "select_pairing"
+    },
+    {
+      "id": "manual_pairing"
+    },
+    {
+      "id": "add_device"
+    },
+    {
+      "id": "add_devices",
+      "template": "add_devices"
+    }
+  ],
+  "settings": [
+    {
+      "type": "group",
+      "label": {
+        "en": "Device Settings",
+        "nl": "Apparaat instellingen"
+      },
+      "children": [
+        {
+          "id": "address",
+          "type": "text",
+          "value": "0.0.0.0",
+          "label": {
+            "en": "IP Address",
+            "nl": "IP adres"
+          }
+        },
+        {
+          "id": "port",
+          "type": "number",
+          "value": 8080,
+          "attr": {
+            "min": 1,
+            "max": 99999
+          },
+          "label": {
+            "en": "Port",
+            "nl": "Poort"
+          }
+        }
+      ]
+    }
+  ]
+}

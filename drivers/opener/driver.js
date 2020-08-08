@@ -47,39 +47,43 @@ class OpenerDriver extends Homey.Driver {
                 }
               }
             } else {
-              return Promise.reject(this.homey.__("driver.no_token"));
+              session.showView('select_pairing');
             }
           }
-          return Promise.resolve(devices);
+          if (devices.length) {
+            return Promise.resolve(devices);
+          } else {
+            session.showView('select_pairing');
+          }
         } else {
-          await session.showView('select_pairing');
+          session.showView('select_pairing');
         }
       } catch (error) {
-        return Promise.reject(error);
+        session.showView('select_pairing');
       }
     });
 
     session.setHandler('manual_pairing', async (data) => {
       try {
-        let path = 'http://' + data.address + ':' + data.port + '/info?token=' + data.token;
+        let path = 'http://'+ data.address +':'+ data.port +'/info?token='+ data.token;
         let result = await this.util.sendCommand(path, 8000);
         for (let i in result.scanResults) {
           if (result.scanResults[i].deviceType == 2) {
             devicesArray.push({
-              name: result.scanResults[i].name + ' (' + data.address + ')',
+              name: result.scanResults[i].name +' ('+ data.address +')',
               data: {
                 id: result.scanResults[i].nukiId
               },
               settings: {
                 address: data.address,
-                port: data.port,
+                port: Number(data.port),
                 nukiId: result.scanResults[i].nukiId,
                 token: data.token
               }
             });
           }
         }
-        return Promise.resolve(result);
+        return Promise.resolve(true);
       } catch (error) {
         return Promise.reject(error);
       }

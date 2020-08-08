@@ -7,7 +7,7 @@
     "token": "Token",
     "nukiid": "Nuki ID",
     "titleselection": "Wat wil je doen?",
-    "nodevices": "Geen hardware Nuki bridge gevonden. Je kan het nog een keer proberen of je Nuki (software) bridge handmatig proberen toe te voegen als je het IP adres en token weet.",
+    "nodevices": "Geen hardware Nuki bridge gevonden. Heb je op de knop van je bridge gedrukt tijdens het koppelen? Je kan het nog een keer proberen of je Nuki (software) bridge handmatig proberen toe te voegen als je het IP adres en token weet.",
     "again": "Probeer opnieuw",
     "manual": "Handmatig koppelen",
     "test" : "Test connectie",
@@ -20,7 +20,8 @@
     "step2": "Once enabled go to the Homey app and add a Nuki Smart Lock as device by selecting the 'Nuki Smart Lock' app from the pairing wizard.",
     "step3": "Confirm adding a Nuki Smart Lock or Nuki Opener and wait for the discovery process to start.",
     "step4": "When the discovery process is running press the button of your Nuki Bridge(s).",
-    "step5": "Your Nuki devices will be discovered and you can finish the pairing of your device(s)."
+    "step5": "Your Nuki devices will be discovered and you can finish the pairing of your device(s).",
+    "nosettings": "Vul a.u.b. alle verplichte velden in."
   },
   "util": {
     "uncalibrated": "Niet gecalibreerd",

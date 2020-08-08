@@ -1,14 +1,14 @@
 <script type="text/javascript">
-  (async () => {
-    try {
-      let devices = await Homey.emit('add_device', {});
+  Homey.emit('add_device', {})
+    .then(devices => {
       for (let i in devices) {
+        console.log(devices[i]);
         Homey.createDevice(devices[i]);
       }
       setTimeout(() => { Homey.done(); }, 5000);
-    } catch (error) {
-      await Homey.alert(error);
+    })
+    .catch(error => {
+      Homey.alert(error);
       Homey.done()
-    }
-  });
+    })
 </script>

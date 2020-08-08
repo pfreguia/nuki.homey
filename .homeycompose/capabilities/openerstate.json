@@ -1,0 +1,12 @@
+{
+  "type": "string",
+  "title": {
+    "en": "Opener State",
+    "nl": "Opener status",
+    "it": "Stato Opener"
+  },
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "icon": "/assets/lockstatus.svg"
+}

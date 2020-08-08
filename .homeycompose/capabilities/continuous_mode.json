@@ -1,0 +1,14 @@
+{
+  "type": "boolean",
+  "title": {
+    "en": "Continuous mode",
+    "nl": "Continumodus",
+    "de": "Dauermodus",
+    "fr": "Mode continu",
+    "it": "Modalità continua",
+    "es": "Modo continuo"
+  },
+  "getable": true,
+  "setable": true,
+  "uiComponent": "toggle"
+}

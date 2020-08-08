@@ -1,0 +1,55 @@
+{
+  "type": "enum",
+  "title": {
+    "en": "Lock Action",
+    "nl": "Slot Actie"
+  },
+  "values": [
+    {
+      "id": "0",
+      "title": {
+        "en": "Choose action ...",
+        "nl": "Kies actie ..."
+      }
+    },
+    {
+      "id": "1",
+      "title": {
+        "en": "Unlock",
+        "nl": "Ontgrendelen"
+      }
+    },
+    {
+      "id": "2",
+      "title": {
+        "en": "Lock",
+        "nl": "Vergrendelen"
+      }
+    },
+    {
+      "id": "3",
+      "title": {
+        "en": "Unlatch",
+        "nl": "Openen"
+      }
+    },
+    {
+      "id": "4",
+      "title": {
+        "en": "Lock 'n' Go",
+        "nl": "Lock 'n' Go"
+      }
+    },
+    {
+      "id": "5",
+      "title": {
+        "en": "Lock 'n' Go With Unlatch",
+        "nl": "Lock 'n' Go met openen"
+      }
+    }
+  ],
+  "getable": true,
+  "setable": true,
+  "uiComponent": "picker",
+  "icon": "/assets/lockaction.svg"
+}

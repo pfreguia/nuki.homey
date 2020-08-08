@@ -1,0 +1,56 @@
+{
+  "id": "nuki.homey",
+  "sdk": 3,
+  "brandColor": "#000000",
+  "name": {
+    "en": "Nuki Smart Lock",
+    "nl": "Nuki Smart Lock"
+  },
+  "tags": {
+    "en": [
+      "nuki",
+      "lock"
+    ],
+    "nl": [
+      "nuki",
+      "slot"
+    ]
+  },
+  "version": "3.0.1",
+  "compatibility": ">=5.0.0",
+  "author": {
+    "name": "Jelger Haanstra",
+    "email": "homey@solidewebservices.com",
+    "website": "https://github.com/jghaanstra/nuki.homey"
+  },
+  "contributing": {
+    "donate": {
+      "paypal": {
+        "username": "jghaanstra"
+      }
+    }
+  },
+  "bugs": {
+    "url": "https://github.com/jghaanstra/nuki.homey/issues"
+  },
+  "homeyCommunityTopicId": 10853,
+  "images": {
+    "large": "./assets/images/large.png",
+    "small": "./assets/images/small.png"
+  },
+  "category": "security",
+  "description": {
+    "en": "Control your Nuki Smart Lock",
+    "nl": "Beheer je Nuki Smart Lock"
+  },
+  "dependencies": {
+    "net": "*"
+  },
+  "api": {
+    "nukiCallbacks": {
+      "method": "post",
+      "path": "/callback",
+      "public": true
+    }
+  }
+}

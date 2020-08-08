@@ -1,6 +1,6 @@
 {
   "name": "nuki.homey",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Nuki Smart Lock",
   "main": "app.js",
   "dependencies": {

@@ -1,0 +1,155 @@
+{
+  "triggers": [
+    {
+      "id": "openerstateChanged",
+      "title": {
+        "en": "Opener state changed",
+        "nl": "Opener status gewijzigd",
+        "it": "Lo stato è cambiato"
+      },
+      "tokens": [
+        {
+          "name": "openerstate",
+          "type": "string",
+          "title": {
+            "en": "New Opener State",
+            "nl": "Nieuwe opener status",
+            "it": "Nuovo stato Opener"
+          },
+          "example": "online"
+        }
+      ],
+      "args": []
+    },
+    {
+      "id": "continuous_mode_true",
+      "title": {
+        "en": "Continuous mode turned on",
+        "nl": "Continumodus gaat aan",
+        "de": "Dauermodus ist angegangen",
+        "fr": "Mode continu s'est activée",
+        "it": "Modalità continua è stata attivata",
+        "es": "Modo continuo se ha activado"
+      },
+      "args": []
+    },
+    {
+      "id": "continuous_mode_false",
+      "title": {
+        "en": "Continuous mode turned off",
+        "nl": "Continumodus gaat uit",
+        "de": "Dauermodus ist ausgegangen",
+        "fr": "Mode continu s'est désactivée",
+        "it": "Modalità continua è stata disattivata",
+        "es": "Modo continuo se ha desactivado"
+      },
+      "args": []
+    },
+    {
+      "id": "openerRinging",
+      "title": {
+        "en": "Opener Ring Action",
+        "nl": "Opener Ring Actie"
+      },
+      "tokens": [
+        {
+          "name": "timestamp",
+          "type": "string",
+          "title": {
+            "en": "time",
+            "nl": "tijd"
+          },
+          "example": "online"
+        }
+      ],
+      "args": []
+    }
+  ],
+  "conditions": [
+    {
+      "id": "continuous_mode",
+      "title": {
+        "en": "Continuous mode is !{{on|off}}",
+        "nl": "Continumodus is !{{aan|uit}}",
+        "de": "Dauermodus ist !{{an|aus}}",
+        "fr": "Mode continu est !{{en marche|arrêtée}}",
+        "it": "Modalità continua è !{{attiva|disattiva}}",
+        "es": "Modo continuo está !{{activada|desactivada}}"
+      },
+      "args": []
+    }
+  ],
+  "actions": [
+    {
+      "id": "openerAction",
+      "title": {
+        "en": "Nuki action",
+        "nl": "Nuki action",
+        "it": "Azione Nuki"
+      },
+      "args": [
+        {
+          "type": "dropdown",
+          "name": "openeraction",
+          "values": [
+            {
+              "id": "1",
+              "title": {
+                "en": "Activate Ring to Open",
+                "nl": "Ring to Open activeren",
+                "de": "Ring to Open aktivieren",
+                "fr": "Activer Ring to Open",
+                "it": "Attiva Ring to Open",
+                "es": "Activar Ring to Open"
+              }
+            },
+            {
+              "id": "2",
+              "title": {
+                "en": "Deactivate Ring to Open",
+                "nl": "Ring to Open deactiveren",
+                "de": "Ring to Open deaktivieren",
+                "fr": "Désactiver Ring to Open",
+                "it": "Disattiva Ring to Open",
+                "es": "Desactivar Ring to Open"
+              }
+            },
+            {
+              "id": "3",
+              "title": {
+                "en": "Open",
+                "nl": "Openen",
+                "de": "Öffnen",
+                "fr": "Ouvrir",
+                "it": "Apri",
+                "es": "Abrir"
+              }
+            },
+            {
+              "id": "4",
+              "title": {
+                "en": "Activate continuous mode",
+                "nl": "Continumodus activeren",
+                "de": "Dauermodus aktivieren",
+                "fr": "Activer le mode continu",
+                "it": "Attiva Modalità continua",
+                "es": "Activar modo continuo"
+              }
+            },
+            {
+              "id": "5",
+              "title": {
+                "en": "Deactivate continuous mode",
+                "nl": "Continumodus deactiveren",
+                "de": "Dauermodus deaktivieren",
+                "fr": "Désactiver le mode continu",
+                "it": "Disattiva Modalità continua",
+                "es": "Desactivar modo continuo"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
