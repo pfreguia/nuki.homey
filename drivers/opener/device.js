@@ -83,7 +83,6 @@ class OpenerDevice extends Homey.Device {
         energyObj = {
           batteries: ["AAA", "AAA", "AAA", "AAA"]
         }
-        this.setEnergy(energyObj);
       }
       else {
         if (this.hasCapability('alarm_battery'))
