@@ -331,14 +331,6 @@
         "small": "/drivers/nuki/assets/images/small.png"
       },
       "icon": "/drivers/nuki/assets/icon.svg",
-      "energy": {
-        "batteries": [
-          "AA",
-          "AA",
-          "AA",
-          "AA"
-        ]
-      },
       "pair": [
         {
           "id": "start",
@@ -365,39 +357,6 @@
         {
           "id": "add_devices",
           "template": "add_devices"
-        }
-      ],
-      "settings": [
-        {
-          "type": "group",
-          "label": {
-            "en": "Device Settings",
-            "nl": "Apparaat instellingen"
-          },
-          "children": [
-            {
-              "id": "address",
-              "type": "text",
-              "value": "0.0.0.0",
-              "label": {
-                "en": "IP Address",
-                "nl": "IP adres"
-              }
-            },
-            {
-              "id": "port",
-              "type": "number",
-              "value": 8080,
-              "attr": {
-                "min": 1,
-                "max": 99999
-              },
-              "label": {
-                "en": "Port",
-                "nl": "Poort"
-              }
-            }
-          ]
         }
       ],
       "name": {
@@ -412,15 +371,6 @@
         "alarm_battery",
         "alarm_contact"
       ],
-      "id": "nuki"
-    },
-    {
-      "class": "lock",
-      "images": {
-        "large": "/drivers/opener/assets/images/large.png",
-        "small": "/drivers/opener/assets/images/small.png"
-      },
-      "icon": "/drivers/opener/assets/icon.svg",
       "energy": {
         "batteries": [
           "AA",
@@ -429,6 +379,51 @@
           "AA"
         ]
       },
+      "id": "nuki",
+      "settings": [
+        {
+          "type": "group",
+          "label": {
+            "en": "Device Settings",
+            "nl": "Apparaat instellingen",
+            "it": "Impostazioni dispositivo"
+          },
+          "children": [
+            {
+              "id": "address",
+              "type": "text",
+              "value": "0.0.0.0",
+              "label": {
+                "en": "IP Address",
+                "nl": "IP adres",
+                "it": "Indirizzo IP"
+              }
+            },
+            {
+              "id": "port",
+              "type": "number",
+              "value": 8080,
+              "attr": {
+                "min": 1,
+                "max": 65535
+              },
+              "label": {
+                "en": "Port",
+                "nl": "Poort",
+                "it": "Porta"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "class": "lock",
+      "images": {
+        "large": "/drivers/opener/assets/images/large.png",
+        "small": "/drivers/opener/assets/images/small.png"
+      },
+      "icon": "/drivers/opener/assets/icon.svg",
       "pair": [
         {
           "id": "start",
@@ -457,12 +452,28 @@
           "template": "add_devices"
         }
       ],
+      "name": {
+        "en": "Nuki Opener",
+        "nl": "Nuki Opener"
+      },
+      "capabilities": [
+        "openerstate",
+        "locked",
+        "continuous_mode"
+      ],
+      "energy": {
+        "approximation": {
+          "usageConstant": 0.8
+        }
+      },
+      "id": "opener",
       "settings": [
         {
           "type": "group",
           "label": {
             "en": "Device Settings",
-            "nl": "Apparaat instellingen"
+            "nl": "Apparaat instellingen",
+            "it": "Impostazioni dispositivo"
           },
           "children": [
             {
@@ -471,7 +482,8 @@
               "value": "0.0.0.0",
               "label": {
                 "en": "IP Address",
-                "nl": "IP adres"
+                "nl": "IP adres",
+                "it": "Indirizzo IP"
               }
             },
             {
@@ -480,11 +492,12 @@
               "value": 8080,
               "attr": {
                 "min": 1,
-                "max": 99999
+                "max": 65535
               },
               "label": {
                 "en": "Port",
-                "nl": "Poort"
+                "nl": "Poort",
+                "it": "Porta"
               }
             }
           ]
@@ -492,8 +505,9 @@
         {
           "type": "group",
           "label": {
-            "en": "General Settings",
-            "nl": "Algemene instellingen"
+            "en": "Power Settings",
+            "nl": "Energie instellingen",
+            "it": "Impostazioni alimentazione"
           },
           "children": [
             {
@@ -501,25 +515,19 @@
               "type": "checkbox",
               "value": false,
               "label": {
-                "en": "Enable if your Nuki Opener is powered by batteries.",
-                "nl": "Inschakelen als je Nuki Opener op batterijen werkt."
+                "en": "Battery operating",
+                "nl": "Batterij werkt",
+                "it": "Alimentazione a batteria"
+              },
+              "hint": {
+                "en": "Enable if your Nuki Opener is powered by batteries (leave disabled if the opener is powered by USB cable). This setting will enable Homey battery alarm accordingly.",
+                "nl": "Inschakelen als je Nuki Opener op batterijen werkt.",
+                "it": "Abilitare se Nuki Opener � alimentato a batteria (lasciare disabilitato se il dispositivo � alimentato da cavo USB). Questa opzione abilita di conseguenza l'allarme batteria di Homey."
               }
             }
           ]
         }
-      ],
-      "name": {
-        "en": "Nuki Opener",
-        "nl": "Nuki Opener"
-      },
-      "capabilities": [
-        "openerstate",
-        "locked",
-        "continuous_mode",
-        "measure_battery",
-        "alarm_battery"
-      ],
-      "id": "opener"
+      ]
     }
   ],
   "capabilities": {
