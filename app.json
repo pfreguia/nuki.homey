@@ -520,9 +520,9 @@
                 "it": "Alimentazione a batteria"
               },
               "hint": {
-                "en": "Enable if your Nuki Opener is powered by batteries (leave disabled if the opener is powered by USB cable). This setting will enable Homey battery alarm accordingly.",
+                "en": "Enable this setting if your Nuki Opener is powered by batteries (leave disabled if the opener is powered by USB cable). This setting allows Homey to manage device energy properly.",
                 "nl": "Inschakelen als je Nuki Opener op batterijen werkt.",
-                "it": "Abilitare se Nuki Opener � alimentato a batteria (lasciare disabilitato se il dispositivo � alimentato da cavo USB). Questa opzione abilita di conseguenza l'allarme batteria di Homey."
+                "it": "Abilitare questa impostazione se Nuki Opener è alimentato a batteria (lasciare disabilitato se il dispositivo è alimentato da cavo USB). Questa impostazione consente a Homey di gestire correttamente l'energia del dispositivo."
               }
             }
           ]
