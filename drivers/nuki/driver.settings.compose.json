@@ -1,0 +1,20 @@
+[
+  {
+    "type": "group",
+    "label": {
+      "en": "Device Settings",
+      "nl": "Apparaat instellingen",
+      "it": "Impostazioni dispositivo"
+    },
+    "children": [
+      {
+        "id": "address",
+        "$extends": "address"
+      },
+      {
+        "id": "port",
+        "$extends": "port"
+      }
+    ]
+  }
+]

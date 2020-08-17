@@ -11,13 +11,6 @@ class OpenerDevice extends Homey.Device {
     // INITIALLY SET DEVICE AS AVAILABLE
     this.setAvailable();
 
-    // UPDATE CAPABILITIES
-    if (this.hasCapability('alarm_battery') && !this.getSetting('battery')) {
-      this.removeCapability('alarm_battery');
-    } else if (!this.hasCapability('alarm_battery') && this.getSetting('battery')) {
-      this.addCapability('alarm_battery');
-    }
-
     // LISTENERS FOR UPDATING CAPABILITIES VALUE
     this.registerCapabilityListener('locked', async (value) => {
       try {
@@ -79,6 +72,29 @@ class OpenerDevice extends Homey.Device {
 
   onAdded() {
     this.setCallbackUrl.bind(this);
+  }
+
+  async onSettings(settings) {
+    if (settings.changedKeys.includes('battery')) {
+      let energyObj;
+      if (settings.newSettings.battery) {
+        if (!this.hasCapability('alarm_battery'))
+          this.addCapability('alarm_battery');
+        energyObj = {
+          batteries: ["AAA", "AAA", "AAA", "AAA"]
+        }
+      }
+      else {
+        if (this.hasCapability('alarm_battery'))
+          this.removeCapability('alarm_battery');
+        energyObj = {
+          "approximation": {
+            "usageConstant": 0.8
+          }
+        }
+      }
+      this.setEnergy(energyObj);
+    }
   }
 
   // HELPER FUNCTIONS

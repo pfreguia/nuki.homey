@@ -83,7 +83,7 @@ class OpenerDriver extends Homey.Driver {
             });
           }
         }
-        return Promise.resolve(true);
+        return Promise.resolve(result);
       } catch (error) {
         return Promise.reject(error);
       }

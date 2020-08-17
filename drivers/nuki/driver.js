@@ -65,7 +65,7 @@ class NukiDriver extends Homey.Driver {
         let path = 'http://'+ data.address +':'+ data.port +'/info?token='+ data.token;
         let result = await this.util.sendCommand(path, 8000);
         for (let i in result.scanResults) {
-          if (result.scanResults[i].deviceType == 1) {
+          if (result.scanResults[i].deviceType == 0) {
             devicesArray.push({
               name: result.scanResults[i].name +' ('+ data.address +')',
               data: {
@@ -80,7 +80,7 @@ class NukiDriver extends Homey.Driver {
             });
           }
         }
-        return Promise.resolve(true);
+        return Promise.resolve(result);
       } catch (error) {
         return Promise.reject(error);
       }

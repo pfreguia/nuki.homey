@@ -1,0 +1,45 @@
+[
+  {
+    "type": "group",
+    "label": {
+      "en": "Device Settings",
+      "nl": "Apparaat instellingen",
+      "it": "Impostazioni dispositivo"
+    },
+    "children": [
+      {
+        "id": "address",
+        "$extends": "address"
+      },
+      {
+        "id": "port",
+        "$extends": "port"
+      }
+    ]
+  },
+  {
+    "type": "group",
+    "label": {
+      "en": "Power Settings",
+      "nl": "Energie instellingen",
+      "it": "Impostazioni alimentazione"
+    },
+    "children": [
+      {
+        "id": "battery",
+        "type": "checkbox",
+        "value": false,
+        "label": {
+          "en": "Battery operating",
+          "nl": "Batterij werkt",
+          "it": "Alimentazione a batteria"
+        },
+        "hint": {
+          "en": "Enable this setting if your Nuki Opener is powered by batteries (leave disabled if the opener is powered by USB cable). This setting allows Homey to manage device energy properly.",
+          "nl": "Inschakelen als je Nuki Opener op batterijen werkt.",
+          "it": "Abilitare questa impostazione se Nuki Opener \u00E8 alimentato a batteria (lasciare disabilitato se il dispositivo \u00E8 alimentato da cavo USB). Questa impostazione consente a Homey di gestire correttamente l'energia del dispositivo."
+        }
+      }
+    ]
+  }
+]

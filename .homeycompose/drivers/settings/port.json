@@ -1,0 +1,14 @@
+{
+   "id": "port",
+   "type": "number",
+   "value": 8080,
+   "attr": {
+    "min": 1,
+    "max": 65535
+  },
+  "label": {
+    "en": "Port",
+    "nl": "Poort",
+    "it": "Porta"
+  }
+}
