@@ -9,7 +9,7 @@ So benefits of this approach over the cloud approach are:
 
 Nuki Direct can also manage the extra features provided by Nuki API in addition to the standard commands, settings, capabilities and flow cards supplied by Homey. With Nuki Direct you can fine-tune the settings and control the specific lock states and events of your Nuki devices.
 
-Since Nuki Direct and Nuki app by Athom have been developed on distinct APIs, they can be happily run side by side on the same Homey without interfering.
+Since Nuki Direct and Nuki app by Athom have been developed on distinct APIs, they can happily run side by side on the same Homey without interfering.
 
 ## Adding your devices
 Follow these steps to add your Nuki to Homey.
@@ -23,7 +23,7 @@ Your Nuki device(s) have now been added to Homey.
 
 ## Release Notes
 ### v3.0.3 - 2020-08-28
-This is the first version after the handover of the app development. This version has the following intents.
+This is the first version after the handover of the app development. New developer and new intents.
 
 * **Differentiate the aspect from the Nuki app by Athom to avoid appearing as a duplicate app**  
 The new name "Nuki Direct" emphasizes straight, fast, reliable communication between Homey and Nuki devices. The app's icon and color have also been changed.
@@ -32,13 +32,13 @@ For this purpose, the icon and title of the device status displayed by the app h
 * **Make Smart Lock and Opener devices more homogeneous**  
 Before this version the devices were managed by two different developers and it was difficult to adopt the same model and the same terminology for the two devices.
 * **Simplify the app**  
-Whenever a new version is released, new features are introduced; when introducing new features, existing features should also be re-analyzed: Is the new functionality consistent with the existing ones? Is the application getting too complicated? Are you creating overlapping features?   
-After this analysis the Continuous mode of the Opener and the Smart Lock battery status have been simplified.
+Whenever a new version is released, new features are introduced; when introducing new features, existing features should also be re-evaluated: Is the new functionality consistent with the existing ones? Is the application getting too complicated? Am I creating overlapping features?   
+After this re-evaluation the Continuous mode of the Opener and the Smart Lock battery status have been simplified. The device settings have been reordered.
 * **Improve security**  
 In my opinion the possibility to unlatch a Smart Lock (or an Opener) directly from the Homey app user interface is dangerous; a single wrong tap can open the door when you are miles away from home! For now, I have hidden the unlatch command from the user interface. If there are no counter-observations, I will remove it completely in the future.
 * **Resolve known issues**  
 The "Nuki Opener Ring Action" trigger flow card added to version 3.0.0 did not work correctly; furthermore, the Timestamp tag associated with this flow-card was difficult to use in practice.  
-The problem has been solved; the tag has been removed and replaced by a new condition flow card "Doorbell rang {less | more} than n seconds ago".
+The problem has been solved and the tag has been removed and replaced by a new condition flow card: "Doorbell rang {less | more} than n seconds ago".
 
 ### v3.0.2 - 2020-08-17
 * App structure refactored using Homeycompose model in order to reduce the duplicated code between SmartLock driver and Opener driver.

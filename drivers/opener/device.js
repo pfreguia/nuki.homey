@@ -154,8 +154,6 @@ class OpenerDevice extends NukiDevice {
     //  continuos_mode_xxxx.
     const prevState = this.getCapabilityValue('openerstate');
     const prevContinuousMode = this.getCapabilityValue('continuous_mode');
-    console.log(prevContinuousMode);
-    console.log(continuousMode);
 
     if (state != prevState || continuousMode != prevContinuousMode) {
       // Update capability openerstate; trigger deprecated openerStateChanged.
@@ -181,7 +179,6 @@ class OpenerDevice extends NukiDevice {
       }
       this.setCapabilityValue('nuki_state', nukiState);
       // Trigger nuki_state_changed.
-      console.log('TRIFFWEER!');
       flow.getDeviceTriggerCard('nuki_state_changed').trigger(this, { previous_state: prevState, previous_continuous_mode: prevContinuousMode }, {});
     }
     // Update capability locked
@@ -201,24 +198,15 @@ class OpenerDevice extends NukiDevice {
 
     // Trigger ring_action.
     if (newState.ringactionState) {
-      console.log(newState.ringactionTimestamp);
       let newRingDate = new Date(newState.ringactionTimestamp);
-      console.log(newRingDate);
       if (this.lastRingNukiDatetime != null) {
         if (this.lastRingNukiDatetime.getTime() !== newRingDate.getTime()) {
-          console.log('lastRingDate <> newRingDate');
-          console.log(this.lastRingNukiDatetime);
-          console.log(newRingDate);
           flow.getDeviceTriggerCard('ring_action').trigger(this, {}, {});
           this.lastRingNukiDatetime = newRingDate;
           this.lastRingHomeyDatetime = new Date();
         }
-        else {
-          console.log('lastRingDate == newRingDate');
-        }
       }
       else {
-        console.log('lastRingDate was null');
         flow.getDeviceTriggerCard('ring_action').trigger(this, {}, {});
         this.lastRingNukiDatetime = newRingDate;
         this.lastRingHomeyDatetime = new Date();
