@@ -7,13 +7,19 @@
     "defaults"
   ],
   "capabilities": [
-    "openerstate",
     "locked",
+    "nuki_state",
+    "openerstate",
     "continuous_mode"
   ],
+  "capabilitiesOptions": {
+    "nuki_state": {
+      "preventTag": true
+    }
+  },
   "energy": {
     "approximation": {
-      "usageConstant": 0.8 
+      "usageConstant": 0.8
     }
   }
 }

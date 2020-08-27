@@ -2,9 +2,9 @@
   {
     "type": "group",
     "label": {
-      "en": "Device Settings",
-      "nl": "Apparaat instellingen",
-      "it": "Impostazioni dispositivo"
+      "en": "Bridge Settings",
+      "nl": "Bridge instellingen",
+      "it": "Impostazioni Bridge"
     },
     "children": [
       {
@@ -14,6 +14,56 @@
       {
         "id": "port",
         "$extends": "port"
+      },
+      {
+        "id": "token",
+        "$extends": "token"
+      }
+    ]
+  },
+  {
+    "type": "group",
+    "label": {
+      "en": "Unlock duration",
+      "nl": "Ontgrendelen duur",
+      "de": "Aufsperrdauer",
+      "it": "Durata sblocco"
+    },
+    "children": [
+      {
+        "id": "unlock_duration",
+        "type": "radio",
+        "value": "ring_to_open",
+        "label": {
+          "en": "Duration",
+          "nl": "Duur",
+          "de": "Dauer",
+          "it": "Durata"
+        },
+        "hint": {
+          "en": "When unlocked, Opener always immediately open your main entrance door as soon as someone ring the doorbell.\nNuki calls this feature \"Ring to Open\".\n\nRing to Open usually has a timed duration (duration can be set via the Nuki app)\n\nThe unlock mode can always remain active by enabling the \"Continuous Mode\".",
+          "nl": "Selecteer het gedrag van Opener wanneer u het apparaat ontgrendelt via deze app. \"Ring to Open\" keert automatisch terug naar de vergrendelde toestand na een aantal minuten dat kan worden ingesteld via de Nuki-app. \"Continumodus\" zorgt ervoor dat de Opener ontgrendeld.",
+          "ït": "Seleziona il comportamento Opener quando sblocchi il dispositivo da questa app. \"Ring to Open\" torna automaticamente in stato di blocco dopo un certo tempo (impostato dall'app Nuki). \"Modalità continua\" mantiene Opener sbloccato sino al successivo blocco."
+        },
+        "values": [
+          {
+            "id": "ring_to_open",
+            "label": {
+              "en": "Timed (Ring to Open)"
+            }
+          },
+          {
+            "id": "continuous_mode",
+            "label": {
+              "en": "Continuous mode",
+              "nl": "Continumodus",
+              "de": "Dauermodus",
+              "fr": "Mode continu",
+              "it": "Modalità continua",
+              "es": "Modo continuo"
+            }
+          }
+        ]
       }
     ]
   },
@@ -35,11 +85,11 @@
           "it": "Alimentazione a batteria"
         },
         "hint": {
-          "en": "Enable this setting if your Nuki Opener is powered by batteries (leave disabled if the opener is powered by USB cable). This setting allows Homey to manage device energy properly.",
+          "en": "Enable this setting if your Nuki Opener is powered by batteries (leave disabled if the Opener is powered by USB cable). This setting allows Homey to manage device energy properly.",
           "nl": "Inschakelen als je Nuki Opener op batterijen werkt.",
           "it": "Abilitare questa impostazione se Nuki Opener \u00E8 alimentato a batteria (lasciare disabilitato se il dispositivo \u00E8 alimentato da cavo USB). Questa impostazione consente a Homey di gestire correttamente l'energia del dispositivo."
         }
       }
     ]
   }
-]
+    ]

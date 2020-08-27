@@ -7,13 +7,21 @@
     "defaults"
   ],
   "capabilities": [
-    "lockstate",
     "locked",
+    "nuki_state",
+    "lockstate",
     "lockaction",
     "measure_battery",
-    "alarm_battery",
     "alarm_contact"
   ],
+  "capabilitiesOptions": {
+    "nuki_state": {
+      "preventTag": true
+    },
+    "lockaction": {
+      "preventTag": true
+    }
+  },
   "energy": {
     "batteries": [
       "AA",

@@ -1,6 +1,32 @@
 {
   "triggers": [
     {
+      "id": "nuki_state_changed",
+      "title": {
+        "en": "Nuki state changed",
+        "nl": "Nuki status gewijzigd",
+        "it": "Lo stato Nuki è cambiato"
+      },
+      "hint": {
+        "en": "State has changed. The tag \"State\" contains the updated value. The local tag \"Previous state\" contains previous value.",
+        "nl": "Status is veranderd. De tag \"Status\" bevat de bijgewerkte waarde. De lokale tag \"Vorige status\" bevat de vorige waarde.",
+        "it": "Lo stato è cambiato. Il tag \"Stato\" contiene i valori aggiornati. Il tag locale \"Stato precedente\" contiene il valore precedente."
+      },
+      "tokens": [
+        {
+          "name": "previous_state",
+          "type": "string",
+          "title": {
+            "en": "Previous state",
+            "nl": "Vorige status",
+            "it": "Stato precedente"
+          },
+          "example": "online"
+        }
+      ],
+      "args": []
+    },
+    {
       "id": "lockstateChanged",
       "title": {
         "en": "Lockstate changed",
@@ -17,6 +43,7 @@
           "example": "Locked"
         }
       ],
+      "deprecated": true,
       "args": []
     }
   ],
@@ -24,8 +51,9 @@
     {
       "id": "lockAction",
       "title": {
-        "en": "Perform a lock operation",
-        "nl": "Slot actie uitvoeren"
+        "en": "Nuki action",
+        "nl": "Nuki actie",
+        "it": "Azione Nuki"
       },
       "args": [
         {

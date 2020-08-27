@@ -2,9 +2,9 @@
   {
     "type": "group",
     "label": {
-      "en": "Device Settings",
-      "nl": "Apparaat instellingen",
-      "it": "Impostazioni dispositivo"
+      "en": "Bridge Settings",
+      "nl": "Bridge instellingen",
+      "it": "Impostazioni Bridge"
     },
     "children": [
       {
@@ -14,6 +14,10 @@
       {
         "id": "port",
         "$extends": "port"
+      },
+      {
+        "id": "token",
+        "$extends": "token"
       }
     ]
   }

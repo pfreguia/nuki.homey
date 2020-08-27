@@ -46,11 +46,12 @@
     "no_token": "Geen token van de bridge ontvangen, zorg ervoor dat je de knop van de bridge indrukt gedurende het pairen."
   },
   "device": {
-    "untrained": "Ongetrained",
+    "untrained": "Untrained",
     "online": "Online",
-    "rto active": "Ring om te openen",
+    "rto_active": "Ring to Open",
     "open": "Open",
-    "opening": "Openend",
-    "boot_run": "Boot run"
+    "opening": "Opening",
+    "boot_run": "Boot run",
+    "continuous_mode": "Ring to Open - Cm"
   }
 }

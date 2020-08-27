@@ -1,0 +1,12 @@
+{
+  "type": "string",
+  "title": {
+    "en": "Nuki State",
+    "nl": "Nuki status",
+    "it": "Stato Nuki"
+  },
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "icon": "/assets/lockstatus.svg"
+}

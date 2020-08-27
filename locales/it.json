@@ -1,19 +1,19 @@
 {
   "pair": {
-    "title": "Pair the Nuki Bridge",
-    "intro": "Enter the details of your Nuki Bridge below.",
-    "address": "IP Address",
-    "port": "Port",
+    "title": "Accoppia il Nuki Bridge",
+    "intro": "Inserisci i dettagli del tuo Nuki Bridge.",
+    "address": "Indirizzo IP",
+    "port": "Porta",
     "token": "Token",
     "nukiid": "Nuki ID",
-    "titleselection": "What do you want to do?",
+    "titleselection": "Come vuoi proseguire?",
     "nodevices": "No hardware Nuki bridge discovered. Did you push the button on your bridge during pairing? You can try again or use try manual pairing if you know the IP address and token of your Nuki (software) bridge.",
-    "again": "Try Again",
-    "manual": "Manual Pairing",
-    "test": "Test Connection",
-    "testing": "Connection test successful, you can now connect the Nuki Bridge.",
-    "connect": "Connect",
-    "success": "Nuki bridge added successfully.",
+    "again": "Riprova",
+    "manual": "Accoppiamento manuale",
+    "test": "Test connessione",
+    "testing": "Test connessione riuscito; ora puoi connettere il Nuki Bridge.",
+    "connect": "Connetti",
+    "success": "Nuki Bridge aggiunto con successo.",
     "bridgetype": "Bridge Type:",
     "unknownerror": "Unknown error, are you sure you have entered the correct details and Homey is on the same network as the Nuki bridge? Please check your settings and try again.",
     "step1": "First enable the HTTP API in your Nuki Bridge. You can do this within the Nuki smartphone app. Go to manage your devices and select your Nuki Bridge. There you can enable the HTTP API.",
@@ -40,10 +40,10 @@
     "503": "Smart Lock is offline"
   },
   "app": {
-    "unreachable": "Unreachable"
+    "unreachable": "Non raggiungibile"
   },
   "driver": {
-    "no_token": "Did not receive a token from the bridge, make sure you push the bridge button during pairing."
+    "no_token": "Non \u00E8 stato ricevuto un token dal Bridge; assicurati di premere il bottone del Bridge durante l'accoppiamento."
   },
   "device": {
     "untrained": "Untrained",

@@ -1,9 +1,9 @@
 "use strict";
 
-const Homey = require('homey');
+const NukiDriver = require('../../lib/NukiDriver.js');
 const Util = require('/lib/util.js');
 
-class OpenerDriver extends Homey.Driver {
+class OpenerDriver extends NukiDriver {
 
   onInit() {
     if (!this.util) this.util = new Util({homey: this.homey });
@@ -11,7 +11,7 @@ class OpenerDriver extends Homey.Driver {
     this.homey.flow.getDeviceTriggerCard('openerstateChanged');
     this.homey.flow.getDeviceTriggerCard('continuous_mode_true');
     this.homey.flow.getDeviceTriggerCard('continuous_mode_false');
-    this.homey.flow.getDeviceTriggerCard('openerRinging');
+    this.homey.flow.getDeviceTriggerCard('ring_action');
   }
 
   onPair(session) {
@@ -39,7 +39,6 @@ class OpenerDriver extends Homey.Driver {
                       settings: {
                         address: bridgeList.bridges[i].ip,
                         port: bridgeList.bridges[i].port,
-                        nukiId: deviceList[x].nukiId,
                         token: auth.token
                       }
                     });
@@ -77,7 +76,6 @@ class OpenerDriver extends Homey.Driver {
               settings: {
                 address: data.address,
                 port: Number(data.port),
-                nukiId: result.scanResults[i].nukiId,
                 token: data.token
               }
             });

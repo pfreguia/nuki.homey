@@ -1,9 +1,9 @@
 'use strict';
 
-const Homey = require('homey');
+const NukiDriver = require('../../lib/NukiDriver.js');
 const Util = require('/lib/util.js');
 
-class NukiDriver extends Homey.Driver {
+class SmartLockDriver extends NukiDriver {
 
   onInit() {
     if (!this.util) this.util = new Util({homey: this.homey});
@@ -36,7 +36,6 @@ class NukiDriver extends Homey.Driver {
                       settings: {
                         address: bridgeList.bridges[i].ip,
                         port: bridgeList.bridges[i].port,
-                        nukiId: deviceList[x].nukiId,
                         token: auth.token
                       }
                     });
@@ -74,7 +73,6 @@ class NukiDriver extends Homey.Driver {
               settings: {
                 address: data.address,
                 port: Number(data.port),
-                nukiId: result.scanResults[i].nukiId,
                 token: data.token
               }
             });
@@ -100,4 +98,4 @@ class NukiDriver extends Homey.Driver {
 
 }
 
-module.exports = NukiDriver;
+module.exports = SmartLockDriver;

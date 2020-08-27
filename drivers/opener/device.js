@@ -1,23 +1,34 @@
 'use strict';
 
-const Homey = require('homey');
+const NukiDevice = require('../../lib/NukiDevice.js');
 const Util = require('/lib/util.js');
 
-class OpenerDevice extends Homey.Device {
+class OpenerDevice extends NukiDevice {
+  lastRingNukiDatetime = null;
+  lastRingHomeyDatetime = null;
 
   onInit() {
-    if (!this.util) this.util = new Util({homey: this.homey });
-
-    // INITIALLY SET DEVICE AS AVAILABLE
+    if (!this.util) this.util = new Util({ homey: this.homey });
+    // Migration from version <= 3.0.2.
+    if (!this.hasCapability('nuki_state')) {
+      this.addCapability('nuki_state');
+    }
+    // Initially set device as available.
     this.setAvailable();
 
     // LISTENERS FOR UPDATING CAPABILITIES VALUE
     this.registerCapabilityListener('locked', async (value) => {
       try {
+        let path = 'http://' + this.getSetting('address') + ':' + this.getSetting('port') + '/';
         if (value) {
-          var path = 'http://' + this.getSetting('address') + ':' + this.getSetting('port') + '/lock?nukiId=' + this.getSetting('nukiId') + '&deviceType=2&token=' + this.getSetting('token');
+          path = path + 'lock?nukiId=' + this.getData().id + '&deviceType=2&token=' + this.getSetting('token');
         } else {
-          var path = 'http://' + this.getSetting('address') + ':' + this.getSetting('port') + '/lockAction?nukiId=' + this.getSetting('nukiId') + '&deviceType=2&action=1&token=' + this.getSetting('token');
+          if (this.getSetting('unlock_duration') == 'continuous_mode') {
+            path = path + 'lockAction?nukiId=' + this.getData().id + '&deviceType=2&action=4&token=' + this.getSetting('token');
+          }
+          else {
+            path = path + 'lockAction?nukiId=' + this.getData().id + '&deviceType=2&action=1&token=' + this.getSetting('token');
+          }
         }
         this.log(path);
         let result = await this.util.sendCommand(path, 8000);
@@ -43,10 +54,11 @@ class OpenerDevice extends Homey.Device {
 
     this.registerCapabilityListener('continuous_mode', async (value) => {
       try {
+        let path;
         if (value) {
-          var path = 'http://' + this.getSetting('address') + ':' + this.getSetting('port') + '/lockAction?nukiId=' + this.getSetting('nukiId') + '&deviceType=2&action=4&token=' + this.getSetting('token');
+          path = 'http://' + this.getSetting('address') + ':' + this.getSetting('port') + '/lockAction?nukiId=' + this.getData().id + '&deviceType=2&action=4&token=' + this.getSetting('token');
         } else {
-          var path = 'http://' + this.getSetting('address') + ':' + this.getSetting('port') + '/lockAction?nukiId=' + this.getSetting('nukiId') + '&deviceType=2&action=5&token=' + this.getSetting('token');
+          path = 'http://' + this.getSetting('address') + ':' + this.getSetting('port') + '/lockAction?nukiId=' + this.getData().id + '&deviceType=2&action=5&token=' + this.getSetting('token');
         }
         let result = await this.util.sendCommand(path, 8000);
         if (result.success == true) {
@@ -68,10 +80,6 @@ class OpenerDevice extends Homey.Device {
         }
       }
     });
-  }
-
-  onAdded() {
-    this.setCallbackUrl.bind(this);
   }
 
   async onSettings(settings) {
@@ -99,10 +107,14 @@ class OpenerDevice extends Homey.Device {
 
   // HELPER FUNCTIONS
   updateCapabilitiesValue(newState) {
+    // This var contains the mere Opener state as defined in Nuki documentation
+    //  (https://developer.nuki.io/page/nuki-bridge-http-api-1-11/4#heading--lock-states).
     let state;
+    // This var contains the Nuki state as meant by Nuki. It is composed by mere Opener
+    //  state an Continuous Mode state.
+    let nukiState;
     let locked;
-    let continuous_mode;
-    let batteryCritical = newState.batteryCritical;
+    let continuousMode;
     switch (newState.state) {
       case 0:
         state = this.homey.__('device.untrained');
@@ -111,7 +123,7 @@ class OpenerDevice extends Homey.Device {
         state = this.homey.__('device.online');
         break;
       case 3:
-        state = this.homey.__('device.rto active');
+        state = this.homey.__('device.rto_active');
         break;
       case 5:
         state = this.homey.__('device.open');
@@ -134,31 +146,52 @@ class OpenerDevice extends Homey.Device {
         locked = false;
         break;
     }
-    continuous_mode = newState.mode == 3;
+    continuousMode = newState.mode == 3;
 
-    // update capability openerstate & trigger openerstateChanged
-    if (state != this.getCapabilityValue('openerstate')) {
-      this.setCapabilityValue('openerstate', state);
-      this.homey.flow.getDeviceTriggerCard('openerstateChanged').trigger(this, {openerstate: state}, {});
+    const flow = this.homey.flow;
+    // Update capabilities openerstate, continuous_mode and nuki_state; trigger
+    //  nuki_state_changed, deprecated openerstateChanged and deprecated
+    //  continuos_mode_xxxx.
+    const prevState = this.getCapabilityValue('openerstate');
+    const prevContinuousMode = this.getCapabilityValue('continuous_mode');
+    console.log(prevContinuousMode);
+    console.log(continuousMode);
+
+    if (state != prevState || continuousMode != prevContinuousMode) {
+      // Update capability openerstate; trigger deprecated openerStateChanged.
+      if (state != prevState) {
+        this.setCapabilityValue('openerstate', state);
+        flow.getDeviceTriggerCard('openerstateChanged').trigger(this, { openerstate: state }, {});
+      }
+      // Update capability contiuous_mode; trigger deprecated continuos_mode_xxxx.
+      if (continuousMode != this.getCapabilityValue('continuous_mode')) {
+        this.setCapabilityValue('continuous_mode', continuousMode);
+        if (continuousMode) {
+          flow.getDeviceTriggerCard('continuous_mode_true').trigger(this, {}, {});
+        } else {
+          flow.getDeviceTriggerCard('continuous_mode_false').trigger(this, {}, {});
+        }
+      }
+      // Update capability nuki_state.
+      if (continuousMode) {
+        nukiState = this.homey.__('device.continuous_mode');
+      }
+      else {
+        nukiState = state;
+      }
+      this.setCapabilityValue('nuki_state', nukiState);
+      // Trigger nuki_state_changed.
+      console.log('TRIFFWEER!');
+      flow.getDeviceTriggerCard('nuki_state_changed').trigger(this, { previous_state: prevState, previous_continuous_mode: prevContinuousMode }, {});
     }
-
-    // update capability locked
+    // Update capability locked
     if (locked != this.getCapabilityValue('locked')) {
       this.setCapabilityValue('locked', locked);
     }
 
-    // update capability contiuous_mode
-    if (continuous_mode != this.getCapabilityValue('continuous_mode')) {
-      this.setCapabilityValue('continuous_mode', continuous_mode);
-      if (continuous_mode) {
-        this.homey.flow.getDeviceTriggerCard('continuous_mode_true').trigger(this, {}, {});
-      } else {
-        this.homey.flow.getDeviceTriggerCard('continuous_mode_false').trigger(this, {}, {});
-      }
-    }
-
-    // update battery alarm capability
+    // Update capability alarm_battery.
     if (this.hasCapability('alarm_battery')) {
+      const batteryCritical = newState.batteryCritical;
       if (batteryCritical == true && (this.getCapabilityValue('alarm_battery') == false || this.getCapabilityValue('alarm_battery') == null)) {
         this.setCapabilityValue('alarm_battery', true);
       } else if (batteryCritical == false && this.getCapabilityValue('alarm_battery') == true) {
@@ -166,25 +199,30 @@ class OpenerDevice extends Homey.Device {
       }
     }
 
-    // trigger opener ring actions
+    // Trigger ring_action.
     if (newState.ringactionState) {
-      this.homey.flow.getDeviceTriggerCard('openerRinging').trigger(this, {timestamp: newState.ringactionTimestamp}, {});
-    }
-  }
-
-  async setCallbackUrl() {
-    try {
-      let homeyaddress = await this.util.getHomeyIp();
-      let callbackUrl = 'http://'+ homeyaddress +'/api/app/nuki.homey/callback/';
-      let callbackListPath = 'http://'+ this.getSetting('address') +':'+ this.getSetting('port') +'/callback/list?token='+ this.getSetting('token');
-      let callbackList = await this.util.sendCommand(callbackListPath, 4000);
-      let callbacks = JSON.stringify(callbackList.callbacks);
-      if (!callbacks.includes(encodeURI(callbackUrl))) {
-        let callbackAddPath = 'http://'+ this.getSetting('address') +':'+ this.getSetting('port') +'/callback/add?url='+ encodeURI(callbackUrl) +'&token='+ this.getSetting('token');
-        let result = await this.util.sendCommand(callbackAddPath, 4000);
+      console.log(newState.ringactionTimestamp);
+      let newRingDate = new Date(newState.ringactionTimestamp);
+      console.log(newRingDate);
+      if (this.lastRingNukiDatetime != null) {
+        if (this.lastRingNukiDatetime.getTime() !== newRingDate.getTime()) {
+          console.log('lastRingDate <> newRingDate');
+          console.log(this.lastRingNukiDatetime);
+          console.log(newRingDate);
+          flow.getDeviceTriggerCard('ring_action').trigger(this, {}, {});
+          this.lastRingNukiDatetime = newRingDate;
+          this.lastRingHomeyDatetime = new Date();
+        }
+        else {
+          console.log('lastRingDate == newRingDate');
+        }
       }
-    } catch (error) {
-      this.log(error);
+      else {
+        console.log('lastRingDate was null');
+        flow.getDeviceTriggerCard('ring_action').trigger(this, {}, {});
+        this.lastRingNukiDatetime = newRingDate;
+        this.lastRingHomeyDatetime = new Date();
+      }
     }
   }
 

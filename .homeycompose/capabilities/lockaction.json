@@ -50,6 +50,5 @@
   ],
   "getable": true,
   "setable": true,
-  "uiComponent": "picker",
-  "icon": "/assets/lockaction.svg"
+  "uiComponent": null
 }

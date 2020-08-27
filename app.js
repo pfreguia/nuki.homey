@@ -45,6 +45,22 @@ class NukiApp extends Homey.App {
           return Promise.reject(error);
         }
       })
+    this.homey.flow.getConditionCard('continuous_mode')
+      .registerRunListener(async (args, state) => {
+        return args.device.getCapabilityValue('continuous_mode');
+      })
+    this.homey.flow.getConditionCard('ring_condition')
+      .registerRunListener(async (args, state) => {
+        if (!args.elapsed_secs) {
+          return false;
+        }
+        const lastRingDatetime = args.device.lastRingHomeyDatetime;
+        if (!lastRingDatetime) {
+          return false;
+        }
+        const now = new Date();
+        return (now - lastRingDatetime) / 1000 < args.elapsed_secs;
+      })
   }
 
   pollDevices() {
@@ -52,16 +68,16 @@ class NukiApp extends Homey.App {
 
     this.pollingInterval = setInterval(async () => {
       try {
-        let bridges = [];
-        let drivers = this.homey.drivers.getDrivers();
-        let isSameBridge = function (b) {
+        const isSameBridge = function (b) {
           return b.address == this.address && b.port == this.port
         };
+        const drivers = this.homey.drivers.getDrivers();
+        let bridges = [];
 
         for (let i in drivers) {
           let devices = drivers[i].getDevices();
           for (let j in devices) {
-            let currBridge = {
+            const currBridge = {
               address: devices[j].getSetting('address'),
               port: devices[j].getSetting('port'),
               token: devices[j].getSetting('token'),
@@ -75,18 +91,16 @@ class NukiApp extends Homey.App {
             existingBridge.nukiDevs.push(devices[j]);
           }
         }
-
         // Loop on each paired device in the list of each bridge (taking into account
-        //  account that some list items may not represent a device paired in Homey)
-        for (let i in bridges) {
-          let bridge = bridges[i];
-          let url = 'http://' + bridge.address + ':' + bridge.port + '/list?token=' + bridge.token;
+        //  that some list items may not represent a device paired in Homey)
+        for (let bridge of bridges) {
+          const url = 'http://' + bridge.address + ':' + bridge.port + '/list?token=' + bridge.token;
           await this.util.sendCommand(url, 4000)
             .then(bridgeItems => {
-              for (let j in bridge.nukiDevs) {
-                let nukiDev = bridge.nukiDevs[j];
-                const device = bridgeItems.find(el => el.nukiId === nukiDev.getSetting('nukiId'));
-                if (!nukiDev.getAvailable()) { nukiDev.setAvailable(); }
+              for (let nukiDev of bridge.nukiDevs) {
+                const device = bridgeItems.find(el => el.nukiId === nukiDev.getData().id);
+                if (!nukiDev.getAvailable()) {
+                  nukiDev.setAvailable(); }
                 switch (device.deviceType) {
                   case 0:  // SmartLock
                     nukiDev.updateCapabilitiesValue(device.lastKnownState);
@@ -99,8 +113,7 @@ class NukiApp extends Homey.App {
             })
             .catch(error => {
               if (error != 503) {
-                for (let j in bridge.nukiDevs) {
-                  let nukiDev = bridge.nukiDevs[j];
+                for (let nukiDev of bridge.nukiDevs) {
                   nukiDev.setUnavailable(this.homey.__('app.unreachable'));
                 }
               }

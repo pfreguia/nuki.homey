@@ -1,11 +1,11 @@
 {
   "type": "string",
   "title": {
-    "en": "Lock State",
-    "nl": "Slot status"
+    "en": "State",
+    "nl": "Status",
+    "it": "Stato"
   },
   "getable": true,
   "setable": false,
-  "uiComponent": "sensor",
-  "icon": "/assets/lockstatus.svg"
+  "uiComponent": null
 }

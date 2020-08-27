@@ -1,10 +1,10 @@
 {
   "id": "nuki.homey",
   "sdk": 3,
-  "brandColor": "#000000",
+  "brandColor": "#939393",
   "name": {
-    "en": "Nuki Smart Lock",
-    "nl": "Nuki Smart Lock"
+    "en": "Nuki Direct",
+    "nl": "Nuki Direct"
   },
   "tags": {
     "en": [
@@ -16,12 +16,20 @@
       "slot"
     ]
   },
-  "version": "3.0.2",
+  "version": "3.0.3",
   "compatibility": ">=5.0.0",
   "author": {
     "name": "Jelger Haanstra",
     "email": "homey@solidewebservices.com",
-    "website": "https://github.com/jghaanstra/nuki.homey"
+    "website": "https://github.com/pfreguia/nuki.homey"
+  },
+  "contributors": {
+    "developers": [
+      {
+        "name": "Piero Freguia",
+        "email": "pfreguia@tiscali.it"
+      }
+    ]
   },
   "contributing": {
     "donate": {
@@ -31,7 +39,7 @@
     }
   },
   "bugs": {
-    "url": "https://github.com/jghaanstra/nuki.homey/issues"
+    "url": "https://github.com/pfreguia/nuki.homey/issues"
   },
   "homeyCommunityTopicId": 10853,
   "images": {
@@ -40,8 +48,9 @@
   },
   "category": "security",
   "description": {
-    "en": "Control your Nuki Smart Lock",
-    "nl": "Beheer je Nuki Smart Lock"
+    "en": "Control your Nuki devices within your network",
+    "nl": "Beheer je Nuki apparaten binnen je netwerk",
+    "it": "Controlla i tuoi dispositivi Nuki all'interno della tua rete"
   },
   "dependencies": {
     "net": "*"
@@ -55,6 +64,38 @@
   },
   "flow": {
     "triggers": [
+      {
+        "id": "nuki_state_changed",
+        "title": {
+          "en": "Nuki state changed",
+          "nl": "Nuki status gewijzigd",
+          "it": "Lo stato Nuki � cambiato"
+        },
+        "hint": {
+          "en": "State has changed. The tag \"State\" contains the updated value. The local tag \"Previous state\" contains previous value.",
+          "nl": "Status is veranderd. De tag \"Status\" bevat de bijgewerkte waarde. De lokale tag \"Vorige status\" bevat de vorige waarde.",
+          "it": "Lo stato � cambiato. Il tag \"Stato\" contiene i valori aggiornati. Il tag locale \"Stato precedente\" contiene il valore precedente."
+        },
+        "tokens": [
+          {
+            "name": "previous_state",
+            "type": "string",
+            "title": {
+              "en": "Previous state",
+              "nl": "Vorige status",
+              "it": "Stato precedente"
+            },
+            "example": "online"
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=nuki"
+          }
+        ]
+      },
       {
         "id": "lockstateChanged",
         "title": {
@@ -72,11 +113,53 @@
             "example": "Locked"
           }
         ],
+        "deprecated": true,
         "args": [
           {
             "type": "device",
             "name": "device",
             "filter": "driver_id=nuki"
+          }
+        ]
+      },
+      {
+        "id": "nuki_state_changed",
+        "title": {
+          "en": "Nuki state changed",
+          "nl": "Nuki status gewijzigd",
+          "it": "Lo stato Nuki è cambiato"
+        },
+        "hint": {
+          "en": "State and/or continuous mode have changed. The tags \"State\" and \"Continuous mode\" contain the updated values. The local tags \"Previous state\" and \"Previous continuous mode\" contain previous values.",
+          "nl": "De status en/of continumodus zijn gewijzigd. De tags \"Status \" en \"Continuomodus\" bevatten de bijgewerkte waarden. De lokale tags \"Vorige status\" en \"Vorige continumodus\" bevatten de vorige waarden.",
+          "it": "Lo stato e/o la modalità continua sono cambiati. I tag \"Stato\" e \"Modalità continua\" contengono i valori aggiornati. I tag locali \"Stato precedente\" e \"Modalità continua precedente\" contengono i valori precedenti."
+        },
+        "tokens": [
+          {
+            "name": "previous_state",
+            "type": "string",
+            "title": {
+              "en": "Previous state",
+              "nl": "Vorige status",
+              "it": "Stato precedente"
+            },
+            "example": "online"
+          },
+          {
+            "name": "previous_continuous_mode",
+            "type": "boolean",
+            "title": {
+              "en": "Previous continuous mode",
+              "nl": "Vorige continumodus",
+              "it": "Modalità continua precedente"
+            }
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=opener"
           }
         ]
       },
@@ -97,8 +180,19 @@
               "it": "Nuovo stato Opener"
             },
             "example": "online"
+          },
+          {
+            "name": "continuous_mode",
+            "type": "boolean",
+            "title": {
+              "en": "Continuous mode",
+              "nl": "Continumodus",
+              "it": "Modo continuo"
+            },
+            "example": "online"
           }
         ],
+        "deprecated": true,
         "args": [
           {
             "type": "device",
@@ -117,6 +211,7 @@
           "it": "Modalità continua è stata attivata",
           "es": "Modo continuo se ha activado"
         },
+        "deprecated": true,
         "args": [
           {
             "type": "device",
@@ -135,6 +230,7 @@
           "it": "Modalità continua è stata disattivata",
           "es": "Modo continuo se ha desactivado"
         },
+        "deprecated": true,
         "args": [
           {
             "type": "device",
@@ -144,22 +240,13 @@
         ]
       },
       {
-        "id": "openerRinging",
+        "id": "ring_action",
         "title": {
-          "en": "Opener Ring Action",
-          "nl": "Opener Ring Actie"
+          "en": "Doorbell rang",
+          "nl": "De deurbel ging",
+          "de": "Es klingelte an der Tür",
+          "it": "Il campanello ha suonato"
         },
-        "tokens": [
-          {
-            "name": "timestamp",
-            "type": "string",
-            "title": {
-              "en": "time",
-              "nl": "tijd"
-            },
-            "example": "online"
-          }
-        ],
         "args": [
           {
             "type": "device",
@@ -173,8 +260,9 @@
       {
         "id": "lockAction",
         "title": {
-          "en": "Perform a lock operation",
-          "nl": "Slot actie uitvoeren"
+          "en": "Nuki action",
+          "nl": "Nuki actie",
+          "it": "Azione Nuki"
         },
         "args": [
           {
@@ -229,7 +317,7 @@
         "id": "openerAction",
         "title": {
           "en": "Nuki action",
-          "nl": "Nuki action",
+          "nl": "Nuki actie",
           "it": "Azione Nuki"
         },
         "args": [
@@ -313,11 +401,47 @@
           "it": "Modalità continua è !{{attiva|disattiva}}",
           "es": "Modo continuo está !{{activada|desactivada}}"
         },
+        "deprecated": true,
         "args": [
           {
             "type": "device",
             "name": "device",
             "filter": "driver_id=opener"
+          }
+        ]
+      },
+      {
+        "id": "ring_condition",
+        "title": {
+          "en": "Doorbell rang !{{less|more}} than n seconds ago",
+          "nl": "Er is !{{minder|meer}} dan n seconden geleden aangebeld",
+          "de": "Es klingelte an der Tür vor !{{weniger|mehr}} als n Sekunden",
+          "it": "Il campanello ha suonato !{{meno|più}} di n secondi fa"
+        },
+        "titleFormatted": {
+          "en": "Doorbell rang !{{less|more}} than [[elapsed_secs]] seconds ago",
+          "nl": "Er is !{{minder|meer}} dan [[elapsed_secs]] seconden geleden aangebeld",
+          "de": "Es klingelte an der Tür vor !{{weniger|mehr}} als [[elapsed_secs]] Sekunden",
+          "it": "Il campanello ha suonato !{{meno|più}} di [[elapsed_secs]] secondi fa"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=opener"
+          },
+          {
+            "name": "elapsed_secs",
+            "type": "number",
+            "min": 0,
+            "max": 86400,
+            "step": 1,
+            "placeholder": {
+              "en": "Seconds",
+              "nl": "Seconden",
+              "de": "Sekunden",
+              "it": "Secondi"
+            }
           }
         ]
       }
@@ -327,8 +451,8 @@
     {
       "class": "lock",
       "images": {
-        "large": "/drivers/nuki/assets/images/large.png",
-        "small": "/drivers/nuki/assets/images/small.png"
+        "large": "/drivers/nuki/assets/images/large.jpg",
+        "small": "/drivers/nuki/assets/images/small.jpg"
       },
       "icon": "/drivers/nuki/assets/icon.svg",
       "pair": [
@@ -364,13 +488,21 @@
         "nl": "Nuki Smart Lock"
       },
       "capabilities": [
-        "lockstate",
         "locked",
+        "nuki_state",
+        "lockstate",
         "lockaction",
         "measure_battery",
-        "alarm_battery",
         "alarm_contact"
       ],
+      "capabilitiesOptions": {
+        "nuki_state": {
+          "preventTag": true
+        },
+        "lockaction": {
+          "preventTag": true
+        }
+      },
       "energy": {
         "batteries": [
           "AA",
@@ -384,19 +516,25 @@
         {
           "type": "group",
           "label": {
-            "en": "Device Settings",
-            "nl": "Apparaat instellingen",
-            "it": "Impostazioni dispositivo"
+            "en": "Bridge Settings",
+            "nl": "Bridge instellingen",
+            "it": "Impostazioni Bridge"
           },
           "children": [
             {
               "id": "address",
               "type": "text",
               "value": "0.0.0.0",
+              "pattern": "\\b\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\b",
               "label": {
                 "en": "IP Address",
                 "nl": "IP adres",
                 "it": "Indirizzo IP"
+              },
+              "hint": {
+                "en": "Local IP address of the Bridge",
+                "nl": "Local IP address of the Bridge",
+                "it": "Indirizzo IP locale del Bridge"
               }
             },
             {
@@ -411,6 +549,24 @@
                 "en": "Port",
                 "nl": "Poort",
                 "it": "Porta"
+              },
+              "hint": {
+                "en": "IP port of the Bridge. The default value is: 8080.",
+                "nl": "IP port of the Bridge. The default value is: 8080.",
+                "it": "Porta IP del Bridge. Il valore predefinito è: 8080."
+              }
+            },
+            {
+              "id": "token",
+              "type": "password",
+              "value": "",
+              "label": {
+                "en": "Token"
+              },
+              "hint": {
+                "en": "You can set the token by managing the Bridge in the Nuki App.",
+                "nl": "You can set the token by managing the Bridge in the Nuki App.",
+                "it": "Puoi impostare il token gestendo il Bridge nell'app Nuki."
               }
             }
           ]
@@ -420,8 +576,8 @@
     {
       "class": "lock",
       "images": {
-        "large": "/drivers/opener/assets/images/large.png",
-        "small": "/drivers/opener/assets/images/small.png"
+        "large": "/drivers/opener/assets/images/large.jpg",
+        "small": "/drivers/opener/assets/images/small.jpg"
       },
       "icon": "/drivers/opener/assets/icon.svg",
       "pair": [
@@ -457,10 +613,16 @@
         "nl": "Nuki Opener"
       },
       "capabilities": [
-        "openerstate",
         "locked",
+        "nuki_state",
+        "openerstate",
         "continuous_mode"
       ],
+      "capabilitiesOptions": {
+        "nuki_state": {
+          "preventTag": true
+        }
+      },
       "energy": {
         "approximation": {
           "usageConstant": 0.8
@@ -471,19 +633,25 @@
         {
           "type": "group",
           "label": {
-            "en": "Device Settings",
-            "nl": "Apparaat instellingen",
-            "it": "Impostazioni dispositivo"
+            "en": "Bridge Settings",
+            "nl": "Bridge instellingen",
+            "it": "Impostazioni Bridge"
           },
           "children": [
             {
               "id": "address",
               "type": "text",
               "value": "0.0.0.0",
+              "pattern": "\\b\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\b",
               "label": {
                 "en": "IP Address",
                 "nl": "IP adres",
                 "it": "Indirizzo IP"
+              },
+              "hint": {
+                "en": "Local IP address of the Bridge",
+                "nl": "Local IP address of the Bridge",
+                "it": "Indirizzo IP locale del Bridge"
               }
             },
             {
@@ -498,7 +666,71 @@
                 "en": "Port",
                 "nl": "Poort",
                 "it": "Porta"
+              },
+              "hint": {
+                "en": "IP port of the Bridge. The default value is: 8080.",
+                "nl": "IP port of the Bridge. The default value is: 8080.",
+                "it": "Porta IP del Bridge. Il valore predefinito è: 8080."
               }
+            },
+            {
+              "id": "token",
+              "type": "password",
+              "value": "",
+              "label": {
+                "en": "Token"
+              },
+              "hint": {
+                "en": "You can set the token by managing the Bridge in the Nuki App.",
+                "nl": "You can set the token by managing the Bridge in the Nuki App.",
+                "it": "Puoi impostare il token gestendo il Bridge nell'app Nuki."
+              }
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "label": {
+            "en": "Unlock duration",
+            "nl": "Ontgrendelen duur",
+            "de": "Aufsperrdauer",
+            "it": "Durata sblocco"
+          },
+          "children": [
+            {
+              "id": "unlock_duration",
+              "type": "radio",
+              "value": "ring_to_open",
+              "label": {
+                "en": "Duration",
+                "nl": "Duur",
+                "de": "Dauer",
+                "it": "Durata"
+              },
+              "hint": {
+                "en": "When unlocked, Opener always immediately open your main entrance door as soon as someone ring the doorbell.\nNuki calls this feature \"Ring to Open\".\n\nRing to Open usually has a timed duration (duration can be set via the Nuki app)\n\nThe unlock mode can always remain active by enabling the \"Continuous Mode\".",
+                "nl": "Selecteer het gedrag van Opener wanneer u het apparaat ontgrendelt via deze app. \"Ring to Open\" keert automatisch terug naar de vergrendelde toestand na een aantal minuten dat kan worden ingesteld via de Nuki-app. \"Continumodus\" zorgt ervoor dat de Opener ontgrendeld.",
+                "�t": "Seleziona il comportamento Opener quando sblocchi il dispositivo da questa app. \"Ring to Open\" torna automaticamente in stato di blocco dopo un certo tempo (impostato dall'app Nuki). \"Modalit� continua\" mantiene Opener sbloccato sino al successivo blocco."
+              },
+              "values": [
+                {
+                  "id": "ring_to_open",
+                  "label": {
+                    "en": "Timed (Ring to Open)"
+                  }
+                },
+                {
+                  "id": "continuous_mode",
+                  "label": {
+                    "en": "Continuous mode",
+                    "nl": "Continumodus",
+                    "de": "Dauermodus",
+                    "fr": "Mode continu",
+                    "it": "Modalit� continua",
+                    "es": "Modo continuo"
+                  }
+                }
+              ]
             }
           ]
         },
@@ -520,7 +752,7 @@
                 "it": "Alimentazione a batteria"
               },
               "hint": {
-                "en": "Enable this setting if your Nuki Opener is powered by batteries (leave disabled if the opener is powered by USB cable). This setting allows Homey to manage device energy properly.",
+                "en": "Enable this setting if your Nuki Opener is powered by batteries (leave disabled if the Opener is powered by USB cable). This setting allows Homey to manage device energy properly.",
                 "nl": "Inschakelen als je Nuki Opener op batterijen werkt.",
                 "it": "Abilitare questa impostazione se Nuki Opener è alimentato a batteria (lasciare disabilitato se il dispositivo è alimentato da cavo USB). Questa impostazione consente a Homey di gestire correttamente l'energia del dispositivo."
               }
@@ -543,7 +775,7 @@
       },
       "getable": true,
       "setable": true,
-      "uiComponent": "toggle"
+      "uiComponent": null
     },
     "lockaction": {
       "type": "enum",
@@ -597,14 +829,25 @@
       ],
       "getable": true,
       "setable": true,
-      "uiComponent": "picker",
-      "icon": "/assets/lockaction.svg"
+      "uiComponent": null
     },
     "lockstate": {
       "type": "string",
       "title": {
-        "en": "Lock State",
-        "nl": "Slot status"
+        "en": "State",
+        "nl": "Status",
+        "it": "Stato"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": null
+    },
+    "nuki_state": {
+      "type": "string",
+      "title": {
+        "en": "Nuki State",
+        "nl": "Nuki status",
+        "it": "Stato Nuki"
       },
       "getable": true,
       "setable": false,
@@ -614,14 +857,13 @@
     "openerstate": {
       "type": "string",
       "title": {
-        "en": "Opener State",
-        "nl": "Opener status",
-        "it": "Stato Opener"
+        "en": "State",
+        "nl": "Status",
+        "it": "Stato"
       },
       "getable": true,
       "setable": false,
-      "uiComponent": "sensor",
-      "icon": "/assets/lockstatus.svg"
+      "uiComponent": null
     }
   }
 }

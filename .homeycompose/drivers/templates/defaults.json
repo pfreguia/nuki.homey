@@ -1,8 +1,8 @@
 {
   "class": "lock",
   "images": {
-    "large": "{{driverAssetsPath}}/images/large.png",
-    "small": "{{driverAssetsPath}}/images/small.png"
+    "large": "{{driverAssetsPath}}/images/large.jpg",
+    "small": "{{driverAssetsPath}}/images/small.jpg"
   },
   "icon": "{{driverAssetsPath}}/icon.svg",
   "pair": [

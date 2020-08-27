@@ -1,29 +1,56 @@
-# Nuki for Homey (Bridge API version)
-This is an alternative Homey app for the Nuki Smart Lock. The official app in the Homey app store created by Athom uses the web API for communication with your Nuki and polls your Nuki bridge for status changes which reduces the battery life of your Nuki Lock or Opener and depends on an internet connection between your Nuki Bridge and the Nuki cloud. This alternative app only requires internet access during pairing of your Nuki Lock or Opener but relies completely on local communication between Homey and your Nuki Bridge for updates in from your devices. When your Nuki Lock or Opener changes state it will notify Homey directly of the changed state without the need to poll your Nuki. Another difference it that it brings back the other possible lockactions like "Lock n Go" which are missing in the official Homey app. So benefits from this app of the official app are:
-* no internet connection needed for communication between Homey and Nuki
-* no polling needed for lockstate updates
-* faster response times because direct communication
-* being able to set all possible lock actions
+# Nuki Direct (Bridge API version)
+This is an alternative Homey app for the Nuki Smart Lock and Nuki Opener. The Nuki app created by Athom (https://apps.athom.com/app/io.nuki) uses the Nuki cloud service (Nuki Web) for controlling your devices.
+Nuki Direct relies completely on your local network for communications between your Homey and your Nuki devices (internet access is optionally used for simplifying the initial pairing of a device). When a Nuki device changes its state, it will notify Homey by pushing the new state directly to Homey.
+So benefits of this approach over the cloud approach are:
+* No internet connection needed for communication between Homey and Nuki.
+* Improved reliability: It does work even if the internet is down or the Nuki cloud service is temporarily unavailable.
+* Quick responsiveness thanks to the direct communication: the faster Homey knows about a state change, the better Homey can serve us.
+* Simpler code, smaller memory footprint.
 
-The app works similar to the previous community app (which was removed from the app store when Athom published their app) but has been completely rewritten with the following additions:
-- SDK2 and therefor future proof
-- auto discovery of Nuki Smart Locks during pairing (no manual entries)
-- better mechanism for adding the callback URL to Nuki (needed for sending lockstate changes from Nuki to Homey)
-- better icons
-- custom capabilities for lockstate and lockaction
-- less code, smaller footprint
+Nuki Direct can also manage the extra features provided by Nuki API in addition to the standard commands, settings, capabilities and flow cards supplied by Homey. With Nuki Direct you can fine-tune the settings and control the specific lock states and events of your Nuki devices.
 
-## Adding your Nuki Lock or Nuki Opener
+Since Nuki Direct and Nuki app by Athom have been developed on distinct APIs, they can be happily run side by side on the same Homey without interfering.
+
+## Adding your devices
 Follow these steps to add your Nuki to Homey.
-* First enable the HTTP API in your Nuki Bridge. You can do this within the Nuki smartphone app. Go to manage your devices and select your Nuki Bridge. There you can enable the HTTP API.
-* Once enabled go to the Homey app and add a Nuki Smart Lock as device by selecting the 'Nuki Smart Lock' app from the pairing wizard.
-* Confirm adding a Nuki Smart Lock or Nuki Opener and wait for the discovery process to start
-* Press the button of your Nuki Bridge(s) during the discovery process
-* Select the Nuki Lock(s) or Nuki Opener(s) you wish to add to Homey and confirm
+* First, make sure the Bridge HTTP API (https://developer.nuki.io/page/nuki-bridge-http-api-1-11/4/) in your Nuki Bridge is enabled. You can do this within the Nuki smartphone app. Go to “Manage your devices” and select your Nuki Bridge. There you can enable the HTTP API.
+* Once enabled, go to the Homey app and add a Nuki device by selecting the “Nuki Direct” icon and then “Nuki Smart Lock” or “Nuki Homey”.
+* Tap the “Connect” button and wait for the searching process to start.
+* Press the button of your Nuki Bridge during the searching process.
+* Select the Nuki device(s) you wish to add to Homey and confirm.
 
 Your Nuki device(s) have now been added to Homey.
 
 ## Release Notes
+### v3.0.3 - 2020-08-28
+This is the first version after the handover of the app development. This version has the following intents.
+
+* **Differentiate the aspect from the Nuki app by Athom to avoid appearing as a duplicate app**  
+The new name "Nuki Direct" emphasizes straight, fast, reliable communication between Homey and Nuki devices. The app's icon and color have also been changed.
+* **Highlight the extra features offered by Nuki and implemented by this app over the standard features of Homey**  
+For this purpose, the icon and title of the device status displayed by the app have been changed; the trigger flow cards related to specific Nuki events have also been modified.
+* **Make Smart Lock and Opener devices more homogeneous**  
+Before this version the devices were managed by two different developers and it was difficult to adopt the same model and the same terminology for the two devices.
+* **Simplify the app**  
+Whenever a new version is released, new features are introduced; when introducing new features, existing features should also be re-analyzed: Is the new functionality consistent with the existing ones? Is the application getting too complicated? Are you creating overlapping features?   
+After this analysis the Continuous mode of the Opener and the Smart Lock battery status have been simplified.
+* **Improve security**  
+In my opinion the possibility to unlatch a Smart Lock (or an Opener) directly from the Homey app user interface is dangerous; a single wrong tap can open the door when you are miles away from home! For now, I have hidden the unlatch command from the user interface. If there are no counter-observations, I will remove it completely in the future.
+* **Resolve known issues**  
+The "Nuki Opener Ring Action" trigger flow card added to version 3.0.0 did not work correctly; furthermore, the Timestamp tag associated with this flow-card was difficult to use in practice.  
+The problem has been solved; the tag has been removed and replaced by a new condition flow card "Doorbell rang {less | more} than n seconds ago".
+
+### v3.0.2 - 2020-08-17
+* App structure refactored using Homeycompose model in order to reduce the duplicated code between SmartLock driver and Opener driver.
+* Smartlock and Opener have different objects  (SmartLock: 4xAA batteries; Opener: power supply or 4xAAA batteries). Energy object removed from drivers\templates\default.json.
+* Added an event handler to Opener devices that handles immediately the Power Settings change.
+* Fixed a small comparison error that prevents the manual pairing of a SmartLock device.
+* Manual pairing of SmartLock and Opener: fixed the resolved promise argument (the custom view needs a result object, not the true constant).
+
+### v3.0.1 - 2020-08-08
+* Started updating the app structure using Homeycompose.
+* Fixed manual pairing.
+
 ### v3.0.0 - 2020-08-06
 * Updated to SDK3 (this require Homey firmware 5.x).
 * Fixed issue with triggercards for continuous mode for Nuki opener.
@@ -32,7 +59,3 @@ Your Nuki device(s) have now been added to Homey.
 * Added triggercard for Nuki Opener Ring actions including timestamp token (requires Nuki Bridge firmware 2.7.0 and Nuki Opener firmware 1.5.1)
 * Added Nuki Opener setting for configuring battery powered device. When enabled the battery alarm capability will be available
 * Added functionality where the Nuki will show as unreachable when it cant be reached
-
-### v3.0.1 - 2020-08-08
-* Updated the app structure using Homey compose.
-* Fixed manual pairing.

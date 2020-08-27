@@ -1,8 +1,8 @@
 {
-   "id": "port",
-   "type": "number",
-   "value": 8080,
-   "attr": {
+  "id": "port",
+  "type": "number",
+  "value": 8080,
+  "attr": {
     "min": 1,
     "max": 65535
   },
@@ -10,5 +10,10 @@
     "en": "Port",
     "nl": "Poort",
     "it": "Porta"
+  },
+  "hint": {
+    "en": "IP port of the Bridge. The default value is: 8080.",
+    "nl": "IP port of the Bridge. The default value is: 8080.",
+    "it": "Porta IP del Bridge. Il valore predefinito \u00E8: 8080."
   }
 }

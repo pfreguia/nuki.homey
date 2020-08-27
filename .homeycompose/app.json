@@ -1,10 +1,10 @@
 {
   "id": "nuki.homey",
   "sdk": 3,
-  "brandColor": "#000000",
+  "brandColor": "#939393",
   "name": {
-    "en": "Nuki Smart Lock",
-    "nl": "Nuki Smart Lock"
+    "en": "Nuki Direct",
+    "nl": "Nuki Direct"
   },
   "tags": {
     "en": [
@@ -16,12 +16,20 @@
       "slot"
     ]
   },
-  "version": "3.0.2",
+  "version": "3.0.3",
   "compatibility": ">=5.0.0",
   "author": {
     "name": "Jelger Haanstra",
     "email": "homey@solidewebservices.com",
-    "website": "https://github.com/jghaanstra/nuki.homey"
+    "website": "https://github.com/pfreguia/nuki.homey"
+  },
+  "contributors": {
+    "developers": [
+      {
+        "name": "Piero Freguia",
+        "email": "pfreguia@tiscali.it"
+      }
+    ]
   },
   "contributing": {
     "donate": {
@@ -31,7 +39,7 @@
     }
   },
   "bugs": {
-    "url": "https://github.com/jghaanstra/nuki.homey/issues"
+    "url": "https://github.com/pfreguia/nuki.homey/issues"
   },
   "homeyCommunityTopicId": 10853,
   "images": {
@@ -40,8 +48,9 @@
   },
   "category": "security",
   "description": {
-    "en": "Control your Nuki Smart Lock",
-    "nl": "Beheer je Nuki Smart Lock"
+    "en": "Control your Nuki devices within your network",
+    "nl": "Beheer je Nuki apparaten binnen je netwerk",
+    "it": "Controlla i tuoi dispositivi Nuki all'interno della tua rete"
   },
   "dependencies": {
     "net": "*"
