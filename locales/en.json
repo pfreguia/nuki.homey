@@ -1,13 +1,13 @@
 {
   "pair": {
-    "title": "Pair the Nuki Bridge",
+    "title": "Instructions",
     "intro": "Enter the details of your Nuki Bridge below.",
     "address": "IP Address",
     "port": "Port",
     "token": "Token",
     "nukiid": "Nuki ID",
     "titleselection": "What do you want to do?",
-    "nodevices": "No hardware Nuki bridge discovered. Did you push the button on your bridge during pairing? You can try again or use try manual pairing if you know the IP address and token of your Nuki (software) bridge.",
+    "nodevices": "No hardware Nuki Bridge discovered. Did you push the button on your bridge during pairing? You can try again or use try manual pairing if you know the IP address and token of your Nuki (software) Bridge.",
     "again": "Try Again",
     "manual": "Manual Pairing",
     "test": "Test Connection",
@@ -15,13 +15,12 @@
     "connect": "Connect",
     "success": "Nuki bridge added successfully.",
     "bridgetype": "Bridge Type:",
-    "unknownerror": "Unknown error, are you sure you have entered the correct details and Homey is on the same network as the Nuki bridge? Please check your settings and try again.",
-    "step1": "First enable the HTTP API in your Nuki Bridge. You can do this within the Nuki smartphone app. Go to manage your devices and select your Nuki Bridge. There you can enable the HTTP API.",
-    "step2": "Once enabled go to the Homey app and add a Nuki Smart Lock as device by selecting the 'Nuki Smart Lock' app from the pairing wizard.",
-    "step3": "Confirm adding a Nuki Smart Lock or Nuki Opener and wait for the discovery process to start.",
-    "step4": "When the discovery process is running press the button of your Nuki Bridge(s).",
-    "step5": "Your Nuki devices will be discovered and you can finish the pairing of your device(s).",
-    "nosettings": "Please fill in all the required fields."
+    "unknownerror": "Unknown error. Are you sure you have entered the correct details and the Nuki Bridge is on the same network as Homey? Please check your settings and try again.",
+    "step1": "First, make sure the HTTP API in your Nuki Bridge is enabled. You can do this within the Nuki smartphone app. Go to \"Manage my devices\" and select \"Bridge\". There you can enable the HTTP API.",
+    "step2": "Once enabled, continue this procedure by tapping the button \"Next >\".",
+    "step4": "When the searching process is running, press the button of your Nuki Bridge.",
+    "step5": "Your Nuki devices will be discovered and you can complete the pairing procedure.",
+    "nosettings": "Please, fill in all the required fields."
   },
   "util": {
     "uncalibrated": "Uncalibrated",

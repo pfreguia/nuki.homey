@@ -708,9 +708,9 @@
                 "it": "Durata"
               },
               "hint": {
-                "en": "When unlocked, Opener always immediately open your main entrance door as soon as someone ring the doorbell.\nNuki calls this feature \"Ring to Open\".\n\nRing to Open usually has a timed duration (duration can be set via the Nuki app)\n\nThe unlock mode can always remain active by enabling the \"Continuous Mode\".",
-                "nl": "Selecteer het gedrag van Opener wanneer u het apparaat ontgrendelt via deze app. \"Ring to Open\" keert automatisch terug naar de vergrendelde toestand na een aantal minuten dat kan worden ingesteld via de Nuki-app. \"Continumodus\" zorgt ervoor dat de Opener ontgrendeld.",
-                "�t": "Seleziona il comportamento Opener quando sblocchi il dispositivo da questa app. \"Ring to Open\" torna automaticamente in stato di blocco dopo un certo tempo (impostato dall'app Nuki). \"Modalit� continua\" mantiene Opener sbloccato sino al successivo blocco."
+                "en": "When unlocked, Opener always immediately opens the main entrance door of the apartment building as soon as someone ring the doorbell.\nNuki calls this feature \"Ring to Open\".\n\nRing to Open usually has a timed duration (duration can be set via the Nuki smarphone app)\n\nThe unlocked state can always remain active by enabling the \"Continuous Mode\".",
+                "nl": "\"Wanneer ontgrendeld, Opener altijd onmiddellijk de hoofdingang opent zodra iemand aanbelt.\nNuki noemt deze functie \"Ring to Open\".\n\nRing to Open heeft meestal een beperkte duur (duur instelbaar via de Nuki smartphone app).\n\nDe ontgrendeld status kan altijd actief blijven door de \"Continumodus\" in te schakelen.",
+                "�t": "Quando sbloccato, Opener apre automaticamente la porta d'ingresso del condominio non appena qualcuno suona il campanello. Nuki chiama questa funzionalit� \"Ring to Open\"\n\n Solitamente Ring to Open ha una durata limitata (la durata pu� essere impostata dall'app per smartphone di Nuki).\n\nLo stato sbloccato pu� rimanere sempre attivo abilitando la \"Modalit� continua\"."
               },
               "values": [
                 {
@@ -753,7 +753,7 @@
               },
               "hint": {
                 "en": "Enable this setting if your Nuki Opener is powered by batteries (leave disabled if the Opener is powered by USB cable). This setting allows Homey to manage device energy properly.",
-                "nl": "Inschakelen als je Nuki Opener op batterijen werkt.",
+                "nl": "Schakel deze instelling in als je Nuki Opener op batterijen werkt (laat deze instelling uitgeschakeld als de Opener wordt gevoed door een USB-kabel). Met deze instelling kan Homey de energie van het apparaat goed beheren.",
                 "it": "Abilitare questa impostazione se Nuki Opener è alimentato a batteria (lasciare disabilitato se il dispositivo è alimentato da cavo USB). Questa impostazione consente a Homey di gestire correttamente l'energia del dispositivo."
               }
             }

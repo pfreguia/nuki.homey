@@ -1,6 +1,6 @@
 {
   "pair": {
-    "title": "Koppelen van Nuki bridge",
+    "title": "Instructies",
     "intro": "Vul de details van je Nuki bridge hieronder in.",
     "address": "IP adres",
     "port": "Port",
@@ -10,17 +10,16 @@
     "nodevices": "Geen hardware Nuki bridge gevonden. Heb je op de knop van je bridge gedrukt tijdens het koppelen? Je kan het nog een keer proberen of je Nuki (software) bridge handmatig proberen toe te voegen als je het IP adres en token weet.",
     "again": "Probeer opnieuw",
     "manual": "Handmatig koppelen",
-    "test" : "Test connectie",
-    "testing" : "Connectietest succesvol, je kan de Nuki bridge nu verbinden.",
+    "test": "Test connectie",
+    "testing": "Connectietest succesvol, je kan de Nuki bridge nu verbinden.",
     "connect": "Verbind",
     "success": "Nuki bridge succesvol toegevoegd.",
     "bridgetype": "Bridge type:",
     "unknownerror": "Onbekende fout, weet je zeker dat je de juiste details hebt opgegeven en dat de Nuki bridge op hetzelfde netwerk zit als Homey? Controleer a.u.b. je instellingen en probeer het nog eens.",
-    "step1": "First enable the HTTP API in your Nuki Bridge. You can do this within the Nuki smartphone app. Go to manage your devices and select your Nuki Bridge. There you can enable the HTTP API.",
-    "step2": "Once enabled go to the Homey app and add a Nuki Smart Lock as device by selecting the 'Nuki Smart Lock' app from the pairing wizard.",
-    "step3": "Confirm adding a Nuki Smart Lock or Nuki Opener and wait for the discovery process to start.",
-    "step4": "When the discovery process is running press the button of your Nuki Bridge(s).",
-    "step5": "Your Nuki devices will be discovered and you can finish the pairing of your device(s).",
+    "step1": "First, make sure the HTTP API in your Nuki Bridge is enabled. You can do this within the Nuki smartphone app. Go to \"Manage my devices\" and select \"Bridge\". There you can enable the HTTP API.",
+    "step2": "Once enabled, continue this procedure by tapping the button \"Next >\".",
+    "step4": "When the searching process is running, press the button of your Nuki Bridge.",
+    "step5": "Your Nuki devices will be discovered and you can complete the pairing procedure.",
     "nosettings": "Vul a.u.b. alle verplichte velden in."
   },
   "util": {
