@@ -1,15 +1,15 @@
 # Nuki Direct
 This is an alternative Homey app for the Nuki Smart Lock and Nuki Opener. The Nuki app created by Athom (https://apps.athom.com/app/io.nuki) uses the Nuki cloud service (Nuki Web) for controlling your devices.
-Nuki Direct relies completely on your local network for communications between your Homey and your Nuki devices (internet access is optionally used for simplifying the initial pairing of a device). When a Nuki device changes its state, it will notify Homey by pushing the new state directly to Homey.  
+Nuki Direct relies completely on your local network for communications between your Homey and your Nuki devices (internet access is optionally used for simplifying the initial pairing of a device). When a Nuki device changes its state, it will notify the new state directly to Homey.  
 So benefits of this approach over the cloud approach are:
 * No internet connection needed for communication between Homey and Nuki.
-* Improved reliability: It does work even if the internet is down or the Nuki cloud service is temporarily unavailable.
+* Improved reliability: t does work even if the internet is down or the Nuki cloud service is temporarily unavailable.
 * Quick responsiveness thanks to the direct communication: the faster Homey knows about a state change, the better Homey can serve us.
 * Simpler code, smaller memory footprint.
 
 Nuki Direct can also manage the extra features provided by Nuki API in addition to the standard commands, settings, capabilities and flow cards supplied by Homey. With Nuki Direct you can fine-tune the settings and control the specific lock states and events of your Nuki devices.
 
-Since Nuki Direct and Nuki app by Athom have been developed on distinct APIs, they can happily run side by side on the same Homey without interfering.
+Since Nuki Direct and Nuki app by Athom have been developed with distinct APIs, they can happily run side by side on the same Homey without interfering.
 
 ## Adding your devices
 Follow these steps to add your Nuki to Homey.
@@ -42,8 +42,8 @@ The problem has been solved and the tag has been removed and replaced by a new c
 
 ### v3.0.2 - 2020-08-17
 * App structure refactored using Homeycompose model in order to reduce the duplicated code between SmartLock driver and Opener driver.
-* Smartlock and Opener have different objects  (SmartLock: 4xAA batteries; Opener: power supply or 4xAAA batteries). Energy object removed from drivers\templates\default.json.
-* Added an event handler to Opener devices that handles immediately the Power Settings change.
+* Smartlock and Opener have different objects (SmartLock: 4xAA batteries; Opener: power supply or 4xAAA batteries). Created a specific Energy object for each driver.
+* Added to Opener devices an event handler that reacts immediately to Power Settings change.
 * Fixed a small comparison error that prevents the manual pairing of a SmartLock device.
 * Manual pairing of SmartLock and Opener: fixed the resolved promise argument (the custom view needs a result object, not the true constant).
 
