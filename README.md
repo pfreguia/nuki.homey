@@ -33,7 +33,7 @@ For this purpose, the icon and title of the device status displayed by the app h
 Before this version the devices were managed by two different developers and it was difficult to adopt the same model and the same terminology for the two devices.
 * **Simplify the app**  
 Whenever a new version is released, new features are introduced; when introducing new features, existing features should also be re-evaluated: Is the new functionality consistent with the existing ones? Is the application getting too complicated? Am I creating overlapping features?   
-After this re-evaluation the Continuous mode of the Opener and the Smart Lock battery status have been simplified. The device settings have been reordered.
+After this re-evaluation the Continuous mode of the Opener and the Smart Lock battery status have been simplified. The device settings have been reordered. The pairing instructions have been refined.
 * **Improve security**  
 In my opinion the possibility to unlatch a Smart Lock (or an Opener) directly from the Homey app user interface is dangerous; a single wrong tap can open the door when you are miles away from home! For now, I have hidden the unlatch command from the user interface. If there are no counter-observations, I will remove it completely in the future.
 * **Resolve known issues**  
