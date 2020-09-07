@@ -24,10 +24,10 @@
   {
     "type": "group",
     "label": {
-      "en": "Unlock duration",
-      "nl": "Ontgrendelen duur",
-      "de": "Aufsperrdauer",
-      "it": "Durata sblocco"
+      "en": "Unlock duration, when unlocked by this app",
+      "nl": "Ontgrendelen duur, wanneer ontgrendeld door deze app",
+      "de": "Aufsperrdauer, wenn von dieser app aufgesperrt",
+      "it": "Durata sblocco, quando sbloccato da questa app"
     },
     "children": [
       {

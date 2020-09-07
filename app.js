@@ -18,7 +18,7 @@ class NukiApp extends Homey.App {
     this.homey.flow.getActionCard('lockAction')
       .registerRunListener(async (args) => {
         try {
-          let path = 'http://'+ args.device.getSetting('address') +':'+ args.device.getSetting('port') +'/lockAction?nukiId='+ args.device.getSetting('nukiId') +'&action='+ args.lockaction +'&token='+ args.device.getSetting('token');
+          let path = 'http://' + args.device.getSetting('address') + ':' + args.device.getSetting('port') + '/lockAction?nukiId=' + args.device.getData().id +'&action='+ args.lockaction +'&token='+ args.device.getSetting('token');
           let result = await this.util.sendCommand(path, 8000);
           if (result.success == true) {
             return Promise.resolve(true);
@@ -34,7 +34,7 @@ class NukiApp extends Homey.App {
     this.homey.flow.getActionCard('openerAction')
       .registerRunListener(async (args, state) => {
         try {
-          let path = 'http://' + args.device.getSetting('address') + ':' + args.device.getSetting('port') + '/lockAction?nukiId=' + args.device.getSetting('nukiId') + '&deviceType=2&action=' + args.openeraction + '&token=' + args.device.getSetting('token');
+          let path = 'http://' + args.device.getSetting('address') + ':' + args.device.getSetting('port') + '/lockAction?nukiId=' + args.device.getData().id + '&deviceType=2&action=' + args.openeraction + '&token=' + args.device.getSetting('token');
           let result = await this.util.sendCommand(path, 8000);
           if (result.success == true) {
             return Promise.resolve(true);

@@ -564,9 +564,9 @@
                 "en": "Token"
               },
               "hint": {
-                "en": "You can set the token by managing the Bridge in the Nuki App.",
-                "nl": "You can set the token by managing the Bridge in the Nuki App.",
-                "it": "Puoi impostare il token gestendo il Bridge nell'app Nuki."
+                "en": "You can set the token by managing the Bridge in the Nuki smartphone app.",
+                "nl": "You can set the token by managing the Bridge in the Nuki smartphone app.",
+                "it": "Puoi impostare il token gestendo il Bridge nell'app per smartphone di Nuki."
               }
             }
           ]
@@ -681,9 +681,9 @@
                 "en": "Token"
               },
               "hint": {
-                "en": "You can set the token by managing the Bridge in the Nuki App.",
-                "nl": "You can set the token by managing the Bridge in the Nuki App.",
-                "it": "Puoi impostare il token gestendo il Bridge nell'app Nuki."
+                "en": "You can set the token by managing the Bridge in the Nuki smartphone app.",
+                "nl": "You can set the token by managing the Bridge in the Nuki smartphone app.",
+                "it": "Puoi impostare il token gestendo il Bridge nell'app per smartphone di Nuki."
               }
             }
           ]
@@ -691,10 +691,10 @@
         {
           "type": "group",
           "label": {
-            "en": "Unlock duration",
-            "nl": "Ontgrendelen duur",
-            "de": "Aufsperrdauer",
-            "it": "Durata sblocco"
+            "en": "Unlock duration, when unlocked by this app",
+            "nl": "Ontgrendelen duur, wanneer ontgrendeld door deze app",
+            "de": "Aufsperrdauer, wenn von dieser app aufgesperrt",
+            "it": "Durata sblocco, quando sbloccato da questa app"
           },
           "children": [
             {

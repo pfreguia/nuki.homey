@@ -1,6 +1,5 @@
 # Nuki Direct
-This is an alternative Homey app for the Nuki Smart Lock and Nuki Opener. The Nuki app created by Athom (https://apps.athom.com/app/io.nuki) uses the Nuki cloud service (Nuki Web) for controlling your devices.
-Nuki Direct relies completely on your local network for communications between your Homey and your Nuki devices (internet access is optionally used for simplifying the initial pairing of a device). When a Nuki device changes its state, it will notify the new state directly to Homey.  
+This is an alternative Homey app for the Nuki Smart Lock and Nuki Opener. Differently from The Nuki app created by Athom (https://apps.athom.com/app/io.nuki) that relies on the Nuki cloud service for controlling your devices, Nuki Direct uses nothing but your local network for communications between your Homey and your Nuki devices (internet access is optionally used for simplifying the initial pairing of a device). When a Nuki device changes its state, it will notify the new state directly to Homey. When Homey issues a command to a Smart Lock or to an Opener, it will send the request directly to the device.  
 So, benefits of this approach over the cloud approach are:
 * No internet connection needed for communication between Homey and Nuki.
 * Improved reliability: it does work even if the internet is down or the Nuki cloud service is temporarily unavailable.

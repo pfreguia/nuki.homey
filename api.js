@@ -13,7 +13,7 @@ module.exports = {
           opener.updateCapabilitiesValue(body);
           break;
       }
-      return true;
+      return { success: true };
     } catch (error) {
       console.log(error);
       return false;
