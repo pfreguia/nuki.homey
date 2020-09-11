@@ -4,7 +4,7 @@
   "description": "Nuki Smart Lock",
   "main": "app.js",
   "dependencies": {
-    "node-fetch": "^2.6.0"
+    "node-fetch": "^2.6.1"
   },
   "devDependencies": {},
   "scripts": {
