@@ -45,6 +45,17 @@
       ],
       "deprecated": true,
       "args": []
+    },
+    {
+      "$extends": "alarm_battery_keypad_true"
+    },
+    {
+      "$extends": "alarm_battery_keypad_false"
+    }
+  ],
+  "conditions": [
+    {
+      "$extends": "alarm_battery_keypad"
     }
   ],
   "actions": [

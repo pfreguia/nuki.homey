@@ -10,10 +10,14 @@
     "locked",
     "nuki_state",
     "openerstate",
-    "continuous_mode"
+    "continuous_mode",
+    "open_action"
   ],
   "capabilitiesOptions": {
     "nuki_state": {
+      "preventTag": true
+    },
+    "open_action": {
       "preventTag": true
     }
   },

@@ -70,6 +70,20 @@
   {
     "type": "group",
     "label": {
+      "en": "User Interface",
+      "nl": "Gebruikersomgeving",
+      "it": "Interfaccia utente"
+    },
+    "children": [
+      {
+        "id": "open_action_visible",
+        "$extends": "open_action_visible"
+      }
+    ]
+  },
+  {
+    "type": "group",
+    "label": {
       "en": "Power Settings",
       "nl": "Energie instellingen",
       "it": "Impostazioni alimentazione"
@@ -92,4 +106,4 @@
       }
     ]
   }
-    ]
+]

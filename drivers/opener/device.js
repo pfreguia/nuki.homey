@@ -8,17 +8,21 @@ class OpenerDevice extends NukiDevice {
   lastRingHomeyDatetime = null;
 
   onInit() {
-    if (!this.util) this.util = new Util({ homey: this.homey });
-    // Migration from version <= 3.0.2.
-    if (!this.hasCapability('nuki_state')) {
-      this.addCapability('nuki_state');
-    }
+    super.onInit();
+
     // Initially set device as available.
     this.setAvailable();
 
     // LISTENERS FOR UPDATING CAPABILITIES VALUE
     this.registerCapabilityListener('locked', async (value) => {
       try {
+        const currValue = this.getCapabilityValue('locked');
+        if (value === currValue) {
+          return Promise.resolve();
+        }
+        if (this.inBridgeTransaction) {
+          return Promise.reject(new Error('Action in progress. Please wait'));
+        }
         let path = 'http://' + this.getSetting('address') + ':' + this.getSetting('port') + '/';
         if (value) {
           path = path + 'lock?nukiId=' + this.getData().id + '&deviceType=2&token=' + this.getSetting('token');
@@ -30,25 +34,58 @@ class OpenerDevice extends NukiDevice {
             path = path + 'lockAction?nukiId=' + this.getData().id + '&deviceType=2&action=1&token=' + this.getSetting('token');
           }
         }
-        this.log(path);
+        this.inBridgeTransaction = true;
         let result = await this.util.sendCommand(path, 8000);
+        this.inBridgeTransaction = false;
         if (result.success == true) {
           return Promise.resolve(true);
         } else {
           return Promise.resolve(false);
         }
       } catch (error) {
-        if (error == 400) {
-          return Promise.reject(this.homey.__('app.400'));
-        } else if (error == 401) {
-          return Promise.reject(this.homey.__('app.401'));
-        } else if (error == 404) {
-          return Promise.reject(this.homey.__('app.404'));
-        } else if (error == 503) {
-          return Promise.reject(this.homey.__('app.503'));
-        } else {
-          return Promise.reject(error);
+        this.inBridgeTransaction = false;
+        return Promise.reject(error);
+      }
+    });
+
+    this.registerCapabilityListener('open_action', async (value) => {
+      try {
+        const currValue = this.getCapabilityValue('open_action');
+        if (value === currValue) {
+          return Promise.resolve();
         }
+        if (value === 1) {
+          if (this.inBridgeTransaction) {
+            return Promise.reject(new Error('Action in progress. Please wait'));
+          }
+          const url = this.buildURL('lockAction', [['nukiId', this.getData().id], ['deviceType', 2], ['action', 3], ['nowait', 1]]);
+          // It seems that, even if result.success is false, the action is
+          //  performed correctly by Nuki. For that resons the "result" object
+          //  of sendCommand() method is not evaluated.
+          this.inBridgeTransaction = true;
+          await this.util.sendCommand(url, 8000);
+          this.inBridgeTransaction = false;
+          // Update capabilties and trigger action flows.
+          const flow = this.homey.flow;
+          const openingStr = this.homey.__('device.opening');
+          const prevArg = {
+            previous_state: this.getCapabilityValue('openerstate'),
+            previous_continuous_mode: this.getCapabilityValue('continuous_mode')
+          };
+          this.setCapabilityValue('nuki_state', openingStr);
+          this.setCapabilityValue('openerstate', openingStr);
+          this.setCapabilityValue('locked', false);
+          flow.getDeviceTriggerCard('nuki_state_changed').trigger(this, prevArg, {});
+          flow.getDeviceTriggerCard('openerstateChanged').trigger(this, { openerstate: openingStr }, {});
+          return Promise.resolve();
+        }
+        else {
+          return Promise.reject(new Error('Action in progress. Please wait'));
+        }
+      }
+      catch (error) {
+        this.inBridgeTransaction = false;
+        return Promise.reject(error);
       }
     });
 
@@ -60,29 +97,23 @@ class OpenerDevice extends NukiDevice {
         } else {
           path = 'http://' + this.getSetting('address') + ':' + this.getSetting('port') + '/lockAction?nukiId=' + this.getData().id + '&deviceType=2&action=5&token=' + this.getSetting('token');
         }
+        this.inBridgeTransaction = true;
         let result = await this.util.sendCommand(path, 8000);
+        this.inBridgeTransaction = false;
         if (result.success == true) {
           return Promise.resolve(true);
         } else {
           return Promise.resolve(false);
         }
       } catch (error) {
-        if (error == 400) {
-          return Promise.reject(this.homey.__('app.400'));
-        } else if (error == 401) {
-          return Promise.reject(this.homey.__('app.401'));
-        } else if (error == 404) {
-          return Promise.reject(this.homey.__('app.404'));
-        } else if (error == 503) {
-          return Promise.reject(this.homey.__('app.503'));
-        } else {
-          return Promise.reject(error);
-        }
+        this.inBridgeTransaction = false;
+        return Promise.reject(error);
       }
     });
   }
 
   async onSettings(settings) {
+    super.onSettings(settings);
     if (settings.changedKeys.includes('battery')) {
       let energyObj;
       if (settings.newSettings.battery) {
@@ -107,6 +138,7 @@ class OpenerDevice extends NukiDevice {
 
   // HELPER FUNCTIONS
   updateCapabilitiesValue(newState) {
+    super.updateCapabilitiesValue(newState);
     // This var contains the mere Opener state as defined in Nuki documentation
     //  (https://developer.nuki.io/page/nuki-bridge-http-api-1-11/4#heading--lock-states).
     let state;
@@ -158,6 +190,7 @@ class OpenerDevice extends NukiDevice {
     if (state != prevState || continuousMode != prevContinuousMode) {
       // Update capability openerstate; trigger deprecated openerStateChanged.
       if (state != prevState) {
+        this.setCapabilityValue('open_action', state === this.homey.__('device.opening')? 1 : 0);
         this.setCapabilityValue('openerstate', state);
         flow.getDeviceTriggerCard('openerstateChanged').trigger(this, { openerstate: state }, {});
       }

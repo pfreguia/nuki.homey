@@ -6,11 +6,8 @@ const Util = require('/lib/util.js');
 class SmartLockDevice extends NukiDevice {
 
   onInit() {
-    if (!this.util) this.util = new Util({homey: this.homey });
-    // Migration from version <= 3.0.2.
-    if (!this.hasCapability('nuki_state')) {
-      this.addCapability('nuki_state');
-    }
+    super.onInit();
+
     // Migration from version <= 3.0.0.
     if (this.hasCapability('alarm_battery')) {
       this.removeCapability('alarm_battery');
@@ -59,14 +56,55 @@ class SmartLockDevice extends NukiDevice {
       }
     });
 
+    this.registerCapabilityListener('open_action', async (value) => {
+      try {
+        const currValue = this.getCapabilityValue('open_action');
+        if (value === currValue) {
+          return Promise.resolve();
+        }
+        if (value === 1) {
+          if (this.inBridgeTransaction) {
+            return Promise.reject(new Error('Action in progress. Please wait'));
+          }
+          const url = this.buildURL('lockAction', [['nukiId', this.getData().id], ['deviceType', 0], ['action', 3], ['nowait', 1]]);
+          // It seems that, even if result.success is false, the action is
+          //  performed correctly by Nuki. For that resons the "result" object
+          //  of sendCommand() method is not evaluated.
+          this.inBridgeTransaction = true;
+          await this.util.sendCommand(url, 18000);
+          this.inBridgeTransaction = false;
+          // Update capabilties and trigger action flows.
+          const flow = this.homey.flow;
+          const unlatchingStr = this.homey.__('util.unlatching');
+          const prevArg = {
+            previous_state: this.getCapabilityValue('lockstate'),
+          };
+          this.setCapabilityValue('nuki_state', unlatchingStr);
+          this.setCapabilityValue('lockstate', unlatchingStr);
+          this.setCapabilityValue('locked', false);
+          flow.getDeviceTriggerCard('nuki_state_changed').trigger(this, prevArg, {});
+          flow.getDeviceTriggerCard('lockstateChanged').trigger(this, { lockstate: unlatchingStr }, {});
+          return Promise.resolve();
+        }
+        else {
+          return Promise.reject(new Error('Action in progress. Please wait'));
+        }
+      }
+      catch (error) {
+        this.inBridgeTransaction = false;
+        return Promise.reject(error);
+      }
+    });
+
   }
 
   // HELPER FUNCTIONS
   updateCapabilitiesValue(newState) {
+    super.updateCapabilitiesValue(newState);
     let state; 
     let nukiState;
     let locked;
-    
+
     switch (newState.state) {
       case 0:
         state = this.homey.__('util.uncalibrated');
@@ -117,6 +155,7 @@ class SmartLockDevice extends NukiDevice {
 
     // update capability lockstate & trigger deprecated lockstateChanged
     if (state != this.getCapabilityValue('lockstate')) {
+      this.setCapabilityValue('open_action', state === this.homey.__('util.unlatching') ? 1 : 0);
       this.setCapabilityValue('lockstate', state);
       flow.getDeviceTriggerCard('lockstateChanged').trigger(this, {lockstate: state}, {});
     }

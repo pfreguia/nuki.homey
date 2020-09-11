@@ -123,6 +123,48 @@
         ]
       },
       {
+        "id": "alarm_battery_keypad_true",
+        "title": {
+          "en": "The Keypad battery alarm turned on",
+          "nl": "De Keypad batterijwaarschuwing gaat aan",
+          "de": "Der Keypadbatterie-Alarm ist angegangen",
+          "fr": "L'alarme batterie Keypad s'est activ�e",
+          "it": "L'allarme della batteria Keypad � stato attivato",
+          "es": "La alarma de la bater�a Keypad se ha activado"
+        },
+        "filter": {
+          "capabilities": "alarm_battery_keypad"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=nuki"
+          }
+        ]
+      },
+      {
+        "id": "alarm_battery_keypad_false",
+        "title": {
+          "en": "The Keypad battery alarm turned off",
+          "nl": "De Keypad batterijwaarschuwing gaat uit",
+          "de": "Der Keypadbatterie-Alarm ist ausgegangen",
+          "fr": "L'alarme batterie Keypad s'est d�sactiv�e",
+          "it": "L'allarme della batteria Keypad � stato disattivato",
+          "es": "La alarma de la bater�a Keypad se ha desactivado"
+        },
+        "filter": {
+          "capabilities": "alarm_battery_keypad"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=nuki"
+          }
+        ]
+      },
+      {
         "id": "nuki_state_changed",
         "title": {
           "en": "Nuki state changed",
@@ -246,6 +288,146 @@
           "nl": "De deurbel ging",
           "de": "Es klingelte an der Tür",
           "it": "Il campanello ha suonato"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=opener"
+          }
+        ]
+      },
+      {
+        "id": "alarm_battery_keypad_true",
+        "title": {
+          "en": "The Keypad battery alarm turned on",
+          "nl": "De Keypad batterijwaarschuwing gaat aan",
+          "de": "Der Keypadbatterie-Alarm ist angegangen",
+          "fr": "L'alarme batterie Keypad s'est activ�e",
+          "it": "L'allarme della batteria Keypad � stato attivato",
+          "es": "La alarma de la bater�a Keypad se ha activado"
+        },
+        "filter": {
+          "capabilities": "alarm_battery_keypad"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=opener"
+          }
+        ]
+      },
+      {
+        "id": "alarm_battery_keypad_false",
+        "title": {
+          "en": "The Keypad battery alarm turned off",
+          "nl": "De Keypad batterijwaarschuwing gaat uit",
+          "de": "Der Keypadbatterie-Alarm ist ausgegangen",
+          "fr": "L'alarme batterie Keypad s'est d�sactiv�e",
+          "it": "L'allarme della batteria Keypad � stato disattivato",
+          "es": "La alarma de la bater�a Keypad se ha desactivado"
+        },
+        "filter": {
+          "capabilities": "alarm_battery_keypad"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=opener"
+          }
+        ]
+      }
+    ],
+    "conditions": [
+      {
+        "id": "alarm_battery_keypad",
+        "title": {
+          "en": "The Keypad battery alarm is !{{on|off}}",
+          "nl": "De Keypad batterijwaarschuwing is !{{aan|uit}}",
+          "de": "Der Keypadbatterie-Alarm ist !{{an|aus}}",
+          "fr": "L'alarme batterie Keypad est !{{en marche|arr�t�e}}",
+          "it": "L'allarme della batteria Keypad � !{{acceso|spento}}",
+          "es": "La alarma de la bater�a Keypad est� !{{activada|desactivada}}"
+        },
+        "filter": {
+          "capabilities": "alarm_battery_keypad"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=nuki"
+          }
+        ]
+      },
+      {
+        "id": "continuous_mode",
+        "title": {
+          "en": "Continuous mode is !{{on|off}}",
+          "nl": "Continumodus is !{{aan|uit}}",
+          "de": "Dauermodus ist !{{an|aus}}",
+          "fr": "Mode continu est !{{en marche|arrêtée}}",
+          "it": "Modalità continua è !{{attiva|disattiva}}",
+          "es": "Modo continuo está !{{activada|desactivada}}"
+        },
+        "deprecated": true,
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=opener"
+          }
+        ]
+      },
+      {
+        "id": "ring_condition",
+        "title": {
+          "en": "Doorbell rang !{{less|more}} than n seconds ago",
+          "nl": "Er is !{{minder|meer}} dan n seconden geleden aangebeld",
+          "de": "Es klingelte an der Tür vor !{{weniger|mehr}} als n Sekunden",
+          "it": "Il campanello ha suonato !{{meno|più}} di n secondi fa"
+        },
+        "titleFormatted": {
+          "en": "Doorbell rang !{{less|more}} than [[elapsed_secs]] seconds ago",
+          "nl": "Er is !{{minder|meer}} dan [[elapsed_secs]] seconden geleden aangebeld",
+          "de": "Es klingelte an der Tür vor !{{weniger|mehr}} als [[elapsed_secs]] Sekunden",
+          "it": "Il campanello ha suonato !{{meno|più}} di [[elapsed_secs]] secondi fa"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=opener"
+          },
+          {
+            "name": "elapsed_secs",
+            "type": "number",
+            "min": 0,
+            "max": 86400,
+            "step": 1,
+            "placeholder": {
+              "en": "Seconds",
+              "nl": "Seconden",
+              "de": "Sekunden",
+              "it": "Secondi"
+            }
+          }
+        ]
+      },
+      {
+        "id": "alarm_battery_keypad",
+        "title": {
+          "en": "The Keypad battery alarm is !{{on|off}}",
+          "nl": "De Keypad batterijwaarschuwing is !{{aan|uit}}",
+          "de": "Der Keypadbatterie-Alarm ist !{{an|aus}}",
+          "fr": "L'alarme batterie Keypad est !{{en marche|arr�t�e}}",
+          "it": "L'allarme della batteria Keypad � !{{acceso|spento}}",
+          "es": "La alarma de la bater�a Keypad est� !{{activada|desactivada}}"
+        },
+        "filter": {
+          "capabilities": "alarm_battery_keypad"
         },
         "args": [
           {
@@ -389,62 +571,6 @@
           }
         ]
       }
-    ],
-    "conditions": [
-      {
-        "id": "continuous_mode",
-        "title": {
-          "en": "Continuous mode is !{{on|off}}",
-          "nl": "Continumodus is !{{aan|uit}}",
-          "de": "Dauermodus ist !{{an|aus}}",
-          "fr": "Mode continu est !{{en marche|arrêtée}}",
-          "it": "Modalità continua è !{{attiva|disattiva}}",
-          "es": "Modo continuo está !{{activada|desactivada}}"
-        },
-        "deprecated": true,
-        "args": [
-          {
-            "type": "device",
-            "name": "device",
-            "filter": "driver_id=opener"
-          }
-        ]
-      },
-      {
-        "id": "ring_condition",
-        "title": {
-          "en": "Doorbell rang !{{less|more}} than n seconds ago",
-          "nl": "Er is !{{minder|meer}} dan n seconden geleden aangebeld",
-          "de": "Es klingelte an der Tür vor !{{weniger|mehr}} als n Sekunden",
-          "it": "Il campanello ha suonato !{{meno|più}} di n secondi fa"
-        },
-        "titleFormatted": {
-          "en": "Doorbell rang !{{less|more}} than [[elapsed_secs]] seconds ago",
-          "nl": "Er is !{{minder|meer}} dan [[elapsed_secs]] seconden geleden aangebeld",
-          "de": "Es klingelte an der Tür vor !{{weniger|mehr}} als [[elapsed_secs]] Sekunden",
-          "it": "Il campanello ha suonato !{{meno|più}} di [[elapsed_secs]] secondi fa"
-        },
-        "args": [
-          {
-            "type": "device",
-            "name": "device",
-            "filter": "driver_id=opener"
-          },
-          {
-            "name": "elapsed_secs",
-            "type": "number",
-            "min": 0,
-            "max": 86400,
-            "step": 1,
-            "placeholder": {
-              "en": "Seconds",
-              "nl": "Seconden",
-              "de": "Sekunden",
-              "it": "Secondi"
-            }
-          }
-        ]
-      }
     ]
   },
   "drivers": [
@@ -493,13 +619,17 @@
         "lockstate",
         "lockaction",
         "measure_battery",
-        "alarm_contact"
+        "alarm_contact",
+        "open_action"
       ],
       "capabilitiesOptions": {
         "nuki_state": {
           "preventTag": true
         },
         "lockaction": {
+          "preventTag": true
+        },
+        "open_action": {
           "preventTag": true
         }
       },
@@ -570,6 +700,31 @@
               }
             }
           ]
+        },
+        {
+          "type": "group",
+          "label": {
+            "en": "User Interface",
+            "nl": "Gebruikersomgeving",
+            "it": "Interfaccia utente"
+          },
+          "children": [
+            {
+              "id": "open_action_visible",
+              "type": "checkbox",
+              "value": true,
+              "label": {
+                "en": "Show \"Open\" slider",
+                "nl": "Show \"Openen\" slider",
+                "it": "Visulizza slider \"Apri\""
+              },
+              "hint": {
+                "en": "The \"Open\" slider has the Nuki device open (unlatch) your lock. Caution: showing this slider may be dangerous because a wrong gesture on it could accidentally open the door.",
+                "nl": "The \"Openen\" slider has the Nuki device open (unlatch) your lock. Caution: showing this slider may be dangerous because a wrong gesture on it could accidentally open the door.",
+                "it": "Lo slider \"Aprire\" fa aprire a Nuki lo scrocco della tua serratura. Attenzione: visualizzare lo slider pu� essere pericoloso perch� un gesto sbagliato nell'app potrebbe aprire la porta accidentalmente."
+              }
+            }
+          ]
         }
       ]
     },
@@ -616,10 +771,14 @@
         "locked",
         "nuki_state",
         "openerstate",
-        "continuous_mode"
+        "continuous_mode",
+        "open_action"
       ],
       "capabilitiesOptions": {
         "nuki_state": {
+          "preventTag": true
+        },
+        "open_action": {
           "preventTag": true
         }
       },
@@ -737,6 +896,31 @@
         {
           "type": "group",
           "label": {
+            "en": "User Interface",
+            "nl": "Gebruikersomgeving",
+            "it": "Interfaccia utente"
+          },
+          "children": [
+            {
+              "id": "open_action_visible",
+              "type": "checkbox",
+              "value": true,
+              "label": {
+                "en": "Show \"Open\" slider",
+                "nl": "Show \"Openen\" slider",
+                "it": "Visulizza slider \"Apri\""
+              },
+              "hint": {
+                "en": "The \"Open\" slider has the Nuki device open (unlatch) your lock. Caution: showing this slider may be dangerous because a wrong gesture on it could accidentally open the door.",
+                "nl": "The \"Openen\" slider has the Nuki device open (unlatch) your lock. Caution: showing this slider may be dangerous because a wrong gesture on it could accidentally open the door.",
+                "it": "Lo slider \"Aprire\" fa aprire a Nuki lo scrocco della tua serratura. Attenzione: visualizzare lo slider pu� essere pericoloso perch� un gesto sbagliato nell'app potrebbe aprire la porta accidentalmente."
+              }
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "label": {
             "en": "Power Settings",
             "nl": "Energie instellingen",
             "it": "Impostazioni alimentazione"
@@ -763,6 +947,28 @@
     }
   ],
   "capabilities": {
+    "alarm_battery_keypad": {
+      "type": "boolean",
+      "title": {
+        "en": "Keypad battery alarm",
+        "nl": "Keypad batterij alarm",
+        "de": "Keypadbatterie-Alarm",
+        "fr": "Alarme batterie Keypad",
+        "it": "Allarme batteria Keypad",
+        "es": "Alarma de bater�a Keypad"
+      },
+      "desc": {
+        "en": "True when there is a Keypad battery warning",
+        "nl": "Geeft een Keypad batterijwaarschuwing",
+        "de": "True, wenn es eine Keypadbatterie-Warnung gibt",
+        "fr": "Vrai quand il y a un avertissement de batterie Keypad",
+        "it": "Vero quando c'� un avvertimento sulla batteria Keypad",
+        "es": "Verdadero cuando hay una advertencia de la bater�a Keypad"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "battery"
+    },
     "continuous_mode": {
       "type": "boolean",
       "title": {
@@ -853,6 +1059,23 @@
       "setable": false,
       "uiComponent": "sensor",
       "icon": "/assets/lockstatus.svg"
+    },
+    "open_action": {
+      "type": "number",
+      "title": {
+        "en": "Open (↑swipe up↑)",
+        "nl": "Openen (↑omhoog scrollen↑)",
+        "de": "�ffnen (↑swipe up↑)",
+        "fr": "Ouvrir (↑swipe up↑)",
+        "it": "Aprire (↑scorri verso l'alto↑)",
+        "es": "Abrir (↑swipe up↑)"
+      },
+      "getable": true,
+      "setable": true,
+      "uiComponent": "slider",
+      "min": 0,
+      "max": 1,
+      "step": 1
     },
     "openerstate": {
       "type": "string",

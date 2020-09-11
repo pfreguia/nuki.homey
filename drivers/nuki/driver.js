@@ -29,7 +29,7 @@ class SmartLockDriver extends NukiDriver {
                 for (let x in deviceList) {
                   if (deviceList[x].deviceType == 0) {
                     devices.push({
-                      name: deviceList[x].name +' ('+ bridgeList.bridges[i].ip +')',
+                      name: deviceList[x].name +' (Direct)',
                       data: {
                         id: deviceList[x].nukiId
                       },

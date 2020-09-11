@@ -12,13 +12,17 @@
     "lockstate",
     "lockaction",
     "measure_battery",
-    "alarm_contact"
+    "alarm_contact",
+    "open_action"
   ],
   "capabilitiesOptions": {
     "nuki_state": {
       "preventTag": true
     },
     "lockaction": {
+      "preventTag": true
+    },
+    "open_action": {
       "preventTag": true
     }
   },

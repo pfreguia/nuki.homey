@@ -1,0 +1,17 @@
+{
+  "type": "number",
+  "title": {
+    "en": "Open (\u2191swipe up\u2191)",
+    "nl": "Openen (\u2191omhoog scrollen\u2191)",
+    "de": "Öffnen (\u2191swipe up\u2191)",
+    "fr": "Ouvrir (\u2191swipe up\u2191)",
+    "it": "Aprire (\u2191scorri verso l'alto\u2191)",
+    "es": "Abrir (\u2191swipe up\u2191)"
+  },
+  "getable": true,
+  "setable": true,
+  "uiComponent": "slider",
+  "min": 0,
+  "max": 1,
+  "step": 1
+}

@@ -1,0 +1,15 @@
+{
+  "id": "open_action_visible",
+  "type": "checkbox",
+  "value": true,
+  "label": {
+    "en": "Show \"Open\" slider",
+    "nl": "Show \"Openen\" slider",
+    "it": "Visulizza slider \"Apri\""
+  },
+  "hint": {
+    "en": "The \"Open\" slider has the Nuki device open (unlatch) your lock. Caution: showing this slider may be dangerous because a wrong gesture on it could accidentally open the door.",
+    "nl": "The \"Openen\" slider has the Nuki device open (unlatch) your lock. Caution: showing this slider may be dangerous because a wrong gesture on it could accidentally open the door.",
+    "it": "Lo slider \"Aprire\" fa aprire a Nuki lo scrocco della tua serratura. Attenzione: visualizzare lo slider può essere pericoloso perchè un gesto sbagliato nell'app potrebbe aprire la porta accidentalmente."
+  }
+}

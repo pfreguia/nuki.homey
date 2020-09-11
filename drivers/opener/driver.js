@@ -32,7 +32,7 @@ class OpenerDriver extends NukiDriver {
                 for (let x in deviceList) {
                   if (deviceList[x].deviceType == 2) {
                     devices.push({
-                      name: deviceList[x].name + ' (' + bridgeList.bridges[i].ip + ')',
+                      name: deviceList[x].name + ' (Direct)',
                       data: {
                         id: deviceList[x].nukiId
                       },

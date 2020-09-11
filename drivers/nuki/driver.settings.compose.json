@@ -20,5 +20,19 @@
         "$extends": "token"
       }
     ]
+  },
+  {
+    "type": "group",
+    "label": {
+      "en": "User Interface",
+      "nl": "Gebruikersomgeving",
+      "it": "Interfaccia utente"
+    },
+    "children": [
+      {
+        "id": "open_action_visible",
+        "$extends": "open_action_visible"
+      }
+    ]
   }
 ]
