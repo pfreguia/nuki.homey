@@ -3,6 +3,7 @@
 module.exports = {
   async nukiCallbacks({homey, body}) {
     try {
+      console.log(body);
       switch (body.deviceType) {
         case 0:  // SmartLock
           let nuki = homey.drivers.getDriver("nuki").getDevice({"id": body.nukiId});

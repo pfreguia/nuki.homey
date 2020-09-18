@@ -13,37 +13,23 @@ class NukiApp extends Homey.App {
     // POLLING DEVICES FOR STATE
     this.pollDevices();
 
-    // FLOW CARDS
-    // Nuki Lock
+    // Nuki Smart Lock flow cards.
     this.homey.flow.getActionCard('lockAction')
-      .registerRunListener(async (args) => {
-        try {
-          let path = 'http://' + args.device.getSetting('address') + ':' + args.device.getSetting('port') + '/lockAction?nukiId=' + args.device.getData().id +'&action='+ args.lockaction +'&token='+ args.device.getSetting('token');
-          let result = await this.util.sendCommand(path, 8000);
-          if (result.success == true) {
-            return Promise.resolve(true);
-          } else {
-            return Promise.resolve(false);
-          }
-        } catch (error) {
-          return Promise.reject(error);
-        }
+      .registerRunListener(async (args, state) => {
+        return args.device.smartLockActionFlowCard(Number(args.lockaction), state).then(() => {
+          return Promise.resolve();
+        }).catch((err) => {
+          return Promise.reject(err);
+        })
       })
-
-    // Nuki Opener
+    // Nuki Opener Flow Cards.
     this.homey.flow.getActionCard('openerAction')
       .registerRunListener(async (args, state) => {
-        try {
-          let path = 'http://' + args.device.getSetting('address') + ':' + args.device.getSetting('port') + '/lockAction?nukiId=' + args.device.getData().id + '&deviceType=2&action=' + args.openeraction + '&token=' + args.device.getSetting('token');
-          let result = await this.util.sendCommand(path, 8000);
-          if (result.success == true) {
-            return Promise.resolve(true);
-          } else {
-            return Promise.resolve(false);
-          }
-        } catch (error) {
-          return Promise.reject(error);
-        }
+        return args.device.openerActionFlowCard(Number(args.openeraction), state).then(() => {
+          return Promise.resolve();
+        }).catch((err) => {
+          return Promise.reject(err);
+        })
       })
     this.homey.flow.getConditionCard('continuous_mode')
       .registerRunListener(async (args, state) => {

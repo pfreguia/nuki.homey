@@ -75,35 +75,38 @@
               "id": "1",
               "title": {
                 "en": "Unlock",
-                "nl": "Ontgrendelen"
+                "nl": "Ontgrendelen",
+                "it": "Sbloccare"
               }
             },
             {
               "id": "2",
               "title": {
                 "en": "Lock",
-                "nl": "Vergrendelen"
+                "nl": "Vergrendelen",
+                "it": "Bloccare"
               }
             },
             {
               "id": "3",
               "title": {
                 "en": "Unlatch",
-                "nl": "Openen"
+                "nl": "Openen",
+                "it": "Aprire"
               }
             },
             {
               "id": "4",
               "title": {
-                "en": "Lock 'n' Go",
-                "nl": "Lock 'n' Go"
+                "en": "Lock \u2019n\u2019 Go"
               }
             },
             {
               "id": "5",
               "title": {
-                "en": "Lock 'n' Go With Unlatch",
-                "nl": "Lock 'n' Go met openen"
+                "en": "Lock \u2019n\u2019 Go with unlatch",
+                "nl": "Lock \u2019n\u2019 Go met openen",
+                "it": "Lock \u2019n\u2019 Go con apertura"
               }
             }
           ]
