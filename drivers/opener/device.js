@@ -253,29 +253,41 @@ class OpenerDevice extends NukiDevice {
   }
 
 
-  async openerActionFlowCard(action, state) {
+  async openerActionFlowCard(action, what_if_action_in_progress) {
     try {
       console.log(action);
+      console.log(what_if_action_in_progress);
+      while (this.progressingAction > 0) {
+        // An action is already in progress.
+        if (action == this.progressingAction) {
+          // Same action is already in progress. Just wait for its completion.
+          console.log('Same action is already in progress. Just wait for its completion');
+          await this.progressingActionDone();
+          console.log('Same action completed');
+          return Promise.resolve();
+        }
+        else {
+          if (what_if_action_in_progress == 'cancel') {
+            // A different action is already in progress. Cancel this action.
+            console.log('A different action is already in progress. Cancel this action');
+            return Promise.resolve();
+          }
+          else {
+            // A different action is already in progress. Wait for its completion before executing this action.
+            console.log('A different action is already in progress. Wait for its completion before excuting this action');
+            await this.progressingActionDone();
+            // Different action completed. Execute this action, if no other actions are in progress.
+            console.log('Different action completed. Execute this action, if no other actions are in progress');
+          }
+        }
+      }
       switch (action) {
         case ACTION_ACTIVATE_RTO:
           {
-            while (this.progressingAction > 0) {
-              // An action is already in progress.
-              if (this.progressingAction == ACTION_ACTIVATE_RTO) {
-                // Ring to Open activation action is already in progress.
-                console.log('Ring to Open activation action is already in progress');
-                await this.progressingActionDone();
-                console.log('Ring to Open activation action completed');
-                return Promise.resolve();
-              }
-              else {
-                console.log('An action is already in progress. Wait');
-                await this.progressingActionDone();
-                console.log('Action completed. Resume');
-              }
-            }
             const currValue = this.getCapabilityValue('openerstate');
-            if (currValue == this.homey.__('device.rto_acive')) {
+            console.log(currValue);
+            console.log(currValue);
+            if (currValue == this.homey.__('device.rto_active')) {
               // Ring to Open already activated. No action needed.
               console.log('Ring to Open already activated. No action needed');
               return Promise.resolve();
@@ -298,25 +310,10 @@ class OpenerDevice extends NukiDevice {
           break;
         case ACTION_DEACTIVATE_RTO:
           {
-            while (this.progressingAction > 0) {
-              // An action is already in progress.
-              if (this.progressingAction == ACTION_DEACTIVATE_RTO) {
-                // Ring to Open deactivation action is already in progress.
-                console.log('Ring to Open deactivation action is already in progress');
-                await this.progressingActionDone();
-                console.log('Ring to Open deactivation action completed');
-                return Promise.resolve();
-              }
-              else {
-                console.log('An action is already in progress. Wait');
-                await this.progressingActionDone();
-                console.log('Action completed. Resume');
-              }
-            }
             const currValue = this.getCapabilityValue('openerstate');
             if (currValue == this.homey.__('device.online')) {
-              // Ring to Open already deactivated. No action needed.
-              console.log('Ring to Open already deactivated. No action needed');
+              // Ring to Open already deactivated. Action does not need to be executed.
+              console.log('Ring to Open already deactivated. Action does not need to be executed');
               return Promise.resolve();
             }
             const url = this.buildURL('lockAction', [
@@ -337,22 +334,7 @@ class OpenerDevice extends NukiDevice {
           break;
         case ACTION_ELECTRIC_STRIKE_ACTUATION:
           {
-            while (this.progressingAction > 0) {
-              // An action is already in progress.
-              if (this.progressingAction == ACTION_ELECTRIC_STRIKE_ACTUATION) {
-                // An Open action is already in progress.
-                console.log('An Open action is already in progress');
-                await this.progressingActionDone();
-                console.log('Open action completed');
-                return Promise.resolve();
-              }
-              else {
-                console.log('An action is already in progress. Wait');
-                await this.progressingActionDone();
-                console.log('Action completed. Resume');
-              }
-            }
-            console.log('Perform Open');
+            console.log('Execute Open');
             const url = this.buildURL('lockAction', [
               ['nukiId', this.getData().id],
               ['deviceType', 2],
@@ -384,21 +366,6 @@ class OpenerDevice extends NukiDevice {
           break;
         case ACTION_ACTIVATE_CONTINUOUS_MODE:
           {
-            while (this.progressingAction > 0) {
-              // An action is already in progress.
-              if (this.progressingAction == ACTION_ACTIVATE_CONTINUOUS_MODE) {
-                // A Continuosus mode activation action is already in progress.
-                console.log('A Continuosus mode activation action is already in progress');
-                await this.progressingActionDone();
-                console.log('Continuous mode activation completed');
-                return Promise.resolve();
-              }
-              else {
-                console.log('An action is already in progress. Wait');
-                await this.progressingActionDone();
-                console.log('Action completed. Resume');
-              }
-            }
             const currValue = this.getCapabilityValue('continuous_mode');
             if (currValue) {
               // Continuos mode already active. No action needed.
@@ -423,21 +390,6 @@ class OpenerDevice extends NukiDevice {
           break;
         case ACTION_DEACTIVATE_CONTINUOUS_MODE:
           {
-            while (this.progressingAction > 0) {
-              // An action is already in progress.
-              if (this.progressingAction == ACTION_DEACTIVATE_CONTINUOUS_MODE) {
-                // A Continuosus mode deactivation action is already in progress.
-                console.log('A Continuosus mode deactivation action is already in progress');
-                await this.progressingActionDone();
-                console.log('Continuous mode deactivation completed');
-                return Promise.resolve();
-              }
-              else {
-                console.log('An action is already in progress. Wait');
-                await this.progressingActionDone();
-                console.log('Action completed. Resume');
-              }
-            }
             const currValue = this.getCapabilityValue('continuous_mode');
             if (!currValue) {
               // Continuos mode already deactivated. No action needed.
@@ -474,7 +426,7 @@ class OpenerDevice extends NukiDevice {
     //  (https://developer.nuki.io/page/nuki-bridge-http-api-1-11/4#heading--lock-states).
     let state;
     // This var contains the Nuki state as meant by Nuki. It is composed by mere Opener
-    //  state an Continuous Mode state.
+    //  state an Continuous mode.
     let nukiState;
     let locked;
     let continuousMode;

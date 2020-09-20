@@ -110,6 +110,24 @@
               }
             }
           ]
+        },
+        {
+          "type": "dropdown",
+          "name": "what_if_action_in_progress",
+          "values": [
+            {
+              "id": "cancel",
+              "label": {
+                "en": "Cancel this action if another action already in progress"
+              }
+            },
+            {
+              "id": "defer",
+              "label": {
+                "en": "Defer this action if another action already in progress"
+              }
+            }
+          ]
         }
       ]
     }

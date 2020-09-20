@@ -16,7 +16,7 @@
       "slot"
     ]
   },
-  "version": "3.0.3",
+  "version": "3.0.4",
   "compatibility": ">=5.0.0",
   "author": {
     "name": "Jelger Haanstra",
@@ -495,6 +495,24 @@
                 }
               }
             ]
+          },
+          {
+            "type": "dropdown",
+            "name": "what_if_action_in_progress",
+            "values": [
+              {
+                "id": "cancel",
+                "label": {
+                  "en": "Cancel this action if another action already in progress"
+                }
+              },
+              {
+                "id": "defer",
+                "label": {
+                  "en": "Defer this action if another action already in progress"
+                }
+              }
+            ]
           }
         ]
       },
@@ -551,23 +569,41 @@
               {
                 "id": "4",
                 "title": {
-                  "en": "Activate continuous mode",
+                  "en": "Activate Continuous mode",
                   "nl": "Continumodus activeren",
                   "de": "Dauermodus aktivieren",
-                  "fr": "Activer le mode continu",
+                  "fr": "Activer le Mode continu",
                   "it": "Attiva Modalità continua",
-                  "es": "Activar modo continuo"
+                  "es": "Activar Modo continuo"
                 }
               },
               {
                 "id": "5",
                 "title": {
-                  "en": "Deactivate continuous mode",
+                  "en": "Deactivate Continuous mode",
                   "nl": "Continumodus deactiveren",
                   "de": "Dauermodus deaktivieren",
-                  "fr": "Désactiver le mode continu",
+                  "fr": "Désactiver le Mode continu",
                   "it": "Disattiva Modalità continua",
-                  "es": "Desactivar modo continuo"
+                  "es": "Desactivar Modo continuo"
+                }
+              }
+            ]
+          },
+          {
+            "type": "dropdown",
+            "name": "what_if_action_in_progress",
+            "values": [
+              {
+                "id": "cancel",
+                "label": {
+                  "en": "Cancel this action if another action already in progress"
+                }
+              },
+              {
+                "id": "defer",
+                "label": {
+                  "en": "Defer this action if another action already in progress"
                 }
               }
             ]
@@ -870,7 +906,7 @@
                 "it": "Durata"
               },
               "hint": {
-                "en": "When unlocked, Opener always immediately opens the main entrance door of the apartment building as soon as someone ring the doorbell.\nNuki calls this feature \"Ring to Open\".\n\nRing to Open usually has a timed duration (duration can be set via the Nuki smarphone app)\n\nThe unlocked state can always remain active by enabling the \"Continuous Mode\".",
+                "en": "When unlocked, Opener always immediately opens the main entrance door of the apartment building as soon as someone ring the doorbell.\nNuki calls this feature \"Ring to Open\".\n\nRing to Open usually has a timed duration (duration can be set via the Nuki smarphone app)\n\nThe unlocked state can always remain active by enabling the \"Continuous mode\".",
                 "nl": "\"Wanneer ontgrendeld, Opener altijd onmiddellijk de hoofdingang opent zodra iemand aanbelt.\nNuki noemt deze functie \"Ring to Open\".\n\nRing to Open heeft meestal een beperkte duur (duur instelbaar via de Nuki smartphone app).\n\nDe ontgrendeld status kan altijd actief blijven door de \"Continumodus\" in te schakelen.",
                 "�t": "Quando sbloccato, Opener apre automaticamente la porta d'ingresso del condominio non appena qualcuno suona il campanello. Nuki chiama questa funzionalit� \"Ring to Open\"\n\n Solitamente Ring to Open ha una durata limitata (la durata pu� essere impostata dall'app per smartphone di Nuki).\n\nLo stato sbloccato pu� rimanere sempre attivo abilitando la \"Modalit� continua\"."
               },

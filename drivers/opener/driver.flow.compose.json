@@ -207,23 +207,41 @@
             {
               "id": "4",
               "title": {
-                "en": "Activate continuous mode",
+                "en": "Activate Continuous mode",
                 "nl": "Continumodus activeren",
                 "de": "Dauermodus aktivieren",
-                "fr": "Activer le mode continu",
+                "fr": "Activer le Mode continu",
                 "it": "Attiva Modalità continua",
-                "es": "Activar modo continuo"
+                "es": "Activar Modo continuo"
               }
             },
             {
               "id": "5",
               "title": {
-                "en": "Deactivate continuous mode",
+                "en": "Deactivate Continuous mode",
                 "nl": "Continumodus deactiveren",
                 "de": "Dauermodus deaktivieren",
-                "fr": "Désactiver le mode continu",
+                "fr": "Désactiver le Mode continu",
                 "it": "Disattiva Modalità continua",
-                "es": "Desactivar modo continuo"
+                "es": "Desactivar Modo continuo"
+              }
+            }
+          ]
+        },
+        {
+          "type": "dropdown",
+          "name": "what_if_action_in_progress",
+          "values": [
+            {
+              "id": "cancel",
+              "label": {
+                "en": "Cancel this action if another action already in progress"
+              }
+            },
+            {
+              "id": "defer",
+              "label": {
+                "en": "Defer this action if another action already in progress"
               }
             }
           ]

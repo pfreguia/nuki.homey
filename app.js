@@ -16,7 +16,7 @@ class NukiApp extends Homey.App {
     // Nuki Smart Lock flow cards.
     this.homey.flow.getActionCard('lockAction')
       .registerRunListener(async (args, state) => {
-        return args.device.smartLockActionFlowCard(Number(args.lockaction), state).then(() => {
+        return args.device.smartLockActionFlowCard(Number(args.lockaction), args.what_if_action_in_progress).then(() => {
           return Promise.resolve();
         }).catch((err) => {
           return Promise.reject(err);
@@ -25,7 +25,7 @@ class NukiApp extends Homey.App {
     // Nuki Opener Flow Cards.
     this.homey.flow.getActionCard('openerAction')
       .registerRunListener(async (args, state) => {
-        return args.device.openerActionFlowCard(Number(args.openeraction), state).then(() => {
+        return args.device.openerActionFlowCard(Number(args.openeraction), args.what_if_action_in_progress).then(() => {
           return Promise.resolve();
         }).catch((err) => {
           return Promise.reject(err);

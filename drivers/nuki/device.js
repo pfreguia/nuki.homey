@@ -149,27 +149,36 @@ class SmartLockDevice extends NukiDevice {
 
   }
 
-  async smartLockActionFlowCard(action, state) {
+  async smartLockActionFlowCard(action, what_if_action_in_progress) {
     try {
       console.log(action);
+      while (this.progressingAction > 0) {
+        // An action is already in progress.
+        if (action == this.progressingAction) {
+          // Same action is already in progress. Just wait for its completion.
+          console.log('Same action is already in progress. Just wait for its completion');
+          await this.progressingActionDone();
+          console.log('Same action completed');
+          return Promise.resolve();
+        }
+        else {
+          if (what_if_action_in_progress == 'cancel') {
+            // A different action is already in progress. Cancel this action.
+            console.log('A different action is already in progress. Cancel this action');
+            return Promise.resolve();
+          }
+          else {
+            // A different action is already in progress. Wait for its completion before execuiting this action.
+            console.log('A different action is already in progress. Wait for its completion before executing this action');
+            await this.progressingActionDone();
+            // Different action completed. Execute this action, if no other actions are in progress.
+            console.log('Different action completed. Execute this action, if no other actions are in progress');
+          }
+        }
+      }
       switch (action) {
         case ACTION_UNLOCK:
           {
-            while (this.progressingAction > 0) {
-              // An action is already in progress.
-              if (this.progressingAction == ACTION_UNLOCK) {
-                // An Unlock action is already in progress.
-                console.log('An Unlock action is already in progress');
-                await this.progressingActionDone();
-                console.log('Unlock action completed');
-                return Promise.resolve();
-              }
-              else {
-                console.log('An action is already in progress. Wait');
-                await this.progressingActionDone();
-                console.log('Action completed. Resume');
-              }
-            }
             const currValue = this.getCapabilityValue('locked');
             if (!currValue) {
               // Already unlocked. No action needed.
@@ -194,21 +203,6 @@ class SmartLockDevice extends NukiDevice {
           break;
         case ACTION_LOCK:
           {
-            while (this.progressingAction > 0) {
-              // An action is already in progress.
-              if (this.progressingAction == ACTION_LOCK) {
-                // A Lock action is already in progress.
-                console.log('A Lock action is already in progress');
-                await this.progressingActionDone();
-                console.log('Lock action completed');
-                return Promise.resolve();
-              }
-              else {
-                console.log('An action is already in progress. Wait');
-                await this.progressingActionDone();
-                console.log('Action completed. Resume');
-              }
-            }
             const currValue = this.getCapabilityValue('locked');
             if (currValue) {
               // Already locked. No action needed.
@@ -233,21 +227,6 @@ class SmartLockDevice extends NukiDevice {
           break;
         case ACTION_UNLATCH:
           {
-            while (this.progressingAction > 0) {
-              // An action is already in progress.
-              if (this.progressingAction == ACTION_UNLATCH) {
-                // An Unlatch action is already in progress.
-                console.log('An Unlatch action is already in progress');
-                await this.progressingActionDone();
-                console.log('Unlatch action completed');
-                return Promise.resolve();
-              }
-              else {
-                console.log('An action is already in progress. Wait');
-                await this.progressingActionDone();
-                console.log('Action completed. Resume');
-              }
-            }
             console.log('Perform Unlatch');
             const url = this.buildURL('lockAction', [
               ['nukiId', this.getData().id],
@@ -279,22 +258,6 @@ class SmartLockDevice extends NukiDevice {
           break;
         case ACTION_LOCK_N_GO:
           {
-            while (this.progressingAction > 0) {
-              // An action is already in progress.
-              if (this.progressingAction == ACTION_LOCK_N_GO_WITH_UNLATCH ||
-                this.progressingAction == ACTION_LOCK_N_GO_WITH_UNLATCH) {
-                // A Lock ’n’ Go action (with or without unlatch) is already in progress.
-                console.log('A Lock ’n’ Go action (with or without unlatch) is already in progress');
-                await this.progressingActionDone();
-                console.log('Lock ’n’ Go action (with or without unlatch) completed');
-                return Promise.resolve();
-              }
-              else {
-                console.log('Another action is already in progress. Wait');
-                await this.progressingActionDone();
-                console.log('Other action completed. Resume');
-              }
-            }
             console.log('Perform Lock ’n’ Go');
             const url = this.buildURL('lockAction', [
               ['nukiId', this.getData().id],
@@ -318,23 +281,7 @@ class SmartLockDevice extends NukiDevice {
           break;
         case ACTION_LOCK_N_GO_WITH_UNLATCH:
           {
-            while (this.progressingAction > 0) {
-              // An action is already in progress.
-              if (this.progressingAction == ACTION_LOCK_N_GO_WITH_UNLATCH || 
-                this.progressingAction == ACTION_LOCK_N_GO_WITH_UNLATCH) {
-                // A Lock ’n’ Go action (with or without unlatch) is already in progress.
-                console.log('A Lock ’n’ Go action (with or without unlatch) is already in progress');
-                await this.progressingActionDone();
-                console.log('Lock ’n’ Go action (with or without unlatch) completed');
-                return Promise.resolve();
-              }
-              else {
-                console.log('Another action is already in progress. Wait');
-                await this.progressingActionDone();
-                console.log('Other action completed. Resume');
-              }
-            }
-            console.log('Perform Lock ’n’ Go');
+            console.log('Perform Lock ’n’ Go with unlacth');
             const url = this.buildURL('lockAction', [
               ['nukiId', this.getData().id],
               ['deviceType', 0],

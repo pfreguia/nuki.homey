@@ -52,7 +52,7 @@ The problem has been solved and the tag has been removed and replaced by a new c
 
 ### v3.0.0 - 2020-08-06
 * Updated to SDK3 (this require Homey firmware 5.x).
-* Fixed issue with triggercards for continuous mode for Nuki opener.
+* Fixed issue with triggercards for Continuous mode for Nuki opener.
 * Added instructions in pairing wizard.
 * Added battery percentage for Nuki Lock (requires Nuki Bridge firmware 2.7.0 and Nuki Lock firmware 2.8.1)
 * Added triggercard for Nuki Opener Ring actions including timestamp token (requires Nuki Bridge firmware 2.7.0 and Nuki Opener firmware 1.5.1)
