@@ -181,8 +181,8 @@ class SmartLockDevice extends NukiDevice {
           {
             const currValue = this.getCapabilityValue('locked');
             if (!currValue) {
-              // Already unlocked. No action needed.
-              console.log('Already unlocked. No action needed');
+              // Already unlocked. Action does not need to be executed.
+              console.log('Already unlocked. Action does not need to be executed');
               return Promise.resolve();
             }
             const url = this.buildURL('lockAction', [
@@ -205,8 +205,8 @@ class SmartLockDevice extends NukiDevice {
           {
             const currValue = this.getCapabilityValue('locked');
             if (currValue) {
-              // Already locked. No action needed.
-              console.log('Already locked. No action needed');
+              // Already locked. Action does not need to be executed.
+              console.log('Already locked. Action does not need to be executed');
               return Promise.resolve();
             }
             const url = this.buildURL('lockAction', [

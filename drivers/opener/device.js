@@ -288,8 +288,8 @@ class OpenerDevice extends NukiDevice {
             console.log(currValue);
             console.log(currValue);
             if (currValue == this.homey.__('device.rto_active')) {
-              // Ring to Open already activated. No action needed.
-              console.log('Ring to Open already activated. No action needed');
+              // Ring to Open already activated. Action does not need to be executed.
+              console.log('Ring to Open already activated. Action does not need to be executed');
               return Promise.resolve();
             }
             const url = this.buildURL('lockAction', [
@@ -368,8 +368,8 @@ class OpenerDevice extends NukiDevice {
           {
             const currValue = this.getCapabilityValue('continuous_mode');
             if (currValue) {
-              // Continuos mode already active. No action needed.
-              console.log('Continuos mode already active. No action needed');
+              // Continuos mode already active. Action does not need to be executed.
+              console.log('Continuos mode already active. Action does not need to be executed');
               return Promise.resolve();
             }
             const url = this.buildURL('lockAction', [
@@ -392,8 +392,8 @@ class OpenerDevice extends NukiDevice {
           {
             const currValue = this.getCapabilityValue('continuous_mode');
             if (!currValue) {
-              // Continuos mode already deactivated. No action needed.
-              console.log('Continuos mode already deactivated. No action needed');
+              // Continuos mode already deactivated. Action does not need to be executed.
+              console.log('Continuos mode already deactivated. Action does not need to be executed');
               return Promise.resolve();
             }
             const url = this.buildURL('lockAction', [
