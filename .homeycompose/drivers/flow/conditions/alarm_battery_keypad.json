@@ -4,7 +4,7 @@
     "nl": "De Keypad batterijwaarschuwing is !{{aan|uit}}",
     "de": "Der Keypadbatterie-Alarm ist !{{an|aus}}",
     "fr": "L'alarme batterie Keypad est !{{en marche|arrêtée}}",
-    "it": "L'allarme della batteria Keypad è !{{acceso|spento}}",
+    "it": "L'allarme della batteria Keypad \u00E8 !{{acceso|spento}}",
     "es": "La alarma de la batería Keypad está !{{activada|desactivada}}"
   },
   "filter": {

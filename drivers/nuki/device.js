@@ -48,7 +48,7 @@ class SmartLockDevice extends NukiDevice {
               return Promise.resolve();
             }
             else {
-              return Promise.reject(new Error('Action in progress. Please wait'));
+              return Promise.reject(new Error('A different action is already in progress'));
             }
           }
           const url = this.buildURL('lockAction', [
@@ -77,7 +77,7 @@ class SmartLockDevice extends NukiDevice {
               return Promise.resolve();
             }
             else {
-              return Promise.reject(new Error('Action in progress. Please wait'));
+              return Promise.reject(new Error('A different action is already in progress'));
             }
           }
           const url = this.buildURL('lockAction', [
@@ -109,7 +109,7 @@ class SmartLockDevice extends NukiDevice {
         if (value === 1) {
           if (this.progressingAction > 0) {
             // An action is already in progress.
-            return Promise.reject(new Error('Action in progress. Please wait'));
+            return Promise.reject(new Error('A different action is already in progress'));
           }
           else {
             const url = this.buildURL('lockAction', [
@@ -138,7 +138,7 @@ class SmartLockDevice extends NukiDevice {
           }
         }
         else {
-          return Promise.reject(new Error('Action in progress. Please wait'));
+          return Promise.reject(new Error('Please wait for the automatic termination'));
         }
       }
       catch (error) {
@@ -162,17 +162,17 @@ class SmartLockDevice extends NukiDevice {
           return Promise.resolve();
         }
         else {
-          if (what_if_action_in_progress == 'cancel') {
-            // A different action is already in progress. Cancel this action.
-            console.log('A different action is already in progress. Cancel this action');
-            return Promise.resolve();
-          }
-          else {
+          if (what_if_action_in_progress == 'defer') {
             // A different action is already in progress. Wait for its completion before execuiting this action.
             console.log('A different action is already in progress. Wait for its completion before executing this action');
             await this.progressingActionDone();
             // Different action completed. Execute this action, if no other actions are in progress.
             console.log('Different action completed. Execute this action, if no other actions are in progress');
+          }
+          else {
+            // A different action is already in progress. Reject this action.
+            console.log('A different action is already in progress. Reject this action');
+            return Promise.reject(new Error('A different action is already in progress'));
           }
         }
       }

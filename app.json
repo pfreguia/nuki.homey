@@ -69,12 +69,12 @@
         "title": {
           "en": "Nuki state changed",
           "nl": "Nuki status gewijzigd",
-          "it": "Lo stato Nuki � cambiato"
+          "it": "Lo stato Nuki è cambiato"
         },
         "hint": {
           "en": "State has changed. The tag \"State\" contains the updated value. The local tag \"Previous state\" contains previous value.",
           "nl": "Status is veranderd. De tag \"Status\" bevat de bijgewerkte waarde. De lokale tag \"Vorige status\" bevat de vorige waarde.",
-          "it": "Lo stato � cambiato. Il tag \"Stato\" contiene i valori aggiornati. Il tag locale \"Stato precedente\" contiene il valore precedente."
+          "it": "Lo stato è cambiato. Il tag \"Stato\" contiene i valori aggiornati. Il tag locale \"Stato precedente\" contiene il valore precedente."
         },
         "tokens": [
           {
@@ -129,7 +129,7 @@
           "nl": "De Keypad batterijwaarschuwing gaat aan",
           "de": "Der Keypadbatterie-Alarm ist angegangen",
           "fr": "L'alarme batterie Keypad s'est activ�e",
-          "it": "L'allarme della batteria Keypad � stato attivato",
+          "it": "L'allarme della batteria Keypad è stato attivato",
           "es": "La alarma de la bater�a Keypad se ha activado"
         },
         "filter": {
@@ -150,7 +150,7 @@
           "nl": "De Keypad batterijwaarschuwing gaat uit",
           "de": "Der Keypadbatterie-Alarm ist ausgegangen",
           "fr": "L'alarme batterie Keypad s'est d�sactiv�e",
-          "it": "L'allarme della batteria Keypad � stato disattivato",
+          "it": "L'allarme della batteria Keypad è stato disattivato",
           "es": "La alarma de la bater�a Keypad se ha desactivado"
         },
         "filter": {
@@ -304,7 +304,7 @@
           "nl": "De Keypad batterijwaarschuwing gaat aan",
           "de": "Der Keypadbatterie-Alarm ist angegangen",
           "fr": "L'alarme batterie Keypad s'est activ�e",
-          "it": "L'allarme della batteria Keypad � stato attivato",
+          "it": "L'allarme della batteria Keypad è stato attivato",
           "es": "La alarma de la bater�a Keypad se ha activado"
         },
         "filter": {
@@ -325,7 +325,7 @@
           "nl": "De Keypad batterijwaarschuwing gaat uit",
           "de": "Der Keypadbatterie-Alarm ist ausgegangen",
           "fr": "L'alarme batterie Keypad s'est d�sactiv�e",
-          "it": "L'allarme della batteria Keypad � stato disattivato",
+          "it": "L'allarme della batteria Keypad è stato disattivato",
           "es": "La alarma de la bater�a Keypad se ha desactivado"
         },
         "filter": {
@@ -348,7 +348,7 @@
           "nl": "De Keypad batterijwaarschuwing is !{{aan|uit}}",
           "de": "Der Keypadbatterie-Alarm ist !{{an|aus}}",
           "fr": "L'alarme batterie Keypad est !{{en marche|arr�t�e}}",
-          "it": "L'allarme della batteria Keypad � !{{acceso|spento}}",
+          "it": "L'allarme della batteria Keypad è !{{acceso|spento}}",
           "es": "La alarma de la bater�a Keypad est� !{{activada|desactivada}}"
         },
         "filter": {
@@ -423,7 +423,7 @@
           "nl": "De Keypad batterijwaarschuwing is !{{aan|uit}}",
           "de": "Der Keypadbatterie-Alarm ist !{{an|aus}}",
           "fr": "L'alarme batterie Keypad est !{{en marche|arr�t�e}}",
-          "it": "L'allarme della batteria Keypad � !{{acceso|spento}}",
+          "it": "L'allarme della batteria Keypad è !{{acceso|spento}}",
           "es": "La alarma de la bater�a Keypad est� !{{activada|desactivada}}"
         },
         "filter": {
@@ -501,15 +501,15 @@
             "name": "what_if_action_in_progress",
             "values": [
               {
-                "id": "cancel",
+                "id": "reject",
                 "label": {
-                  "en": "Cancel this action if another action already in progress"
+                  "en": "Reject this action if a different action is already in progress"
                 }
               },
               {
                 "id": "defer",
                 "label": {
-                  "en": "Defer this action if another action already in progress"
+                  "en": "Defer this action if a different action is already in progress"
                 }
               }
             ]
@@ -595,15 +595,15 @@
             "name": "what_if_action_in_progress",
             "values": [
               {
-                "id": "cancel",
+                "id": "reject",
                 "label": {
-                  "en": "Cancel this action if another action already in progress"
+                  "en": "Reject this action if a different action is already in progress"
                 }
               },
               {
                 "id": "defer",
                 "label": {
-                  "en": "Defer this action if another action already in progress"
+                  "en": "Defer this action if a different action is already in progress"
                 }
               }
             ]
@@ -754,13 +754,13 @@
               "value": true,
               "label": {
                 "en": "Show \"Open\" slider",
-                "nl": "Show \"Openen\" slider",
+                "nl": "Toon \"Openen\" slider",
                 "it": "Visulizza slider \"Apri\""
               },
               "hint": {
-                "en": "The \"Open\" slider has the Nuki device open (unlatch) your lock. Caution: showing this slider may be dangerous because a wrong gesture on it could accidentally open the door.",
-                "nl": "The \"Openen\" slider has the Nuki device open (unlatch) your lock. Caution: showing this slider may be dangerous because a wrong gesture on it could accidentally open the door.",
-                "it": "Lo slider \"Aprire\" fa aprire a Nuki lo scrocco della tua serratura. Attenzione: visualizzare lo slider pu� essere pericoloso perch� un gesto sbagliato nell'app potrebbe aprire la porta accidentalmente."
+                "en": "The \"Open\" slider has the Nuki device open your door. Caution: showing this slider may be dangerous because a wrong gesture on it could accidentally open the door.",
+                "nl": "De \"Openen\" slider opent je deur. Pas op: het tonen van deze slider kan ervoor zorgen dat je per ongeluk met een verkeerde beweging de deur opent terwijl je niet thuis bent.",
+                "it": "Lo slider \"Aprire\" fa aprire la porta dal dispositivo Nuki. Attenzione: visualizzare lo slider pu� essere pericoloso perch� un gesto sbagliato nell'app potrebbe aprire la porta accidentalmente."
               }
             }
           ]
@@ -908,7 +908,7 @@
               "hint": {
                 "en": "When unlocked, Opener always immediately opens the main entrance door of the apartment building as soon as someone ring the doorbell.\nNuki calls this feature \"Ring to Open\".\n\nRing to Open usually has a timed duration (duration can be set via the Nuki smarphone app)\n\nThe unlocked state can always remain active by enabling the \"Continuous mode\".",
                 "nl": "\"Wanneer ontgrendeld, Opener altijd onmiddellijk de hoofdingang opent zodra iemand aanbelt.\nNuki noemt deze functie \"Ring to Open\".\n\nRing to Open heeft meestal een beperkte duur (duur instelbaar via de Nuki smartphone app).\n\nDe ontgrendeld status kan altijd actief blijven door de \"Continumodus\" in te schakelen.",
-                "�t": "Quando sbloccato, Opener apre automaticamente la porta d'ingresso del condominio non appena qualcuno suona il campanello. Nuki chiama questa funzionalit� \"Ring to Open\"\n\n Solitamente Ring to Open ha una durata limitata (la durata pu� essere impostata dall'app per smartphone di Nuki).\n\nLo stato sbloccato pu� rimanere sempre attivo abilitando la \"Modalit� continua\"."
+                "it": "Quando sbloccato, Opener apre automaticamente la porta d'ingresso del condominio non appena qualcuno suona il campanello. Nuki chiama questa funzionalit� \"Ring to Open\"\n\n Solitamente Ring to Open ha una durata limitata (la durata pu� essere impostata dall'app per smartphone di Nuki).\n\nLo stato sbloccato pu� rimanere sempre attivo abilitando la \"Modalit� continua\"."
               },
               "values": [
                 {
@@ -946,13 +946,13 @@
               "value": true,
               "label": {
                 "en": "Show \"Open\" slider",
-                "nl": "Show \"Openen\" slider",
+                "nl": "Toon \"Openen\" slider",
                 "it": "Visulizza slider \"Apri\""
               },
               "hint": {
-                "en": "The \"Open\" slider has the Nuki device open (unlatch) your lock. Caution: showing this slider may be dangerous because a wrong gesture on it could accidentally open the door.",
-                "nl": "The \"Openen\" slider has the Nuki device open (unlatch) your lock. Caution: showing this slider may be dangerous because a wrong gesture on it could accidentally open the door.",
-                "it": "Lo slider \"Aprire\" fa aprire a Nuki lo scrocco della tua serratura. Attenzione: visualizzare lo slider pu� essere pericoloso perch� un gesto sbagliato nell'app potrebbe aprire la porta accidentalmente."
+                "en": "The \"Open\" slider has the Nuki device open your door. Caution: showing this slider may be dangerous because a wrong gesture on it could accidentally open the door.",
+                "nl": "De \"Openen\" slider opent je deur. Pas op: het tonen van deze slider kan ervoor zorgen dat je per ongeluk met een verkeerde beweging de deur opent terwijl je niet thuis bent.",
+                "it": "Lo slider \"Aprire\" fa aprire la porta dal dispositivo Nuki. Attenzione: visualizzare lo slider pu� essere pericoloso perch� un gesto sbagliato nell'app potrebbe aprire la porta accidentalmente."
               }
             }
           ]
@@ -1001,7 +1001,7 @@
         "nl": "Geeft een Keypad batterijwaarschuwing",
         "de": "True, wenn es eine Keypadbatterie-Warnung gibt",
         "fr": "Vrai quand il y a un avertissement de batterie Keypad",
-        "it": "Vero quando c'� un avvertimento sulla batteria Keypad",
+        "it": "Vero quando c'è un avvertimento sulla batteria Keypad",
         "es": "Verdadero cuando hay una advertencia de la bater�a Keypad"
       },
       "getable": true,

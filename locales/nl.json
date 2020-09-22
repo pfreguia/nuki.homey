@@ -16,10 +16,10 @@
     "success": "Nuki bridge succesvol toegevoegd.",
     "bridgetype": "Bridge type:",
     "unknownerror": "Onbekende fout, weet je zeker dat je de juiste details hebt opgegeven en dat de Nuki bridge op hetzelfde netwerk zit als Homey? Controleer a.u.b. je instellingen en probeer het nog eens.",
-    "step1": "First, make sure the HTTP API in your Nuki Bridge is enabled. You can do this within the Nuki smartphone app. Go to \"Manage my devices\" and select \"Bridge\". There you can enable the HTTP API.",
-    "step2": "Once enabled, continue this procedure by tapping the button \"Next >\".",
-    "step4": "When the searching process is running, press the button of your Nuki Bridge.",
-    "step5": "Your Nuki devices will be discovered and you can complete the pairing procedure.",
+    "step1": "Zorg er eerst voor dat de HTTP API in je Nuki Bridge is geactiveerd. Je kan dit doen via de Nuki smartphone app. Ga naar \"Beheer apparaten\" en selecteer \"Bridge\". Hier kan je de HTTP API inschakelen.",
+    "step2": "Eenmaal ingeschakeld kan je de procedure vervolgen door op de knop \"Volgende\" te drukken.",
+    "step4": "Druk op de knop van je Nuki Bridge als het zoekproces is gestart.",
+    "step5": "Jouw Nuki apparaten worden vervolgens ontdekt en je kan de koppelingsprocedure verder doorlopen.",
     "nosettings": "Vul a.u.b. alle verplichte velden in."
   },
   "util": {

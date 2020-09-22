@@ -13,7 +13,7 @@
     "nl": "Geeft een Keypad batterijwaarschuwing",
     "de": "True, wenn es eine Keypadbatterie-Warnung gibt",
     "fr": "Vrai quand il y a un avertissement de batterie Keypad",
-    "it": "Vero quando c'è un avvertimento sulla batteria Keypad",
+    "it": "Vero quando c'\u00E8 un avvertimento sulla batteria Keypad",
     "es": "Verdadero cuando hay una advertencia de la batería Keypad"
   },
   "getable": true,

@@ -5,12 +5,12 @@
       "title": {
         "en": "Nuki state changed",
         "nl": "Nuki status gewijzigd",
-        "it": "Lo stato Nuki è cambiato"
+        "it": "Lo stato Nuki \u00E8 cambiato"
       },
       "hint": {
         "en": "State has changed. The tag \"State\" contains the updated value. The local tag \"Previous state\" contains previous value.",
         "nl": "Status is veranderd. De tag \"Status\" bevat de bijgewerkte waarde. De lokale tag \"Vorige status\" bevat de vorige waarde.",
-        "it": "Lo stato è cambiato. Il tag \"Stato\" contiene i valori aggiornati. Il tag locale \"Stato precedente\" contiene il valore precedente."
+        "it": "Lo stato \u00E8 cambiato. Il tag \"Stato\" contiene i valori aggiornati. Il tag locale \"Stato precedente\" contiene il valore precedente."
       },
       "tokens": [
         {
@@ -116,15 +116,15 @@
           "name": "what_if_action_in_progress",
           "values": [
             {
-              "id": "cancel",
+              "id": "reject",
               "label": {
-                "en": "Cancel this action if another action already in progress"
+                "en": "Reject this action if a different action is already in progress"
               }
             },
             {
               "id": "defer",
               "label": {
-                "en": "Defer this action if another action already in progress"
+                "en": "Defer this action if a different action is already in progress"
               }
             }
           ]
