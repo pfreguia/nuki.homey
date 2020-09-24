@@ -1,7 +1,7 @@
 {
   "id": "nuki.homey",
   "sdk": 3,
-  "brandColor": "#939393",
+  "brandColor": "#909090",
   "name": {
     "en": "Nuki Direct",
     "nl": "Nuki Direct"

@@ -10,8 +10,12 @@
       "id": "start",
       "$template": "start",
       "navigation": {
-        "next": "list_devices"
+        "next": "loading_bridge"
       }
+    },
+    {
+      "id": "loading_bridge",
+      "$template": "loading_bridge"
     },
     {
       "id": "list_devices",
@@ -27,10 +31,6 @@
     {
       "id": "manual_pairing",
       "$template": "manual_pairing"
-    },
-    {
-      "id": "add_device",
-      "$template": "add_device"
     },
     {
       "id": "add_devices",

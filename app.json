@@ -1,7 +1,7 @@
 {
   "id": "nuki.homey",
   "sdk": 3,
-  "brandColor": "#939393",
+  "brandColor": "#909090",
   "name": {
     "en": "Nuki Direct",
     "nl": "Nuki Direct"
@@ -624,8 +624,11 @@
         {
           "id": "start",
           "navigation": {
-            "next": "list_devices"
+            "next": "loading_bridge"
           }
+        },
+        {
+          "id": "loading_bridge"
         },
         {
           "id": "list_devices",
@@ -639,9 +642,6 @@
         },
         {
           "id": "manual_pairing"
-        },
-        {
-          "id": "add_device"
         },
         {
           "id": "add_devices",
@@ -778,8 +778,11 @@
         {
           "id": "start",
           "navigation": {
-            "next": "list_devices"
+            "next": "loading_bridge"
           }
+        },
+        {
+          "id": "loading_bridge"
         },
         {
           "id": "list_devices",
@@ -793,9 +796,6 @@
         },
         {
           "id": "manual_pairing"
-        },
-        {
-          "id": "add_device"
         },
         {
           "id": "add_devices",

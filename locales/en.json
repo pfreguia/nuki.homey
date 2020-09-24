@@ -1,9 +1,9 @@
 {
   "pair": {
     "title": "Instructions",
-    "intro": "Enter the details of your Nuki Bridge below.",
+    "intro": "Enter the details of your Nuki Bridge.",
     "address": "IP Address",
-    "port": "Port",
+    "port": "Port  (default value: 8080)",
     "token": "Token",
     "nukiid": "Nuki ID",
     "titleselection": "What do you want to do?",
@@ -12,7 +12,7 @@
     "manual": "Manual pairing",
     "test": "Test connection",
     "testing": "Connection test successful. Now you can connect your device through the Nuki Bridge.",
-    "connect": "Connect",
+    "connect": "Next  >",
     "success": "Nuki bridge added successfully.",
     "bridgetype": "Bridge Type:",
     "unknownerror": "Unknown error. Are you sure you have entered the correct details and the Nuki Bridge is on the same network where Homey is? Please check your settings and try again.",
@@ -20,7 +20,8 @@
     "step2": "Once enabled, continue this procedure by tapping the button \"Next >\".",
     "step4": "When the searching process is running, press the button of your Nuki Bridge.",
     "step5": "Your Nuki devices will be discovered and you can complete the pairing procedure.",
-    "nosettings": "Please, fill in all the required fields."
+    "nosettings": "Please, fill in all the required fields.",
+    "press_bridge_button": "Press the button of your Nuki Bridge"
   },
   "util": {
     "uncalibrated": "Uncalibrated",
