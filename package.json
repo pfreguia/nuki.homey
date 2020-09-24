@@ -1,7 +1,7 @@
 {
   "name": "nuki.homey",
-  "version": "3.0.2",
-  "description": "Nuki Smart Lock",
+  "version": "3.0.4",
+  "description": "Nuki Direct",
   "main": "app.js",
   "dependencies": {
     "node-fetch": "^2.6.1"
@@ -21,7 +21,7 @@
   "author": "Jelger Haanstra",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/jghaanstra/nuki.homey/issues"
+    "url": "https://github.com/pfreguia/nuki.homey/issues"
   },
-  "homepage": "https://github.com/jghaanstra/nuki.homey#readme"
+  "homepage": "https://github.com/pfreguia/nuki.homey#readme"
 }
