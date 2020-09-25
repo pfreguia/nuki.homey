@@ -43,7 +43,7 @@
         "hint": {
           "en": "When unlocked, Opener always immediately opens the main entrance door of the apartment building as soon as someone ring the doorbell.\nNuki calls this feature \"Ring to Open\".\n\nRing to Open usually has a timed duration (duration can be set via the Nuki smarphone app)\n\nThe unlocked state can always remain active by enabling the \"Continuous mode\".",
           "nl": "\"Wanneer ontgrendeld, Opener altijd onmiddellijk de hoofdingang opent zodra iemand aanbelt.\nNuki noemt deze functie \"Ring to Open\".\n\nRing to Open heeft meestal een beperkte duur (duur instelbaar via de Nuki smartphone app).\n\nDe ontgrendeld status kan altijd actief blijven door de \"Continumodus\" in te schakelen.",
-          "it": "Quando sbloccato, Opener apre automaticamente la porta d'ingresso del condominio non appena qualcuno suona il campanello. Nuki chiama questa funzionalità \"Ring to Open\"\n\n Solitamente Ring to Open ha una durata limitata (la durata può essere impostata dall'app per smartphone di Nuki).\n\nLo stato sbloccato può rimanere sempre attivo abilitando la \"Modalità continua\"."
+          "it": "Quando sbloccato, Opener apre automaticamente la porta d'ingresso del condominio non appena qualcuno suona il campanello. Nuki chiama questa funzionalit\u00E0 \"Ring to Open\"\n\n Solitamente Ring to Open ha una durata limitata (la durata pu\u00F2 essere impostata dall'app per smartphone di Nuki).\n\nLo stato sbloccato pu\u00F2 rimanere sempre attivo abilitando la \"Modalit\u00E0 continua\"."
         },
         "values": [
           {
@@ -59,7 +59,7 @@
               "nl": "Continumodus",
               "de": "Dauermodus",
               "fr": "Mode continu",
-              "it": "Modalità continua",
+              "it": "Modalit\u00E0 continua",
               "es": "Modo continuo"
             }
           }

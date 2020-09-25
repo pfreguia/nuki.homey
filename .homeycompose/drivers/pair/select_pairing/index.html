@@ -28,15 +28,19 @@ $(function() {
   }
   .button {
     display: block;
-    min-width: 100%;
-    margin-bottom: 8px !important;
+    width: 100%;
   }
+   .button:enabled {
+     background-color: #00c139 !important;
+     color: #fff;
+   }
 </style>
 
 <p data-i18n="pair.nodevices">No hardware Nuki bridge discovered. Did you push the button on your bridge during pairing? You can try again or use try manual pairing if you know the IP address and token of your Nuki (software) bridge.</p>
 <div class="nuki-pairing">
 	<div class="form-group buttons">
 		<button id="again" class="button" data-i18n="pair.again">Try Again</button>
+        <br>
 		<button id="manual" class="button" data-i18n="pair.manual">Manual</button>
 	</div>
 </div>

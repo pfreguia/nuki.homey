@@ -10,17 +10,13 @@
     "nodevices": "Geen hardware Nuki bridge gevonden. Heb je op de knop van je bridge gedrukt tijdens het koppelen? Je kan het nog een keer proberen of je Nuki (software) bridge handmatig proberen toe te voegen als je het IP adres en token weet.",
     "again": "Probeer opnieuw",
     "manual": "Handmatig koppelen",
-    "test": "Test connectie",
-    "testing": "Connectietest succesvol, je kan de Nuki bridge nu verbinden.",
     "connect": "Verbind",
-    "success": "Nuki bridge succesvol toegevoegd.",
-    "bridgetype": "Bridge type:",
     "unknownerror": "Onbekende fout, weet je zeker dat je de juiste details hebt opgegeven en dat de Nuki bridge op hetzelfde netwerk zit als Homey? Controleer a.u.b. je instellingen en probeer het nog eens.",
     "step1": "Zorg er eerst voor dat de HTTP API in je Nuki Bridge is geactiveerd. Je kan dit doen via de Nuki smartphone app. Ga naar \"Beheer apparaten\" en selecteer \"Bridge\". Hier kan je de HTTP API inschakelen.",
     "step2": "Eenmaal ingeschakeld kan je de procedure vervolgen door op de knop \"Volgende\" te drukken.",
     "step4": "Druk op de knop van je Nuki Bridge als het zoekproces is gestart.",
-    "step5": "Jouw Nuki apparaten worden vervolgens ontdekt en je kan de koppelingsprocedure verder doorlopen.",
-    "nosettings": "Vul a.u.b. alle verplichte velden in."
+    "step5": "Mocht deze procedure mislukken (bijvoorbeeld omdat de knop niet is ingedrukt), dan wordt u doorverwezen naar de handmatige koppelingsprocedure.",
+    "press_bridge_button": "Druk op de knop van je Nuki Bridge"
   },
   "util": {
     "uncalibrated": "Niet gecalibreerd",
@@ -34,9 +30,10 @@
     "motor_blocked": "Motor geblokkeerd",
     "undefined": "Niet gedefinieerd",
     "400": "Actie is ongeldig",
-    "401": "Token is ongeldig, voeg je Nuki opnieuw toe a.u.b.",
+    "401": "Token is ongeldig",
+    "403":  "Authentication is disabled",
     "404": "Slot is onbekend, voeg je Nuki opnieuw toe a.u.b.",
-    "503": "Slot is offline"
+    "503": "Nuki Bridge is druk"
   },
   "app": {
     "unreachable": "Onbereikbaar"

@@ -10,18 +10,13 @@
     "nodevices": "No Nuki Bridge discovered. Did you push the button on your bridge during pairing? You can try again or continue with the manual pairing, if you know the IP address and token of your Nuki Bridge.",
     "again": "Try again",
     "manual": "Manual pairing",
-    "test": "Test connection",
-    "testing": "Connection test successful. Now you can connect your device through the Nuki Bridge.",
-    "connect": "Next  >",
-    "success": "Nuki bridge added successfully.",
-    "bridgetype": "Bridge Type:",
+    "connect": "Connect",
     "unknownerror": "Unknown error. Are you sure you have entered the correct details and the Nuki Bridge is on the same network where Homey is? Please check your settings and try again.",
     "step1": "First, make sure the HTTP API in your Nuki Bridge is enabled. You can do this within the Nuki smartphone app. Go to \"Manage my devices\" and select \"Bridge\". There you can enable the HTTP API.",
     "step2": "Once enabled, continue this procedure by tapping the button \"Next >\".",
-    "step4": "When the searching process is running, press the button of your Nuki Bridge.",
-    "step5": "Your Nuki devices will be discovered and you can complete the pairing procedure.",
-    "nosettings": "Please, fill in all the required fields.",
-    "press_bridge_button": "Press the button of your Nuki Bridge"
+    "step4": "When the searching process is running, press the button on your Nuki Bridge.",
+    "step5": "Should this procedure fails (for example because the button has not been pressed), you will be prompted to the manual pairing procedure.",
+    "press_bridge_button": "Press the button on your Nuki Bridge"
   },
   "util": {
     "uncalibrated": "Uncalibrated",
@@ -35,9 +30,10 @@
     "motor_blocked": "Motor Blocked",
     "undefined": "Undefined",
     "400": "Action invalid",
-    "401": "Token is invalid, please re-pair your Nuki",
-    "404": "Smart Lock is unknown, please re-pair your Nuki",
-    "503": "Smart Lock is offline"
+    "401": "Token is invalid",
+    "403": "Authentication is disabled",
+    "404": "Device is unknown, please re-pair your Nuki",
+    "503": "Nuki Bridge is busy"
   },
   "app": {
     "unreachable": "Unreachable"

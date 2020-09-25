@@ -6,7 +6,7 @@
     "de": "Keypadbatterie-Alarm",
     "fr": "Alarme batterie Keypad",
     "it": "Allarme batteria Keypad",
-    "es": "Alarma de batería Keypad"
+    "es": "Alarma de bater\u00EDa Keypad"
   },
   "desc": {
     "en": "True when there is a Keypad battery warning",
@@ -14,7 +14,7 @@
     "de": "True, wenn es eine Keypadbatterie-Warnung gibt",
     "fr": "Vrai quand il y a un avertissement de batterie Keypad",
     "it": "Vero quando c'\u00E8 un avvertimento sulla batteria Keypad",
-    "es": "Verdadero cuando hay una advertencia de la batería Keypad"
+    "es": "Verdadero cuando hay una advertencia de la bater\u00EDa Keypad"
   },
   "getable": true,
   "setable": false,

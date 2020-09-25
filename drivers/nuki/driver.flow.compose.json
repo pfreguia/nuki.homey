@@ -118,13 +118,15 @@
             {
               "id": "reject",
               "label": {
-                "en": "Reject this action if a different action is already in progress"
+                "en": "Don't execute this action if a different action is already in progress",
+                "it": "Non eseguire questa azione se un'azione diversa \u00E9 gi\u00E0 in corso"
               }
             },
             {
               "id": "defer",
               "label": {
-                "en": "Defer this action if a different action is already in progress"
+                "en": "Defer this action if a different action is already in progress",
+                "it": "Differisci questa azione se un'azione diversa \u00E9 gi\u00E0 in corso"
               }
             }
           ]
