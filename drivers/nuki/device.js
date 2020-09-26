@@ -60,7 +60,7 @@ class SmartLockDevice extends NukiDevice {
           // It seems that, even if result.success is false, the action is
           //  performed correctly by Nuki. For that resons the "result" object
           //  of sendCommand() method is not evaluated.
-          await this.util.sendCommand(url, 8000);
+          await this.util.sendCommand(url, 16000);
           console.log('Lock done');
           this.progressingAction = 0;
           return Promise.resolve();
@@ -89,7 +89,7 @@ class SmartLockDevice extends NukiDevice {
           // It seems that, even if result.success is false, the action is
           //  performed correctly by Nuki. For that resons the "result" object
           //  of sendCommand() method is not evaluated.
-          await this.util.sendCommand(url, 8000);
+          await this.util.sendCommand(url, 16000);
           console.log('Unlock done');
           this.progressingAction = 0;
           return Promise.resolve();
@@ -122,7 +122,7 @@ class SmartLockDevice extends NukiDevice {
             // It seems that, even if result.success is false, the action is
             //  performed correctly by Nuki. For that resons the "result" object
             //  of sendCommand() method is not evaluated.
-            await this.util.sendCommand(url, 8000);
+            await this.util.sendCommand(url, 16000);
             // Update capabilties and trigger action flows.
             const flow = this.homey.flow;
             const unlatchingStr = this.homey.__('util.unlatching');
@@ -239,7 +239,7 @@ class SmartLockDevice extends NukiDevice {
             // It seems that, even if result.success is false, the action is
             //  performed correctly by Nuki. For that resons the "result" object
             //  of sendCommand() method is not evaluated.
-            await this.util.sendCommand(url, 32000);
+            await this.util.sendCommand(url, 16000);
             console.log('Unlatch performed');
             // Update capabilties and trigger action flows.
             const flow = this.homey.flow;

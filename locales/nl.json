@@ -1,6 +1,5 @@
 {
   "pair": {
-    "title": "Instructies",
     "intro": "Vul de details van je Nuki bridge hieronder in.",
     "address": "IP adres",
     "port": "Port",
@@ -16,7 +15,7 @@
     "step2": "Eenmaal ingeschakeld kan je de procedure vervolgen door op de knop \"Volgende\" te drukken.",
     "step4": "Druk op de knop van je Nuki Bridge als het zoekproces is gestart.",
     "step5": "Mocht deze procedure mislukken (bijvoorbeeld omdat de knop niet is ingedrukt), dan wordt u doorverwezen naar de handmatige koppelingsprocedure.",
-    "press_bridge_button": "Druk op de knop van je Nuki Bridge"
+    "press_bridge_button": "Druk kort op de knop van je Nuki Bridge"
   },
   "util": {
     "uncalibrated": "Niet gecalibreerd",

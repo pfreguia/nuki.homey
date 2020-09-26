@@ -1,6 +1,5 @@
 {
   "pair": {
-    "title": "Anleitung",
     "intro": "Tragen Sie unten die Daten Ihrer Nuki Bridge ein.",
     "address": "IP-Adresse",
     "port": "Port",
@@ -16,7 +15,7 @@
     "step2": "Sobald Sie die Funktion aktiviert haben, tippen Sie auf die Schaltfläche \"“Weiter >\" um den Vorgang fortzusetzen.",
     "step4": "Sobald der Suchvorgang läuft, drücken Sie die Taste auf der Nuki Bridge.",
     "step5": "Sollte dieser Vorgang fehlschlagen (z. B. weil die Taste auf der Nuki Bridge nicht gedrückt wurde), werden Sie zum manuellen Pairing-Vorgang aufgefordert.",
-    "press_bridge_button": "Drücken Sie die Taste auf der Nuki Bridge"
+    "press_bridge_button": "Drücken Sie kurz die Taste auf der Nuki Bridge"
   },
   "util": {
     "uncalibrated": "Uncalibrated",

@@ -1,6 +1,5 @@
 {
   "pair": {
-    "title": "Instructions",
     "intro": "Enter the details of your Nuki Bridge.",
     "address": "IP Address",
     "port": "Port  (default value: 8080)",
@@ -16,7 +15,7 @@
     "step2": "Once enabled, continue this procedure by tapping the button \"Next >\".",
     "step4": "When the searching process is running, press the button on your Nuki Bridge.",
     "step5": "Should this procedure fails (for example because the button has not been pressed), you will be prompted to the manual pairing procedure.",
-    "press_bridge_button": "Press the button on your Nuki Bridge"
+    "press_bridge_button": "Press and release the button on your Nuki Bridge"
   },
   "util": {
     "uncalibrated": "Uncalibrated",

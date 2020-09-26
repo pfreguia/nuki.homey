@@ -128,7 +128,7 @@ class OpenerDevice extends NukiDevice {
             // It seems that, even if result.success is false, the action is
             //  performed correctly by Nuki. For that resons the "result" object
             //  of sendCommand() method is not evaluated.
-            await this.util.sendCommand(url, 8000);
+            await this.util.sendCommand(url, 12000);
             // Update capabilties and trigger action flows.
             const flow = this.homey.flow;
             const openingStr = this.homey.__('device.opening');
@@ -347,7 +347,7 @@ class OpenerDevice extends NukiDevice {
             // It seems that, even if result.success is false, the action is
             //  performed correctly by Nuki. For that resons the "result" object
             //  of sendCommand() method is not evaluated.
-            await this.util.sendCommand(url, 32000);
+            await this.util.sendCommand(url, 12000);
             console.log('Open performed');
             // Update capabilties and trigger action flows.
             const flow = this.homey.flow;

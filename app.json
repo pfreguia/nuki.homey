@@ -29,6 +29,11 @@
         "name": "Piero Freguia",
         "email": "pfreguia@tiscali.it"
       }
+    ],
+    "translators": [
+      {
+        "name": "fantross"
+      }
     ]
   },
   "contributing": {

@@ -1,6 +1,5 @@
 {
   "pair": {
-    "title": "Istruzioni",
     "intro": "Inserisci i dettagli del tuo Nuki Bridge.",
     "address": "Indirizzo IP",
     "port": "Porta",
@@ -16,7 +15,7 @@
     "step2": "Una volta completata la verifica, continua questa procedura toccando il bottone \"Successivo >\"",
     "step4": "Mentre la ricerca \u00E8 in corso premi il bottone sul tuo Nuki Bridge.",
     "step5": "Se questa procedura dovesse fallire (ad esempio perché non è stato premuto il bottone sul Bridge), potrai eseguire la procedura di accoppiamento manuale.",
-    "press_bridge_button": "Premi il bottone sul tuo Nuki Bridge"
+    "press_bridge_button": "Premi e rilascia il bottone sul tuo Nuki Bridge"
   },
   "util": {
     "uncalibrated": "Uncalibrated",
