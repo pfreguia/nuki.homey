@@ -6,6 +6,7 @@
   "label": {
     "en": "IP Address",
     "nl": "IP adres",
+    "de": "IP-Adresse", 
     "it": "Indirizzo IP"
   },
   "hint": {
