@@ -6,7 +6,7 @@
     "en": "Show \"Open\" slider",
     "nl": "Toon \"Openen\" slider",
     "it": "Visualizza slider \"Apri\"",
-    "de": "Schieberegler \"Öffnen"\" anzeigen"
+    "de": "Schieberegler \"Öffnen\" anzeigen"
   },
   "hint": {
     "en": "The \"Open\" slider has the Nuki device open your door. Caution: showing this slider may be dangerous because a wrong gesture on it could accidentally open the door.",
