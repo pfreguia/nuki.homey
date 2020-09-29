@@ -4,7 +4,8 @@
     "label": {
       "en": "Bridge Settings",
       "nl": "Bridge instellingen",
-      "it": "Impostazioni Bridge"
+      "it": "Impostazioni Bridge",
+      "de": "Bridge Einstellungen"
     },
     "children": [
       {
@@ -26,7 +27,7 @@
     "label": {
       "en": "Unlock duration, when unlocked by this app",
       "nl": "Ontgrendelen duur, wanneer ontgrendeld door deze app",
-      "de": "Aufsperrdauer, wenn von dieser app aufgesperrt",
+      "de": "Aufsperrdauer, wenn von dieser App aufgesperrt",
       "it": "Durata sblocco, quando sbloccato da questa app"
     },
     "children": [
@@ -43,7 +44,8 @@
         "hint": {
           "en": "When unlocked, Opener always immediately opens the main entrance door of the apartment building as soon as someone ring the doorbell.\nNuki calls this feature \"Ring to Open\".\n\nRing to Open usually has a timed duration (duration can be set via the Nuki smarphone app)\n\nThe unlocked state can always remain active by enabling the \"Continuous mode\".",
           "nl": "\"Wanneer ontgrendeld, Opener altijd onmiddellijk de hoofdingang opent zodra iemand aanbelt.\nNuki noemt deze functie \"Ring to Open\".\n\nRing to Open heeft meestal een beperkte duur (duur instelbaar via de Nuki smartphone app).\n\nDe ontgrendeld status kan altijd actief blijven door de \"Continumodus\" in te schakelen.",
-          "it": "Quando sbloccato, Opener apre automaticamente la porta d'ingresso del condominio non appena qualcuno suona il campanello. Nuki chiama questa funzionalit\u00E0 \"Ring to Open\"\n\n Solitamente Ring to Open ha una durata limitata (la durata pu\u00F2 essere impostata dall'app per smartphone di Nuki).\n\nLo stato sbloccato pu\u00F2 rimanere sempre attivo abilitando la \"Modalit\u00E0 continua\"."
+          "it": "Quando sbloccato, Opener apre automaticamente la porta d'ingresso del condominio non appena qualcuno suona il campanello. Nuki chiama questa funzionalit\u00E0 \"Ring to Open\"\n\n Solitamente Ring to Open ha una durata limitata (la durata pu\u00F2 essere impostata dall'app per smartphone di Nuki).\n\nLo stato sbloccato pu\u00F2 rimanere sempre attivo abilitando la \"Modalit\u00E0 continua\".",
+          "de": "Im entsperrten Zustand öffnet Opener immer sofort die Haupteingangstür des Wohnhauses, sobald jemand an der Tür klingelt.\nNuki nennt diese Funktion \"Ring to Open\".\n\n\"Ring to Open\"hat normalerweise eine zeitgesteuerte Dauer (die Dauer kann über die Nuki Smartphone-App eingestellt werden).\n\nDer entsperrte Zustand kann immer aktiv bleiben, indem der \"Dauermodus\" aktiviert wird."
         },
         "values": [
           {
@@ -72,7 +74,8 @@
     "label": {
       "en": "User Interface",
       "nl": "Gebruikersomgeving",
-      "it": "Interfaccia utente"
+      "it": "Interfaccia utente",
+      "de": "Benutzeroberfläche"
     },
     "children": [
       {
@@ -86,7 +89,8 @@
     "label": {
       "en": "Power Settings",
       "nl": "Energie instellingen",
-      "it": "Impostazioni alimentazione"
+      "it": "Impostazioni alimentazione",
+      "de": "Energieeinstellungen"
     },
     "children": [
       {
@@ -96,12 +100,14 @@
         "label": {
           "en": "Battery operating",
           "nl": "Batterij werkt",
-          "it": "Alimentazione a batteria"
+          "it": "Alimentazione a batteria",
+          "de": "Batteriebetrieb"
         },
         "hint": {
           "en": "Enable this setting if your Nuki Opener is powered by batteries (leave disabled if the Opener is powered by USB cable). This setting allows Homey to manage device energy properly.",
           "nl": "Schakel deze instelling in als je Nuki Opener op batterijen werkt (laat deze instelling uitgeschakeld als de Opener wordt gevoed door een USB-kabel). Met deze instelling kan Homey de energie van het apparaat goed beheren.",
-          "it": "Abilitare questa impostazione se Nuki Opener \u00E8 alimentato a batteria (lasciare disabilitato se il dispositivo \u00E8 alimentato da cavo USB). Questa impostazione consente a Homey di gestire correttamente l'energia del dispositivo."
+          "it": "Abilitare questa impostazione se Nuki Opener \u00E8 alimentato a batteria (lasciare disabilitato se il dispositivo \u00E8 alimentato da cavo USB). Questa impostazione consente a Homey di gestire correttamente l'energia del dispositivo.",
+          "de": "Aktivieren Sie diese Einstellung, wenn Ihr Nuki Opener mit Batterien betrieben wird (lassen Sie diese Option deaktiviert, wenn der Opener über ein USB-Kabel betrieben wird). Mit dieser Einstellung kann Homey die Energie des Geräts ordnungsgemäß verwalten."
         }
       }
     ]
