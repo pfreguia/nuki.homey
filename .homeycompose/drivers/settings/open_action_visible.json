@@ -5,11 +5,13 @@
   "label": {
     "en": "Show \"Open\" slider",
     "nl": "Toon \"Openen\" slider",
-    "it": "Visualizza slider \"Apri\""
+    "it": "Visualizza slider \"Apri\"",
+    "de": "Schieberegler \"Öffnen"\" anzeigen"
   },
   "hint": {
     "en": "The \"Open\" slider has the Nuki device open your door. Caution: showing this slider may be dangerous because a wrong gesture on it could accidentally open the door.",
     "nl": "De \"Openen\" slider opent je deur. Pas op: het tonen van deze slider kan ervoor zorgen dat je per ongeluk met een verkeerde beweging de deur opent terwijl je niet thuis bent.",
-    "it": "Lo slider \"Aprire\" fa aprire la porta dal dispositivo Nuki. Attenzione: visualizzare lo slider pu\u00F2 essere pericoloso perch\u00E9 un gesto sbagliato nell'app potrebbe aprire la porta accidentalmente."
+    "it": "Lo slider \"Aprire\" fa aprire la porta dal dispositivo Nuki. Attenzione: visualizzare lo slider pu\u00F2 essere pericoloso perch\u00E9 un gesto sbagliato nell'app potrebbe aprire la porta accidentalmente.",
+    "de": "Mit dem Schieberegler \"Öffnen\" öffnet das Nuki Ihre Tür. Achtung: Das Anzeigen dieses Schiebereglers kann gefährlich sein, da eine falsche Geste versehentlich die Tür öffnen kann."
   }
 }
