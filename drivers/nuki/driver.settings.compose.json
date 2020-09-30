@@ -4,7 +4,8 @@
     "label": {
       "en": "Bridge Settings",
       "nl": "Bridge instellingen",
-      "it": "Impostazioni Bridge"
+      "it": "Impostazioni Bridge",
+      "de": "Bridge Einstellungen"
     },
     "children": [
       {
@@ -26,7 +27,8 @@
     "label": {
       "en": "User Interface",
       "nl": "Gebruikersomgeving",
-      "it": "Interfaccia utente"
+      "it": "Interfaccia utente",
+      "de": "Benutzeroberfläche"
     },
     "children": [
       {
