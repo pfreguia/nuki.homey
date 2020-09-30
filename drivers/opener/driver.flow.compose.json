@@ -5,12 +5,14 @@
       "title": {
         "en": "Nuki state changed",
         "nl": "Nuki status gewijzigd",
-        "it": "Lo stato Nuki \u00E8 cambiato"
+        "it": "Lo stato Nuki \u00E8 cambiato",
+        "de": "Nuki Status hat sich geändert"
       },
       "hint": {
         "en": "State and/or continuous mode have changed. The tags \"State\" and \"Continuous mode\" contain the updated values. The local tags \"Previous state\" and \"Previous continuous mode\" contain previous values.",
         "nl": "De status en/of continumodus zijn gewijzigd. De tags \"Status \" en \"Continuomodus\" bevatten de bijgewerkte waarden. De lokale tags \"Vorige status\" en \"Vorige continumodus\" bevatten de vorige waarden.",
-        "it": "Lo stato e/o la modalità continua sono cambiati. I tag \"Stato\" e \"Modalità continua\" contengono i valori aggiornati. I tag locali \"Stato precedente\" e \"Modalità continua precedente\" contengono i valori precedenti."
+        "it": "Lo stato e/o la modalità continua sono cambiati. I tag \"Stato\" e \"Modalità continua\" contengono i valori aggiornati. I tag locali \"Stato precedente\" e \"Modalità continua precedente\" contengono i valori precedenti.",
+        "de": "Status und/oder Dauermodus hat sich geändert. Die Tags \"Status\" und \“Dauermodus\“ enthalten den aktualisierten Wert. Die lokalen Tags \"Vorheriger Status\" und \“Vorheriger Dauermodus\“ enthalten den vorherigen Wert."
       },
       "tokens": [
         {
@@ -19,7 +21,8 @@
           "title": {
             "en": "Previous state",
             "nl": "Vorige status",
-            "it": "Stato precedente"
+            "it": "Stato precedente",
+            "de": "Vorheriger Status"
           },
           "example": "online"
         },
@@ -29,7 +32,8 @@
           "title": {
             "en": "Previous continuous mode",
             "nl": "Vorige continumodus",
-            "it": "Modalità continua precedente"
+            "it": "Modalità continua precedente",
+            "de": "Vorheriger Dauermodus"
           }
         }
       ],
@@ -40,7 +44,8 @@
       "title": {
         "en": "Opener state changed",
         "nl": "Opener status gewijzigd",
-        "it": "Lo stato è cambiato"
+        "it": "Lo stato è cambiato",
+        "de": "Opener Status hat sich geändert"
       },
       "tokens": [
         {
@@ -49,7 +54,8 @@
           "title": {
             "en": "New Opener State",
             "nl": "Nieuwe opener status",
-            "it": "Nuovo stato Opener"
+            "it": "Nuovo stato Opener",
+            "de": "Neuer Opener Status"
           },
           "example": "online"
         },
@@ -59,7 +65,8 @@
           "title": {
             "en": "Continuous mode",
             "nl": "Continumodus",
-            "it": "Modo continuo"
+            "it": "Modo continuo",
+            "de": "Dauermodus"
           },
           "example": "online"
         }
@@ -72,7 +79,7 @@
       "title": {
         "en": "Continuous mode turned on",
         "nl": "Continumodus gaat aan",
-        "de": "Dauermodus ist angegangen",
+        "de": "Dauermodus aktiviert",
         "fr": "Mode continu s'est activée",
         "it": "Modalità continua è stata attivata",
         "es": "Modo continuo se ha activado"
@@ -85,7 +92,7 @@
       "title": {
         "en": "Continuous mode turned off",
         "nl": "Continumodus gaat uit",
-        "de": "Dauermodus ist ausgegangen",
+        "de": "Dauermodus deaktiviert",
         "fr": "Mode continu s'est désactivée",
         "it": "Modalità continua è stata disattivata",
         "es": "Modo continuo se ha desactivado"
@@ -164,7 +171,8 @@
       "title": {
         "en": "Nuki action",
         "nl": "Nuki actie",
-        "it": "Azione Nuki"
+        "it": "Azione Nuki",
+        "de": "Nuki Aktion"
       },
       "args": [
         {
@@ -236,14 +244,16 @@
               "id": "reject",
               "label": {
                 "en": "Don't execute this action if a different action is already in progress",
-                "it": "Non eseguire questa azione se un'azione diversa \u00E9 gi\u00E0 in corso"
+                "it": "Non eseguire questa azione se un'azione diversa \u00E9 gi\u00E0 in corso",
+                "de": "Führen Sie diese Aktion nicht aus, wenn bereits eine andere Aktion ausgeführt wird"
               }
             },
             {
               "id": "defer",
               "label": {
-                "en": "Don't execute this action if a different action is already in progress",
-                "it": "Non eseguire questa azione se un'azione diversa \u00E9 gi\u00E0 in corso"
+                "en": "Defer this action if a different action is already in progress",
+                "it": "Differisci questa azione se un'azione diversa \u00E9 gi\u00E0 in corso",
+                "de": "Verzögern Sie diese Aktion, wenn bereits eine andere Aktion ausgeführt wird"
               }
             }
           ]
