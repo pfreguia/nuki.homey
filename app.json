@@ -74,11 +74,13 @@
         "title": {
           "en": "Nuki state changed",
           "nl": "Nuki status gewijzigd",
+          "de": "Nuki Status hat sich geändert",
           "it": "Lo stato Nuki è cambiato"
         },
         "hint": {
           "en": "State has changed. The tag \"State\" contains the updated value. The local tag \"Previous state\" contains previous value.",
           "nl": "Status is veranderd. De tag \"Status\" bevat de bijgewerkte waarde. De lokale tag \"Vorige status\" bevat de vorige waarde.",
+          "de": "Status hat sich geändert. Das Tag \"Status\" enthält den aktualisierten Wert. Das lokale Tag \"Vorheriger Status\" enthält den vorherigen Wert.",
           "it": "Lo stato è cambiato. Il tag \"Stato\" contiene i valori aggiornati. Il tag locale \"Stato precedente\" contiene il valore precedente."
         },
         "tokens": [
@@ -88,6 +90,7 @@
             "title": {
               "en": "Previous state",
               "nl": "Vorige status",
+              "de": "Vorheriger Status",
               "it": "Stato precedente"
             },
             "example": "online"
@@ -105,7 +108,8 @@
         "id": "lockstateChanged",
         "title": {
           "en": "Lockstate changed",
-          "nl": "Slotstatus is veranderd"
+          "nl": "Slotstatus is veranderd",
+          "de": "Sperrstatus hat sich verändert"
         },
         "tokens": [
           {
@@ -113,7 +117,8 @@
             "type": "string",
             "title": {
               "en": "Lockstate",
-              "nl": "Slotstatus"
+              "nl": "Slotstatus",
+              "de": "Sperrstatus"
             },
             "example": "Locked"
           }
@@ -174,11 +179,13 @@
         "title": {
           "en": "Nuki state changed",
           "nl": "Nuki status gewijzigd",
+          "de": "Nuki Status hat sich geändert",
           "it": "Lo stato Nuki è cambiato"
         },
         "hint": {
           "en": "State and/or continuous mode have changed. The tags \"State\" and \"Continuous mode\" contain the updated values. The local tags \"Previous state\" and \"Previous continuous mode\" contain previous values.",
           "nl": "De status en/of continumodus zijn gewijzigd. De tags \"Status \" en \"Continuomodus\" bevatten de bijgewerkte waarden. De lokale tags \"Vorige status\" en \"Vorige continumodus\" bevatten de vorige waarden.",
+          "de": "Status und/oder Dauermodus hat sich geändert. Die Tags \"Status\" und \"Dauermodus\" enthalten den aktualisierten Wert. Die lokalen Tags \"Vorheriger Status\" und \"Vorheriger Dauermodus\" enthalten den vorherigen Wert.",
           "it": "Lo stato e/o la modalità continua sono cambiati. I tag \"Stato\" e \"Modalità continua\" contengono i valori aggiornati. I tag locali \"Stato precedente\" e \"Modalità continua precedente\" contengono i valori precedenti."
         },
         "tokens": [
@@ -188,6 +195,7 @@
             "title": {
               "en": "Previous state",
               "nl": "Vorige status",
+              "de": "Vorheriger Status",
               "it": "Stato precedente"
             },
             "example": "online"
@@ -198,6 +206,7 @@
             "title": {
               "en": "Previous continuous mode",
               "nl": "Vorige continumodus",
+              "de": "Vorheriger Dauermodus",
               "it": "Modalità continua precedente"
             }
           }
@@ -215,6 +224,7 @@
         "title": {
           "en": "Opener state changed",
           "nl": "Opener status gewijzigd",
+          "de": "Opener Status hat sich geändert",
           "it": "Lo stato è cambiato"
         },
         "tokens": [
@@ -224,6 +234,7 @@
             "title": {
               "en": "New Opener State",
               "nl": "Nieuwe opener status",
+              "de": "Neuer Opener Status",
               "it": "Nuovo stato Opener"
             },
             "example": "online"
@@ -234,6 +245,7 @@
             "title": {
               "en": "Continuous mode",
               "nl": "Continumodus",
+              "de": "Dauermodus",
               "it": "Modo continuo"
             },
             "example": "online"
@@ -253,7 +265,7 @@
         "title": {
           "en": "Continuous mode turned on",
           "nl": "Continumodus gaat aan",
-          "de": "Dauermodus ist angegangen",
+          "de": "Dauermodus aktiviert",
           "fr": "Mode continu s'est activée",
           "it": "Modalità continua è stata attivata",
           "es": "Modo continuo se ha activado"
@@ -272,7 +284,7 @@
         "title": {
           "en": "Continuous mode turned off",
           "nl": "Continumodus gaat uit",
-          "de": "Dauermodus ist ausgegangen",
+          "de": "Dauermodus deaktiviert",
           "fr": "Mode continu s'est désactivée",
           "it": "Modalità continua è stata disattivata",
           "es": "Modo continuo se ha desactivado"
@@ -449,6 +461,7 @@
         "title": {
           "en": "Nuki action",
           "nl": "Nuki actie",
+          "de": "Nuki Aktion",
           "it": "Azione Nuki"
         },
         "args": [
@@ -466,6 +479,7 @@
                 "title": {
                   "en": "Unlock",
                   "nl": "Ontgrendelen",
+                  "de": "Aufsperren",
                   "it": "Sbloccare"
                 }
               },
@@ -474,6 +488,7 @@
                 "title": {
                   "en": "Lock",
                   "nl": "Vergrendelen",
+                  "de": "Zusperren",
                   "it": "Bloccare"
                 }
               },
@@ -482,6 +497,7 @@
                 "title": {
                   "en": "Unlatch",
                   "nl": "Openen",
+                  "de": "Entriegeln",
                   "it": "Aprire"
                 }
               },
@@ -496,6 +512,7 @@
                 "title": {
                   "en": "Lock ’n’ Go with unlatch",
                   "nl": "Lock ’n’ Go met openen",
+                  "de": "Lock ’n’ Go mit Entriegeln",
                   "it": "Lock ’n’ Go con apertura"
                 }
               }
@@ -509,6 +526,7 @@
                 "id": "reject",
                 "label": {
                   "en": "Don't execute this action if a different action is already in progress",
+                  "de": "Führen Sie diese Aktion nicht aus, wenn bereits eine andere Aktion ausgeführt wird",
                   "it": "Non eseguire questa azione se un'azione diversa é già in corso"
                 }
               },
@@ -516,6 +534,7 @@
                 "id": "defer",
                 "label": {
                   "en": "Defer this action if a different action is already in progress",
+                  "de": "Verzögern Sie diese Aktion, wenn bereits eine andere Aktion ausgeführt wird",
                   "it": "Differisci questa azione se un'azione diversa é già in corso"
                 }
               }
@@ -528,6 +547,7 @@
         "title": {
           "en": "Nuki action",
           "nl": "Nuki actie",
+          "de": "Nuki Aktion",
           "it": "Azione Nuki"
         },
         "args": [
@@ -605,14 +625,16 @@
                 "id": "reject",
                 "label": {
                   "en": "Don't execute this action if a different action is already in progress",
+                  "de": "Führen Sie diese Aktion nicht aus, wenn bereits eine andere Aktion ausgeführt wird",
                   "it": "Non eseguire questa azione se un'azione diversa é già in corso"
                 }
               },
               {
                 "id": "defer",
                 "label": {
-                  "en": "Don't execute this action if a different action is already in progress",
-                  "it": "Non eseguire questa azione se un'azione diversa é già in corso"
+                  "en": "Defer this action if a different action is already in progress",
+                  "de": "Verzögern Sie diese Aktion, wenn bereits eine andere Aktion ausgeführt wird",
+                  "it": "Differisci questa azione se un'azione diversa é già in corso"
                 }
               }
             ]
@@ -696,6 +718,7 @@
           "label": {
             "en": "Bridge Settings",
             "nl": "Bridge instellingen",
+            "de": "Bridge Einstellungen",
             "it": "Impostazioni Bridge"
           },
           "children": [
@@ -756,6 +779,7 @@
           "label": {
             "en": "User Interface",
             "nl": "Gebruikersomgeving",
+            "de": "Benutzeroberfläche",
             "it": "Interfaccia utente"
           },
           "children": [
@@ -766,11 +790,13 @@
               "label": {
                 "en": "Show \"Open\" slider",
                 "nl": "Toon \"Openen\" slider",
-                "it": "Visualizza slider \"Apri\""
+                "it": "Visualizza slider \"Apri\"",
+                "de": "Schieberegler \"Öffnen\" anzeigen"
               },
               "hint": {
                 "en": "The \"Open\" slider has the Nuki device open your door. Caution: showing this slider may be dangerous because a wrong gesture on it could accidentally open the door.",
                 "nl": "De \"Openen\" slider opent je deur. Pas op: het tonen van deze slider kan ervoor zorgen dat je per ongeluk met een verkeerde beweging de deur opent terwijl je niet thuis bent.",
+                "de": "Mit dem Schieberegler \"Öffnen\" öffnet das Nuki Ihre Tür. Achtung: Das Anzeigen dieses Schiebereglers kann gefährlich sein, da eine falsche Geste versehentlich die Tür öffnen kann.",
                 "it": "Lo slider \"Aprire\" fa aprire la porta dal dispositivo Nuki. Attenzione: visualizzare lo slider può essere pericoloso perché un gesto sbagliato nell'app potrebbe aprire la porta accidentalmente."
               }
             }
@@ -844,7 +870,8 @@
           "label": {
             "en": "Bridge Settings",
             "nl": "Bridge instellingen",
-            "it": "Impostazioni Bridge"
+            "it": "Impostazioni Bridge",
+            "de": "Bridge Einstellungen"
           },
           "children": [
             {
@@ -904,7 +931,7 @@
           "label": {
             "en": "Unlock duration, when unlocked by this app",
             "nl": "Ontgrendelen duur, wanneer ontgrendeld door deze app",
-            "de": "Aufsperrdauer, wenn von dieser app aufgesperrt",
+            "de": "Aufsperrdauer, wenn von dieser App aufgesperrt",
             "it": "Durata sblocco, quando sbloccato da questa app"
           },
           "children": [
@@ -921,6 +948,7 @@
               "hint": {
                 "en": "When unlocked, Opener always immediately opens the main entrance door of the apartment building as soon as someone ring the doorbell.\nNuki calls this feature \"Ring to Open\".\n\nRing to Open usually has a timed duration (duration can be set via the Nuki smarphone app)\n\nThe unlocked state can always remain active by enabling the \"Continuous mode\".",
                 "nl": "\"Wanneer ontgrendeld, Opener altijd onmiddellijk de hoofdingang opent zodra iemand aanbelt.\nNuki noemt deze functie \"Ring to Open\".\n\nRing to Open heeft meestal een beperkte duur (duur instelbaar via de Nuki smartphone app).\n\nDe ontgrendeld status kan altijd actief blijven door de \"Continumodus\" in te schakelen.",
+                "de": "Im entsperrten Zustand öffnet Opener immer sofort die Haupteingangstür des Wohnhauses, sobald jemand an der Tür klingelt.\nNuki nennt diese Funktion \"Ring to Open\".\n\n\"Ring to Open\"hat normalerweise eine zeitgesteuerte Dauer (die Dauer kann über die Nuki Smartphone-App eingestellt werden).\n\nDer entsperrte Zustand kann immer aktiv bleiben, indem der \"Dauermodus\" aktiviert wird.",
                 "it": "Quando sbloccato, Opener apre automaticamente la porta d'ingresso del condominio non appena qualcuno suona il campanello. Nuki chiama questa funzionalità \"Ring to Open\"\n\n Solitamente Ring to Open ha una durata limitata (la durata può essere impostata dall'app per smartphone di Nuki).\n\nLo stato sbloccato può rimanere sempre attivo abilitando la \"Modalità continua\"."
               },
               "values": [
@@ -950,6 +978,7 @@
           "label": {
             "en": "User Interface",
             "nl": "Gebruikersomgeving",
+            "de": "Benutzeroberfläche",
             "it": "Interfaccia utente"
           },
           "children": [
@@ -960,11 +989,13 @@
               "label": {
                 "en": "Show \"Open\" slider",
                 "nl": "Toon \"Openen\" slider",
-                "it": "Visualizza slider \"Apri\""
+                "it": "Visualizza slider \"Apri\"",
+                "de": "Schieberegler \"Öffnen\" anzeigen"
               },
               "hint": {
                 "en": "The \"Open\" slider has the Nuki device open your door. Caution: showing this slider may be dangerous because a wrong gesture on it could accidentally open the door.",
                 "nl": "De \"Openen\" slider opent je deur. Pas op: het tonen van deze slider kan ervoor zorgen dat je per ongeluk met een verkeerde beweging de deur opent terwijl je niet thuis bent.",
+                "de": "Mit dem Schieberegler \"Öffnen\" öffnet das Nuki Ihre Tür. Achtung: Das Anzeigen dieses Schiebereglers kann gefährlich sein, da eine falsche Geste versehentlich die Tür öffnen kann.",
                 "it": "Lo slider \"Aprire\" fa aprire la porta dal dispositivo Nuki. Attenzione: visualizzare lo slider può essere pericoloso perché un gesto sbagliato nell'app potrebbe aprire la porta accidentalmente."
               }
             }
@@ -975,6 +1006,7 @@
           "label": {
             "en": "Power Settings",
             "nl": "Energie instellingen",
+            "de": "Energieeinstellungen",
             "it": "Impostazioni alimentazione"
           },
           "children": [
@@ -985,11 +1017,13 @@
               "label": {
                 "en": "Battery operating",
                 "nl": "Batterij werkt",
+                "de": "Batteriebetrieb",
                 "it": "Alimentazione a batteria"
               },
               "hint": {
                 "en": "Enable this setting if your Nuki Opener is powered by batteries (leave disabled if the Opener is powered by USB cable). This setting allows Homey to manage device energy properly.",
                 "nl": "Schakel deze instelling in als je Nuki Opener op batterijen werkt (laat deze instelling uitgeschakeld als de Opener wordt gevoed door een USB-kabel). Met deze instelling kan Homey de energie van het apparaat goed beheren.",
+                "de": "Aktivieren Sie diese Einstellung, wenn Ihr Nuki Opener mit Batterien betrieben wird (lassen Sie diese Option deaktiviert, wenn der Opener über ein USB-Kabel betrieben wird). Mit dieser Einstellung kann Homey die Energie des Geräts ordnungsgemäß verwalten.",
                 "it": "Abilitare questa impostazione se Nuki Opener è alimentato a batteria (lasciare disabilitato se il dispositivo è alimentato da cavo USB). Questa impostazione consente a Homey di gestire correttamente l'energia del dispositivo."
               }
             }

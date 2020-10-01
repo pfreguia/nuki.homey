@@ -5,14 +5,14 @@
       "title": {
         "en": "Nuki state changed",
         "nl": "Nuki status gewijzigd",
-        "it": "Lo stato Nuki \u00E8 cambiato",
-        "de": "Nuki Status hat sich geändert"
+        "de": "Nuki Status hat sich geändert",
+        "it": "Lo stato Nuki \u00E8 cambiato"
       },
       "hint": {
         "en": "State has changed. The tag \"State\" contains the updated value. The local tag \"Previous state\" contains previous value.",
         "nl": "Status is veranderd. De tag \"Status\" bevat de bijgewerkte waarde. De lokale tag \"Vorige status\" bevat de vorige waarde.",
-        "it": "Lo stato \u00E8 cambiato. Il tag \"Stato\" contiene i valori aggiornati. Il tag locale \"Stato precedente\" contiene il valore precedente.",
-        "de": "Status hat sich geändert. Das Tag \"Status\" enthält den aktualisierten Wert. Das lokale Tag \"Vorheriger Status\" enthält den vorherigen Wert."
+        "de": "Status hat sich geändert. Das Tag \"Status\" enthält den aktualisierten Wert. Das lokale Tag \"Vorheriger Status\" enthält den vorherigen Wert.",
+        "it": "Lo stato \u00E8 cambiato. Il tag \"Stato\" contiene i valori aggiornati. Il tag locale \"Stato precedente\" contiene il valore precedente."
       },
       "tokens": [
         {
@@ -21,8 +21,8 @@
           "title": {
             "en": "Previous state",
             "nl": "Vorige status",
-            "it": "Stato precedente",
-            "de": "Vorheriger Status"
+            "de": "Vorheriger Status",
+            "it": "Stato precedente"
           },
           "example": "online"
         }
@@ -69,8 +69,8 @@
       "title": {
         "en": "Nuki action",
         "nl": "Nuki actie",
-        "it": "Azione Nuki",
-        "de": "Nuki Aktion"
+        "de": "Nuki Aktion",
+        "it": "Azione Nuki"
       },
       "args": [
         {
@@ -82,8 +82,8 @@
               "title": {
                 "en": "Unlock",
                 "nl": "Ontgrendelen",
-                "it": "Sbloccare",
-                "de": "Aufsperren"
+                "de": "Aufsperren",
+                "it": "Sbloccare"
               }
             },
             {
@@ -91,8 +91,8 @@
               "title": {
                 "en": "Lock",
                 "nl": "Vergrendelen",
-                "it": "Bloccare",
-                "de": "Zusperren"
+                "de": "Zusperren",
+                "it": "Bloccare"
               }
             },
             {
@@ -100,8 +100,8 @@
               "title": {
                 "en": "Unlatch",
                 "nl": "Openen",
-                "it": "Aprire",
-                "de": "Entriegeln"
+                "de": "Entriegeln",
+                "it": "Aprire"
               }
             },
             {
@@ -115,8 +115,8 @@
               "title": {
                 "en": "Lock \u2019n\u2019 Go with unlatch",
                 "nl": "Lock \u2019n\u2019 Go met openen",
-                "it": "Lock \u2019n\u2019 Go con apertura",
-                "de": "Lock \u2019n\u2019 Go mit Entriegeln"
+                "de": "Lock \u2019n\u2019 Go mit Entriegeln",
+                "it": "Lock \u2019n\u2019 Go con apertura"
               }
             }
           ]
@@ -129,16 +129,16 @@
               "id": "reject",
               "label": {
                 "en": "Don't execute this action if a different action is already in progress",
-                "it": "Non eseguire questa azione se un'azione diversa \u00E9 gi\u00E0 in corso",
-                "de": "Führen Sie diese Aktion nicht aus, wenn bereits eine andere Aktion ausgeführt wird"
+                "de": "Führen Sie diese Aktion nicht aus, wenn bereits eine andere Aktion ausgeführt wird",
+                "it": "Non eseguire questa azione se un'azione diversa \u00E9 gi\u00E0 in corso"
               }
             },
             {
               "id": "defer",
               "label": {
                 "en": "Defer this action if a different action is already in progress",
-                "it": "Differisci questa azione se un'azione diversa \u00E9 gi\u00E0 in corso",
-                "de": "Verzögern Sie diese Aktion, wenn bereits eine andere Aktion ausgeführt wird"
+                "de": "Verzögern Sie diese Aktion, wenn bereits eine andere Aktion ausgeführt wird",
+                "it": "Differisci questa azione se un'azione diversa \u00E9 gi\u00E0 in corso"
               }
             }
           ]
