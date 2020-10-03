@@ -3,6 +3,7 @@
   "title": {
     "en": "Nuki State",
     "nl": "Nuki status",
+    "de": "Nuki Status", 
     "it": "Stato Nuki"
   },
   "getable": true,

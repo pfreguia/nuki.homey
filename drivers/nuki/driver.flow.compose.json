@@ -98,10 +98,10 @@
             {
               "id": "3",
               "title": {
-                "en": "Unlatch",
-                "nl": "Openen",
-                "de": "Entriegeln",
-                "it": "Aprire"
+                "en": "Open door",
+                "nl": "Deuer openen",
+                "de": "Tür öffnen",
+                "it": "Aprire porta"
               }
             },
             {
@@ -113,9 +113,9 @@
             {
               "id": "5",
               "title": {
-                "en": "Lock \u2019n\u2019 Go with unlatch",
-                "nl": "Lock \u2019n\u2019 Go met openen",
-                "de": "Lock \u2019n\u2019 Go mit Entriegeln",
+                "en": "Lock \u2019n\u2019 Go with opening",
+                "nl": "Lock \u2019n\u2019 Go met opening",
+                "de": "Lock \u2019n\u2019 Go mit Öffnung",
                 "it": "Lock \u2019n\u2019 Go con apertura"
               }
             }
@@ -128,17 +128,19 @@
             {
               "id": "reject",
               "label": {
-                "en": "Don't execute this action if a different action is already in progress",
-                "de": "Führen Sie diese Aktion nicht aus, wenn bereits eine andere Aktion ausgeführt wird",
-                "it": "Non eseguire questa azione se un'azione diversa \u00E9 gi\u00E0 in corso"
+                "en": "This action is not executed if a different action is already in progress",
+                "nl": "Deze actie wordt niet uitgevoerd als er al een andere actie wordt uitgevoerd",
+                "de": "Diese Aktion wird nicht ausgeführt, wenn bereits eine andere Aktion ausgeführt wird",
+                "it": "Questa azione non è eseguita se un’azione diversa è già in corso"
               }
             },
             {
               "id": "defer",
               "label": {
-                "en": "Defer this action if a different action is already in progress",
-                "de": "Verzögern Sie diese Aktion, wenn bereits eine andere Aktion ausgeführt wird",
-                "it": "Differisci questa azione se un'azione diversa \u00E9 gi\u00E0 in corso"
+                "en": "This action is delayed if a different action is already in progress",
+                "nl": "Deze actie wordt vertraagd als er al een andere actie wordt uitgevoerd",
+                "de": "Diese Aktion wird verzögert, wenn bereits eine andere Aktion ausgeführt wird",
+                "it": "Questa azione è differita se un'azione diversa è già in corso"
               }
             }
           ]

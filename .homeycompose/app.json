@@ -1,38 +1,61 @@
 {
   "id": "nuki.homey",
   "sdk": 3,
-  "brandColor": "#909090",
+  "brandColor": "#8c8c8c",
   "name": {
-    "en": "Nuki Direct",
-    "nl": "Nuki Direct"
+    "en": "Nuki Direct"
   },
   "tags": {
     "en": [
       "nuki",
-      "lock"
+      "smart",
+      "door",
+      "lock",
+      "opener",
+      "protection"
     ],
     "nl": [
       "nuki",
-      "slot"
+      "deurslot",
+      "smart",
+      "opener",
+      "bescherming"
+    ],
+    "de": [
+      "nuki",
+      "tuerschloss",
+      "smart",
+      "opener",
+      "schutz"
+    ],
+    "it": [
+      "nuki",
+      "smart",
+      "intelligente",
+      "serratura",
+      "sicurezza",
+      "protezione",
+      "porta",
+      "opener"
     ]
   },
-  "version": "3.0.4",
+  "version": "3.0.5",
   "compatibility": ">=5.0.0",
   "author": {
-    "name": "Jelger Haanstra",
-    "email": "homey@solidewebservices.com",
+    "name": "Piero Freguia",
+    "email": "pfreguia@tiscali.it",
     "website": "https://github.com/pfreguia/nuki.homey"
   },
   "contributors": {
     "developers": [
       {
-        "name": "Piero Freguia",
-        "email": "pfreguia@tiscali.it"
+        "name": "Jelger Haanstra",
+        "email": "homey@solidewebservices.com"
       }
     ],
     "translators": [
       {
-        "name": "fantross"
+        "name": "Dirk G\u00f6bel"
       }
     ]
   },
@@ -53,9 +76,7 @@
   },
   "category": "security",
   "description": {
-    "en": "Control your Nuki devices within your network",
-    "nl": "Beheer je Nuki apparaten binnen je netwerk",
-    "it": "Controlla i tuoi dispositivi Nuki all'interno della tua rete"
+    "en": "Your home has never been so smartly secure"
   },
   "dependencies": {
     "net": "*"

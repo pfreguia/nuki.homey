@@ -18,19 +18,19 @@
     "press_bridge_button": "Druk kort op de knop van je Nuki Bridge"
   },
   "util": {
-    "uncalibrated": "Niet gecalibreerd",
-    "locked": "Vergrendeld",
-    "unlocking": "Ontgrendelende",
-    "unlocked": "Ontgrendeld",
-    "locking": "Vergrendelende",
-    "unlatched": "Geopend",
-    "unlocked_go": "Ontgrendeld (Lock ‘n’ Go)",
-    "unlatching": "Openende",
-    "motor_blocked": "Motor geblokkeerd",
-    "undefined": "Niet gedefinieerd",
+    "uncalibrated": "niet gecalibreerd",
+    "locked": "vergrendeld",
+    "unlocking": "ontgrendelend",
+    "unlocked": "ontgrendeld",
+    "locking": "vergrendelend",
+    "unlatched": "deur open",
+    "unlocked_go": "ontgrendeld (Lock ‘n’ Go)",
+    "unlatching": "deur openen...",
+    "motor_blocked": "motor geblokkeerd",
+    "undefined": "niet gedefinieerd",
     "400": "Actie is ongeldig",
     "401": "Token is ongeldig",
-    "403":  "Authentication is disabled",
+    "403": "Authentication is disabled",
     "404": "Slot is onbekend, voeg je Nuki opnieuw toe a.u.b.",
     "503": "Nuki Bridge is druk"
   },
@@ -41,12 +41,12 @@
     "no_token": "Geen token van de bridge ontvangen, zorg ervoor dat je de knop van de bridge indrukt gedurende het pairen."
   },
   "device": {
-    "untrained": "Untrained",
-    "online": "Online",
+    "untrained": "untrained",
+    "online": "online",
     "rto_active": "Ring to Open",
-    "open": "Open",
-    "opening": "Opening",
-    "boot_run": "Boot run",
+    "open": "open",
+    "opening": "wordt geopend...",
+    "boot_run": "boot run",
     "continuous_mode": "Ring to Open - Cm"
   }
 }

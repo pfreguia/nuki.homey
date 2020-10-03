@@ -1,7 +1,6 @@
 {
   "name": {
-    "en": "Nuki Smart Lock",
-    "nl": "Nuki Smart Lock"
+    "en": "Nuki Smart Lock"
   },
   "$extends": [
     "defaults"

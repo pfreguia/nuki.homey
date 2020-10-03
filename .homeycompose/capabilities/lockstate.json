@@ -3,6 +3,7 @@
   "title": {
     "en": "State",
     "nl": "Status",
+    "de": "Status",
     "it": "Stato"
   },
   "getable": true,

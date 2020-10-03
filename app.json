@@ -1,38 +1,62 @@
 {
+  "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "nuki.homey",
   "sdk": 3,
-  "brandColor": "#909090",
+  "brandColor": "#8c8c8c",
   "name": {
-    "en": "Nuki Direct",
-    "nl": "Nuki Direct"
+    "en": "Nuki Direct"
   },
   "tags": {
     "en": [
       "nuki",
-      "lock"
+      "smart",
+      "door",
+      "lock",
+      "opener",
+      "protection"
     ],
     "nl": [
       "nuki",
-      "slot"
+      "deurslot",
+      "smart",
+      "opener",
+      "bescherming"
+    ],
+    "de": [
+      "nuki",
+      "tuerschloss",
+      "smart",
+      "opener",
+      "schutz"
+    ],
+    "it": [
+      "nuki",
+      "smart",
+      "intelligente",
+      "serratura",
+      "sicurezza",
+      "protezione",
+      "porta",
+      "opener"
     ]
   },
-  "version": "3.0.4",
+  "version": "3.0.5",
   "compatibility": ">=5.0.0",
   "author": {
-    "name": "Jelger Haanstra",
-    "email": "homey@solidewebservices.com",
+    "name": "Piero Freguia",
+    "email": "pfreguia@tiscali.it",
     "website": "https://github.com/pfreguia/nuki.homey"
   },
   "contributors": {
     "developers": [
       {
-        "name": "Piero Freguia",
-        "email": "pfreguia@tiscali.it"
+        "name": "Jelger Haanstra",
+        "email": "homey@solidewebservices.com"
       }
     ],
     "translators": [
       {
-        "name": "fantross"
+        "name": "Dirk Göbel"
       }
     ]
   },
@@ -53,9 +77,7 @@
   },
   "category": "security",
   "description": {
-    "en": "Control your Nuki devices within your network",
-    "nl": "Beheer je Nuki apparaten binnen je netwerk",
-    "it": "Controlla i tuoi dispositivi Nuki all'interno della tua rete"
+    "en": "Your home has never been so smartly secure"
   },
   "dependencies": {
     "net": "*"
@@ -495,10 +517,10 @@
               {
                 "id": "3",
                 "title": {
-                  "en": "Unlatch",
-                  "nl": "Openen",
-                  "de": "Entriegeln",
-                  "it": "Aprire"
+                  "en": "Open door",
+                  "nl": "Deuer openen",
+                  "de": "Tür öffnen",
+                  "it": "Aprire porta"
                 }
               },
               {
@@ -510,9 +532,9 @@
               {
                 "id": "5",
                 "title": {
-                  "en": "Lock ’n’ Go with unlatch",
-                  "nl": "Lock ’n’ Go met openen",
-                  "de": "Lock ’n’ Go mit Entriegeln",
+                  "en": "Lock ’n’ Go with opening",
+                  "nl": "Lock ’n’ Go met opening",
+                  "de": "Lock ’n’ Go mit Öffnung",
                   "it": "Lock ’n’ Go con apertura"
                 }
               }
@@ -525,17 +547,19 @@
               {
                 "id": "reject",
                 "label": {
-                  "en": "Don't execute this action if a different action is already in progress",
-                  "de": "Führen Sie diese Aktion nicht aus, wenn bereits eine andere Aktion ausgeführt wird",
-                  "it": "Non eseguire questa azione se un'azione diversa é già in corso"
+                  "en": "This action is not executed if a different action is already in progress",
+                  "nl": "Deze actie wordt niet uitgevoerd als er al een andere actie wordt uitgevoerd",
+                  "de": "Diese Aktion wird nicht ausgeführt, wenn bereits eine andere Aktion ausgeführt wird",
+                  "it": "Questa azione non è eseguita se un’azione diversa è già in corso"
                 }
               },
               {
                 "id": "defer",
                 "label": {
-                  "en": "Defer this action if a different action is already in progress",
-                  "de": "Verzögern Sie diese Aktion, wenn bereits eine andere Aktion ausgeführt wird",
-                  "it": "Differisci questa azione se un'azione diversa é già in corso"
+                  "en": "This action is delayed if a different action is already in progress",
+                  "nl": "Deze actie wordt vertraagd als er al een andere actie wordt uitgevoerd",
+                  "de": "Diese Aktion wird verzögert, wenn bereits eine andere Aktion ausgeführt wird",
+                  "it": "Questa azione è differita se un'azione diversa è già in corso"
                 }
               }
             ]
@@ -624,17 +648,19 @@
               {
                 "id": "reject",
                 "label": {
-                  "en": "Don't execute this action if a different action is already in progress",
-                  "de": "Führen Sie diese Aktion nicht aus, wenn bereits eine andere Aktion ausgeführt wird",
-                  "it": "Non eseguire questa azione se un'azione diversa é già in corso"
+                  "en": "This action is not executed if a different action is already in progress",
+                  "nl": "Deze actie wordt niet uitgevoerd als er al een andere actie wordt uitgevoerd",
+                  "de": "Diese Aktion wird nicht ausgeführt, wenn bereits eine andere Aktion ausgeführt wird",
+                  "it": "Questa azione non è eseguita se un’azione diversa è già in corso"
                 }
               },
               {
                 "id": "defer",
                 "label": {
-                  "en": "Defer this action if a different action is already in progress",
-                  "de": "Verzögern Sie diese Aktion, wenn bereits eine andere Aktion ausgeführt wird",
-                  "it": "Differisci questa azione se un'azione diversa é già in corso"
+                  "en": "This action is delayed if a different action is already in progress",
+                  "nl": "Deze actie wordt vertraagd als er al een andere actie wordt uitgevoerd",
+                  "de": "Diese Aktion wird verzögert, wenn bereits eine andere Aktion ausgeführt wird",
+                  "it": "Questa azione è differita se un'azione diversa è già in corso"
                 }
               }
             ]
@@ -680,8 +706,7 @@
         }
       ],
       "name": {
-        "en": "Nuki Smart Lock",
-        "nl": "Nuki Smart Lock"
+        "en": "Nuki Smart Lock"
       },
       "capabilities": [
         "locked",
@@ -840,8 +865,7 @@
         }
       ],
       "name": {
-        "en": "Nuki Opener",
-        "nl": "Nuki Opener"
+        "en": "Nuki Opener"
       },
       "capabilities": [
         "locked",
@@ -931,7 +955,7 @@
           "label": {
             "en": "Unlock duration, when unlocked by this app",
             "nl": "Ontgrendelen duur, wanneer ontgrendeld door deze app",
-            "de": "Aufsperrdauer, wenn von dieser App aufgesperrt",
+            "de": "Entsperrdauer, wenn von dieser App entsperrt",
             "it": "Durata sblocco, quando sbloccato da questa app"
           },
           "children": [
@@ -948,7 +972,7 @@
               "hint": {
                 "en": "When unlocked, Opener always immediately opens the main entrance door of the apartment building as soon as someone ring the doorbell.\nNuki calls this feature \"Ring to Open\".\n\nRing to Open usually has a timed duration (duration can be set via the Nuki smarphone app)\n\nThe unlocked state can always remain active by enabling the \"Continuous mode\".",
                 "nl": "\"Wanneer ontgrendeld, Opener altijd onmiddellijk de hoofdingang opent zodra iemand aanbelt.\nNuki noemt deze functie \"Ring to Open\".\n\nRing to Open heeft meestal een beperkte duur (duur instelbaar via de Nuki smartphone app).\n\nDe ontgrendeld status kan altijd actief blijven door de \"Continumodus\" in te schakelen.",
-                "de": "Im entsperrten Zustand öffnet Opener immer sofort die Haupteingangstür des Wohnhauses, sobald jemand an der Tür klingelt.\nNuki nennt diese Funktion \"Ring to Open\".\n\n\"Ring to Open\"hat normalerweise eine zeitgesteuerte Dauer (die Dauer kann über die Nuki Smartphone-App eingestellt werden).\n\nDer entsperrte Zustand kann immer aktiv bleiben, indem der \"Dauermodus\" aktiviert wird.",
+                "de": "Im entsperrten Zustand öffnet Opener immer sofort die Haupteingangstür des Wohnhauses, sobald jemand an der Tür klingelt.\nNuki nennt diese Funktion \"Ring to Open\".\n\n\"Ring to Open\" hat normalerweise eine zeitgesteuerte Dauer (die Dauer kann über die Nuki Smartphone-App eingestellt werden).\n\nWählt man den “Dauermodus” aus, wird der Zustand entsperrt dauerhaft aktiviert.",
                 "it": "Quando sbloccato, Opener apre automaticamente la porta d'ingresso del condominio non appena qualcuno suona il campanello. Nuki chiama questa funzionalità \"Ring to Open\"\n\n Solitamente Ring to Open ha una durata limitata (la durata può essere impostata dall'app per smartphone di Nuki).\n\nLo stato sbloccato può rimanere sempre attivo abilitando la \"Modalità continua\"."
               },
               "values": [
@@ -1128,6 +1152,7 @@
       "title": {
         "en": "State",
         "nl": "Status",
+        "de": "Status",
         "it": "Stato"
       },
       "getable": true,
@@ -1139,6 +1164,7 @@
       "title": {
         "en": "Nuki State",
         "nl": "Nuki status",
+        "de": "Nuki Status",
         "it": "Stato Nuki"
       },
       "getable": true,
@@ -1168,6 +1194,7 @@
       "title": {
         "en": "State",
         "nl": "Status",
+        "de": "Status",
         "it": "Stato"
       },
       "getable": true,

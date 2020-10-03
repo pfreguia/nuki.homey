@@ -1,7 +1,6 @@
 {
   "name": {
-    "en": "Nuki Opener",
-    "nl": "Nuki Opener"
+    "en": "Nuki Opener"
   },
   "$extends": [
     "defaults"

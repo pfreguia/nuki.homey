@@ -18,16 +18,16 @@
     "press_bridge_button": "Premi e rilascia il bottone sul tuo Nuki Bridge"
   },
   "util": {
-    "uncalibrated": "Uncalibrated",
-    "locked": "Locked",
-    "unlocking": "Unlocking",
-    "unlocked": "Unlocked",
-    "locking": "Locking",
-    "unlatched": "Unlatched",
-    "unlocked_go": "Unlocked (Lock ‘n’ Go)",
-    "unlatching": "Unlatching",
-    "motor_blocked": "Motor Blocked",
-    "undefined": "Undefined",
+    "uncalibrated": "non calibrato",
+    "locked": "bloccato",
+    "unlocking": "sblocco",
+    "unlocked": "sbloccato",
+    "locking": "blocco",
+    "unlatched": "porta aperta",
+    "unlocked_go": "sbloccato (Lock ‘n’ Go)",
+    "unlatching": "apertura porta...",
+    "motor_blocked": "motore bloccato",
+    "undefined": "non definito",
     "400": "Action invalid",
     "401": "Token is invalid",
     "403": "Authentication is disabled",
@@ -41,12 +41,12 @@
     "no_token": "Non \u00E8 stato ricevuto un token dal Bridge; assicurati di premere il bottone del Bridge durante l'accoppiamento."
   },
   "device": {
-    "untrained": "Untrained",
-    "online": "Online",
+    "untrained": "untrained",
+    "online": "online",
     "rto_active": "Ring to Open",
-    "open": "Open",
-    "opening": "Opening",
-    "boot_run": "Boot run",
+    "open": "aperta",
+    "opening": "in apertura...",
+    "boot_run": "boot run",
     "continuous_mode":  "Ring to Open - CM"
   }
 }
