@@ -1,7 +1,7 @@
 'use strict';
 
 const NukiDriver = require('../../lib/NukiDriver.js');
-const Util = require('/lib/util.js');
+
 
 class SmartLockDriver extends NukiDriver {
 
@@ -10,8 +10,6 @@ class SmartLockDriver extends NukiDriver {
   }
 
   onInit() {
-    if (!this.util) this.util = new Util({homey: this.homey});
-
     this.homey.flow.getDeviceTriggerCard('lockstateChanged');
   }
 

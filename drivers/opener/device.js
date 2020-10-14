@@ -2,6 +2,7 @@
 
 const NukiDevice = require('../../lib/NukiDevice.js');
 
+
 // Actions allowed on an Opener device as defined in Nuki documentation.
 const ACTION_ACTIVATE_RTO = 1
 const ACTION_DEACTIVATE_RTO = 2
@@ -18,14 +19,10 @@ class OpenerDevice extends NukiDevice {
   onInit() {
     super.onInit();
 
-    // Initially set device as available.
-    this.setAvailable();
-
     // LISTENERS FOR UPDATING CAPABILITIES VALUE
     this.registerCapabilityListener('locked', async (value, options) => {
       try {
-        console.log('Value: ' + (value ? 'Lock' : 'Unlock'));
-        console.log(options);
+        this.log('Value: ' + (value ? 'Lock' : 'Unlock'));
         if (value) {
           // Lock action.
           if (this.progressingAction > 0) {
@@ -34,9 +31,9 @@ class OpenerDevice extends NukiDevice {
               (this.progressingAction == ACTION_DEACTIVATE_CONTINUOUS_MODE && (this.getCapabilityValue('openerstate') === 1)) ||
               (this.progressingAction == QUICK_ACTION_LOCK)) {
               // An action that leads to Lock state is already in progress.
-              console.log('An action that leads to Lock state is already in progress');
+              this.log('An action that leads to Lock state is already in progress');
               await this.progressingActionDone();
-              console.log('Lock action in progress completed');
+              this.log('Lock action in progress completed');
               return Promise.resolve();
             }
             else {
@@ -46,19 +43,19 @@ class OpenerDevice extends NukiDevice {
           const currValue = this.getCapabilityValue('locked');
           if (currValue) {
             // Already locked. No action needed.
-            console.log('Already locked. No action needed');
+            this.log('Already locked. No action needed');
             return Promise.resolve();
           }
-          const url = this.buildURL('lock', [
-            ['nukiId', this.getData().id],
-            ['deviceType', 2]
-          ]);
+          
           this.progressingAction = QUICK_ACTION_LOCK;
           // It seems that, even if result.success is false, the action is
           //  performed correctly by Nuki. For that resons the "result" object
-          //  of sendCommand() method is not evaluated.
-          await this.util.sendCommand(url, 8000);
-          console.log('Lock done');
+          //  of sendRequest() method is not evaluated.
+           await this.bridge.sendRequest('lock', [
+            ['nukiId', this.getData().id],
+            ['deviceType', 2]
+          ], 8000);
+          this.log('Lock done');
           this.progressingAction = 0;
           return Promise.resolve();
         }
@@ -70,9 +67,9 @@ class OpenerDevice extends NukiDevice {
             if ((unlock_continuous && this.progressingAction == ACTION_ACTIVATE_CONTINUOUS_MODE) ||
               (!unlock_continuous && this.progressingAction == ACTION_ACTIVATE_RTO)) {
               // An action that leads to Unlock state is already in progress.
-              console.log('An action that leads to Unlock state is already in progress');
+              this.log('An action that leads to Unlock state is already in progress');
               await this.progressingActionDone();
-              console.log('Unlock action in progress completed');
+              this.log('Unlock action in progress completed');
               return Promise.resolve();
             }
             else {
@@ -82,21 +79,20 @@ class OpenerDevice extends NukiDevice {
           const currValue = this.getCapabilityValue('locked');
           if (!currValue) {
             // Already unlocked. No action needed.
-            console.log('Already unlocked. No action needed');
+            this.log('Already unlocked. No action needed');
             return Promise.resolve();
           }
           const unlockAction = (unlock_continuous ? ACTION_ACTIVATE_CONTINUOUS_MODE : ACTION_ACTIVATE_RTO);
-          const url = this.buildURL('lockAction', [
-            ['nukiId', this.getData().id],
-            ['deviceType', 2],
-            ['action', unlockAction]
-          ]);
           this.progressingAction = unlockAction;
           // It seems that, even if result.success is false, the action is
           //  performed correctly by Nuki. For that resons the "result" object
-          //  of sendCommand() method is not evaluated.
-          await this.util.sendCommand(url, 8000);
-          console.log('Unlock done');
+          //  of sendRequest() method is not evaluated.
+          await this.bridge.sendRequest('lockAction', [
+            ['nukiId', this.getData().id],
+            ['deviceType', 2],
+            ['action', unlockAction]
+          ], 8000);
+          this.log('Unlock done');
           this.progressingAction = 0;
           return Promise.resolve();
         }
@@ -108,7 +104,7 @@ class OpenerDevice extends NukiDevice {
 
     this.registerCapabilityListener('open_action', async (value) => {
       try {
-        console.log('manual');
+        this.log('manual');
         const currValue = this.getCapabilityValue('open_action');
         if (value === currValue) {
           return Promise.resolve();
@@ -119,16 +115,15 @@ class OpenerDevice extends NukiDevice {
             return Promise.reject(new Error('A different action is already in progress'));
           }
           else {
-            const url = this.buildURL('lockAction', [
-              ['nukiId', this.getData().id],
-              ['deviceType', 2],
-              ['action', ACTION_ELECTRIC_STRIKE_ACTUATION],
-              ['nowait', 1]]);
             this.progressingAction = ACTION_ELECTRIC_STRIKE_ACTUATION;
             // It seems that, even if result.success is false, the action is
             //  performed correctly by Nuki. For that resons the "result" object
-            //  of sendCommand() method is not evaluated.
-            await this.util.sendCommand(url, 12000);
+            //  of sendRequest() method is not evaluated.
+            await this.bridge.sendRequest('lockAction', [
+              ['nukiId', this.getData().id],
+              ['deviceType', 2],
+              ['action', ACTION_ELECTRIC_STRIKE_ACTUATION],
+              ['nowait', 1]], 12000);
             // Update capabilties and trigger action flows.
             const flow = this.homey.flow;
             const openingStr = this.homey.__('device.opening');
@@ -161,33 +156,32 @@ class OpenerDevice extends NukiDevice {
         if (value === currValue) {
           return Promise.resolve();
         }
-        console.log('Continuous mode: ' + (value ? 'Active' : 'Not active'));
+        this.log('Continuous mode: ' + (value ? 'Active' : 'Not active'));
         if (value) {
           // Activate Continuous mode.
           if (this.progressingAction > 0) {
             // An action is already in progress.
             if (this.progressingAction == ACTION_ACTIVATE_CONTINUOUS_MODE) {
               // An action that activate Continuosus mode is already in progress.
-              console.log('An action that activate Continuosus mode is already in progress');
+              this.log('An action that activate Continuosus mode is already in progress');
               await this.progressingActionDone();
-              console.log('Continuous mode activation completed');
+              this.log('Continuous mode activation completed');
               return Promise.resolve();
             }
             else {
               return Promise.reject(new Error('A different action is already in progress'));
             }
           }
-          const url = this.buildURL('lockAction', [
-            ['nukiId', this.getData().id],
-            ['deviceType', 2],
-            ['action', ACTION_ACTIVATE_CONTINUOUS_MODE]
-          ]);
           this.progressingAction = ACTION_ACTIVATE_CONTINUOUS_MODE;
           // It seems that, even if result.success is false, the action is
           //  performed correctly by Nuki. For that resons the "result" object
-          //  of sendCommand() method is not evaluated.
-          await this.util.sendCommand(url, 8000);
-          console.log('Continuous mode activated');
+          //  of sendRequest() method is not evaluated.
+          await this.bridge.sendRequest('lockAction', [
+            ['nukiId', this.getData().id],
+            ['deviceType', 2],
+            ['action', ACTION_ACTIVATE_CONTINUOUS_MODE]
+          ], 8000);
+          this.log('Continuous mode activated');
           this.progressingAction = 0;
           return Promise.resolve();
         }
@@ -198,26 +192,25 @@ class OpenerDevice extends NukiDevice {
             if (this.progressingAction == ACTION_DEACTIVATE_CONTINUOUS_MODE ||
               this.progressingAction == QUICK_ACTION_LOCK) {
               // An action that deactivate Continuosus mode is already in progress.
-              console.log('An action that deactivate Continuosus mode is already in progress');
+              this.log('An action that deactivate Continuosus mode is already in progress');
               await this.progressingActionDone();
-              console.log('Continuous mode deactivation completed');
+              this.log('Continuous mode deactivation completed');
               return Promise.resolve();
             }
             else {
               return Promise.reject(new Error('A different action is already in progress'));
             }
           }
-          const url = this.buildURL('lockAction', [
-            ['nukiId', this.getData().id],
-            ['deviceType', 2],
-            ['action', ACTION_DEACTIVATE_CONTINUOUS_MODE]
-          ]);
           this.progressingAction = ACTION_DEACTIVATE_CONTINUOUS_MODE;
           // It seems that, even if result.success is false, the action is
           //  performed correctly by Nuki. For that resons the "result" object
-          //  of sendCommand() method is not evaluated.
-          await this.util.sendCommand(url, 8000);
-          console.log('Continuous mode deactivated');
+          //  of sendRequest() method is not evaluated.
+          await this.bridge.sendRequest('lockAction', [
+            ['nukiId', this.getData().id],
+            ['deviceType', 2],
+            ['action', ACTION_DEACTIVATE_CONTINUOUS_MODE]
+          ], 8000);
+          this.log('Continuous mode deactivated');
           this.progressingAction = 0;
           return Promise.resolve();
         }
@@ -255,30 +248,30 @@ class OpenerDevice extends NukiDevice {
 
   async openerActionFlowCard(action, what_if_action_in_progress) {
     try {
-      console.log(action);
-      console.log(what_if_action_in_progress);
+      this.log(action);
+      this.log(what_if_action_in_progress);
       while (this.progressingAction > 0) {
         // An action is already in progress.
         if (action == this.progressingAction) {
           // Same action is already in progress. Just wait for its completion.
-          console.log('Same action is already in progress. Just wait for its completion');
+          this.log('Same action is already in progress. Just wait for its completion');
           await this.progressingActionDone();
-          console.log('Same action completed');
+          this.log('Same action completed');
           return Promise.resolve();
         }
         else {
           if (what_if_action_in_progress == 'defer') {
             // A different action is already in progress. Wait for its completion before executing this action.
-            console.log('A different action is already in progress. Wait for its completion before excuting this action');
+            this.log('A different action is already in progress. Wait for its completion before excuting this action');
             await this.progressingActionDone();
             // Different action completed. Execute this action, if no other actions are in progress.
-            console.log('Different action completed. Execute this action, if no other actions are in progress');
+            this.log('Different action completed. Execute this action, if no other actions are in progress');
 
 
           }
           else {
             // A different action is already in progress. Reject this action.
-            console.log('A different action is already in progress. Reject this action');
+            this.log('A different action is already in progress. Reject this action');
             return Promise.reject(new Error('A different action is already in progress'));
           }
         }
@@ -287,24 +280,23 @@ class OpenerDevice extends NukiDevice {
         case ACTION_ACTIVATE_RTO:
           {
             const currValue = this.getCapabilityValue('openerstate');
-            console.log(currValue);
-            console.log(currValue);
+            this.log(currValue);
+            this.log(currValue);
             if (currValue == this.homey.__('device.rto_active')) {
               // Ring to Open already activated. Action does not need to be executed.
-              console.log('Ring to Open already activated. Action does not need to be executed');
+              this.log('Ring to Open already activated. Action does not need to be executed');
               return Promise.resolve();
             }
-            const url = this.buildURL('lockAction', [
-              ['nukiId', this.getData().id],
-              ['deviceType', 2],
-              ['action', ACTION_ACTIVATE_RTO]
-            ]);
             this.progressingAction = ACTION_ACTIVATE_RTO;
             // It seems that, even if result.success is false, the action is
             //  performed correctly by Nuki. For that resons the "result" object
-            //  of sendCommand() method is not evaluated.
-            await this.util.sendCommand(url, 8000);
-            console.log('Ring to Open activated');
+            //  of sendRequest() method is not evaluated.
+            await this.bridge.sendRequest('lockAction', [
+              ['nukiId', this.getData().id],
+              ['deviceType', 2],
+              ['action', ACTION_ACTIVATE_RTO]
+            ], 8000);
+            this.log('Ring to Open activated');
             await this.setCapabilityValue('openerstate', this.homey.__('device.rto_active'));
             this.progressingAction = 0;
             return Promise.resolve();
@@ -315,20 +307,19 @@ class OpenerDevice extends NukiDevice {
             const currValue = this.getCapabilityValue('openerstate');
             if (currValue == this.homey.__('device.online')) {
               // Ring to Open already deactivated. Action does not need to be executed.
-              console.log('Ring to Open already deactivated. Action does not need to be executed');
+              this.log('Ring to Open already deactivated. Action does not need to be executed');
               return Promise.resolve();
             }
-            const url = this.buildURL('lockAction', [
-              ['nukiId', this.getData().id],
-              ['deviceType', 2],
-              ['action', ACTION_DEACTIVATE_RTO]
-            ]);
             this.progressingAction = ACTION_DEACTIVATE_RTO;
             // It seems that, even if result.success is false, the action is
             //  performed correctly by Nuki. For that resons the "result" object
-            //  of sendCommand() method is not evaluated.
-            await this.util.sendCommand(url, 8000);
-            console.log('Ring to Open deactivated');
+            //  of sendRequest() method is not evaluated.
+            await this.bridge.sendRequest('lockAction', [
+              ['nukiId', this.getData().id],
+              ['deviceType', 2],
+              ['action', ACTION_DEACTIVATE_RTO]
+            ], 8000);
+            this.log('Ring to Open deactivated');
             await this.setCapabilityValue('openerstate', this.homey.__('device.online'));
             this.progressingAction = 0;
             return Promise.resolve();
@@ -336,19 +327,18 @@ class OpenerDevice extends NukiDevice {
           break;
         case ACTION_ELECTRIC_STRIKE_ACTUATION:
           {
-            console.log('Execute Open');
-            const url = this.buildURL('lockAction', [
+            this.log('Execute Open');
+            this.progressingAction = ACTION_ELECTRIC_STRIKE_ACTUATION;
+            // It seems that, even if result.success is false, the action is
+            //  performed correctly by Nuki. For that resons the "result" object
+            //  of sendRequest() method is not evaluated.
+            await this.bridge.sendRequest('lockAction', [
               ['nukiId', this.getData().id],
               ['deviceType', 2],
               ['action', ACTION_ELECTRIC_STRIKE_ACTUATION],
               ['nowait', 1]
-            ]);
-            this.progressingAction = ACTION_ELECTRIC_STRIKE_ACTUATION;
-            // It seems that, even if result.success is false, the action is
-            //  performed correctly by Nuki. For that resons the "result" object
-            //  of sendCommand() method is not evaluated.
-            await this.util.sendCommand(url, 12000);
-            console.log('Open performed');
+            ], 12000);
+            this.log('Open performed');
             // Update capabilties and trigger action flows.
             const flow = this.homey.flow;
             const openingStr = this.homey.__('device.opening');
@@ -371,20 +361,19 @@ class OpenerDevice extends NukiDevice {
             const currValue = this.getCapabilityValue('continuous_mode');
             if (currValue) {
               // Continuos mode already active. Action does not need to be executed.
-              console.log('Continuos mode already active. Action does not need to be executed');
+              this.log('Continuos mode already active. Action does not need to be executed');
               return Promise.resolve();
             }
-            const url = this.buildURL('lockAction', [
-              ['nukiId', this.getData().id],
-              ['deviceType', 2],
-              ['action', ACTION_ACTIVATE_CONTINUOUS_MODE]
-            ]);
             this.progressingAction = ACTION_ACTIVATE_CONTINUOUS_MODE;
             // It seems that, even if result.success is false, the action is
             //  performed correctly by Nuki. For that resons the "result" object
-            //  of sendCommand() method is not evaluated.
-            await this.util.sendCommand(url, 8000);
-            console.log('Continuous mode activated');
+            //  of sendRequest() method is not evaluated.
+            await this.bridge.sendRequest('lockAction', [
+              ['nukiId', this.getData().id],
+              ['deviceType', 2],
+              ['action', ACTION_ACTIVATE_CONTINUOUS_MODE]
+            ], 8000);
+            this.log('Continuous mode activated');
             await this.setCapabilityValue('continuous_mode', true);
             this.progressingAction = 0;
             return Promise.resolve();
@@ -395,20 +384,19 @@ class OpenerDevice extends NukiDevice {
             const currValue = this.getCapabilityValue('continuous_mode');
             if (!currValue) {
               // Continuos mode already deactivated. Action does not need to be executed.
-              console.log('Continuos mode already deactivated. Action does not need to be executed');
+              this.log('Continuos mode already deactivated. Action does not need to be executed');
               return Promise.resolve();
             }
-            const url = this.buildURL('lockAction', [
-              ['nukiId', this.getData().id],
-              ['deviceType', 2],
-              ['action', ACTION_DEACTIVATE_CONTINUOUS_MODE]
-            ]);
             this.progressingAction = ACTION_DEACTIVATE_CONTINUOUS_MODE;
             // It seems that, even if result.success is false, the action is
             //  performed correctly by Nuki. For that resons the "result" object
-            //  of sendCommand() method is not evaluated.
-            await this.util.sendCommand(url, 8000);
-            console.log('Continuous mode deactivated');
+            //  of sendRequest() method is not evaluated.
+            await this.bridge.sendRequest('lockAction', [
+              ['nukiId', this.getData().id],
+              ['deviceType', 2],
+              ['action', ACTION_DEACTIVATE_CONTINUOUS_MODE]
+            ], 8000);
+            this.log('Continuous mode deactivated');
             await this.setCapabilityValue('continuous_mode', false);
             this.progressingAction = 0;
             return Promise.resolve();

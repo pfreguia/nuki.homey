@@ -1,0 +1,103 @@
+﻿<html>
+<head>
+
+    <style>
+        table, th, td {
+            padding-top: 6px;
+            padding-left: 0px;
+            padding-right: 0px;
+        }
+
+        .button {
+        }
+
+            .button:enabled {
+                background-color: #00c139 !important;
+                color: #fff;
+            }
+    </style>
+
+</head>
+<body>
+    <div id="bridges" hidden>
+        <span data-i18n="pair.more_than_one_bridge">More than one Nuki Bridge was detected. Please select a Bridge.</span>
+        <table id="tb" style="width:100%;">
+            <colgroup>
+                <col style="width:100%;">
+                <col>
+            </colgroup>
+            <tr>
+                <td>
+                    <span name="server-id">&nbsp;</span><br />
+                    <span name="info">&nbsp;</span><br />
+                    <span name="date">&nbsp;</span>
+                </td>
+                <td>
+                    <button name="btn" class="button">
+                        <img src="select_bridge.assets/icon.svg" style="width: 36px;height:36px;vertical-align: middle;">
+                    </button>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div id="reason" hidden></div>
+
+    <script type="text/javascript">
+
+        const ids = document.getElementsByName('server-id');
+        const infos = document.getElementsByName('info');
+        const dates = document.getElementsByName('date');
+        const btns = document.getElementsByName('btn');
+        const sep = ':&nbsp;';
+        const mkNRows = function (rowCount) {
+            const tb = document.getElementsByTagName('table')[0];
+            const row = document.getElementsByTagName('tr')[0];
+            for (let i = 1; i < rowCount; i++) {
+                const r1 = row.cloneNode(true);
+                tb.appendChild(r1);
+            }
+        }
+        const mkRow = function (index, foundBridge) {
+            ids[index].innerHTML = 'Server ID' + sep + '<b>' +
+                Number(foundBridge.bridgeId).toString(16).toUpperCase() + '</b>';
+            if (!foundBridge.hasOwnProperty('ip') || !foundBridge.hasOwnProperty('port')) {
+                infos[index].innerHTML = Homey.__('pair.state') + sep + '<b>' +
+                    Homey.__('pair.http_api_disabled_short') + '</b>';
+            }
+            else if (foundBridge.ip == '0.0.0.0') {
+                infos[index].innerHTML = Homey.__('pair.state') + sep + '<b>' +
+                    Homey.__('pair.discovery_disabled_short') + '</b>';
+            }
+            else {
+                infos[index].innerHTML = Homey.__('pair.address') + sep + '<b>' +
+                    foundBridge.ip + '</b>' + ' ' + Homey.__('pair.port') + sep +
+                    '<b>' + foundBridge.port + '</b>';
+            }
+            dates[index].innerHTML = Homey.__('pair.date') + sep + '<b>' +
+                new Date(foundBridge.dateUpdated).toLocaleString() + '</b>';
+            btns[index].onclick = function () {
+                Homey.emit('set_target_bridge', foundBridge)
+                    .then(function () {
+                        Homey.showView('query_bridge');
+                    });
+            }
+        };
+        Homey.emit('get_found_bridges', {})
+            .then(function (foundBridges) {
+                mkNRows(foundBridges.length);
+                for (let i in foundBridges) {
+                   mkRow(i, foundBridges[i]);
+                }
+                $('#bridges').show();
+            })
+            .catch(error => {
+                Homey.setTitle(Homey.__('pair.failed'));
+                $('#reason').html(error.message);
+                $('#reason').show();
+                Homey.setNavigationClose();
+            });
+
+    </script>
+
+</body>
+</html>

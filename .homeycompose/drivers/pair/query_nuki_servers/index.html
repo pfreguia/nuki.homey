@@ -1,0 +1,28 @@
+﻿<html>
+<head>
+    <script type="text/javascript">
+
+        Homey.emit('query_nuki_servers', {})
+            .then(function (foundBridges) {
+                switch (foundBridges.length) {
+                    case 0:
+                        // Unable to get a Bridge list from Nuki Servers. Go to manual pairing.
+                        Homey.showView('manual_pairing');
+                        break;
+                    case -1:
+                        // There is one Bridge (the most common case). Query that Bridge directly.
+                        Homey.showView('query_bridge');
+                        break;
+                    default:
+                        // More than one Bridge. The user must explicitly select a Bridge.
+                        Homey.showView('select_bridge');
+                }
+            });
+
+    </script>
+</head>
+<body>
+    <span data-i18n="pair.query_nuki_servers">Connecting to Nuki Servers. Please wait...</span>
+    <img src="{{assets}}/globe.svg" style="width:60%; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+</body>
+</html>

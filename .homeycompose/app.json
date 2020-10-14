@@ -76,7 +76,7 @@
   },
   "category": "security",
   "description": {
-    "en": "Your home has never been so smartly secure"
+    "en": "Your home has never been so smartly secured"
   },
   "dependencies": {
     "net": "*"

@@ -2,20 +2,24 @@
   "pair": {
     "intro": "Enter the details of your Nuki Bridge.",
     "address": "IP Address",
-    "port": "Port  (default value: 8080)",
+    "port": "Port",
+    "default_value": "default value",
     "token": "Token",
-    "nukiid": "Nuki ID",
-    "titleselection": "What do you want to do?",
-    "nodevices": "No Nuki Bridge discovered. Did you push the button on your bridge during pairing? You can try again or continue with the manual pairing, if you know the IP address and token of your Nuki Bridge.",
-    "again": "Try again",
-    "manual": "Manual pairing",
     "connect": "Connect",
-    "unknownerror": "Unknown error. Are you sure you have entered the correct details and the Nuki Bridge is on the same network where Homey is? Please check your settings and try again.",
-    "step1": "First, make sure the HTTP API in your Nuki Bridge is enabled. You can do this within the Nuki smartphone app. Go to \"Manage my devices\" and select \"Bridge\". There you can enable the HTTP API.",
-    "step2": "Once enabled, continue this procedure by tapping the button \"Next >\".",
-    "step4": "When the searching process is running, press the button on your Nuki Bridge.",
-    "step5": "Should this procedure fails (for example because the button has not been pressed), you will be prompted to the manual pairing procedure.",
-    "press_bridge_button": "Press and release the button on your Nuki Bridge"
+
+    "state": "State",
+    "date": "Date",
+    "discovery_disabled_short": "API Quick Discovery disabled",
+    "http_api_disabled_short": "HTTP API disabled",
+
+    "query_nuki_servers": "Connecting to Nuki Servers. Please wait...",
+    "more_than_one_bridge": "More than one Nuki Bridge was detected. Please select a Bridge.",
+    "press_bridge_button": "Press the button on your Nuki Bridge within <span id=\"seconds\">30</span> seconds.",
+    "failed": "Pairing failed",
+    "button_not_pressed": "Bridge button not pressed within 30 seconds",
+    "discovery_disabled": "The API Quick discovery in your Nuki Bridge is disabled",
+    "http_api_disabled": "The HTTP API in your Nuki Bridge is disabled. Make sure the HTTP API in your Nuki Bridge is enabled. You can do this within the Nuki smartphone app. Go to \"Manage my devices\" and select \"Bridge\". There you can enable the HTTP API.",
+    "try_manual_pairing": "You can continue with the manual pairing."
   },
   "util": {
     "uncalibrated": "uncalibrated",
@@ -30,7 +34,6 @@
     "undefined": "undefined",
     "400": "Action invalid",
     "401": "Token is invalid",
-    "403": "Authentication is disabled",
     "404": "Device is unknown, please re-pair your Nuki",
     "503": "Nuki Bridge is busy"
   },
@@ -47,6 +50,6 @@
     "open": "open",
     "opening": "opening...",
     "boot_run": "boot run",
-    "continuous_mode":  "Ring to Open - CM"
+    "continuous_mode": "Ring to Open - CM"
   }
 }

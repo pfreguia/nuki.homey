@@ -77,7 +77,7 @@
   },
   "category": "security",
   "description": {
-    "en": "Your home has never been so smartly secure"
+    "en": "Your home has never been so smartly secured"
   },
   "dependencies": {
     "net": "*"
@@ -679,13 +679,16 @@
       "icon": "/drivers/nuki/assets/icon.svg",
       "pair": [
         {
-          "id": "start",
-          "navigation": {
-            "next": "loading_bridge"
-          }
+          "id": "query_nuki_servers"
         },
         {
-          "id": "loading_bridge"
+          "id": "select_bridge"
+        },
+        {
+          "id": "query_bridge"
+        },
+        {
+          "id": "manual_pairing"
         },
         {
           "id": "list_devices",
@@ -693,12 +696,6 @@
           "navigation": {
             "next": "add_devices"
           }
-        },
-        {
-          "id": "select_pairing"
-        },
-        {
-          "id": "manual_pairing"
         },
         {
           "id": "add_devices",
@@ -838,13 +835,16 @@
       "icon": "/drivers/opener/assets/icon.svg",
       "pair": [
         {
-          "id": "start",
-          "navigation": {
-            "next": "loading_bridge"
-          }
+          "id": "query_nuki_servers"
         },
         {
-          "id": "loading_bridge"
+          "id": "select_bridge"
+        },
+        {
+          "id": "query_bridge"
+        },
+        {
+          "id": "manual_pairing"
         },
         {
           "id": "list_devices",
@@ -852,12 +852,6 @@
           "navigation": {
             "next": "add_devices"
           }
-        },
-        {
-          "id": "select_pairing"
-        },
-        {
-          "id": "manual_pairing"
         },
         {
           "id": "add_devices",

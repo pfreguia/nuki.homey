@@ -7,15 +7,20 @@
   "icon": "{{driverAssetsPath}}/icon.svg",
   "pair": [
     {
-      "id": "start",
-      "$template": "start",
-      "navigation": {
-        "next": "loading_bridge"
-      }
+      "id": "query_nuki_servers",
+      "$template": "query_nuki_servers"
     },
     {
-      "id": "loading_bridge",
-      "$template": "loading_bridge"
+      "id": "select_bridge",
+      "$template": "select_bridge"
+    },
+    {
+      "id": "query_bridge",
+      "$template": "query_bridge"
+    },
+    {
+      "id": "manual_pairing",
+      "$template": "manual_pairing"
     },
     {
       "id": "list_devices",
@@ -23,14 +28,6 @@
       "navigation": {
         "next": "add_devices"
       }
-    },
-    {
-      "id": "select_pairing",
-      "$template": "select_pairing"
-    },
-    {
-      "id": "manual_pairing",
-      "$template": "manual_pairing"
     },
     {
       "id": "add_devices",

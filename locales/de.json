@@ -3,19 +3,23 @@
     "intro": "Tragen Sie unten die Daten Ihrer Nuki Bridge ein.",
     "address": "IP-Adresse",
     "port": "Port",
+    "default_value": "Standardwert",
     "token": "Token",
-    "nukiid": "Nuki ID",
-    "titleselection": "Was möchten Sie tun?",
-    "nodevices": "Keine Nuki Bridge gefunden. Haben Sie während des Pairing-Vorgangs die Taste auf der Bridge gedrückt? Sie können es erneut versuchen oder, wenn Ihnen die IP-Adresse und das Token Ihrer Nuki Bridge bekannt sind, mit dem manuellen Pairing fortfahren.",
-    "again": "Erneut versuchen",
-    "manual": "Manuelles Pairing",
     "connect": "Verbinden",
-    "unknownerror": "Unbekannter Fehler. Sind Sie sicher, dass Sie die richtigen Daten eingegeben haben und sich die Nuki Bridge im selben Netzwerk befindet wie Homey? Bitte überprüfen Sie Ihre Einstellungen und versuchen Sie es erneut.",
-    "step1": "Stellen Sie zunächst sicher, dass die HTTP-API in Ihrer Nuki Bridge aktiviert ist. Dies können Sie in der Nuki Smartphone App tun. Gehen Sie dazu zu \"Meine Geräte verwalten\" und wählen Sie \"Bridge\". Dort können Sie dann die HTTP-API aktivieren.",
-    "step2": "Sobald Sie die Funktion aktiviert haben, tippen Sie auf die Schaltfläche \"“Weiter >\" um den Vorgang fortzusetzen.",
-    "step4": "Sobald der Suchvorgang läuft, drücken Sie die Taste auf der Nuki Bridge.",
-    "step5": "Sollte dieser Vorgang fehlschlagen (z. B. weil die Taste auf der Nuki Bridge nicht gedrückt wurde), werden Sie zum manuellen Pairing-Vorgang aufgefordert.",
-    "press_bridge_button": "Drücken Sie kurz die Taste auf der Nuki Bridge"
+
+    "state": "Status",
+    "date": "Datum",
+    "discovery_disabled_short": "API Schnellverbindung deaktiviert",
+    "http_api_disabled_short": "HTTP-API deaktiviert",
+
+    "query_nuki_servers": "Verbindung zu Nuki-Servern herstellen. Warten Sie mal...",
+    "more_than_one_bridge": "Es wurde mehr als ein Nuki Bridge erkannt. Bitte wählen Sie ein Bridge.",
+    "press_bridge_button": "Drücken Sie die Taste auf der Nuki Bridge innerhalb von <span id=\"seconds\">30</span> Sekunden.",
+    "failed": "Pairing fehlgeschlagen",
+    "button_not_pressed": "Bridge button not pressed within 30 seconds",
+    "discovery_disabled": "Die API Schnellverbindung in Ihrer Nuki Bridge ist deaktiviert",
+    "http_api_disabled": "Die HTTP-API in Ihrer Nuki Bridge ist deaktiviert. Stellen Sie sicher, dass die HTTP-API in Ihrer Nuki Bridge aktiviert ist. Dies können Sie in der Nuki Smartphone App tun. Gehen Sie dazu zu \"Meine Geräte verwalten\" und wählen Sie \"Bridge\". Dort können Sie dann die HTTP-API aktivieren.",
+    "try_manual_pairing": "Sie können mit dem manuellen Pairing fortfahren."
   },
   "util": {
     "uncalibrated": "nicht kalibriert",
@@ -30,7 +34,6 @@
     "undefined": "nicht definiert",
     "400": "Action invalid",
     "401": "Token is invalid",
-    "403": "Authentication is disabled",
     "404": "Device is unknown, please re-pair your Nuki",
     "503": "Nuki Bridge is busy"
   },
@@ -47,6 +50,6 @@
     "open": "offen",
     "opening": "öffnen...",
     "boot_run": "boot run",
-    "continuous_mode":  "Ring to Open - Dm"
+    "continuous_mode": "Ring to Open - Dm"
   }
 }

@@ -1,0 +1,92 @@
+﻿<html>
+<head>
+    <script type="text/javascript">
+        // Get target bridge info (bridgeId, ip, port, dateUpdated).
+        Homey.emit('get_target_bridge', {})
+            .then(function (targetBridge) {
+                if (!targetBridge.hasOwnProperty('ip') || !targetBridge.hasOwnProperty('port')) {
+                    // Bridge IP and/or port missing: the Bridge HTTP API is
+                    //  disabled.Show a close message.
+                    Homey.setTitle(Homey.__('pair.failed'));
+                    $('#reason').html(Homey.__('pair.http_api_disabled'));
+                    $('#reason').show();
+                    Homey.setNavigationClose();
+                }
+                else {
+                    if (targetBridge.ip == '0.0.0.0') {
+                        // IP is 0.0.0.0: Bridge discovery is disabled. Go to manual pairing.
+                        Homey.emit('set_manual_pairing_reason', Homey.__('pair.discovery_disabled'))
+                            .then(function () {
+                                Homey.showView('manual_pairing');
+                            });
+                    }
+                    else {
+                        // Show "Press Bridge button" image and query the target Bridge
+                        //  (send an "auth" + "list" request to the Bridge). The result of query
+                        //  is handled by "query_bridge_done" event handler.
+                        $('#bridge_button').show();
+                        Homey.emit('query_bridge', {});
+                    }
+                }
+            })
+            .catch(error => {
+                Homey.setTitle(Homey.__('pair.failed'));
+                $('#bridge_button').hide();
+                $('#reason').html(error.message);
+                $('#reason').show();
+                Homey.setNavigationClose();
+            });
+
+        Homey.on('query_bridge_auth_done', function () {
+            $('#bridge_button').hide();
+        });
+
+        Homey.on('query_bridge_done', function (result) {
+            // "result" does contain one of the following strings: 
+            //   - "ok": device list filled. Go to "list_devices" view.
+            //   - "timeout": Bridge button not pressed. Go to manual pairing.
+            //   - "forbidden": discovery not enabled. Go to manual pairing.
+            //   - Other: other error. Show a close message.
+            switch (result) {
+                case 'ok':
+                    Homey.showView('list_devices');
+                    break;
+                case 'timeout':                                          
+                    Homey.emit('set_manual_pairing_reason', Homey.__('pair.button_not_pressed'))
+                        .then(function () {
+                            Homey.showView('manual_pairing');
+                        });
+                    break;
+                case 'forbidden':
+                    Homey.emit('set_manual_pairing_reason', Homey.__('pair.discovery_disabled'))
+                        .then(function () {
+                            Homey.showView('manual_pairing');
+                        });
+                    break;
+                default:
+                    Homey.setTitle(Homey.__('pair.failed'));
+                    $('#bridge_button').hide();
+                    $('#reason').html(result);
+                    $('#reason').show();
+                    Homey.setNavigationClose();
+            }
+        });
+
+        var countdownSeconds = 30;
+        let x = setInterval(function () {
+            $('#seconds').html(--countdownSeconds);
+            if (countdownSeconds == 0) {
+                clearInterval(x);
+            }
+        }, 1000);
+
+    </script>
+</head>
+<body>
+    <div id="bridge_button" hidden>
+        <span data-i18n="pair.press_bridge_button">Press the button on your Nuki Bridge within <span id="seconds">30</span> seconds.</span>
+        <img src="{{assets}}/bridge.svg" style="width:80%; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+    </div>
+    <div id="reason" hidden></div>
+</body>
+</html>

@@ -2,7 +2,19 @@
 <head>
     <script type="text/javascript">
 
-        Homey.setTitle(Homey.__('pair.manual'));
+        Homey.emit('get_manual_pairing_reason', {})
+            .then(function (manualPairingReason) {
+                $('#mpr').html(manualPairingReason);
+            });
+        Homey.emit('get_target_bridge', {})
+            .then(function (targetBridge) {
+                if (targetBridge.ip) {
+                    $("#address").val(targetBridge.ip);
+                }
+                if (targetBridge.port) {
+                    $("#port").val(targetBridge.port);
+                }
+            });
 
         function connectBridge() {
             event.preventDefault();
@@ -19,7 +31,7 @@
                     Homey.showView('list_devices');
                 })
                 .catch(error => {
-                    $('#nuki-error').html("&#x26a0; " + error);
+                    $('#nuki-error').html("&#10060; " + error.message);
                     $('#nuki-error').show();
                     Homey.hideLoadingOverlay();
                 })
@@ -57,15 +69,29 @@
                 background-color: #00c139 !important;
                 color: #fff;
             }
+
+        .roundrect {
+            color: #716705;
+            border: 1px;
+            border-color: #877b0b;
+            border-style: solid;
+            border-radius: 4px;
+            background-color: khaki;
+            width: auto;
+            height: auto;
+            padding: 3px 4px 3px 4px;
+        }
     </style>
 </head>
 
 <body>
-    <p data-i18n="pair.intro">Enter the details of your Nuki Bridge.</p>
+    <p class="roundrect"><font size="+1">&#129300;</font> <span id='mpr'></span>.</p>
+    <p><span data-i18n="pair.try_manual_pairing">You can continue with the manual pairing.</span><br/>
+    <span data-i18n="pair.intro">Enter the details of your Nuki Bridge.</span></p>
     <form class="form-group" onsubmit="connectBridge()">
         <label for="address" data-i18n="pair.address">IP address</label>
         <input type="text" class="textbox" id="address" pattern="\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b" inputmode="numeric" required>
-        <label for="port" data-i18n="pair.port">Port (default value: 8080)</label>
+        <label for="port"><span data-i18n="pair.port">Port</span> (<span data-i18n="pair.dafault_value">default value</span>: 8080)</label>
         <input type="text" class="textbox" id="port" pattern="\b\d{1,5}\b" inputmode="numeric" value="8080" required>
         <label for="token" data-i18n="pair.token">Token</label>
         <input type="password" class="textbox" id="token" required>

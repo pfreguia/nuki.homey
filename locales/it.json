@@ -3,19 +3,23 @@
     "intro": "Inserisci i dettagli del tuo Nuki Bridge.",
     "address": "Indirizzo IP",
     "port": "Porta",
+    "default_value": "valore predefinito",
     "token": "Token",
-    "nukiid": "Nuki ID",
-    "titleselection": "Come vuoi proseguire?",
-    "nodevices": "Non è stato rilevato alcun Nuki Bridge. Hai premuto il bottone sul Bridge durante la fase di ricerca? Puoi riprovare oppure, se conosci IP, porta e token del tuo Bridge puoi proseguire con la procedura manuale.",
-    "again": "Riprova",
-    "manual": "Accoppiamento manuale",
     "connect": "Connetti",
-    "unknownerror": "Errore sconosciuto, Sei sicuro di aver inserito le informazioni corrette e che il tuo Nuki bridge si trovi nella stessa sottorete di Homey? Per favore, controlla le impostazioni e riprova.",
-    "step1": "Innanzitutto assicurati che HTTP API sia abilitata nel tuo Nuki Bridge. Puoi effettuare la verifica dall'app per smartphone di Nuki. Seleziona dal menu \"Gestisci i miei dispositivi\" e poi scegli \"Bridge\". Proseguendo nella procedura potrai verificare che HTTP API sia abilitata.",
-    "step2": "Una volta completata la verifica, continua questa procedura toccando il bottone \"Successivo >\"",
-    "step4": "Mentre la ricerca \u00E8 in corso premi il bottone sul tuo Nuki Bridge.",
-    "step5": "Se questa procedura dovesse fallire (ad esempio perché non è stato premuto il bottone sul Bridge), potrai eseguire la procedura di accoppiamento manuale.",
-    "press_bridge_button": "Premi e rilascia il bottone sul tuo Nuki Bridge"
+
+    "state": "Stato",
+    "date": "Data",
+    "discovery_disabled_short": "Individuazione rapida disabilitata",
+    "http_api_disabled_short": "HTTP API disabilitata",
+
+    "query_nuki_servers": "Connessione ai Nuki Servers. Attendere prego...",
+    "more_than_one_bridge": "È stato rilevato più di un Nuki Bridge. Seleziona un Bridge.",
+    "press_bridge_button1": "Premi il bottone sul tuo Nuki Bridge entro <span id=\"seconds\">30</span> secondi.",
+    "failed": "L'accoppiamento non è riuscito",
+    "button_not_pressed": "Il bottone sul Nuki Bridge non è stato premuto entro 30 secondi",
+    "discovery_disabled": "L'API Individuazione rapida nel tuo Nuki Bridge è disabilitata",
+    "http_api_disabled": "La HTTP API nel tuo Nuki Bridge è disabilitata. Assicurati che HTTP API sia abilitata nel tuo Nuki Bridge. Puoi effettuare la verifica dall'app per smartphone di Nuki. Seleziona la voce di menu \"Gestisci i miei dispositivi\" e poi scegli \"Bridge\". Accedendo alle impostazioni potrai verificare che HTTP API sia abilitata.",
+    "try_manual_pairing": "Puoi proseguire con l'accoppiamento manuale."
   },
   "util": {
     "uncalibrated": "non calibrato",
@@ -30,7 +34,6 @@
     "undefined": "non definito",
     "400": "Action invalid",
     "401": "Token is invalid",
-    "403": "Authentication is disabled",
     "404": "Device is unknown, please re-pair your Nuki",
     "503": "Nuki Bridge is busy"
   },
@@ -47,6 +50,6 @@
     "open": "aperta",
     "opening": "in apertura...",
     "boot_run": "boot run",
-    "continuous_mode":  "Ring to Open - CM"
+    "continuous_mode": "Ring to Open - CM"
   }
 }

@@ -3,19 +3,23 @@
     "intro": "Vul de details van je Nuki bridge hieronder in.",
     "address": "IP adres",
     "port": "Port",
+    "default_value": "standaardwaarde",
     "token": "Token",
-    "nukiid": "Nuki ID",
-    "titleselection": "Wat wil je doen?",
-    "nodevices": "Geen hardware Nuki bridge gevonden. Heb je op de knop van je bridge gedrukt tijdens het koppelen? Je kan het nog een keer proberen of je Nuki (software) bridge handmatig proberen toe te voegen als je het IP adres en token weet.",
-    "again": "Probeer opnieuw",
-    "manual": "Handmatig koppelen",
     "connect": "Verbind",
-    "unknownerror": "Onbekende fout, weet je zeker dat je de juiste details hebt opgegeven en dat de Nuki bridge op hetzelfde netwerk zit als Homey? Controleer a.u.b. je instellingen en probeer het nog eens.",
-    "step1": "Zorg er eerst voor dat de HTTP API in je Nuki Bridge is geactiveerd. Je kan dit doen via de Nuki smartphone app. Ga naar \"Beheer apparaten\" en selecteer \"Bridge\". Hier kan je de HTTP API inschakelen.",
-    "step2": "Eenmaal ingeschakeld kan je de procedure vervolgen door op de knop \"Volgende\" te drukken.",
-    "step4": "Druk op de knop van je Nuki Bridge als het zoekproces is gestart.",
-    "step5": "Mocht deze procedure mislukken (bijvoorbeeld omdat de knop niet is ingedrukt), dan wordt u doorverwezen naar de handmatige koppelingsprocedure.",
-    "press_bridge_button": "Druk kort op de knop van je Nuki Bridge"
+
+    "state": "Status",
+    "date": "Datum",
+    "discovery_disabled_short": "API Snelle Ontdekking gedeactiveerd",
+    "http_api_disabled_short": "HTTP API gedeactiveerd",
+
+    "query_nuki_servers": "Verbinding met Nuki-Servers. Even geduld a.u.b...",
+    "more_than_one_bridge": "Er is meer dan één Nuki Bridge gedetecteerd. Selecteer een Bridge.",
+    "press_bridge_button": "Druk binnen <span id=\"seconds\">30</span> seconden op de knop van je Nuki Bridge.",
+    "failed": "Het koppelen is mislukt",
+    "button_not_pressed": "Bridge button not pressed within 30 seconds",
+    "discovery_disabled": "De API Snelle Ontdekking in je Nuki Bridge is gedeactiveerd",
+    "http_api_disabled": "De HTTP API in je Nuki Bridge is gedeactiveerd. Zorg ervoor dat de HTTP API in je Nuki Bridge is geactiveerd. Je kan dit doen via de Nuki smartphone app. Ga naar \"Beheer apparaten\" en selecteer \"Bridge\". Hier kan je de HTTP API inschakelen.",
+    "try_manual_pairing": "Je kan je Nuki Bridge handmatig proberen toe te voegen."
   },
   "util": {
     "uncalibrated": "niet gecalibreerd",
@@ -30,7 +34,6 @@
     "undefined": "niet gedefinieerd",
     "400": "Actie is ongeldig",
     "401": "Token is ongeldig",
-    "403": "Authentication is disabled",
     "404": "Slot is onbekend, voeg je Nuki opnieuw toe a.u.b.",
     "503": "Nuki Bridge is druk"
   },

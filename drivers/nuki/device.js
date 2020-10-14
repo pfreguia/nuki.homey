@@ -25,8 +25,6 @@ class SmartLockDevice extends NukiDevice {
     if (!this.hasCapability('alarm_contact')) {
       this.addCapability('alarm_contact');
     }
-    // Initially set device as available.
-    this.setAvailable();
 
     // LISTENERS FOR UPDATING CAPABILITIES
     this.registerCapabilityListener('locked', async (value) => {
@@ -35,33 +33,32 @@ class SmartLockDevice extends NukiDevice {
         if (value === currValue) {
           return Promise.resolve();
         }
-        console.log('Value: ' + (value ? 'Lock' : 'Unlock'));
+        this.log('Value: ' + (value ? 'Lock' : 'Unlock'));
         if (value) {
           // Lock action.
           if (this.progressingAction > 0) {
             // An action is already in progress.
             if (this.progressingAction == ACTION_LOCK) {
               // An action that leads to Lock state is already in progress.
-              console.log('An action that leads to Lock state is already in progress');
+              this.log('An action that leads to Lock state is already in progress');
               await this.progressingActionDone();
-              console.log('Lock action in progress completed');
+              this.log('Lock action in progress completed');
               return Promise.resolve();
             }
             else {
               return Promise.reject(new Error('A different action is already in progress'));
             }
           }
-          const url = this.buildURL('lockAction', [
-            ['nukiId', this.getData().id],
-            ['deviceType', 0],
-            ['action', ACTION_LOCK]
-          ]);
           this.progressingAction = ACTION_LOCK;
           // It seems that, even if result.success is false, the action is
           //  performed correctly by Nuki. For that resons the "result" object
-          //  of sendCommand() method is not evaluated.
-          await this.util.sendCommand(url, 16000);
-          console.log('Lock done');
+          //  of sendRequest() method is not evaluated.
+          await this.bridge.sendRequest('lockAction', [
+            ['nukiId', this.getData().id],
+            ['deviceType', 0],
+            ['action', ACTION_LOCK]
+          ], 16000);
+          this.log('Lock done');
           this.progressingAction = 0;
           return Promise.resolve();
         }
@@ -71,26 +68,25 @@ class SmartLockDevice extends NukiDevice {
             // An action is already in progress.
             if (this.progressingAction == ACTION_UNLOCK) {
               // An action that leads to Unlock state is already in progress.
-              console.log('An action that leads to Unlock state is already in progress');
+              this.log('An action that leads to Unlock state is already in progress');
               await this.progressingActionDone();
-              console.log('Unlock action in progress completed');
+              this.log('Unlock action in progress completed');
               return Promise.resolve();
             }
             else {
               return Promise.reject(new Error('A different action is already in progress'));
             }
           }
-          const url = this.buildURL('lockAction', [
-            ['nukiId', this.getData().id],
-            ['deviceType', 0],
-            ['action', ACTION_UNLOCK]
-          ]);
           this.progressingAction = ACTION_UNLOCK;
           // It seems that, even if result.success is false, the action is
           //  performed correctly by Nuki. For that resons the "result" object
-          //  of sendCommand() method is not evaluated.
-          await this.util.sendCommand(url, 16000);
-          console.log('Unlock done');
+          //  of sendRequest() method is not evaluated.
+          await this.bridge.sendRequest('lockAction', [
+            ['nukiId', this.getData().id],
+            ['deviceType', 0],
+            ['action', ACTION_UNLOCK]
+          ], 16000);
+          this.log('Unlock done');
           this.progressingAction = 0;
           return Promise.resolve();
         }
@@ -112,17 +108,16 @@ class SmartLockDevice extends NukiDevice {
             return Promise.reject(new Error('A different action is already in progress'));
           }
           else {
-            const url = this.buildURL('lockAction', [
+            this.progressingAction = ACTION_UNLATCH;
+            // It seems that, even if result.success is false, the action is
+            //  performed correctly by Nuki. For that resons the "result" object
+            //  of sendrequest() method is not evaluated.
+            await this.bridge.sendRequest('lockAction', [
               ['nukiId', this.getData().id],
               ['deviceType', 0],
               ['action', ACTION_UNLATCH],
               ['nowait', 1]
-            ]);
-            this.progressingAction = ACTION_UNLATCH;
-            // It seems that, even if result.success is false, the action is
-            //  performed correctly by Nuki. For that resons the "result" object
-            //  of sendCommand() method is not evaluated.
-            await this.util.sendCommand(url, 16000);
+            ], 16000);
             // Update capabilties and trigger action flows.
             const flow = this.homey.flow;
             const unlatchingStr = this.homey.__('util.unlatching');
@@ -151,27 +146,27 @@ class SmartLockDevice extends NukiDevice {
 
   async smartLockActionFlowCard(action, what_if_action_in_progress) {
     try {
-      console.log(action);
+      this.log(action);
       while (this.progressingAction > 0) {
         // An action is already in progress.
         if (action == this.progressingAction) {
           // Same action is already in progress. Just wait for its completion.
-          console.log('Same action is already in progress. Just wait for its completion');
+          this.log('Same action is already in progress. Just wait for its completion');
           await this.progressingActionDone();
-          console.log('Same action completed');
+          this.log('Same action completed');
           return Promise.resolve();
         }
         else {
           if (what_if_action_in_progress == 'defer') {
             // A different action is already in progress. Wait for its completion before execuiting this action.
-            console.log('A different action is already in progress. Wait for its completion before executing this action');
+            this.log('A different action is already in progress. Wait for its completion before executing this action');
             await this.progressingActionDone();
             // Different action completed. Execute this action, if no other actions are in progress.
-            console.log('Different action completed. Execute this action, if no other actions are in progress');
+            this.log('Different action completed. Execute this action, if no other actions are in progress');
           }
           else {
             // A different action is already in progress. Reject this action.
-            console.log('A different action is already in progress. Reject this action');
+            this.log('A different action is already in progress. Reject this action');
             return Promise.reject(new Error('A different action is already in progress'));
           }
         }
@@ -182,20 +177,19 @@ class SmartLockDevice extends NukiDevice {
             const currValue = this.getCapabilityValue('locked');
             if (!currValue) {
               // Already unlocked. Action does not need to be executed.
-              console.log('Already unlocked. Action does not need to be executed');
+              this.log('Already unlocked. Action does not need to be executed');
               return Promise.resolve();
             }
-            const url = this.buildURL('lockAction', [
-              ['nukiId', this.getData().id],
-              ['deviceType', 0],
-              ['action', ACTION_UNLOCK]
-            ]);
             this.progressingAction = ACTION_UNLOCK;
             // It seems that, even if result.success is false, the action is
             //  performed correctly by Nuki. For that resons the "result" object
-            //  of sendCommand() method is not evaluated.
-            await this.util.sendCommand(url, 16000);
-            console.log('Unlock done');
+            //  of sendRequest() method is not evaluated.
+            await this.bridge.sendRequest('lockAction', [
+              ['nukiId', this.getData().id],
+              ['deviceType', 0],
+              ['action', ACTION_UNLOCK]
+            ], 16000);
+            this.log('Unlock done');
             await this.setCapabilityValue('locked', false);
             this.progressingAction = 0;
             return Promise.resolve();
@@ -206,20 +200,19 @@ class SmartLockDevice extends NukiDevice {
             const currValue = this.getCapabilityValue('locked');
             if (currValue) {
               // Already locked. Action does not need to be executed.
-              console.log('Already locked. Action does not need to be executed');
+              this.log('Already locked. Action does not need to be executed');
               return Promise.resolve();
             }
-            const url = this.buildURL('lockAction', [
-              ['nukiId', this.getData().id],
-              ['deviceType', 0],
-              ['action', ACTION_LOCK]
-            ]);
             this.progressingAction = ACTION_LOCK;
             // It seems that, even if result.success is false, the action is
             //  performed correctly by Nuki. For that resons the "result" object
-            //  of sendCommand() method is not evaluated.
-            await this.util.sendCommand(url, 16000);
-            console.log('Lock done');
+            //  of sendRequest() method is not evaluated.
+            await this.bridge.sendRequest('lockAction', [
+              ['nukiId', this.getData().id],
+              ['deviceType', 0],
+              ['action', ACTION_LOCK]
+            ], 16000);
+            this.log('Lock done');
             await this.setCapabilityValue('locked', true);
             this.progressingAction = 0;
             return Promise.resolve();
@@ -227,20 +220,19 @@ class SmartLockDevice extends NukiDevice {
           break;
         case ACTION_UNLATCH:
           {
-            console.log('Perform Unlatch');
-            const url = this.buildURL('lockAction', [
-              ['nukiId', this.getData().id],
-              ['deviceType', 0],
-              ['action', ACTION_UNLATCH],
-              ['nowait', 1]
-            ]);
+            this.log('Perform Unlatch');
             this.setCapabilityValue('open_action', 1);
             this.progressingAction = ACTION_UNLATCH;
             // It seems that, even if result.success is false, the action is
             //  performed correctly by Nuki. For that resons the "result" object
-            //  of sendCommand() method is not evaluated.
-            await this.util.sendCommand(url, 16000);
-            console.log('Unlatch performed');
+            //  of sendRequest() method is not evaluated.
+            await this.bridge.sendRequest('lockAction', [
+              ['nukiId', this.getData().id],
+              ['deviceType', 0],
+              ['action', ACTION_UNLATCH],
+              ['nowait', 1]
+            ], 16000);
+            this.log('Unlatch performed');
             // Update capabilties and trigger action flows.
             const flow = this.homey.flow;
             const unlatchingStr = this.homey.__('util.unlatching');
@@ -258,46 +250,44 @@ class SmartLockDevice extends NukiDevice {
           break;
         case ACTION_LOCK_N_GO:
           {
-            console.log('Perform Lock ’n’ Go');
-            const url = this.buildURL('lockAction', [
-              ['nukiId', this.getData().id],
-              ['deviceType', 0],
-              ['action', ACTION_LOCK_N_GO]
-            ]);
+            this.log('Perform Lock ’n’ Go');
             this.progressingAction = ACTION_LOCK_N_GO;
             // It seems that, even if result.success is false, the action is
             //  performed correctly by Nuki. For that resons the "result" object
-            //  of sendCommand() method is not evaluated.
-            await this.util.sendCommand(url, 60000);
-            console.log('Lock ’n’ Go successfully issued');
+            //  of sendRequest() method is not evaluated.
+            await this.bridge.sendRequest('lockAction', [
+              ['nukiId', this.getData().id],
+              ['deviceType', 0],
+              ['action', ACTION_LOCK_N_GO]
+            ], 60000);
+            this.log('Lock ’n’ Go successfully issued');
             // Wait until the Smart Lock is not locked (final state of Lock ’n’ Go action).
             if (this.getCapabilityValue('lockstate') != this.homey.__('util.locked')) {
               await new Promise(resolve => this._unlockStateEvent.once('done', resolve));
             }
-            console.log('Lock ’n’ Go completed');
+            this.log('Lock ’n’ Go completed');
             this.progressingAction = 0;
             return Promise.resolve();
           }
           break;
         case ACTION_LOCK_N_GO_WITH_UNLATCH:
           {
-            console.log('Perform Lock ’n’ Go with unlacth');
-            const url = this.buildURL('lockAction', [
-              ['nukiId', this.getData().id],
-              ['deviceType', 0],
-              ['action', ACTION_LOCK_N_GO_WITH_UNLATCH]
-            ]);
+            this.log('Perform Lock ’n’ Go with unlacth');
             this.progressingAction = ACTION_LOCK_N_GO_WITH_UNLATCH;
             // It seems that, even if result.success is false, the action is
             //  performed correctly by Nuki. For that resons the "result" object
-            //  of sendCommand() method is not evaluated.
-            await this.util.sendCommand(url, 60000);
-            console.log('Lock ’n’ Go with unlatch successfully issued');
+            //  of sendRequest() method is not evaluated.
+            await this.bridge.sendRequest('lockAction', [
+              ['nukiId', this.getData().id],
+              ['deviceType', 0],
+              ['action', ACTION_LOCK_N_GO_WITH_UNLATCH]
+            ], 60000);
+            this.log('Lock ’n’ Go with unlatch successfully issued');
             // Wait until the Smart Lock is not locked (final state of Lock ’n’ Go action).
             if (this.getCapabilityValue('lockstate') != this.homey.__('util.locked')) {
               await new Promise(resolve => this._unlockStateEvent.once('done', resolve));
             }
-            console.log('Lock ’n’ Go with unlatch completed');
+            this.log('Lock ’n’ Go with unlatch completed');
             this.progressingAction = 0;
             return Promise.resolve();
           }
