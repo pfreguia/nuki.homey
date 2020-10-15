@@ -29,11 +29,11 @@ The Nuki Servers's answer can be one of the following:
   3. Other (unexpected answer, Nuki Servers are unreachable, ...). Go to manual pairing.
 
   The Nuki Bridge's answer can be one of the following:
-  1) HTTP API is not enabled on the Bridge. Pairing failure.
-  2) API Quick Discovery is not enabled on the Bridge. Go to manual paring.
-  3) API Quick Discovery is enabled but the user did not press the button on the Nuki Bridge within 30 seconds.
-  4) The Bridge returned a valid device list. The user can select the device he wants to add to Homey.
-  5) Other (answer not received, unexpected answer, ...). Pairing failure.
+  1. HTTP API is not enabled on the Bridge. Pairing failure.
+  2. API Quick Discovery is not enabled on the Bridge. Go to manual paring.
+  3. API Quick Discovery is enabled but the user did not press the button on the Nuki Bridge within 30 seconds. Go to manual paring.
+  4. The Bridge returned a valid device list. The user can select the device he wants to add to Homey.
+  5. Other (answer not received, unexpected answer, ...). Pairing failure.
 
   The manual pairing procedure requires the user to enter IP address, port and API Token of the Bridge. If the procedure succeeds, the user can select the device they want to add to Homey.   
   Thus, in the most common case (a single Bridge, HTTP API and API Quick Discovery already enabled in the Bridge) the paring procedure only requires the user to press the button on the Bridge.
