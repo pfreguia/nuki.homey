@@ -13,8 +13,9 @@ const QUICK_ACTION_LOCK = 101
 
 
 class OpenerDevice extends NukiDevice {
-  lastRingNukiDatetime = null;
-  lastRingHomeyDatetime = null;
+  _lastRingNukiDateTime = null;
+  _lastRingHomeyDateTime = null;
+  _openTimer = null;
 
   onInit() {
     super.onInit();
@@ -104,7 +105,7 @@ class OpenerDevice extends NukiDevice {
 
     this.registerCapabilityListener('open_action', async (value) => {
       try {
-        this.log('manual');
+        this.log('Manual open action');
         const currValue = this.getCapabilityValue('open_action');
         if (value === currValue) {
           return Promise.resolve();
@@ -136,11 +137,13 @@ class OpenerDevice extends NukiDevice {
             this.setCapabilityValue('locked', false);
             flow.getDeviceTriggerCard('nuki_state_changed').trigger(this, prevArg, {});
             flow.getDeviceTriggerCard('openerstateChanged').trigger(this, { openerstate: openingStr }, {});
+            // Safety timer that can automatically restore the current state after a while.
+            // this._openTimer = setTimeout(() => this._openDevice(prevArg.previous_state), 2000);
             return Promise.resolve();
           }
         }
         else {
-          return Promise.reject(new Error('Please wait for the automatic termination'));
+          return Promise.reject(new Error('The open action will terminate automaticallly'));
         }
       }
       catch (error) {
@@ -352,6 +355,8 @@ class OpenerDevice extends NukiDevice {
             this.setCapabilityValue('locked', false);
             flow.getDeviceTriggerCard('nuki_state_changed').trigger(this, prevArg, {});
             flow.getDeviceTriggerCard('openerstateChanged').trigger(this, { openerstate: openingStr }, {});
+            // Safety timer that can automatically restore the current state after a while.
+            // this._openTimer = setTimeout(() => this._openDevice(prevArg.previous_state), 2000);
             await this.progressingActionDone();
             return Promise.resolve();
           }
@@ -463,6 +468,10 @@ class OpenerDevice extends NukiDevice {
     if (state != prevState || continuousMode != prevContinuousMode) {
       // Update capability openerstate; trigger deprecated openerStateChanged.
       if (state != prevState) {
+        if (this._openTimer) {
+          clearTimeout(this._openTimer);
+          this._openTimer = null;
+        }
         if (state == this.homey.__('device.opening')) {
           this.progressingAction = ACTION_ELECTRIC_STRIKE_ACTUATION;
           this.setCapabilityValue('open_action', 1);
@@ -512,17 +521,17 @@ class OpenerDevice extends NukiDevice {
     // Trigger ring_action.
     if (newState.ringactionState) {
       let newRingDate = new Date(newState.ringactionTimestamp);
-      if (this.lastRingNukiDatetime != null) {
-        if (this.lastRingNukiDatetime.getTime() !== newRingDate.getTime()) {
+      if (this._lastRingNukiDateTime != null) {
+        if (this._lastRingNukiDateTime.getTime() !== newRingDate.getTime()) {
           flow.getDeviceTriggerCard('ring_action').trigger(this, {}, {});
-          this.lastRingNukiDatetime = newRingDate;
-          this.lastRingHomeyDatetime = new Date();
+          this._lastRingNukiDateTime = newRingDate;
+          this._lastRingHomeyDateTime = new Date();
         }
       }
       else {
         flow.getDeviceTriggerCard('ring_action').trigger(this, {}, {});
-        this.lastRingNukiDatetime = newRingDate;
-        this.lastRingHomeyDatetime = new Date();
+        this._lastRingNukiDateTime = newRingDate;
+        this._lastRingHomeyDateTime = new Date();
       }
     }
   }

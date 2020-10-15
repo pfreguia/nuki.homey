@@ -18,7 +18,7 @@
     "failed": "Het koppelen is mislukt",
     "button_not_pressed": "Bridge button not pressed within 30 seconds",
     "discovery_disabled": "De API Snelle Ontdekking in je Nuki Bridge is gedeactiveerd",
-    "http_api_disabled": "De HTTP API in je Nuki Bridge is gedeactiveerd. Zorg ervoor dat de HTTP API in je Nuki Bridge is geactiveerd. Je kan dit doen via de Nuki smartphone app. Ga naar \"Beheer apparaten\" en selecteer \"Bridge\". Hier kan je de HTTP API inschakelen.",
+    "http_api_disabled": "De HTTP API in je Nuki Bridge is gedeactiveerd. Zorg ervoor dat de HTTP API in je Nuki Bridge is geactiveerd. Je kan dit doen via de Nuki smartphone app. Ga naar \"Mijn apparaten beheeren\" en selecteer \"Bridge\". Hier kan je de HTTP API inschakelen.",
     "try_manual_pairing": "Je kan je Nuki Bridge handmatig proberen toe te voegen."
   },
   "util": {

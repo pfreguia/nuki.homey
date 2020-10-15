@@ -12,6 +12,7 @@ const ACTION_LOCK_N_GO_WITH_UNLATCH = 5
 
 class SmartLockDevice extends NukiDevice {
   _unlockStateEvent = new EventEmitter();
+  _openTimer = null;
 
   onInit() {
     super.onInit();
@@ -98,6 +99,7 @@ class SmartLockDevice extends NukiDevice {
 
     this.registerCapabilityListener('open_action', async (value) => {
       try {
+        this.log('Manual open action');
         const currValue = this.getCapabilityValue('open_action');
         if (value === currValue) {
           return Promise.resolve();
@@ -129,11 +131,14 @@ class SmartLockDevice extends NukiDevice {
             this.setCapabilityValue('locked', false);
             flow.getDeviceTriggerCard('nuki_state_changed').trigger(this, prevArg, {});
             flow.getDeviceTriggerCard('lockstateChanged').trigger(this, { lockstate: unlatchingStr }, {});
+            // Safety timer that can automatically restore the current state after a while.
+            // this._openTimer = setTimeout(() => this._openDevice(prevArg.previous_state),
+            //   prevArg.previous_state == this.homey.__('util.locked')? 9000 : 3000);
             return Promise.resolve();
           }
         }
         else {
-          return Promise.reject(new Error('Please wait for the automatic termination'));
+          return Promise.reject(new Error('The open action will terminate automatically'));
         }
       }
       catch (error) {
@@ -244,6 +249,9 @@ class SmartLockDevice extends NukiDevice {
             this.setCapabilityValue('locked', false);
             flow.getDeviceTriggerCard('nuki_state_changed').trigger(this, prevArg, {});
             flow.getDeviceTriggerCard('lockstateChanged').trigger(this, { lockstate: unlatchingStr }, {});
+            // Safety timer that can automatically restore the current state after a while.
+            // this._openTimer = setTimeout(() => this._openDevice(prevArg.previous_state),
+            //   prevArg.previous_state == this.homey.__('util.locked') ? 9000 : 3000);
             await this.progressingActionDone();
             return Promise.resolve();
           }
@@ -357,6 +365,10 @@ class SmartLockDevice extends NukiDevice {
 
     // update capability lockstate & trigger deprecated lockstateChanged
     if (state != this.getCapabilityValue('lockstate')) {
+      if (this._openTimer) {
+        clearTimeout(this._openTimer);
+        this._openTimer = null;
+      }
       if (state == this.homey.__('util.unlatching')) {
         this.progressingAction = ACTION_UNLATCH;
         this.setCapabilityValue('open_action', 1);
@@ -393,6 +405,7 @@ class SmartLockDevice extends NukiDevice {
       this.setCapabilityValue('measure_battery', Number(newState.batteryChargeState));
     }
   }
+
 }
 
 module.exports = SmartLockDevice;
