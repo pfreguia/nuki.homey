@@ -36,7 +36,7 @@ The Nuki Servers's answer can be one of the following:
 
   The manual pairing procedure requires the user to enter IP address, port and API Token of the Bridge. If the procedure succeeds, the user can select the device he wants to add to Homey.   
   Thus, in the most common case (a single Bridge, HTTP API and API Quick Discovery already enabled in the Bridge) the paring procedure only requires the user to press the button on the Bridge.
-* Previous versions of Nuki Direct lose all devices and flows if Homey changes its local IP address. This version loses neither devices nor flows.
+* Previous versions of Nuki Direct lose all devices and flows if the local IP address Homey changes. This version loses neither devices nor flows.
 * Some users have reported Nuki Direct's slowness in updating the status of its devices in the first few minutes after a restart. Indeed, previous versions of Nuki Direct may take up to 5 minutes after a restart for the device status to update. This version updates the devices status immediately after the initialization.
 * Nuki Direct v3.0.0 introduced the ability to mark as unavailable all the devices of an unreachable Bridge. This version adds the ability to mark as unavailable a device that is unreachable by the Bridge.
 * German UI language (full translation).
