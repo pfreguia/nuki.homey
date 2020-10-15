@@ -22,7 +22,7 @@ Your Nuki device(s) have now been added to Homey.
 
 ## Release Notes for the latest version (release notes of previous versions are available at https://github.com/pfreguia/nuki.homey/releases)
 ### v3.0.5 - 2020-10-15
-* Pairing procedure rewritten. The new pairing procedure asks automatically the Nuki Servers for the list of registered Bridges (each Nuki Bridge is always registered at the Nuki Servers infrastructure).
+* Pairing procedure has been rewritten. The new pairing procedure asks automatically the Nuki Servers for the list of registered Bridges (each Nuki Bridge is always registered at the Nuki Servers infrastructure).
 The Nuki Servers's answer can be one of the following:
   1. More than one Bridge is registered. The user must select a Bridge from the list of Bridges.
   2. A single Bridge is registered (or the user selected a Bridge in the previous step). The new pairing procedure tries to authenticate against the Bridge via HTTP API. If API Quick Discovery is enabled, Authentication requires the user to press the Button on the Bridge. Once authenticated, the procedure asks the Bridge for the list of its devices (Smart Locks and Openers). 
