@@ -22,21 +22,22 @@ Your Nuki device(s) have now been added to Homey.
 
 ## Release Notes for the latest version (release notes of previous versions are available at https://github.com/pfreguia/nuki.homey/releases)
 ### v3.0.5 - 2020-10-15
-* Pairing procedure rewritten. The new pairing procedure asks automatically the Nuki Servers for the list of registered Bridges (each Nuki Bridge is always registered at the Nuki Servers).
+* Pairing procedure rewritten. The new pairing procedure asks automatically the Nuki Servers for the list of registered Bridges (each Nuki Bridge is always registered at the Nuki Servers infrastructure).
 The Nuki Servers's answer can be one of the following:
   1. More than one Bridge is registered. The user must select a Bridge from the list of Bridges.
   2. A single Bridge is registered (or the user selected a Bridge in the previous step). The new pairing procedure tries to authenticate against the Bridge via HTTP API. If API Quick Discovery is enabled, Authentication requires the user to press the Button on the Bridge. Once authenticated, the procedure asks the Bridge for the list of its devices (Smart Locks and Openers). 
   3. Other (unexpected answer, Nuki Servers are unreachable, ...). Go to manual pairing.
 
   The Nuki Bridge's answer can be one of the following:
-  1. HTTP API is not enabled on the Bridge. Pairing failure.
-  2. API Quick Discovery is not enabled on the Bridge. Go to manual paring.
-  3. The Bridge returned a valid device list. The user can select the device he wants to add to Homey.
-  4. Other (answer not received, unexpected answer, ...). Pairing failure.
+  1) HTTP API is not enabled on the Bridge. Pairing failure.
+  2) API Quick Discovery is not enabled on the Bridge. Go to manual paring.
+  3) API Quick Discovery is enabled but the user did not press the button on the Nuki Bridge within 30 seconds.
+  4) The Bridge returned a valid device list. The user can select the device he wants to add to Homey.
+  5) Other (answer not received, unexpected answer, ...). Pairing failure.
 
-  The manual pairing procedure requires the user to enter IP address, port and API Token of the Bridge. If the procedure succeeds, the user can select the device he wants to add to Homey.   
+  The manual pairing procedure requires the user to enter IP address, port and API Token of the Bridge. If the procedure succeeds, the user can select the device they want to add to Homey.   
   Thus, in the most common case (a single Bridge, HTTP API and API Quick Discovery already enabled in the Bridge) the paring procedure only requires the user to press the button on the Bridge.
 * Previous versions of Nuki Direct lose all devices and flows if the local IP address Homey changes. This version loses neither devices nor flows.
-* Some users have reported Nuki Direct's slowness in updating the status of its devices in the first few minutes after a restart. Indeed, previous versions of Nuki Direct may take up to 5 minutes after a restart for the device status to update. This version updates the devices status immediately after the initialization.
-* Nuki Direct v3.0.0 introduced the ability to mark as unavailable all the devices of an unreachable Bridge. This version adds the ability to mark as unavailable a device that is unreachable by the Bridge.
+* Some users have reported Nuki Direct's slowness in updating the status of the devices in the first few minutes after a restart. Indeed, previous versions of Nuki Direct may take up to 5 minutes after a restart for the device status to update. This version updates the devices status immediately after the initialization.
+* Nuki Direct v3.0.0 introduced the ability to mark as unavailable all the devices of an unreachable Bridge. This version adds the ability to mark as unavailable a device that is unreachable by the Bridge as well.
 * German UI language (full translation).
