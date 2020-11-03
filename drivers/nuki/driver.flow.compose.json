@@ -60,6 +60,36 @@
   ],
   "conditions": [
     {
+      "id": "contact_alarm_condition",
+      "title": {
+        "en": "The contact alarm changed !{{less|more}} than n seconds ago",
+        "nl": "De contact alarm is !{{minder|meer}} dan n seconden geleden gewijzigd",
+        "de": "Der Kontakt-Alarm hat sich geändert vor !{{weniger|mehr}} als n Sekunden",
+        "it": "L'allarme contatto è cambiato !{{meno|più}} di n secondi fa"
+      },
+      "titleFormatted": {
+        "en": "The contact alarm changed !{{less|more}} than [[elapsed_secs]] seconds ago",
+        "nl": "De contact alarm is !{{minder|meer}} dan [[elapsed_secs]] seconden geleden gewijzigd",
+        "de": "Der Kontakt-Alarm hat sich geändert vor !{{weniger|mehr}} als [[elapsed_secs]] Sekunden",
+        "it": "L'allarme contatto è cambiato !{{meno|più}} di [[elapsed_secs]] secondi fa"
+      },
+      "args": [
+        {
+          "name": "elapsed_secs",
+          "type": "number",
+          "min": 0,
+          "max": 86400,
+          "step": 1,
+          "placeholder": {
+            "en": "Seconds",
+            "nl": "Seconden",
+            "de": "Sekunden",
+            "it": "Secondi"
+          }
+        }
+      ]
+    },
+    {
       "$extends": "alarm_battery_keypad"
     }
   ],

@@ -11,8 +11,15 @@ const ACTION_LOCK_N_GO = 4
 const ACTION_LOCK_N_GO_WITH_UNLATCH = 5
 
 class SmartLockDevice extends NukiDevice {
+  _lastContactAlarmChangeDateTime = null;
   _unlockStateEvent = new EventEmitter();
-  _openTimer = null;
+  _openingTimer = null;
+
+
+  get lastContactAlarmChangeDateTime() {
+    return this._lastContactAlarmChangeDateTime;
+  }
+
 
   onInit() {
     super.onInit();
@@ -131,9 +138,9 @@ class SmartLockDevice extends NukiDevice {
             this.setCapabilityValue('locked', false);
             flow.getDeviceTriggerCard('nuki_state_changed').trigger(this, prevArg, {});
             flow.getDeviceTriggerCard('lockstateChanged').trigger(this, { lockstate: unlatchingStr }, {});
-            // Safety timer that can automatically restore the current state after a while.
-            // this._openTimer = setTimeout(() => this._openDevice(prevArg.previous_state),
-            //   prevArg.previous_state == this.homey.__('util.locked')? 9000 : 3000);
+            // Safety timer that can automatically restore the current status 
+            //  after a while, if the event from Opener is missed.
+            this._openingTimer = setTimeout(() => this._restoreStatusBeforeOpening(prevArg.previous_state), 24000);
             return Promise.resolve();
           }
         }
@@ -249,9 +256,9 @@ class SmartLockDevice extends NukiDevice {
             this.setCapabilityValue('locked', false);
             flow.getDeviceTriggerCard('nuki_state_changed').trigger(this, prevArg, {});
             flow.getDeviceTriggerCard('lockstateChanged').trigger(this, { lockstate: unlatchingStr }, {});
-            // Safety timer that can automatically restore the current state after a while.
-            // this._openTimer = setTimeout(() => this._openDevice(prevArg.previous_state),
-            //   prevArg.previous_state == this.homey.__('util.locked') ? 9000 : 3000);
+            // Safety timer that can automatically restore the current status 
+            //  after a while, if the event from Opener is missed.
+            this._openingTimer = setTimeout(() => this._restoreStatusBeforeOpening(prevArg.previous_state), 24000);
             await this.progressingActionDone();
             return Promise.resolve();
           }
@@ -365,9 +372,9 @@ class SmartLockDevice extends NukiDevice {
 
     // update capability lockstate & trigger deprecated lockstateChanged
     if (state != this.getCapabilityValue('lockstate')) {
-      if (this._openTimer) {
-        clearTimeout(this._openTimer);
-        this._openTimer = null;
+      if (this._openingTimer) {
+        clearTimeout(this._openingTimer);
+        this._openingTimer = null;
       }
       if (state == this.homey.__('util.unlatching')) {
         this.progressingAction = ACTION_UNLATCH;
@@ -395,7 +402,9 @@ class SmartLockDevice extends NukiDevice {
     if (newState.doorsensorState == 2 || newState.doorsensorState == 3) {
       if (newState.doorsensorState == 3 && !this.getCapabilityValue('alarm_contact')) {
         this.setCapabilityValue('alarm_contact', true);
+        this._lastContactAlarmChangeDateTime = new Date();
       } else if (newState.doorsensorState == 2 && (this.getCapabilityValue('alarm_contact') || this.getCapabilityValue('alarm_contact') == null)) {
+        this._lastContactAlarmChangeDateTime = new Date();
         this.setCapabilityValue('alarm_contact', false);
       }
     }
@@ -404,6 +413,30 @@ class SmartLockDevice extends NukiDevice {
     if (Number(newState.batteryChargeState) != this.getCapabilityValue('measure_battery')) {
       this.setCapabilityValue('measure_battery', Number(newState.batteryChargeState));
     }
+  }
+
+
+  _restoreStatusBeforeOpening(baseState) {
+    this.log('restoreStatusBeforeOpening');
+    this._openingTimer = null;
+    const flow = this.homey.flow;
+    // Update capability open_action.
+    this.progressingAction = 0;
+    this.setCapabilityValue('open_action', 0);
+    // Update capability locked.
+    const locked = (baseState == this.homey.__('util.locked') ? true : false);
+    if (locked != this.getCapabilityValue('locked')) {
+      this.setCapabilityValue('locked', locked);
+    }
+    // Update capability lockstate & trigger deprecated lockstateChanged flow card.
+    this.setCapabilityValue('lockstate', baseState);
+    flow.getDeviceTriggerCard('lockstateChanged').trigger(this, { lockstate: baseState }, {});
+    // Update capability nuki_state and trigger nuki_state_changed flow card. 
+    const nukiState = baseState;
+    this.setCapabilityValue('nuki_state', nukiState);
+    flow.getDeviceTriggerCard('nuki_state_changed').trigger(this, {
+      previous_state: this.homey.__('util.unlatching')
+    }, {});
   }
 
 }

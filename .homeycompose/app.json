@@ -24,7 +24,7 @@
     ],
     "de": [
       "nuki",
-      "tuerschloss",
+      "t\u00fcrschloss",
       "smart",
       "opener",
       "schutz"
@@ -63,7 +63,7 @@
   "contributing": {
     "donate": {
       "paypal": {
-        "username": "jghaanstra"
+        "username": "pierofreguia"
       }
     }
   },

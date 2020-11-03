@@ -15,11 +15,16 @@ const QUICK_ACTION_LOCK = 101
 class OpenerDevice extends NukiDevice {
   _lastRingNukiDateTime = null;
   _lastRingHomeyDateTime = null;
-  _openTimer = null;
+  _openingTimer = null;
+
+
+  get lastDoorbellRingDateTime() {
+    return this._lastRingHomeyDateTime;
+  }
+
 
   onInit() {
     super.onInit();
-
     // LISTENERS FOR UPDATING CAPABILITIES VALUE
     this.registerCapabilityListener('locked', async (value, options) => {
       try {
@@ -137,8 +142,9 @@ class OpenerDevice extends NukiDevice {
             this.setCapabilityValue('locked', false);
             flow.getDeviceTriggerCard('nuki_state_changed').trigger(this, prevArg, {});
             flow.getDeviceTriggerCard('openerstateChanged').trigger(this, { openerstate: openingStr }, {});
-            // Safety timer that can automatically restore the current state after a while.
-            // this._openTimer = setTimeout(() => this._openDevice(prevArg.previous_state), 2000);
+            // Safety timer that can automatically restore the current status 
+            //  after a while, if the event from Opener is missed.
+            this._openingTimer = setTimeout(() => this._restoreStatusBeforeOpening(prevArg.previous_state), 16000);
             return Promise.resolve();
           }
         }
@@ -355,8 +361,9 @@ class OpenerDevice extends NukiDevice {
             this.setCapabilityValue('locked', false);
             flow.getDeviceTriggerCard('nuki_state_changed').trigger(this, prevArg, {});
             flow.getDeviceTriggerCard('openerstateChanged').trigger(this, { openerstate: openingStr }, {});
-            // Safety timer that can automatically restore the current state after a while.
-            // this._openTimer = setTimeout(() => this._openDevice(prevArg.previous_state), 2000);
+            // Safety timer that can automatically restore the current status 
+            //  after a while, if the event from Opener is missed.
+            this._openingTimer = setTimeout(() => this._restoreStatusBeforeOpening(prevArg.previous_state), 16000);
             await this.progressingActionDone();
             return Promise.resolve();
           }
@@ -468,9 +475,9 @@ class OpenerDevice extends NukiDevice {
     if (state != prevState || continuousMode != prevContinuousMode) {
       // Update capability openerstate; trigger deprecated openerStateChanged.
       if (state != prevState) {
-        if (this._openTimer) {
-          clearTimeout(this._openTimer);
-          this._openTimer = null;
+        if (this._openingTimer) {
+          clearTimeout(this._openingTimer);
+          this._openingTimer = null;
         }
         if (state == this.homey.__('device.opening')) {
           this.progressingAction = ACTION_ELECTRIC_STRIKE_ACTUATION;
@@ -520,7 +527,7 @@ class OpenerDevice extends NukiDevice {
 
     // Trigger ring_action.
     if (newState.ringactionState) {
-      let newRingDate = new Date(newState.ringactionTimestamp);
+      const newRingDate = new Date(newState.ringactionTimestamp);
       if (this._lastRingNukiDateTime != null) {
         if (this._lastRingNukiDateTime.getTime() !== newRingDate.getTime()) {
           flow.getDeviceTriggerCard('ring_action').trigger(this, {}, {});
@@ -534,6 +541,32 @@ class OpenerDevice extends NukiDevice {
         this._lastRingHomeyDateTime = new Date();
       }
     }
+  }
+
+
+  _restoreStatusBeforeOpening(baseState) {
+    this.log('restoreStatusBeforeOpening');
+    this._openingTimer = null;
+    const continuousMode = this.getCapabilityValue('continuous_mode');
+    const flow = this.homey.flow;
+    // Update capability open_action.
+    this.progressingAction = 0;
+    this.setCapabilityValue('open_action', 0);
+    // Update capability locked.
+    const locked = (baseState == this.homey.__('device.online') ? !continuousMode : false);
+    if (locked != this.getCapabilityValue('locked')) {
+      this.setCapabilityValue('locked', locked);
+    }
+    // Update capability openerstate and trigger deprecated openerstateChanged flow card.
+    this.setCapabilityValue('openerstate', baseState);
+    flow.getDeviceTriggerCard('openerstateChanged').trigger(this, { openerstate: baseState }, {});
+    // Update capability nuki_state and trigger nuki_state_changed flow card.
+    const nukiState = (continuousMode ? this.homey.__('device.continuous_mode') : baseState);
+    this.setCapabilityValue('nuki_state', nukiState);
+    flow.getDeviceTriggerCard('nuki_state_changed').trigger(this, {
+      previous_state: this.homey.__('device.opening'),
+      previous_continuous_mode: continuousMode
+    }, {});
   }
 
 }

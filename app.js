@@ -16,6 +16,18 @@ class NukiApp extends Homey.App {
           return Promise.reject(err);
         })
       })
+    this.homey.flow.getConditionCard('contact_alarm_condition')
+      .registerRunListener(async (args, state) => {
+        if (!args.elapsed_secs) {
+          return false;
+        }
+        const lastContactAlarmChangeDateTime = args.device.lastContactAlarmChangeDateTime;
+        if (!lastContactAlarmChangeDateTime) {
+          return false;
+        }
+        const now = new Date();
+        return (now - lastContactAlarmChangeDateTime) / 1000 < args.elapsed_secs;
+      })
     // Nuki Opener Flow Cards.
     this.homey.flow.getActionCard('openerAction')
       .registerRunListener(async (args, state) => {
@@ -34,12 +46,12 @@ class NukiApp extends Homey.App {
         if (!args.elapsed_secs) {
           return false;
         }
-        const lastRingDatetime = args.device.lastRingHomeyDatetime;
-        if (!lastRingDatetime) {
+        const lastDoorbellRingDateTime = args.device.lastDoorbellRingDateTime;
+        if (!lastDoorbellRingDateTime) {
           return false;
         }
         const now = new Date();
-        return (now - lastRingDatetime) / 1000 < args.elapsed_secs;
+        return (now - lastDoorbellRingDateTime) / 1000 < args.elapsed_secs;
       })
   }
 

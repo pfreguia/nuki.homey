@@ -20,9 +20,11 @@ Follow these steps to add your Nuki devices to Homey.
 
 Your Nuki device(s) have now been added to Homey.
 
-## Release Notes for the latest version (release notes of previous versions are available at https://github.com/pfreguia/nuki.homey/releases)
-### v3.0.5 - 2020-10-15
+## Release Notes for the latest version (release notes of previous versions are available [here](https://github.com/pfreguia/nuki.homey/releases))
+### v3.0.6- 2020-11-03
 * Complete German translation of the app UI (thanks to Dirk).
+* New condition flow card "The contact alarm changed {less|more} than n seconds ago". For more information see [here](https://github.com/pfreguia/nuki.homey/wiki/Nuki-Smart-Lock-and-Homey-presence). 
+* Open (unlatch) a Smart Lock or an Opener by app UI or by action flow card: added a "safety" timer that restores the correct state in case the final event from the device is not received.
 * Pairing procedure has been rewritten. The new pairing procedure asks automatically the Nuki Servers for the list of registered Bridges (each Nuki Bridge is always registered at the Nuki Servers infrastructure).
 The Nuki Servers's answer can be one of the following:
   1. More than one Bridge is registered. The user must select a Bridge from the list of Bridges.
@@ -41,3 +43,4 @@ The Nuki Servers's answer can be one of the following:
 * Previous versions of Nuki Direct lose all devices and flows if the local IP address Homey changes. This version loses neither devices nor flows.
 * Some users have reported Nuki Direct's slowness in updating the status of the devices in the first few minutes after a restart. Indeed, previous versions of Nuki Direct may take up to 5 minutes after a restart for the device status to update. This version updates the devices status immediately after the initialization.
 * Nuki Direct v3.0.0 introduced the ability to mark as unavailable all the devices of an unreachable Bridge. This version adds the ability to mark as unavailable a device that is unreachable by the Bridge as well.
+* Bug: the condition flow card "Doorbell rang less than n seconds ago" introduced in version v.3.0.3 was always evaluated as false.
