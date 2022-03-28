@@ -52,7 +52,7 @@ class OpenerDevice extends NukiDevice {
             this.log('Already locked. No action needed');
             return Promise.resolve();
           }
-          
+
           this.progressingAction = QUICK_ACTION_LOCK;
           // It seems that, even if result.success is false, the action is
           //  performed correctly by Nuki. For that resons the "result" object
@@ -140,9 +140,9 @@ class OpenerDevice extends NukiDevice {
             this.setCapabilityValue('nuki_state', openingStr);
             this.setCapabilityValue('openerstate', openingStr);
             this.setCapabilityValue('locked', false);
-            flow.getDeviceTriggerCard('nuki_state_changed').trigger(this, prevArg, {});
+            flow.getDeviceTriggerCard('nuki_opener_state_changed').trigger(this, prevArg, {});
             flow.getDeviceTriggerCard('openerstateChanged').trigger(this, { openerstate: openingStr }, {});
-            // Safety timer that can automatically restore the current status 
+            // Safety timer that can automatically restore the current status
             //  after a while, if the event from Opener is missed.
             this._openingTimer = setTimeout(() => this._restoreStatusBeforeOpening(prevArg.previous_state), 16000);
             return Promise.resolve();
@@ -359,9 +359,9 @@ class OpenerDevice extends NukiDevice {
             this.setCapabilityValue('nuki_state', openingStr);
             this.setCapabilityValue('openerstate', openingStr);
             this.setCapabilityValue('locked', false);
-            flow.getDeviceTriggerCard('nuki_state_changed').trigger(this, prevArg, {});
+            flow.getDeviceTriggerCard('nuki_opener_state_changed').trigger(this, prevArg, {});
             flow.getDeviceTriggerCard('openerstateChanged').trigger(this, { openerstate: openingStr }, {});
-            // Safety timer that can automatically restore the current status 
+            // Safety timer that can automatically restore the current status
             //  after a while, if the event from Opener is missed.
             this._openingTimer = setTimeout(() => this._restoreStatusBeforeOpening(prevArg.previous_state), 16000);
             await this.progressingActionDone();
@@ -508,7 +508,7 @@ class OpenerDevice extends NukiDevice {
       }
       this.setCapabilityValue('nuki_state', nukiState);
       // Trigger nuki_state_changed.
-      flow.getDeviceTriggerCard('nuki_state_changed').trigger(this, { previous_state: prevState, previous_continuous_mode: prevContinuousMode }, {});
+      flow.getDeviceTriggerCard('nuki_opener_state_changed').trigger(this, { previous_state: prevState, previous_continuous_mode: prevContinuousMode }, {});
     }
     // Update capability locked
     if (locked != this.getCapabilityValue('locked')) {
@@ -563,7 +563,7 @@ class OpenerDevice extends NukiDevice {
     // Update capability nuki_state and trigger nuki_state_changed flow card.
     const nukiState = (continuousMode ? this.homey.__('device.continuous_mode') : baseState);
     this.setCapabilityValue('nuki_state', nukiState);
-    flow.getDeviceTriggerCard('nuki_state_changed').trigger(this, {
+    flow.getDeviceTriggerCard('nuki_opener_state_changed').trigger(this, {
       previous_state: this.homey.__('device.opening'),
       previous_continuous_mode: continuousMode
     }, {});

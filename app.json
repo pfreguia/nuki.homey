@@ -198,12 +198,12 @@
         ]
       },
       {
-        "id": "nuki_state_changed",
+        "id": "nuki_opener_state_changed",
         "title": {
-          "en": "Nuki state changed",
-          "nl": "Nuki status gewijzigd",
-          "de": "Nuki Status hat sich geändert",
-          "it": "Lo stato Nuki è cambiato"
+          "en": "Nuki Opener state changed",
+          "nl": "Nuki Opener status gewijzigd",
+          "de": "Nuki Opener Status hat sich geändert",
+          "it": "Lo stato Nuki Opener è cambiato"
         },
         "hint": {
           "en": "State and/or continuous mode have changed. The tags \"State\" and \"Continuous mode\" contain the updated values. The local tags \"Previous state\" and \"Previous continuous mode\" contain previous values.",
@@ -336,48 +336,6 @@
             "filter": "driver_id=opener"
           }
         ]
-      },
-      {
-        "id": "alarm_battery_keypad_true",
-        "title": {
-          "en": "The Keypad battery alarm turned on",
-          "nl": "De Keypad batterijwaarschuwing gaat aan",
-          "de": "Der Keypadbatterie-Alarm ist angegangen",
-          "fr": "L'alarme batterie Keypad s'est activée",
-          "it": "L'allarme della batteria Keypad è stato attivato",
-          "es": "La alarma de la batería Keypad se ha activado"
-        },
-        "filter": {
-          "capabilities": "alarm_battery_keypad"
-        },
-        "args": [
-          {
-            "type": "device",
-            "name": "device",
-            "filter": "driver_id=opener"
-          }
-        ]
-      },
-      {
-        "id": "alarm_battery_keypad_false",
-        "title": {
-          "en": "The Keypad battery alarm turned off",
-          "nl": "De Keypad batterijwaarschuwing gaat uit",
-          "de": "Der Keypadbatterie-Alarm ist ausgegangen",
-          "fr": "L'alarme batterie Keypad s'est désactivée",
-          "it": "L'allarme della batteria Keypad è stato disattivato",
-          "es": "La alarma de la batería Keypad se ha desactivado"
-        },
-        "filter": {
-          "capabilities": "alarm_battery_keypad"
-        },
-        "args": [
-          {
-            "type": "device",
-            "name": "device",
-            "filter": "driver_id=opener"
-          }
-        ]
       }
     ],
     "conditions": [
@@ -488,27 +446,6 @@
               "de": "Sekunden",
               "it": "Secondi"
             }
-          }
-        ]
-      },
-      {
-        "id": "alarm_battery_keypad",
-        "title": {
-          "en": "The Keypad battery alarm is !{{on|off}}",
-          "nl": "De Keypad batterijwaarschuwing is !{{aan|uit}}",
-          "de": "Der Keypadbatterie-Alarm ist !{{an|aus}}",
-          "fr": "L'alarme batterie Keypad est !{{en marche|arrêtée}}",
-          "it": "L'allarme della batteria Keypad è !{{acceso|spento}}",
-          "es": "La alarma de la batería Keypad está !{{activada|desactivada}}"
-        },
-        "filter": {
-          "capabilities": "alarm_battery_keypad"
-        },
-        "args": [
-          {
-            "type": "device",
-            "name": "device",
-            "filter": "driver_id=opener"
           }
         ]
       }

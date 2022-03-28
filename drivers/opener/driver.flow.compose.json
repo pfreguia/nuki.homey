@@ -1,12 +1,12 @@
 {
   "triggers": [
     {
-      "id": "nuki_state_changed",
+      "id": "nuki_opener_state_changed",
       "title": {
-        "en": "Nuki state changed",
-        "nl": "Nuki status gewijzigd",
-        "de": "Nuki Status hat sich geändert",
-        "it": "Lo stato Nuki \u00E8 cambiato"
+        "en": "Nuki Opener state changed",
+        "nl": "Nuki Opener status gewijzigd",
+        "de": "Nuki Opener Status hat sich geändert",
+        "it": "Lo stato Nuki Opener \u00E8 cambiato"
       },
       "hint": {
         "en": "State and/or continuous mode have changed. The tags \"State\" and \"Continuous mode\" contain the updated values. The local tags \"Previous state\" and \"Previous continuous mode\" contain previous values.",
@@ -109,12 +109,6 @@
         "it": "Il campanello ha suonato"
       },
       "args": []
-    },
-    {
-      "$extends": "alarm_battery_keypad_true"
-    },
-    {
-      "$extends": "alarm_battery_keypad_false"
     }
   ],
   "conditions": [
@@ -160,9 +154,6 @@
           }
         }
       ]
-    },
-    {
-      "$extends": "alarm_battery_keypad"
     }
   ],
   "actions": [
