@@ -1,0 +1,27 @@
+{
+  "name": "nuki.homey",
+  "version": "3.0.4",
+  "description": "Nuki Direct",
+  "main": "app.js",
+  "dependencies": {
+    "node-fetch": "^2.6.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jghaanstra/nuki.homey.git"
+  },
+  "keywords": [
+    "nuki",
+    "lock"
+  ],
+  "author": "Jelger Haanstra",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pfreguia/nuki.homey/issues"
+  },
+  "homepage": "https://github.com/pfreguia/nuki.homey#readme"
+}

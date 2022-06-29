@@ -1,17 +1,15 @@
 {
-  "type": "number",
+  "type": "boolean",
   "title": {
-    "en": "Open (\u2191swipe up\u2191)",
-    "nl": "Openen (\u2191omhoog scrollen\u2191)",
-    "de": "\u00D6ffnen (\u2191swipe up\u2191)",
-    "fr": "Ouvrir (\u2191swipe up\u2191)",
-    "it": "Aprire (\u2191scorri verso l'alto\u2191)",
-    "es": "Abrir (\u2191swipe up\u2191)"
+    "en": "Open",
+    "nl": "Openen",
+    "de": "\u00D6ffnen",
+    "fr": "Ouvrir",
+    "it": "Aprire",
+    "es": "Abrir"
   },
+  "uiQuickAction": true,
   "getable": true,
   "setable": true,
-  "uiComponent": "slider",
-  "min": 0,
-  "max": 1,
-  "step": 1
+  "uiComponent": "button"
 }

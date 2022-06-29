@@ -1,0 +1,55 @@
+{
+  "pair": {
+    "intro": "Enter the details of your Nuki Bridge.",
+    "address": "IP Address",
+    "port": "Port",
+    "default_value": "default value",
+    "token": "Token",
+    "connect": "Connect",
+
+    "state": "State",
+    "date": "Date",
+    "discovery_disabled_short": "API Quick Discovery disabled",
+    "http_api_disabled_short": "HTTP API disabled",
+
+    "query_nuki_servers": "Connecting to Nuki Servers. Please wait...",
+    "more_than_one_bridge": "More than one Nuki Bridge was detected. Please select a Bridge.",
+    "press_bridge_button": "Press the button on your Nuki Bridge within <span id=\"seconds\">30</span> seconds.",
+    "failed": "Pairing failed",
+    "button_not_pressed": "Bridge button not pressed within 30 seconds",
+    "discovery_disabled": "The API Quick discovery in your Nuki Bridge is disabled",
+    "http_api_disabled": "The HTTP API in your Nuki Bridge is disabled. Make sure the HTTP API in your Nuki Bridge is enabled. You can do this within the Nuki smartphone app. Go to \"Manage my devices\" and select \"Bridge\". There you can enable the HTTP API.",
+    "try_manual_pairing": "You can continue with the manual pairing."
+  },
+  "util": {
+    "uncalibrated": "uncalibrated",
+    "locked": "locked",
+    "unlocking": "unlocking",
+    "unlocked": "unlocked",
+    "locking": "locking",
+    "unlatched": "door open",
+    "unlocked_go": "unlocked (Lock ‘n’ Go)",
+    "unlatching": "opening door...",
+    "motor_blocked": "motor blocked",
+    "undefined": "undefined",
+    "400": "Action invalid",
+    "401": "Token is invalid",
+    "404": "Device is unknown, please re-pair your Nuki",
+    "503": "Nuki Bridge is busy"
+  },
+  "app": {
+    "unreachable": "Unreachable"
+  },
+  "driver": {
+    "no_token": "Did not receive a token from the bridge, make sure you push the bridge button during pairing."
+  },
+  "device": {
+    "untrained": "untrained",
+    "online": "online",
+    "rto_active": "Ring to Open",
+    "open": "open",
+    "opening": "opening...",
+    "boot_run": "boot run",
+    "continuous_mode": "Ring to Open - CM"
+  }
+}

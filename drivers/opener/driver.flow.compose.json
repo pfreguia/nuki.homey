@@ -1,7 +1,7 @@
 {
   "triggers": [
     {
-      "id": "nuki_state_changed",
+      "id": "nuki_state_changed_opener",
       "title": {
         "en": "Nuki state changed",
         "nl": "Nuki status gewijzigd",
@@ -111,10 +111,10 @@
       "args": []
     },
     {
-      "$extends": "alarm_battery_keypad_true"
+      "$extends": "alarm_battery_keypad_true_opener"
     },
     {
-      "$extends": "alarm_battery_keypad_false"
+      "$extends": "alarm_battery_keypad_false_opener"
     }
   ],
   "conditions": [
@@ -162,7 +162,7 @@
       ]
     },
     {
-      "$extends": "alarm_battery_keypad"
+      "$extends": "alarm_battery_keypad_opener"
     }
   ],
   "actions": [
