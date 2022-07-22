@@ -138,7 +138,7 @@ class SmartLockDevice extends NukiDevice {
             this.setCapabilityValue('locked', false);
             flow.getDeviceTriggerCard('nuki_state_changed').trigger(this, prevArg, {});
             flow.getDeviceTriggerCard('lockstateChanged').trigger(this, { lockstate: unlatchingStr }, {});
-            // Safety timer that can automatically restore the current status 
+            // Safety timer that can automatically restore the current status
             //  after a while, if the event from Opener is missed.
             this._openingTimer = setTimeout(() => this._restoreStatusBeforeOpening(prevArg.previous_state), 24000);
             return Promise.resolve();

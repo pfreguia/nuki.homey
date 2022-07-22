@@ -52,12 +52,12 @@ class OpenerDevice extends NukiDevice {
             this.log('Already locked. No action needed');
             return Promise.resolve();
           }
-          
+
           this.progressingAction = QUICK_ACTION_LOCK;
           // It seems that, even if result.success is false, the action is
           //  performed correctly by Nuki. For that resons the "result" object
           //  of sendRequest() method is not evaluated.
-           await this.bridge.sendRequest('lock', [
+          await this.bridge.sendRequest('lock', [
             ['nukiId', this.getData().id],
             ['deviceType', 2]
           ], 8000);
@@ -416,7 +416,7 @@ class OpenerDevice extends NukiDevice {
           break;
       }
     } catch (error) {
-        this.progressingAction = 0;
+      this.progressingAction = 0;
       return Promise.reject(error);
     }
   }
