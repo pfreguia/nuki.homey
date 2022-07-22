@@ -1,7 +1,17 @@
 {
   "triggers": [
     {
-      "id": "nuki_state_changed",
+      "id": "ring_action",
+      "title": {
+        "en": "Doorbell rang",
+        "nl": "De deurbel ging",
+        "de": "Es klingelte an der Tür",
+        "it": "Il campanello ha suonato"
+      },
+      "args": []
+    },
+    {
+      "id": "opener_nuki_state_changed",
       "title": {
         "en": "Nuki state changed",
         "nl": "Nuki status gewijzigd",
@@ -24,7 +34,12 @@
             "de": "Vorheriger Status",
             "it": "Stato precedente"
           },
-          "example": "online"
+          "example": {
+            "en": "online",
+            "nl": "online",
+            "de": "erreichbar",
+            "it": "online"
+          }
         },
         {
           "name": "previous_continuous_mode",
@@ -99,22 +114,6 @@
       },
       "deprecated": true,
       "args": []
-    },
-    {
-      "id": "ring_action",
-      "title": {
-        "en": "Doorbell rang",
-        "nl": "De deurbel ging",
-        "de": "Es klingelte an der Tür",
-        "it": "Il campanello ha suonato"
-      },
-      "args": []
-    },
-    {
-      "$extends": "alarm_battery_keypad_true"
-    },
-    {
-      "$extends": "alarm_battery_keypad_false"
     }
   ],
   "conditions": [
@@ -160,19 +159,22 @@
           }
         }
       ]
-    },
-    {
-      "$extends": "alarm_battery_keypad"
     }
   ],
   "actions": [
     {
       "id": "openerAction",
       "title": {
-        "en": "Nuki action",
-        "nl": "Nuki actie",
-        "de": "Nuki Aktion",
-        "it": "Azione Nuki"
+        "en": "Nuki action...",
+        "nl": "Nuki actie...",
+        "de": "Nuki Aktion...",
+        "it": "Azione Nuki..."
+      },
+      "titleFormatted": {
+        "en": "Nuki action [[openeraction]]. [[what_if_action_in_progress]]",
+        "nl": "Nuki actie [[openeraction]]. [[what_if_action_in_progress]]",
+        "de": "Nuki Aktion [[openeraction]]. [[what_if_action_in_progress]]",
+        "it": "Azione Nuki [[openeraction]]. [[what_if_action_in_progress]]"
       },
       "args": [
         {

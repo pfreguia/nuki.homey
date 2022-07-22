@@ -1,18 +1,18 @@
 {
   "triggers": [
     {
-      "id": "nuki_state_changed",
+      "id": "smartlock_nuki_state_changed",
       "title": {
         "en": "Nuki state changed",
         "nl": "Nuki status gewijzigd",
         "de": "Nuki Status hat sich geändert",
-        "it": "Lo stato Nuki \u00E8 cambiato"
+        "it": "Lo stato Nuki è cambiato"
       },
       "hint": {
         "en": "State has changed. The tag \"State\" contains the updated value. The local tag \"Previous state\" contains previous value.",
         "nl": "Status is veranderd. De tag \"Status\" bevat de bijgewerkte waarde. De lokale tag \"Vorige status\" bevat de vorige waarde.",
         "de": "Status hat sich geändert. Das Tag \"Status\" enthält den aktualisierten Wert. Das lokale Tag \"Vorheriger Status\" enthält den vorherigen Wert.",
-        "it": "Lo stato \u00E8 cambiato. Il tag \"Stato\" contiene i valori aggiornati. Il tag locale \"Stato precedente\" contiene il valore precedente."
+        "it": "Lo stato è cambiato. Il tag \"Stato\" contiene i valori aggiornati. Il tag locale \"Stato precedente\" contiene il valore precedente."
       },
       "tokens": [
         {
@@ -24,9 +24,31 @@
             "de": "Vorheriger Status",
             "it": "Stato precedente"
           },
-          "example": "online"
+          "example": {
+            "en": "unlocked",
+            "nl": "ontgrendeld",
+            "de": "aufgesperrt",
+            "it": "sbloccato"
+          }
         }
       ],
+      "args": []
+    },
+    {
+      "id": "contact_alarm_tampered",
+      "title": {
+        "en": "Contact alarm tampered",
+        "nl": "Contact alarm gesaboteerd",
+        "de": "Kontact-Alarm manipuliert",
+        "it": "Allarme contatto manomesso"
+      },
+      "hint": {
+        "en": "The contact alarm has been tampered with.",
+        "nl": "Er is geknoeid met het contactalarm.",
+        "de": "Der Kontakt-Alarm wurde manipuliert.",
+        "it": "L'allarme contatto è stato manomesso."
+      },
+      "tokens": [],
       "args": []
     },
     {
@@ -50,12 +72,6 @@
       ],
       "deprecated": true,
       "args": []
-    },
-    {
-      "$extends": "alarm_battery_keypad_true"
-    },
-    {
-      "$extends": "alarm_battery_keypad_false"
     }
   ],
   "conditions": [
@@ -88,19 +104,22 @@
           }
         }
       ]
-    },
-    {
-      "$extends": "alarm_battery_keypad"
     }
   ],
   "actions": [
     {
       "id": "lockAction",
       "title": {
-        "en": "Nuki action",
-        "nl": "Nuki actie",
-        "de": "Nuki Aktion",
-        "it": "Azione Nuki"
+        "en": "Nuki action...",
+        "nl": "Nuki actie...",
+        "de": "Nuki Aktion...",
+        "it": "Azione Nuki..."
+      },
+      "titleFormatted": {
+        "en": "Nuki action [[lockaction]]. [[what_if_action_in_progress]]",
+        "nl": "Nuki actie [[lockaction]]. [[what_if_action_in_progress]]",
+        "de": "Nuki Aktion [[lockaction]]. [[what_if_action_in_progress]]",
+        "it": "Azione Nuki [[lockaction]]. [[what_if_action_in_progress]]"
       },
       "args": [
         {
@@ -129,7 +148,7 @@
               "id": "3",
               "title": {
                 "en": "Open door",
-                "nl": "Deuer openen",
+                "nl": "Deur openen",
                 "de": "Tür öffnen",
                 "it": "Aprire porta"
               }

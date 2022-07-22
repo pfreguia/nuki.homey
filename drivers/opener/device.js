@@ -426,33 +426,34 @@ class OpenerDevice extends NukiDevice {
     super.updateCapabilitiesValue(newState);
     // This var contains the mere Opener state as defined in Nuki documentation
     //  (https://developer.nuki.io/page/nuki-bridge-http-api-1-11/4#heading--lock-states).
-    let state;
-    // This var contains the Nuki state as meant by Nuki. It is composed by mere Opener
-    //  state an Continuous mode.
+    let openerstate;
+    // This boolean var is true if the Opener Continuous mode is active; false otherwise.
+    let continuousMode;
+    // This var contains the Nuki state as meant by Nuki. It is calculated by composing
+    // Opener state (var openerstate) and Continuous mode (var continuosMode).
     let nukiState;
     let locked;
-    let continuousMode;
     switch (newState.state) {
       case 0:
-        state = this.homey.__('device.untrained');
+        openerstate = this.homey.__('device.untrained');
         break;
       case 1:
-        state = this.homey.__('device.online');
+        openerstate = this.homey.__('device.online');
         break;
       case 3:
-        state = this.homey.__('device.rto_active');
+        openerstate = this.homey.__('device.rto_active');
         break;
       case 5:
-        state = this.homey.__('device.open');
+        openerstate = this.homey.__('device.open');
         break;
       case 7:
-        state = this.homey.__('device.opening');
+        openerstate = this.homey.__('device.opening');
         break;
       case 253:
-        state = this.homey.__('device.boot_run');
+        openerstate = this.homey.__('device.boot_run');
         break;
       default:
-        state = this.homey.__('util.undefined');
+        openerstate = this.homey.__('util.undefined');
         break;
     }
     switch (newState.state) {
@@ -467,54 +468,52 @@ class OpenerDevice extends NukiDevice {
 
     const flow = this.homey.flow;
     // Update capabilities openerstate, continuous_mode and nuki_state; trigger
-    //  nuki_state_changed, deprecated openerstateChanged and deprecated
-    //  continuos_mode_xxxx.
-    const prevState = this.getCapabilityValue('openerstate');
+    //  opener_nuki_state_changed and deprecated nuki_state_changed.
+    const prevOpenerstate = this.getCapabilityValue('openerstate');
     const prevContinuousMode = this.getCapabilityValue('continuous_mode');
 
-    if (state != prevState || continuousMode != prevContinuousMode) {
-      // Update capability openerstate; trigger deprecated openerStateChanged.
-      if (state != prevState) {
+    if (openerstate != prevOpenerstate || continuousMode != prevContinuousMode) {
+      let setCapabilityArr = [];
+      // Update capability openerstate.
+      if (openerstate != prevOpenerstate) {
         if (this._openingTimer) {
           clearTimeout(this._openingTimer);
           this._openingTimer = null;
         }
-        if (state == this.homey.__('device.opening')) {
+        if (openerstate == this.homey.__('device.opening')) {
           this.progressingAction = ACTION_ELECTRIC_STRIKE_ACTUATION;
           this.setCapabilityValue('open_action', 1);
         }
-        else if (prevState == this.homey.__('device.opening')) {
+        else if (prevOpenerstate == this.homey.__('device.opening')) {
           this.progressingAction = 0;
           this.setCapabilityValue('open_action', 0);
         }
-        this.setCapabilityValue('openerstate', state);
-        flow.getDeviceTriggerCard('openerstateChanged').trigger(this, { openerstate: state }, {});
+        setCapabilityArr.push(this.setCapabilityValue('openerstate', openerstate));
       }
-      // Update capability contiuous_mode; trigger deprecated continuos_mode_xxxx.
-      if (continuousMode != this.getCapabilityValue('continuous_mode')) {
-        this.setCapabilityValue('continuous_mode', continuousMode);
-        if (continuousMode) {
-          flow.getDeviceTriggerCard('continuous_mode_true').trigger(this, {}, {});
-        } else {
-          flow.getDeviceTriggerCard('continuous_mode_false').trigger(this, {}, {});
-        }
+      // Update capability continuous_mode.
+      if (continuousMode != prevContinuousMode) {
+        setCapabilityArr.push(this.setCapabilityValue('continuous_mode', continuousMode));
       }
+      // Trigger flow cards when the async SetCapabilityValue() function have been completed.
+      Promise.all(setCapabilityArr).then(async () => {
+        // Trigger opener_nuki_state_changed.
+        flow.getDeviceTriggerCard('opener_nuki_state_changed').trigger(this, { previous_state: prevOpenerstate, previous_continuous_mode: prevContinuousMode }, {})
+        // Trigger deprecated nuki_state_changed.
+        flow.getDeviceTriggerCard('nuki_state_changed').trigger(this, { previous_state: prevOpenerstate }, {})
+      })
       // Update capability nuki_state.
       if (continuousMode) {
         nukiState = this.homey.__('device.continuous_mode');
       }
       else {
-        nukiState = state;
+        nukiState = openerstate;
       }
       this.setCapabilityValue('nuki_state', nukiState);
-      // Trigger nuki_state_changed.
-      flow.getDeviceTriggerCard('nuki_state_changed').trigger(this, { previous_state: prevState, previous_continuous_mode: prevContinuousMode }, {});
     }
     // Update capability locked
     if (locked != this.getCapabilityValue('locked')) {
       this.setCapabilityValue('locked', locked);
     }
-
     // Update capability alarm_battery.
     if (this.hasCapability('alarm_battery')) {
       const batteryCritical = newState.batteryCritical;

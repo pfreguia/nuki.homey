@@ -318,40 +318,40 @@ class SmartLockDevice extends NukiDevice {
   // HELPER FUNCTIONS
   updateCapabilitiesValue(newState) {
     super.updateCapabilitiesValue(newState);
-    let state; 
+    let lockstate; 
     let nukiState;
     let locked;
 
     switch (newState.state) {
       case 0:
-        state = this.homey.__('util.uncalibrated');
+        lockstate = this.homey.__('util.uncalibrated');
         break;
       case 1:
-        state = this.homey.__('util.locked');
+        lockstate = this.homey.__('util.locked');
         break;
       case 2:
-        state = this.homey.__('util.unlocking');
+        lockstate = this.homey.__('util.unlocking');
         break;
       case 3:
-        state = this.homey.__('util.unlocked');
+        lockstate = this.homey.__('util.unlocked');
         break;
       case 4:
-        state = this.homey.__('util.locking');
+        lockstate = this.homey.__('util.locking');
         break;
       case 5:
-        state = this.homey.__('util.unlatched');
+        lockstate = this.homey.__('util.unlatched');
         break;
       case 6:
-        state = this.homey.__('util.unlocked_go');
+        lockstate = this.homey.__('util.unlocked_go');
         break;
       case 7:
-        state = this.homey.__('util.unlatching');
+        lockstate = this.homey.__('util.unlatching');
         break;
       case 254:
-        state = this.homey.__('util.motor_blocked');
+        lockstate = this.homey.__('util.motor_blocked');
         break;
       default:
-        state = this.homey.__('util.undefined');
+        lockstate = this.homey.__('util.undefined');
         break;
     }
     switch (newState.state) {
@@ -364,51 +364,55 @@ class SmartLockDevice extends NukiDevice {
     }
 
     const flow = this.homey.flow;
-    const prevState = this.getCapabilityValue('lockstate');
-    // update capability locked
-    if (locked != this.getCapabilityValue('locked')) {
-      this.setCapabilityValue('locked', locked);
-    }
+    // Update capabilities lockstateand nuki_state; trigger smartlock_nuki_state_changed
+    //  and deprecated nuki_state_changed.
+    const prevLockstate = this.getCapabilityValue('lockstate');
 
-    // update capability lockstate & trigger deprecated lockstateChanged
-    if (state != this.getCapabilityValue('lockstate')) {
+    if (lockstate != prevLockstate) {
       if (this._openingTimer) {
         clearTimeout(this._openingTimer);
         this._openingTimer = null;
       }
-      if (state == this.homey.__('util.unlatching')) {
+      if (lockstate == this.homey.__('util.unlatching')) {
         this.progressingAction = ACTION_UNLATCH;
         this.setCapabilityValue('open_action', 1);
       }
-      else if (prevState == this.homey.__('util.unlatching')) {
+      else if (prevLockstate == this.homey.__('util.unlatching')) {
         this.progressingAction = 0;
         this.setCapabilityValue('open_action', 0);
       }
-      this.setCapabilityValue('lockstate', state);
-      flow.getDeviceTriggerCard('lockstateChanged').trigger(this, { lockstate: state }, {});
-      if (state == this.homey.__('util.locked')) {
+      // Trigger flow cards when the async SetCapabilityValue() function has been completed.
+      this.setCapabilityValue('lockstate', lockstate).then(() => {
+        // Trigger smartlock_nuki_state_changed.
+        flow.getDeviceTriggerCard('smartlock_nuki_state_changed').trigger(this, { previous_state: prevLockstate }, {})
+        // Trigger deprecated nuki_state_changed.
+        flow.getDeviceTriggerCard('nuki_state_changed').trigger(this, { previous_state: prevLockstate }, {})
+      })
+      if (lockstate == this.homey.__('util.locked')) {
         this._unlockStateEvent.emit('done');
       }
-    }
-    // Update capability nuki_state. 
-    nukiState = state;
-    if (state != this.getCapabilityValue('nuki_state')) {
-      this.setCapabilityValue('nuki_state', nukiState);
-      // Trigger nuki_state_changed.
-      flow.getDeviceTriggerCard('nuki_state_changed').trigger(this, { previous_state: prevState }, {});
-    }
-
-    // Update capability alarm_contact.
-    if (newState.doorsensorState == 2 || newState.doorsensorState == 3) {
-      if (newState.doorsensorState == 3 && !this.getCapabilityValue('alarm_contact')) {
-        this.setCapabilityValue('alarm_contact', true);
-        this._lastContactAlarmChangeDateTime = new Date();
-      } else if (newState.doorsensorState == 2 && (this.getCapabilityValue('alarm_contact') || this.getCapabilityValue('alarm_contact') == null)) {
-        this._lastContactAlarmChangeDateTime = new Date();
-        this.setCapabilityValue('alarm_contact', false);
+      // Update capability nuki_state. 
+      nukiState = lockstate;
+      if (lockstate != this.getCapabilityValue('nuki_state')) {
+        this.setCapabilityValue('nuki_state', nukiState);
       }
     }
+    // update capability locked
+    if (locked != this.getCapabilityValue('locked')) {
+      this.setCapabilityValue('locked', locked);
+    }
+    // Update capability alarm_contact.
+    if (newState.doorsensorState == 240) {
+      flow.getDeviceTriggerCard('contact_alarm_tampered').trigger(this, {}, {})
+    } else
 
+    if ([3, 4, 5, 16].includes(newState.doorsensorState) && !this.getCapabilityValue('alarm_contact')) {
+      this.setCapabilityValue('alarm_contact', true);
+      this._lastContactAlarmChangeDateTime = new Date();
+    } else if ([1, 2].includes(newState.doorsensorState) && (this.getCapabilityValue('alarm_contact') || this.getCapabilityValue('alarm_contact') == null)) {
+      this._lastContactAlarmChangeDateTime = new Date();
+      this.setCapabilityValue('alarm_contact', false);
+    }
     // update capability measure_battery
     if (Number(newState.batteryChargeState) != this.getCapabilityValue('measure_battery')) {
       this.setCapabilityValue('measure_battery', Number(newState.batteryChargeState));

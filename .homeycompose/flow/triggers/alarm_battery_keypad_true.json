@@ -9,5 +9,12 @@
   },
   "filter": {
     "capabilities": "alarm_battery_keypad"
-  }
+  },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "nuki|opener"
+    }
+  ]
 }

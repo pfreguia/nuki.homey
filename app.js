@@ -5,7 +5,7 @@ const Homey = require('homey');
 class NukiApp extends Homey.App {
 
   onInit() {
-    this.log('Initializing Nuki app ...');
+    this.log('Initializing Nuki Direct app ...');
 
     // Nuki Smart Lock flow cards.
     this.homey.flow.getActionCard('lockAction')
@@ -53,6 +53,11 @@ class NukiApp extends Homey.App {
         const now = new Date();
         return (now - lastDoorbellRingDateTime) / 1000 < args.elapsed_secs;
       })
+    // Common Flow Cards
+    let alarmBatteryKeypadCondition = this.homey.flow.getConditionCard('alarm_battery_keypad');
+    alarmBatteryKeypadCondition.registerRunListener(async (args, state) => {
+      return args.device.getCapabilityValue('alarm_battery_keypad');
+    })
   }
 
 }

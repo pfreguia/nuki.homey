@@ -41,7 +41,7 @@
       "opener"
     ]
   },
-  "version": "3.0.6",
+  "version": "3.0.7",
   "compatibility": ">=5.0.0",
   "author": {
     "name": "Piero Freguia",
@@ -93,6 +93,48 @@
   "flow": {
     "triggers": [
       {
+        "title": {
+          "en": "The Keypad battery alarm turned off",
+          "nl": "De Keypad batterijwaarschuwing gaat uit",
+          "de": "Der Keypadbatterie-Alarm ist ausgegangen",
+          "fr": "L'alarme batterie Keypad s'est désactivée",
+          "it": "L'allarme della batteria Keypad è stato disattivato",
+          "es": "La alarma de la batería Keypad se ha desactivado"
+        },
+        "filter": {
+          "capabilities": "alarm_battery_keypad"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "nuki|opener"
+          }
+        ],
+        "id": "alarm_battery_keypad_false"
+      },
+      {
+        "title": {
+          "en": "The Keypad battery alarm turned on",
+          "nl": "De Keypad batterijwaarschuwing gaat aan",
+          "de": "Der Keypadbatterie-Alarm ist angegangen",
+          "fr": "L'alarme batterie Keypad s'est activée",
+          "it": "L'allarme della batteria Keypad è stato attivato",
+          "es": "La alarma de la batería Keypad se ha activado"
+        },
+        "filter": {
+          "capabilities": "alarm_battery_keypad"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "nuki|opener"
+          }
+        ],
+        "id": "alarm_battery_keypad_true"
+      },
+      {
         "id": "nuki_state_changed",
         "title": {
           "en": "Nuki state changed",
@@ -116,9 +158,78 @@
               "de": "Vorheriger Status",
               "it": "Stato precedente"
             },
-            "example": "online"
+            "example": {
+              "en": "unlocked",
+              "nl": "ontgrendeld",
+              "de": "aufgesperrt",
+              "it": "sbloccato"
+            }
           }
         ],
+        "deprecated": true,
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "nuki|opener"
+          }
+        ]
+      },
+      {
+        "id": "smartlock_nuki_state_changed",
+        "title": {
+          "en": "Nuki state changed",
+          "nl": "Nuki status gewijzigd",
+          "de": "Nuki Status hat sich geändert",
+          "it": "Lo stato Nuki è cambiato"
+        },
+        "hint": {
+          "en": "State has changed. The tag \"State\" contains the updated value. The local tag \"Previous state\" contains previous value.",
+          "nl": "Status is veranderd. De tag \"Status\" bevat de bijgewerkte waarde. De lokale tag \"Vorige status\" bevat de vorige waarde.",
+          "de": "Status hat sich geändert. Das Tag \"Status\" enthält den aktualisierten Wert. Das lokale Tag \"Vorheriger Status\" enthält den vorherigen Wert.",
+          "it": "Lo stato è cambiato. Il tag \"Stato\" contiene i valori aggiornati. Il tag locale \"Stato precedente\" contiene il valore precedente."
+        },
+        "tokens": [
+          {
+            "name": "previous_state",
+            "type": "string",
+            "title": {
+              "en": "Previous state",
+              "nl": "Vorige status",
+              "de": "Vorheriger Status",
+              "it": "Stato precedente"
+            },
+            "example": {
+              "en": "unlocked",
+              "nl": "ontgrendeld",
+              "de": "aufgesperrt",
+              "it": "sbloccato"
+            }
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=nuki"
+          }
+        ]
+      },
+      {
+        "id": "contact_alarm_tampered",
+        "title": {
+          "en": "Contact alarm tampered",
+          "nl": "Contact alarm gesaboteerd",
+          "de": "Kontact-Alarm manipuliert",
+          "it": "Allarme contatto manomesso"
+        },
+        "hint": {
+          "en": "The contact alarm has been tampered with.",
+          "nl": "Er is geknoeid met het contactalarm.",
+          "de": "Der Kontakt-Alarm wurde manipuliert.",
+          "it": "L'allarme contatto è stato manomesso."
+        },
+        "tokens": [],
         "args": [
           {
             "type": "device",
@@ -156,49 +267,23 @@
         ]
       },
       {
-        "id": "alarm_battery_keypad_true",
+        "id": "ring_action",
         "title": {
-          "en": "The Keypad battery alarm turned on",
-          "nl": "De Keypad batterijwaarschuwing gaat aan",
-          "de": "Der Keypadbatterie-Alarm ist angegangen",
-          "fr": "L'alarme batterie Keypad s'est activée",
-          "it": "L'allarme della batteria Keypad è stato attivato",
-          "es": "La alarma de la batería Keypad se ha activado"
-        },
-        "filter": {
-          "capabilities": "alarm_battery_keypad"
+          "en": "Doorbell rang",
+          "nl": "De deurbel ging",
+          "de": "Es klingelte an der Tür",
+          "it": "Il campanello ha suonato"
         },
         "args": [
           {
             "type": "device",
             "name": "device",
-            "filter": "driver_id=nuki"
+            "filter": "driver_id=opener"
           }
         ]
       },
       {
-        "id": "alarm_battery_keypad_false",
-        "title": {
-          "en": "The Keypad battery alarm turned off",
-          "nl": "De Keypad batterijwaarschuwing gaat uit",
-          "de": "Der Keypadbatterie-Alarm ist ausgegangen",
-          "fr": "L'alarme batterie Keypad s'est désactivée",
-          "it": "L'allarme della batteria Keypad è stato disattivato",
-          "es": "La alarma de la batería Keypad se ha desactivado"
-        },
-        "filter": {
-          "capabilities": "alarm_battery_keypad"
-        },
-        "args": [
-          {
-            "type": "device",
-            "name": "device",
-            "filter": "driver_id=nuki"
-          }
-        ]
-      },
-      {
-        "id": "nuki_state_changed",
+        "id": "opener_nuki_state_changed",
         "title": {
           "en": "Nuki state changed",
           "nl": "Nuki status gewijzigd",
@@ -221,7 +306,12 @@
               "de": "Vorheriger Status",
               "it": "Stato precedente"
             },
-            "example": "online"
+            "example": {
+              "en": "online",
+              "nl": "online",
+              "de": "erreichbar",
+              "it": "online"
+            }
           },
           {
             "name": "previous_continuous_mode",
@@ -320,67 +410,30 @@
             "filter": "driver_id=opener"
           }
         ]
-      },
-      {
-        "id": "ring_action",
-        "title": {
-          "en": "Doorbell rang",
-          "nl": "De deurbel ging",
-          "de": "Es klingelte an der Tür",
-          "it": "Il campanello ha suonato"
-        },
-        "args": [
-          {
-            "type": "device",
-            "name": "device",
-            "filter": "driver_id=opener"
-          }
-        ]
-      },
-      {
-        "id": "alarm_battery_keypad_true",
-        "title": {
-          "en": "The Keypad battery alarm turned on",
-          "nl": "De Keypad batterijwaarschuwing gaat aan",
-          "de": "Der Keypadbatterie-Alarm ist angegangen",
-          "fr": "L'alarme batterie Keypad s'est activée",
-          "it": "L'allarme della batteria Keypad è stato attivato",
-          "es": "La alarma de la batería Keypad se ha activado"
-        },
-        "filter": {
-          "capabilities": "alarm_battery_keypad"
-        },
-        "args": [
-          {
-            "type": "device",
-            "name": "device",
-            "filter": "driver_id=opener"
-          }
-        ]
-      },
-      {
-        "id": "alarm_battery_keypad_false",
-        "title": {
-          "en": "The Keypad battery alarm turned off",
-          "nl": "De Keypad batterijwaarschuwing gaat uit",
-          "de": "Der Keypadbatterie-Alarm ist ausgegangen",
-          "fr": "L'alarme batterie Keypad s'est désactivée",
-          "it": "L'allarme della batteria Keypad è stato disattivato",
-          "es": "La alarma de la batería Keypad se ha desactivado"
-        },
-        "filter": {
-          "capabilities": "alarm_battery_keypad"
-        },
-        "args": [
-          {
-            "type": "device",
-            "name": "device",
-            "filter": "driver_id=opener"
-          }
-        ]
       }
     ],
     "conditions": [
+      {
+        "title": {
+          "en": "The Keypad battery alarm is !{{on|off}}",
+          "nl": "De Keypad batterijwaarschuwing is !{{aan|uit}}",
+          "de": "Der Keypadbatterie-Alarm ist !{{an|aus}}",
+          "fr": "L'alarme batterie Keypad est !{{en marche|arrêtée}}",
+          "it": "L'allarme della batteria Keypad è !{{acceso|spento}}",
+          "es": "La alarma de la batería Keypad está !{{activada|desactivada}}"
+        },
+        "filter": {
+          "capabilities": "alarm_battery_keypad"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "nuki|opener"
+          }
+        ],
+        "id": "alarm_battery_keypad"
+      },
       {
         "id": "contact_alarm_condition",
         "title": {
@@ -413,27 +466,6 @@
               "de": "Sekunden",
               "it": "Secondi"
             }
-          }
-        ]
-      },
-      {
-        "id": "alarm_battery_keypad",
-        "title": {
-          "en": "The Keypad battery alarm is !{{on|off}}",
-          "nl": "De Keypad batterijwaarschuwing is !{{aan|uit}}",
-          "de": "Der Keypadbatterie-Alarm ist !{{an|aus}}",
-          "fr": "L'alarme batterie Keypad est !{{en marche|arrêtée}}",
-          "it": "L'allarme della batteria Keypad è !{{acceso|spento}}",
-          "es": "La alarma de la batería Keypad está !{{activada|desactivada}}"
-        },
-        "filter": {
-          "capabilities": "alarm_battery_keypad"
-        },
-        "args": [
-          {
-            "type": "device",
-            "name": "device",
-            "filter": "driver_id=nuki"
           }
         ]
       },
@@ -490,37 +522,22 @@
             }
           }
         ]
-      },
-      {
-        "id": "alarm_battery_keypad",
-        "title": {
-          "en": "The Keypad battery alarm is !{{on|off}}",
-          "nl": "De Keypad batterijwaarschuwing is !{{aan|uit}}",
-          "de": "Der Keypadbatterie-Alarm ist !{{an|aus}}",
-          "fr": "L'alarme batterie Keypad est !{{en marche|arrêtée}}",
-          "it": "L'allarme della batteria Keypad è !{{acceso|spento}}",
-          "es": "La alarma de la batería Keypad está !{{activada|desactivada}}"
-        },
-        "filter": {
-          "capabilities": "alarm_battery_keypad"
-        },
-        "args": [
-          {
-            "type": "device",
-            "name": "device",
-            "filter": "driver_id=opener"
-          }
-        ]
       }
     ],
     "actions": [
       {
         "id": "lockAction",
         "title": {
-          "en": "Nuki action",
-          "nl": "Nuki actie",
-          "de": "Nuki Aktion",
-          "it": "Azione Nuki"
+          "en": "Nuki action...",
+          "nl": "Nuki actie...",
+          "de": "Nuki Aktion...",
+          "it": "Azione Nuki..."
+        },
+        "titleFormatted": {
+          "en": "Nuki action [[lockaction]]. [[what_if_action_in_progress]]",
+          "nl": "Nuki actie [[lockaction]]. [[what_if_action_in_progress]]",
+          "de": "Nuki Aktion [[lockaction]]. [[what_if_action_in_progress]]",
+          "it": "Azione Nuki [[lockaction]]. [[what_if_action_in_progress]]"
         },
         "args": [
           {
@@ -554,7 +571,7 @@
                 "id": "3",
                 "title": {
                   "en": "Open door",
-                  "nl": "Deuer openen",
+                  "nl": "Deur openen",
                   "de": "Tür öffnen",
                   "it": "Aprire porta"
                 }
@@ -605,10 +622,16 @@
       {
         "id": "openerAction",
         "title": {
-          "en": "Nuki action",
-          "nl": "Nuki actie",
-          "de": "Nuki Aktion",
-          "it": "Azione Nuki"
+          "en": "Nuki action...",
+          "nl": "Nuki actie...",
+          "de": "Nuki Aktion...",
+          "it": "Azione Nuki..."
+        },
+        "titleFormatted": {
+          "en": "Nuki action [[openeraction]]. [[what_if_action_in_progress]]",
+          "nl": "Nuki actie [[openeraction]]. [[what_if_action_in_progress]]",
+          "de": "Nuki Aktion [[openeraction]]. [[what_if_action_in_progress]]",
+          "it": "Azione Nuki [[openeraction]]. [[what_if_action_in_progress]]"
         },
         "args": [
           {

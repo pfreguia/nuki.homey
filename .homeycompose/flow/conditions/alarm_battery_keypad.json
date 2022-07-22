@@ -1,0 +1,20 @@
+{
+  "title": {
+    "en": "The Keypad battery alarm is !{{on|off}}",
+    "nl": "De Keypad batterijwaarschuwing is !{{aan|uit}}",
+    "de": "Der Keypadbatterie-Alarm ist !{{an|aus}}",
+    "fr": "L'alarme batterie Keypad est !{{en marche|arr\u00EAt\u00E9e}}",
+    "it": "L'allarme della batteria Keypad \u00E8 !{{acceso|spento}}",
+    "es": "La alarma de la bater\u00EDa Keypad est\u00E1 !{{activada|desactivada}}"
+  },
+  "filter": {
+    "capabilities": "alarm_battery_keypad"
+  },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "nuki|opener"
+    }
+  ]
+}
