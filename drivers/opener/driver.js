@@ -10,10 +10,7 @@ class OpenerDriver extends NukiDriver {
   }
 
   onInit() {
-    this.homey.flow.getDeviceTriggerCard('openerstateChanged');
-    this.homey.flow.getDeviceTriggerCard('continuous_mode_true');
-    this.homey.flow.getDeviceTriggerCard('continuous_mode_false');
-    this.homey.flow.getDeviceTriggerCard('ring_action');
+
   }
 
 }

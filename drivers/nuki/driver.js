@@ -10,7 +10,7 @@ class SmartLockDriver extends NukiDriver {
   }
 
   onInit() {
-    this.homey.flow.getDeviceTriggerCard('lockstateChanged');
+    
   }
 
 }

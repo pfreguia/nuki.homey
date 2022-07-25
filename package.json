@@ -1,6 +1,6 @@
 {
   "name": "nuki.homey",
-  "version": "3.0.7",
+  "version": "3.1.0",
   "description": "Nuki Direct",
   "main": "app.js",
   "dependencies": {
