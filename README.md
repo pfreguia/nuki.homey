@@ -21,9 +21,5 @@ Follow these steps to add your Nuki devices to Homey.
 Your Nuki device(s) have now been added to Homey.
 
 ## Release notes for the latest version (release notes of previous versions are available [here](https://github.com/pfreguia/nuki.homey/releases))
-### v3.1.0 - 2022-07-25
-* Support for Nuki Smart Lock 3.0 (Pro).
-* New trigger flow card when the new Nuki Bluetooth door sensor has been tampered with.
-* Notice: The existing trigger cards "Nuki state changed" for the Opener have lost the local tag "Previous Continuous mode". If your flows need this local tag, you need to delete and re-create these flow cards. This is due to an internal code refactoring induced by a new app validation constraint in Homey (app cannot define multiple flow card triggers with same id).
-* Bug: Due to some changes in Homey Apps SDK v3, the "Nuki state changed" trigger cards (for both Smart Lock and Opener) were fired before the Nuki state capabilities were updated to the new values. Now, when a flow is started by these cards, the capability values (that can be used in a condition flow card) are already updated. 
-* Bug: When a device was removed from Nuki Bridge, Nuki Direct did not react and the device appeared to still be available in Homey. Now the removed device is marked as unavailable.
+### v3.1.1 - 2022-08-19
+* Bug: unable to pair a new Smart Lock (either 1.0/2.0 or 3.0 (Pro)). This [issue](https://github.com/pfreguia/nuki.homey/issues/23) was introduced in v3.1.0. Resolved.
