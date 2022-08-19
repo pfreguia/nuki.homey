@@ -33,6 +33,10 @@ class SmartLockDevice extends NukiDevice {
     if (!this.hasCapability('alarm_contact')) {
       this.addCapability('alarm_contact');
     }
+    // Devices paired with version < 3.1.0 do not have the deviceType property
+    // in Homey Data object thus, the deviceType (needed for Nuki commands) 
+    // is evaluated by following variable.
+    const evDeviceType = this.getData().deviceType === undefined ? 0 : this.getData().deviceType;
 
     // LISTENERS FOR UPDATING CAPABILITIES
     this.registerCapabilityListener('locked', async (value) => {
@@ -63,7 +67,7 @@ class SmartLockDevice extends NukiDevice {
           //  of sendRequest() method is not evaluated.
           await this.bridge.sendRequest('lockAction', [
             ['nukiId', this.getData().id],
-            ['deviceType', 0],
+            ['deviceType', evDeviceType],
             ['action', ACTION_LOCK]
           ], 16000);
           this.log('Lock done');
@@ -91,7 +95,7 @@ class SmartLockDevice extends NukiDevice {
           //  of sendRequest() method is not evaluated.
           await this.bridge.sendRequest('lockAction', [
             ['nukiId', this.getData().id],
-            ['deviceType', 0],
+            ['deviceType', evDeviceType],
             ['action', ACTION_UNLOCK]
           ], 16000);
           this.log('Unlock done');
@@ -123,7 +127,7 @@ class SmartLockDevice extends NukiDevice {
             //  of sendrequest() method is not evaluated.
             await this.bridge.sendRequest('lockAction', [
               ['nukiId', this.getData().id],
-              ['deviceType', 0],
+              ['deviceType', evDeviceType],
               ['action', ACTION_UNLATCH],
               ['nowait', 1]
             ], 16000);
@@ -157,6 +161,10 @@ class SmartLockDevice extends NukiDevice {
   }
 
   async smartLockActionFlowCard(action, what_if_action_in_progress) {
+    // Devices paired with version < 3.1.0 do not have the deviceType property
+    // in Homey Data object thus, the deviceType (needed for Nuki commands) 
+    // is evaluated by following variable.
+    const evDeviceType = this.getData().deviceType === undefined ? 0 : this.getData().deviceType;
     try {
       this.log(action);
       while (this.progressingAction > 0) {
@@ -198,7 +206,7 @@ class SmartLockDevice extends NukiDevice {
             //  of sendRequest() method is not evaluated.
             await this.bridge.sendRequest('lockAction', [
               ['nukiId', this.getData().id],
-              ['deviceType', 0],
+              ['deviceType', evDeviceType],
               ['action', ACTION_UNLOCK]
             ], 16000);
             this.log('Unlock done');
@@ -221,7 +229,7 @@ class SmartLockDevice extends NukiDevice {
             //  of sendRequest() method is not evaluated.
             await this.bridge.sendRequest('lockAction', [
               ['nukiId', this.getData().id],
-              ['deviceType', 0],
+              ['deviceType', evDeviceType],
               ['action', ACTION_LOCK]
             ], 16000);
             this.log('Lock done');
@@ -240,7 +248,7 @@ class SmartLockDevice extends NukiDevice {
             //  of sendRequest() method is not evaluated.
             await this.bridge.sendRequest('lockAction', [
               ['nukiId', this.getData().id],
-              ['deviceType', 0],
+              ['deviceType', evDeviceType],
               ['action', ACTION_UNLATCH],
               ['nowait', 1]
             ], 16000);
@@ -272,7 +280,7 @@ class SmartLockDevice extends NukiDevice {
             //  of sendRequest() method is not evaluated.
             await this.bridge.sendRequest('lockAction', [
               ['nukiId', this.getData().id],
-              ['deviceType', 0],
+              ['deviceType', evDeviceType],
               ['action', ACTION_LOCK_N_GO]
             ], 60000);
             this.log('Lock ’n’ Go successfully issued');
@@ -294,7 +302,7 @@ class SmartLockDevice extends NukiDevice {
             //  of sendRequest() method is not evaluated.
             await this.bridge.sendRequest('lockAction', [
               ['nukiId', this.getData().id],
-              ['deviceType', 0],
+              ['deviceType', evDeviceType],
               ['action', ACTION_LOCK_N_GO_WITH_UNLATCH]
             ], 60000);
             this.log('Lock ’n’ Go with unlatch successfully issued');
